@@ -23,7 +23,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss">
 	.content {
 		display: flex;
 		flex-direction: column;
@@ -47,6 +47,6 @@
 
 	.title {
 		font-size: 36rpx;
-		color: #8f8f94;
+		color: $uni-text-color;
 	}
 </style>
