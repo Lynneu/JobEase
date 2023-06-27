@@ -69,7 +69,7 @@
 	}
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped>
 	.uni-list-ad {
 		position: relative;
 		border: 1px red solid;
