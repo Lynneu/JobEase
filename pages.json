@@ -35,8 +35,8 @@
                 "enablePullDownRefresh": false
             }
             
-        },
-		{
+        }		
+		,{
 		    "path" : "pages/m1_login/login",
 		    "style" :                                                                                    
 		    {
@@ -44,8 +44,9 @@
 		        "enablePullDownRefresh": false
 		    }
 		    
-		},
-		{
+		}
+		
+        ,{
             "path" : "pages/m3_detail_lecture/m3_detail_lecture",
             "style" :                                                                                    
             {
