@@ -1,7 +1,6 @@
 <script>
 	export default {
 		onLaunch: function() {
-			console.log('App Launch')
 		},
 		onShow: function() {
 			console.log('App Show')
@@ -14,4 +13,8 @@
 
 <style>
 	/*每个页面公共css */
+	@import "colorui/main.css";
+	@import "colorui/icon.css";
+	@import 'common/uni.css';
+	
 </style>

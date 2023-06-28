@@ -1,13 +1,128 @@
 <template>
-	<view>
-		<h1>找讲座</h1>
-	</view>
+  <view>
+    <view class="uni-inline-item uni-row area-padding">
+      <view style="width: 100rpx;">
+        <uni-icons @click="showDrawer('showLeft')" type="bars" size="25" color="#007AFF"></uni-icons>
+        <uni-drawer ref="showLeft" mode="left" :width="320">
+          <view class="close">
+            <button @click="closeDrawer('showLeft')"><text class="word-btn-white">关闭Drawer</text></button>
+          </view>
+        </uni-drawer>
+      </view>
+      <view class="text" style="-webkit-flex: 1;flex: 1;">
+        <uni-search-bar @confirm="search" :focus="true" v-model="searchValue" @blur="blur" @focus="focus" @input="input" @cancel="cancel" @clear="clear" placeholder="请输入搜索内容" clearButton="auto" cancelButton="none"></uni-search-bar>
+      </view>
+      <view class="text" style="width: 170rpx; margin-left: 10px;">
+        <button type="primary" size="mini" @click="searchclick">搜索</button>
+      </view>
+    </view>
+    <view class="search-result">
+      <text class="search-result-text">当前输入为：{{ searchValue }}</text>
+    </view>
+    <uni-fab ref="fab" :pattern="pattern" :content="content" :horizontal="horizontal" :vertical="vertical" :direction="direction" @trigger="trigger" />
+  </view>
 </template>
 
 <script>
-	
+export default {
+  components: {},
+  data() {
+    return {
+      searchValue: '',
+      title: 'uni-fab',
+      directionStr: '垂直',
+      horizontal: 'right',
+      vertical: 'bottom',
+      direction: 'horizontal',
+      pattern: {
+        color: '#7A7E83',
+        backgroundColor: '#fff',
+        selectedColor: '#fff',
+        buttonColor: '#007AFF',
+        iconBackgroundColor: '#fff'
+      },
+      is_color_type: false,
+      content: [{
+        iconWidth: "24px",
+        iconPath: '../../static/image/icon_create_lecture.png',
+        // selectedIconPath: '../../static/image/icon_create_lecture_HL.png',
+        text: '发布讲座',
+        active: false
+      }]
+    }
+  },
+  onBackPress() {
+    if (this.$refs.fab.isShow) {
+      this.$refs.fab.close(false)
+      return true
+    }
+    return false
+  },
+  methods: {
+    search(res) {
+      uni.showToast({
+        title: '搜索：' + res.value,
+        icon: 'none'
+      })
+    },
+    input(res) {
+      console.log('----input:', res)
+    },
+    clear(res) {
+      uni.showToast({
+        title: 'clear事件，清除值为：' + res.value,
+        icon: 'none'
+      })
+    },
+    blur(res) {
+      uni.showToast({
+        title: 'blur事件，输入值为：' + res.value,
+        icon: 'none'
+      })
+    },
+    focus(e) {
+      uni.showToast({
+        title: 'focus事件，输出值为：' + e.value,
+        icon: 'none'
+      })
+    },
+    cancel(res) {
+      uni.showToast({
+        title: '点击取消，输入值为：' + res.value,
+        icon: 'none'
+      })
+    },
+    trigger(e) {
+      console.log(e)
+      // this.content[e.index].active = !e.item.active
+      this.$refs.fab.close()
+      uni.navigateTo({
+        url: '../m4_release_lecture/m4_release_lecture'
+      });
+    },
+    showDrawer(ref) {
+      this.$refs[ref].open();
+    },
+    closeDrawer(ref) {
+      this.$refs[ref].close();
+    },
+    searchclick() {
+      console.log(this.searchValue())
+    }
+  },
+}
 </script>
 
 <style lang="scss">
-	
+.search-result {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+.area-padding {
+  background-color: $uni-bg-color;
+  margin: auto;
+  justify-content: center;
+  padding: 10px 0;
+}
 </style>

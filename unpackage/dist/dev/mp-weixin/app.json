@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/find_teacher/find_teacher",
+    "pages/find_lecture/find_lecture",
+    "pages/user_info/user_info",
+    "pages/m3_appt_lecture/appt_lecture",
+    "pages/m1_login/login",
+    "pages/m3_detail_lecture/m3_detail_lecture",
+    "pages/m4_release_lecture/m4_release_lecture"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "JobEase",
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#55aaff",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/find_teacher/find_teacher",
+        "iconPath": "static/image/icon_teacher.png",
+        "selectedIconPath": "static/image/icon_teacher_HL.png",
+        "text": "找导师"
+      },
+      {
+        "pagePath": "pages/find_lecture/find_lecture",
+        "iconPath": "static/image/icon_lecture.png",
+        "selectedIconPath": "static/image/icon_lecture_HL.png",
+        "text": "找讲座"
+      },
+      {
+        "pagePath": "pages/user_info/user_info",
+        "iconPath": "static/image/icon_my.png",
+        "selectedIconPath": "static/image/icon_my_HL.png",
+        "text": "个人信息"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

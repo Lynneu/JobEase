@@ -1,6 +1,6 @@
 <template>
 	<view>
-		
+		<h1>讲座详情</h1>
 	</view>
 </template>
 
