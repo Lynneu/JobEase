@@ -50,7 +50,7 @@
             "path" : "pages/m3_detail_lecture/m3_detail_lecture",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "讲座详情",
                 "enablePullDownRefresh": false
             }
             
@@ -59,7 +59,7 @@
             "path" : "pages/m4_release_lecture/m4_release_lecture",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "发布讲座",
                 "enablePullDownRefresh": false
             }
             
@@ -68,7 +68,7 @@
             "path" : "pages/m1_sign/m1_sign",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "注册",
                 "enablePullDownRefresh": false
             }
             
@@ -78,7 +78,7 @@
             "path" : "pages/m1_role_select/m1_role_select",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "身份选择",
                 "enablePullDownRefresh": false
             }
             
@@ -87,13 +87,22 @@
             "path" : "pages/m3_appt_consult/m3_appt_consult",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "咨询预约",
                 "enablePullDownRefresh": false
             }
             
         }
         ,{
             "path" : "pages/m3_detail_appt_consult/m3_detail_appt_consult",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "导师详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/m1_identify_teacher/m1_identify_teacher",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

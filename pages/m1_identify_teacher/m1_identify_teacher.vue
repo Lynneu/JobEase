@@ -1,27 +1,23 @@
 <template>
 	<view class="login-content">
 		<view class="login-title">
-			登录
+			新用户注册
 		</view>
 		<view class="iphone">
-			<input type="number" placeholder="输入手机号" :value="iphoneValue" @input="clearInput" />
+			<input type="number" placeholder="就职公司" :value="iphoneValue" @input="clearInput" />
 			<uni-icons type="closeempty" color="#808080" size="25" v-if="showClearIcon" @click="clearIcon"></uni-icons>
 		</view>
 
 		<view class="password" v-if="type==2">
 			<!-- <input type="password" placeholder="输入密码" /> 要显示密码就不要设置type="password"-->
-			<input placeholder="请输入密码" v-model="passwordValue" :password="showPassword" />
-			<uni-icons type="eye-filled" color="#808080" size="25" @click="changePassword"></uni-icons>
+			<input placeholder="真实姓名" v-model="passwordValue" :password="showPassword" />
 		</view>
-		<view class="test" v-if="type==1">
-			<input type="text" placeholder="输入验证码" v-model="testValue" />
-			<view class="get-test" type="default" @click="getTest()" v-if="showTimer">获取验证码</view>
-			<view class="get-test" type="default" v-else>{{timer+'s'}}</view>
+		<view class="password" v-if="type==2">
+			<!-- <input type="password" placeholder="输入密码" /> 要显示密码就不要设置type="password"-->
+			<input placeholder="工号" v-model="passwordValue" :password="showPassword" />
+			
 		</view>
-		<view class="test-btn" v-if="type==2" @click="setLoginType(1)">手机验证码登录>></view>
-		<view class="password-btn" v-if="type==1" @click="setLoginType(2)">密码登录>></view>
-		<view class="signup"><h5>还未注册账号？点击进行</h5>	<view class="signup-btn" @click="Login()">注册</view></view>
-		<view class="login-btn" @click="Login()">登录</view>
+		<view class="login-btn" @click="Login()">注册</view>
 	</view>
 </template>
 
@@ -248,19 +244,5 @@
 		line-height: 45px;
 		position: fixed;
 		bottom: 60px;
-	}
-	.signup-btn {
-		width: 100px;
-		height: 40px;
-		background: #0000e1;
-		text-align: center;
-		border-radius: 36px;
-		color: #fff;
-		font-size: 20px;
-		line-height: 40px;
-		bottom: 60px;
-	}
-	.signup{
-		float: left;
 	}
 </style>
