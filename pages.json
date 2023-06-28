@@ -34,7 +34,17 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        }		
+		,{
+		    "path" : "pages/m1_login/login",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "登录",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
