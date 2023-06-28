@@ -45,6 +45,15 @@
 		    
 		}
 		
+        ,{
+            "path" : "pages/m3_detail_lecture/m3_detail_lecture",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
