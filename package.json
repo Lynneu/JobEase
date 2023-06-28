@@ -1,0 +1,16 @@
+{
+    "id": "yll1024335892-ayi-search",
+    "name": "search搜索栏",
+    "displayName": "search搜索栏",
+    "version": "1.0.0",
+    "description": "search搜索栏",
+    "keywords": [
+        "search,搜索栏"
+    ],
+    "dcloudext": {
+        "category": [
+            "前端组件",
+            "通用组件"
+        ]
+    }
+}
