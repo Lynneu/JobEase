@@ -54,6 +54,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/m4_release_lecture/m4_release_lecture",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
