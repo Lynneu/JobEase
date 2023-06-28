@@ -1,27 +1,28 @@
 <template>
 	<view>
 		<view class="lec_body">
-			<view class="backgroud">
+			<view class="backgroud1">
 				<view class="word">
 					<view class="title">
-						<text>如何拥有良好的睡眠质量</text>
+						<text>王某某</text>
 					</view>
 					<view class="datail">
-						<text>演 讲 人：pp\n</text>
-						<text>讲座时间：2023\n</text>
-						<text>讲座主题：睡眠学导论\n</text>
-						<text>讲座费用：0\n</text>
-						<text>剩余名额：3\n</text>
+						<text>专业标签：pp\n</text>
+						<text>评　　分：10\n</text>
+						<text>工作单位：10\n</text>
 						<text>\n</text>
 					</view>
 					<view class="in_word">
 						<view class="in_background">
 							<text>
-								<text>讲座内容\n</text>
+								导师介绍
 							</text>
 						</view>
 					</view>
 				</view>
+			</view>
+			<view>
+				
 			</view>
 			<view class="confirm">
 				<text>\n</text>
@@ -52,7 +53,7 @@
 		padding-bottom: 30%;
 		
 	}
-	.backgroud{
+	.backgroud1{
 		width: 100%;
 		height: 900rpx;
 		border-radius: 5px;
@@ -77,14 +78,13 @@
 	}
 
 	.in_background{
-		padding-left: 3px;
 		width: 100%;
-		height: 470rpx;
+		height: 650rpx;
 		border-radius: 5px 5px 5px 5px;
 		background-color: #ffffff;
 	}
 	.confirm{
-		padding-left: 70%;
+		padding-left: 55%;
 		font-weight: 600;
 	}
 
