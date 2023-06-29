@@ -1,35 +1,27 @@
 <template>
 	<view>
 		<view class="lec_body">
-			<view class="backgroud">
-				<view class="word">
-					<view class="title">
-						<text>如何拥有良好的睡眠质量</text>
-					</view>
-					<view class="datail">
-						<text>演 讲 人：pp\n</text>
-						<text>讲座时间：2023\n</text>
-						<text>讲座主题：睡眠学导论\n</text>
-						<text>讲座费用：0\n</text>
-						<text>剩余名额：3\n</text>
-						<text>\n</text>
-					</view>
-					<view class="in_word">
-						<view class="in_background">
-							<text>
-								<text>讲座内容\n</text>
-							</text>
-						</view>
-					</view>
+			<view class="word">
+				<view class="title">
+					<text>如何拥有良好的睡眠质量</text>
+				</view>
+		
+				<view class="datail">
+					<text v-for="(item,index) in name" :key="index">演 讲 人：{{item}} \n</text>
+					<text>讲座时间：2023\n</text>
+					<text>讲座主题：睡眠学导论\n</text>
+					<text>讲座费用：0\n</text>
+					<text>剩余名额：3\n</text>
 				</view>
 			</view>
-			<view class="confirm">
-				<text>\n</text>
-				<button size="mini" type="primary">
-					<text>预约</text>
-				</button>
-			</view>
 		</view>
+		<uni-card>
+			<text>讲座内容\n</text>
+			<text class="card_title">讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容</text>
+		</uni-card>
+		<button size="mini" type="primary">
+			<text>预约</text>
+		</button>
 	</view>
 </template>
 
@@ -37,6 +29,7 @@
 	export default {
 		data() {
 			return {
+				name:['pp'],
 				
 			};
 		}
@@ -44,20 +37,14 @@
 </script>
 
 <style lang="scss">
-
+	page{
+		background-color: #ffffff;
+	}
 	.lec_body{
 		padding-left: 3%;
 		padding-right: 3%;
 		padding-top: 5%;
-		padding-bottom: 30%;
 		
-	}
-	.backgroud{
-		width: 100%;
-		height: 900rpx;
-		border-radius: 5px;
-		background-color: #DCDCDC;
-		box-shadow: 0px 0px 3px 2px #C0C0C0
 	}
 	.word{
 		padding-left: 3%;
@@ -73,19 +60,16 @@
 		font-weight: 600;
 	}
 	.in_word{
-		justify-content: center;
-	}
-
-	.in_background{
-		padding-left: 3px;
-		width: 100%;
-		height: 470rpx;
-		border-radius: 5px 5px 5px 5px;
-		background-color: #ffffff;
+		font-size: 30rpx;
+		font-weight: 600;
 	}
 	.confirm{
 		padding-left: 70%;
 		font-weight: 600;
+		padding-bottom: 3%;
+	}
+	.card_title{
+		font-size: 20rpx;
 	}
 
 </style>

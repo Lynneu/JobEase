@@ -129,11 +129,12 @@
 </script>
 
 <style lang="scss">
-
+	page{
+		background-color: #ffffff;
+	}
 	.lec_body{
 		padding-left: 2%;
 		padding-right: 2%;
-		padding-top: 3%;
 		padding-bottom: 10%;
 		
 	}
