@@ -3,9 +3,40 @@
 	<view class="uni-inline-item uni-row area-padding">
 		<view style="width: 100rpx;">
 			<uni-icons @click="showDrawer('showLeft')" type="bars" size="25" color="#007AFF"></uni-icons>
-			<uni-drawer ref="showLeft" mode="left" :width="320" >
-				<view class="close">
-					<button @click="closeDrawer('showLeft')"><text class="word-btn-white">关闭Drawer</text></button>
+			<uni-drawer ref="showLeft" mode="left" :width="300">
+				<view class="container">
+					<uni-section title="筛选" type="line">
+						<view class="form-container">
+							<uni-forms>
+								<uni-forms-item label="咨询职位" label-width=60>
+									<uni-data-select
+									        v-model="jobvalue"
+									        :localdata="job"
+									        @change="changeJob"
+											placeholder="请选择职位"
+									      ></uni-data-select>
+								</uni-forms-item>
+								<uni-forms-item label="咨询方向" label-width=60>
+									<uni-data-select
+									        v-model="consultvalue"
+									        :localdata="consult"
+									        @change="changeconsult"
+											placeholder="请选择咨询方向"
+									      ></uni-data-select>
+								</uni-forms-item>
+								<uni-forms-item label="价格区间" label-width=60>
+									<uni-number-box :min="1" :max="999" :value="100" background="#2979FF" color="#fff" />
+								</uni-forms-item>
+								<uni-forms-item label="评分区间" label-width=60>
+									<uni-number-box :min="0" :max="10" :value="5" background="#2979FF" color="#fff" />
+								</uni-forms-item>
+							</uni-forms>
+							
+							<view class="choose">
+								<button type="primary" size="mini" @click="closeDrawer('showLeft')">筛选</button>
+							</view>
+						</view>
+					</uni-section>
 				</view>
 			</uni-drawer>
 		</view>
@@ -19,12 +50,22 @@
 			<button class="mini-btn" type="primary" size="mini" @click="searchclick">搜索</button>
 		</view>
 	</view>
-	
-	<view class="search-result">
-		<text class="search-result-text">当前输入为：{{ searchValue }}</text>
-	</view>
-					
-		
+		<view class="list-area">
+			<uni-list>
+				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
+				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
+				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
+				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
+				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
+				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
+				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
+				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
+				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
+				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
+				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
+				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
+			</uni-list>				
+		</view>
 	</view>
 </template>
 
@@ -32,7 +73,22 @@
 	export default {
 		data() {
 			return {
-				searchValue: ''
+				searchValue: '',
+				jobvalue: '',
+				consultvalue: '',
+				job: [
+				  { value: 0, text: "前端" },
+				  { value: 1, text: "后端" },
+				  { value: 2, text: "产品经理" },
+				  { value: 3, text: "运营" },
+				  { value: 4, text: "策划" },
+				],
+				consult: [
+					{ value: 0, text: "简历修改" },
+					{ value: 1, text: "面试准备" },
+					{ value: 2, text: "薪资" },
+					{ value: 3, text: "职业规划" },
+				]
 			}
 		},
 		methods: {
@@ -77,6 +133,12 @@
 			},
 			searchclick() {
 				console.log(this.searchValue)
+			},
+			changeJob(e) {
+				console.log("e:", e);
+			},
+			changeconsult(e) {
+				console.log("e:", e);
 			}
 		},
 		onBackPress() {
@@ -100,5 +162,13 @@
 	justify-content: center;
 	padding: 10px 0;
 }
-
+.container {
+	margin: 20px;
+}
+.choose {
+	text-align: center;
+}
+.list-area {
+	margin-top: 5px;
+}
 </style>

@@ -9,6 +9,13 @@ if (!Math) {
   "./pages/m1_login/login.js";
   "./pages/m3_detail_lecture/m3_detail_lecture.js";
   "./pages/m4_release_lecture/m4_release_lecture.js";
+  "./pages/m1_sign/m1_sign.js";
+  "./pages/m1_role_select/m1_role_select.js";
+  "./pages/m3_appt_consult/m3_appt_consult.js";
+  "./pages/m3_detail_appt_consult/m3_detail_appt_consult.js";
+  "./pages/m1_identify_teacher/m1_identify_teacher.js";
+  "./pages/m4_seeker_information/m4_seeker_information.js";
+  "./pages/m4_mentor_information/m4_mentor_information.js";
 }
 const _sfc_main = {
   onLaunch: function() {

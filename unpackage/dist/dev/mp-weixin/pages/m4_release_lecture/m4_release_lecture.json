@@ -1,5 +1,9 @@
 {
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "发布讲座",
   "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "usingComponents": {
+    "uni-number-box": "../../uni_modules/uni-number-box/components/uni-number-box/uni-number-box",
+    "uni-section": "../../uni_modules/uni-section/components/uni-section/uni-section",
+    "uni-datetime-picker": "../../uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker"
+  }
 }
