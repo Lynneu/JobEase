@@ -109,6 +109,24 @@
             }
             
         }
+        ,{
+            "path" : "pages/m4_seeker_information/m4_seeker_information",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/m4_mentor_information/m4_mentor_information",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
