@@ -1,35 +1,33 @@
 <template>
 	<view>
 		<view class="lec_body">
-			<view class="backgroud1">
-				<view class="word">
-					<view class="title">
-						<text>王某某</text>
-					</view>
-					<view class="datail">
-						<text>专业标签：pp\n</text>
-						<text>评　　分：10\n</text>
-						<text>工作单位：10\n</text>
-						<text>\n</text>
-					</view>
-					<view class="in_word">
-						<view class="in_background">
-							<text>
-								导师介绍
-							</text>
-						</view>
-					</view>
+			<view class="word">
+				<view class="title">
+					<text>王某某</text>
+				</view>
+				<view class="datail">
+					<text>专业标签：pp\n</text>
+					<text>评　　分：10\n</text>
+					<text>工作单位：10\n</text>
+					<text>\n</text>
+				</view>
+				<view class="in_word">
+					<text>
+						导师介绍\n
+					</text>
+					<text>
+						测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试
+					</text>
 				</view>
 			</view>
-			<view>
-				
-			</view>
+			
 			<view class="confirm">
 				<text>\n</text>
-				<button size="mini" type="primary">
+				<button size="mini" type="primary" @click="trigger()">
 					<text>预约</text>
 				</button>
 			</view>
+			
 		</view>
 	</view>
 </template>
@@ -40,6 +38,14 @@
 			return {
 				
 			};
+		},
+		methods:{
+			trigger(e){
+				console.log(e)
+				uni.navigateTo({
+					url:'../m3_appt_consult/m3_appt_consult'
+				});
+			},
 		}
 	}
 </script>
@@ -52,13 +58,6 @@
 		padding-top: 5%;
 		padding-bottom: 30%;
 		
-	}
-	.backgroud1{
-		width: 100%;
-		height: 900rpx;
-		border-radius: 5px;
-		background-color: #DCDCDC;
-		box-shadow: 0px 0px 3px 2px #C0C0C0
 	}
 	.word{
 		padding-left: 3%;
@@ -75,13 +74,6 @@
 	}
 	.in_word{
 		justify-content: center;
-	}
-
-	.in_background{
-		width: 100%;
-		height: 650rpx;
-		border-radius: 5px 5px 5px 5px;
-		background-color: #ffffff;
 	}
 	.confirm{
 		padding-left: 55%;
