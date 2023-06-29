@@ -61,3 +61,19 @@
 		position: fixed;
 		bottom: 60px;
 }
+.signup-btn.data-v-1f4898ea {
+		width: 100px;
+		height: 40px;
+		background: #0000e1;
+		text-align: center;
+		border-radius: 36px;
+		color: #fff;
+		font-size: 20px;
+		line-height: 40px;
+		bottom: 60px;
+}
+.signup.data-v-1f4898ea{
+		height: 70px;
+		float: right;
+		display: flex;
+}

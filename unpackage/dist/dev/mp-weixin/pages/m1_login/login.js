@@ -23,7 +23,6 @@ const _sfc_main = {
     };
   },
   methods: {
-    // 显示隐藏密码
     changePassword: function() {
       this.showPassword = !this.showPassword;
     },
@@ -45,7 +44,9 @@ const _sfc_main = {
     setLoginType(type) {
       this.type = type;
     },
-    // 密码登录
+    Zhuce() {
+      this.href("pages/m1_sign/m1_sign", true);
+    },
     Login() {
       let that = this;
       if (!that.iphoneValue || !this.isMobile(that.iphoneValue)) {
@@ -191,26 +192,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       size: "25"
     })
   } : {}, {
-    l: $data.type == 1
-  }, $data.type == 1 ? common_vendor.e({
-    m: $data.testValue,
-    n: common_vendor.o(($event) => $data.testValue = $event.detail.value),
-    o: $data.showTimer
-  }, $data.showTimer ? {
-    p: common_vendor.o(($event) => $options.getTest())
-  } : {
-    q: common_vendor.t($data.timer + "s")
-  }) : {}, {
-    r: $data.type == 2
-  }, $data.type == 2 ? {
-    s: common_vendor.o(($event) => $options.setLoginType(1))
-  } : {}, {
-    t: $data.type == 1
-  }, $data.type == 1 ? {
-    v: common_vendor.o(($event) => $options.setLoginType(2))
-  } : {}, {
-    w: common_vendor.o(($event) => $options.Login()),
-    x: common_vendor.o(($event) => $options.Login())
+    l: common_vendor.o((...args) => $options.Zhuce && $options.Zhuce(...args)),
+    m: common_vendor.o(($event) => $options.Login())
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-1f4898ea"], ["__file", "D:/Code/JobEase/JobEase/pages/m1_login/login.vue"]]);

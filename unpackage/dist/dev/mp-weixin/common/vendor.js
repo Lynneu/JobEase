@@ -7111,12 +7111,61 @@ const pages = [
   {
     path: "pages/m3_detail_lecture/m3_detail_lecture",
     style: {
-      navigationBarTitleText: "",
+      navigationBarTitleText: "讲座详情",
       enablePullDownRefresh: false
     }
   },
   {
     path: "pages/m4_release_lecture/m4_release_lecture",
+    style: {
+      navigationBarTitleText: "发布讲座",
+      enablePullDownRefresh: false
+    }
+  },
+  {
+    path: "pages/m1_sign/m1_sign",
+    style: {
+      navigationBarTitleText: "注册",
+      enablePullDownRefresh: false
+    }
+  },
+  {
+    path: "pages/m1_role_select/m1_role_select",
+    style: {
+      navigationBarTitleText: "身份选择",
+      enablePullDownRefresh: false
+    }
+  },
+  {
+    path: "pages/m3_appt_consult/m3_appt_consult",
+    style: {
+      navigationBarTitleText: "咨询预约",
+      enablePullDownRefresh: false
+    }
+  },
+  {
+    path: "pages/m3_detail_appt_consult/m3_detail_appt_consult",
+    style: {
+      navigationBarTitleText: "导师详情",
+      enablePullDownRefresh: false
+    }
+  },
+  {
+    path: "pages/m1_identify_teacher/m1_identify_teacher",
+    style: {
+      navigationBarTitleText: "",
+      enablePullDownRefresh: false
+    }
+  },
+  {
+    path: "pages/m4_seeker_information/m4_seeker_information",
+    style: {
+      navigationBarTitleText: "",
+      enablePullDownRefresh: false
+    }
+  },
+  {
+    path: "pages/m4_mentor_information/m4_mentor_information",
     style: {
       navigationBarTitleText: "",
       enablePullDownRefresh: false
@@ -7159,10 +7208,14 @@ const tabBar = {
     }
   ]
 };
+const usingComponents = {
+  "fui-button": "components/fui-button/fui-button"
+};
 const t = {
   pages,
   globalStyle,
-  tabBar
+  tabBar,
+  usingComponents
 };
 function n(e2) {
   return e2 && e2.__esModule && Object.prototype.hasOwnProperty.call(e2, "default") ? e2.default : e2;

@@ -184,7 +184,7 @@
 	.uni-numbox__value {
 		margin: 0 2px;
 		background-color: $bg;
-		width: 40px;
+		width: 100px;
 		height: $box-height;
 		text-align: center;
 		font-size: 14px;

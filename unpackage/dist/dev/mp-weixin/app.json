@@ -6,7 +6,14 @@
     "pages/m3_appt_lecture/appt_lecture",
     "pages/m1_login/login",
     "pages/m3_detail_lecture/m3_detail_lecture",
-    "pages/m4_release_lecture/m4_release_lecture"
+    "pages/m4_release_lecture/m4_release_lecture",
+    "pages/m1_sign/m1_sign",
+    "pages/m1_role_select/m1_role_select",
+    "pages/m3_appt_consult/m3_appt_consult",
+    "pages/m3_detail_appt_consult/m3_detail_appt_consult",
+    "pages/m1_identify_teacher/m1_identify_teacher",
+    "pages/m4_seeker_information/m4_seeker_information",
+    "pages/m4_mentor_information/m4_mentor_information"
   ],
   "window": {
     "navigationBarTextStyle": "black",
