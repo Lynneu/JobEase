@@ -161,5 +161,9 @@
 				"text": "个人信息"
 			}
 			]
-		}
+		},
+		  "usingComponents": {
+		    "fui-button": "components/fui-button/fui-button"
+		  }
+
 }

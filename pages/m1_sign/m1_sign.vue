@@ -99,7 +99,7 @@
 					}, //发送的数据
 					success: (res) => {
 						if (res.data.code == 200) {
-							//存储token
+						
 							that.token = res.data.token;
 							uni.setStorageSync('token', that.token); // 将登录信息以token的方式存在硬盘中
 							uni.setStorageSync('userInfo', JSON.stringify(res.data)); // 将用户信息存储在硬盘中
@@ -120,51 +120,7 @@
 					}
 				})
 			},
-			// 获取验证码
-			getTest() {
-				let that = this
-				//当手机号为空或者手机号不正确时
-				if (!that.iphoneValue || !this.isMobile(that.iphoneValue)) {
-					uni.showToast({
-						title: '请输入正确电话号码',
-						icon: 'none'
-					})
-					return false
-				}
-				uni.request({
-					url: 'http://app/login/sendSms', // 路径
-					method: 'GET', // 请求方法
-					data: {
-						phone: that.iphoneValue,
-						type: '1',
-					}, //发送的数据
-					success: (res) => {
-						if (res.data.code == 200) {
-							uni.showToast({
-								title: '验证码发送成功',
-								icon: 'none'
-							})
-							that.timer=60//设置时间初始化
-							that.timeDown(that.timer)//调用时间减少
-						}
-					}
-				})
-			},
-			// 设置验证码时间动态减少
-			timeDown(num){
-				let that=this;
-				// 当时间为0时,恢复为按钮,清除定时器
-				if(num==0){
-					that.showTimer=true;
-					return clearTimeout();
-				}else{
-					that.showTimer=false;
-					setTimeout(function(){
-						that.timer=num-1
-						that.timeDown(num-1)
-					},1000)//定时每秒减一
-				}
-			},
+
 			// 下面是可以封装起来引入的部分
 			// 判断是否是正确的手机号码
 			isMobile(str) {

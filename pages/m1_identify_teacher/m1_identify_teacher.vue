@@ -1,106 +1,205 @@
 <template>
-	<view class="login-content">
-		<view class="login-title">
-			导师认证
+	<view>
+		<view class="uni-form-item uni-column">
+		    <view class="title">
+				<text class="uni-form-item__title">就职公司:</text>
+			</view>
+		    <view class="uni-input-wrapper">
+		        <input class="uni-input" maxlength="20" placeholder="最大输入长度为20" />
+		    </view>
 		</view>
-		<view class="iphone">
-			<input type="number" placeholder="就职公司" :value="iphoneValue" @input="clearInput" />
-			<uni-icons type="closeempty" color="#808080" size="25" v-if="showClearIcon" @click="clearIcon"></uni-icons>
+		<view class="uni-title uni-common-pl">真实姓名：</view>
+		<view class="uni-textarea">
+			<textarea maxlength="10" placeholder="最大输入长度为10" @blur="bindTextAreaBlur" auto-height />
+			</view>
+		<view class="uni-title uni-common-pl">工号：</view>
+		<view class="uni-textarea">
+			<textarea maxlength="10" placeholder="最大输入长度为10" @blur="bindTextAreaBlur" auto-height />
+			</view>
+		
+		<view class="uni-title uni-common-pl">岗位：</view>
+		<view class="uni-list">
+			<view class="uni-list-cell">
+				<view class="uni-list-cell-left">
+					当前选择
+				</view>
+				<view class="uni-list-cell-db">
+					<picker @change="bindPickerChange" :value="index" :range="array" range-key="name">
+						<view class="uni-input">{{array[index].name}}</view>
+					</picker>
+				</view>
+			</view>
 		</view>
-		<view class="password">
-			<!-- <input type="password" placeholder="输入密码" /> 要显示密码就不要设置type="password"-->
-			<input placeholder="真实姓名" v-model="passwordValue" :password="showPassword" />
+		<view class="uni-title uni-common-pl">岗位：</view>
+		<view class="uni-list">
+			<view class="uni-list-cell">
+				<view class="uni-list-cell-left">
+					当前选择
+				</view>
+				<view class="uni-list-cell-db">
+					<picker @change="bindPickerChange" :value="index" :range="array" range-key="name">
+						<view class="uni-input">{{array[index].name}}</view>
+					</picker>
+				</view>
+			</view>
 		</view>
-		<view class="password">
-			<input placeholder="工号" v-model="passwordValue" :password="showPassword" />
+		
+		<uni-section :title="'收费 : '+ numberValue+'元/小时（0-999）'" type="line" padding>
+			<uni-number-box  :max="999" :step="50" :value="numberValue" @change="change1" />
+		</uni-section>
+		
+		<view class="uni-form-item uni-column">
+		    <view class="title">
+				<text class="uni-form-item__title">公司邮箱:</text>
+			</view>
+		    <view class="uni-input-wrapper">
+		        <input class="uni-input"  />
+		    </view>
 		</view>
-		<view class="password">
-			<input placeholder="岗位" v-model="passwordValue" :password="showPassword" />
+		<view class="uni-form-item uni-column">
+		    <view class="title">
+				<text class="uni-form-item__title">验证码:</text>
+			</view>
+		    <view class="uni-input-wrapper">
+		        <input class="uni-input"/>
+		    </view>
 		</view>
-		<view class="password">
-			<input placeholder="主要咨询//" v-model="passwordValue" :password="showPassword" />
-		</view>
-		<view class="password">
-			<input placeholder="价格" v-model="passwordValue" :password="showPassword" />
-		</view>
-		<view class="password">
-			<input placeholder="公司邮箱" v-model="passwordValue" :password="showPassword" />
-		</view>
-        <view class="test">
-			<input type="text" placeholder="输入验证码" v-model="testValue" />
-			<view class="get-test" type="default" @click="getTest()" v-if="showTimer">获取验证码</view>
-			<view class="get-test" type="default" v-else>{{timer+'s'}}</view>
-		</view>
-		<view class="login-btn" @click="Login()">进行导师认证</view>
+		<view class="button-sp-area">
+		    <button type="primary" plain="true">提交认证</button>
+		 </view>	
+		
 	</view>
 </template>
 
 <script>
-	
+	export default {
+		data() {
+			return {
+				array: [{name:'前端开发'},{name:'后端开发'},{name:'C++开发'},{name:'Java开发'},{name:'算法'},{name:'测试开发'},{name:'产品经理'},{name:'运营'},{name:'HR'},{name:'其他'}],
+				index: 0,
+				numberValue: 0,
+				
+				
+				current: 0
+			}
+		},
+		watch: {
+			datetimeString() {
+				console.log('日期时间单选:', this.datetimeString);
+			},
+		},
+		onLoad() {
+
+		},
+		methods: {
+			bindPickerChange(e) {
+				console.log('picker发送选择改变，携带值为：' + e.detail.value);
+				this.index = e.detail.value;
+			},
+			
+			bindTextAreaBlur(e) {
+				console.log(e.detail.value);
+			},
+			
+			change1(value) {
+				this.numberValue = value;
+			},
+			change3(value) {
+				this.last_numberValue = value;
+			},
+			change4(value) {
+				this.listen_numberValue = value;
+			},
+			radioChange(evt) {
+				for (let i = 0; i < this.items.length; i++) {
+					if (this.items[i].value === evt.detail.value) {
+						this.current = i;
+						break;
+					}
+				}
+			},
+			change2(e) {
+				console.log('----change2事件:', e);
+			},
+			getDateTime(date, addZero = true){
+				return `${this.getDate(date, addZero)} ${this.getTime(date, addZero)}`
+			},
+			getDate(date, addZero = true){
+				date = new Date(date)
+				const year = date.getFullYear()
+				const month = date.getMonth()+1
+				const day = date.getDate()
+				return `${year}-${addZero ? this.addZero(month) : month}-${addZero ? this.addZero(day) : day}`
+			},
+			getTime(date, addZero = true){
+				date = new Date(date)
+				const hour = date.getHours()
+				const minute = date.getMinutes()
+				const second = date.getSeconds()
+				return this.hideSecond ?
+				`${addZero ? this.addZero(hour) : hour}:${addZero ? this.addZero(minute) : minute}` :
+				`${addZero ? this.addZero(hour) : hour}:${addZero ? this.addZero(minute) : minute}:${addZero ? this.addZero(second) : second}`
+			},
+			addZero(num) {
+				if (num < 10) {
+					num = `0${num}`
+				}
+				return num
+			}
+			
+		}
+	}
 </script>
 
-<style scoped>
-	.login-content {
-		padding: 20px 10px 35px;
-		text-align: center;
-		color: #333333;
-	}
 
-	.login-title {
-		font-size: 24px;
-		font-weight: bold;
-		margin-bottom: 20px;
-	}
 
-	.login-content input {
-		height: 40px;
-		background: #F8F8F8;
-		border-radius: 20px;
-		text-align: left;
-		padding: 15px;
-		box-sizing: border-box;
-		font-size: 15px;
-	}
 
-	.iphone,
-	.password,
-	.test {
-		position: relative;
-		margin-bottom: 30px;
+<style lang="scss">
+	.title {
+	    padding: 5px 13px;
 	}
-
-	.iphone .uni-icons,
-	.password .uni-icons {
-		position: absolute;
-		top: 10px;
-		right: 30px;
-	}
-
-	.get-test {
-		color: #0000ff;
-		font-size: 15px;
-		width: 122px;
-		height: 50px;
-		border: 1px solid #0000ff;
-		border-radius: 25px;
-		line-height: 50px;
-	}
-
-	.test {
+	.uni-form-item uni-column
+	{
 		display: flex;
-		justify-content: space-between;
 	}
+	.uni-form-item__title {
+	    font-size: 16px;
+	    line-height: 24px;
+	}
+	
+	.uni-input-wrapper {
 
-	.login-btn {
-		width: 355px;
-		height: 45px;
-		background: #0000ff;
-		border-radius: 36px;
-		color: #fff;
-		font-size: 20px;
-		text-align: center;
-		line-height: 45px;
-		position: fixed;
-		bottom: 60px;
+	    padding: 8px 13px;
+	    flex-direction: row;
+	    flex-wrap: nowrap;
+	    background-color: #FFFFFF;
+	}
+	
+	.uni-input {
+	    height: 28px;
+	    line-height: 28px;
+	    font-size: 15px;
+	    padding: 0px;
+	    flex: 1;
+	    background-color: #FFFFFF;
+	}
+	
+	.example-body {
+		background-color: #fff;
+		padding: 10px;
+	}
+	
+	.uni-list-cell {
+		justify-content: flex-start
+	}
+	
+	button {
+	    margin-top: 30rpx;
+	    margin-bottom: 30rpx;
+	}
+	
+	.button-sp-area {
+	    margin: 0 auto;
+	    width: 60%;
 	}
 </style>

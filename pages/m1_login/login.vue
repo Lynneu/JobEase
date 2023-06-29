@@ -13,9 +13,8 @@
 			<input placeholder="请输入密码" v-model="passwordValue" :password="showPassword" />
 			<uni-icons type="eye-filled" color="#808080" size="25" @click="changePassword"></uni-icons>
 		</view>
-
-		<view class="password-btn" v-if="type==1" @click="setLoginType(2)">密码登录>></view>
-		<view class="signup"><h5>还未注册账号？点击进行</h5>	<view class="signup-btn" @click="Login()">注册</view></view>
+		
+	    <view class="signup"><h5>还未注册账号？点击进行</h5>	<view class="signup-btn" @click="Zhuce">注册</view></view>
 		<view class="login-btn" @click="Login()">登录</view>
 	</view>
 </template>
@@ -37,7 +36,7 @@
 		},
 
 		methods: {
-			// 显示隐藏密码
+
 			changePassword: function() {
 				this.showPassword = !this.showPassword;
 			},
@@ -59,7 +58,10 @@
 			setLoginType(type) {
 				this.type = type
 			},
-			// 密码登录
+			Zhuce(){
+				this.href('pages/m1_sign/m1_sign',true)
+			},
+			
 			Login() {
 				let that = this
 				//当手机号为空或者手机号不正确时
