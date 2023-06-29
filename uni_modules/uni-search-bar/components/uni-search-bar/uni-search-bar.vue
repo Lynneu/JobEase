@@ -234,7 +234,7 @@
 		/* #endif */
 		flex-direction: row;
 		position: relative;
-		padding: 10px;
+		// padding: 10px;
 		// background-color: #fff;
 	}
 

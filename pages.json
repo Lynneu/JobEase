@@ -4,7 +4,6 @@
             "path" : "pages/find_teacher/find_teacher",
             "style" :                                                                                    
             {
-				"navigationStyle":"custom",
                 "navigationBarTitleText": "找导师",
                 "enablePullDownRefresh": true
             }
@@ -114,7 +113,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "JobEase",
-		"navigationBarBackgroundColor": "#55aaff",
+		"navigationBarBackgroundColor": "#fff",
 		"backgroundColor": "#ffffff"
 	},
 	"tabBar": {
