@@ -13,12 +13,7 @@
 			<input placeholder="请输入密码" v-model="passwordValue" :password="showPassword" />
 			<uni-icons type="eye-filled" color="#808080" size="25" @click="changePassword"></uni-icons>
 		</view>
-		<view class="test" v-if="type==1">
-			<input type="text" placeholder="输入验证码" v-model="testValue" />
-			<view class="get-test" type="default" @click="getTest()" v-if="showTimer">获取验证码</view>
-			<view class="get-test" type="default" v-else>{{timer+'s'}}</view>
-		</view>
-		<view class="test-btn" v-if="type==2" @click="setLoginType(1)">手机验证码登录>></view>
+
 		<view class="password-btn" v-if="type==1" @click="setLoginType(2)">密码登录>></view>
 		<view class="signup"><h5>还未注册账号？点击进行</h5>	<view class="signup-btn" @click="Login()">注册</view></view>
 		<view class="login-btn" @click="Login()">登录</view>
@@ -261,6 +256,9 @@
 		bottom: 60px;
 	}
 	.signup{
-		float: left;
+		height: 70px;
+		float: right;
+		display: flex;
+
 	}
 </style>
