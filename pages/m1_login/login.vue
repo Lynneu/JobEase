@@ -14,7 +14,10 @@
 			<uni-icons type="eye-filled" color="#808080" size="25" @click="changePassword"></uni-icons>
 		</view>
 		
-	    <view class="signup"><h5>还未注册账号？点击进行</h5>	<view class="signup-btn" @click="Zhuce">注册</view></view>
+	    <view class="signup">
+			<h5>还未注册账号？点击进行</h5>	
+			<button class="signup-btn" @click="Zhuce">注册</button>
+		</view>
 		<view class="login-btn" @click="Login">登录</view>
 	</view>
 </template>
@@ -59,7 +62,9 @@
 				this.type = type
 			},
 			Zhuce(){
-				this.href('pages/m1_sign/m1_sign',true)
+				uni.navigateTo({
+					url: "../m1_sign/m1_sign"
+				})
 			},
 			
 			Login() {
@@ -252,7 +257,7 @@
 		bottom: 60px;
 	}
 	.signup-btn {
-		width: 100px;
+		width: 80px;
 		height: 40px;
 		background: #0000e1;
 		text-align: center;
@@ -260,7 +265,8 @@
 		color: #fff;
 		font-size: 20px;
 		line-height: 40px;
-		bottom: 60px;
+		left: 10px;
+		bottom: 10px;
 	}
 	.signup{
 		height: 70px;

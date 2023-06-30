@@ -40,11 +40,23 @@ const _sfc_main = {
     //提交
     sure() {
       if (this.selectId.length == 0) {
-        alert("请选择身份");
+        common_vendor.index.showToast({
+          title: "请选择身份",
+          icon: "none"
+        });
         return false;
       }
       var listIds = this.selectId.join(",");
       console.log("提交的数据", listIds);
+      if (listIds.includes("2")) {
+        common_vendor.index.navigateTo({
+          url: "../m1_identify_teacher/m1_identify_teacher"
+        });
+      } else {
+        common_vendor.index.switchTab({
+          url: "../find_teacher/find_teacher"
+        });
+      }
     }
   }
 };

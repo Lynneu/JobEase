@@ -66,6 +66,11 @@ const _sfc_main = {
         num = `0${num}`;
       }
       return num;
+    },
+    submit() {
+      common_vendor.index.switchTab({
+        url: "../find_teacher/find_teacher"
+      });
     }
   }
 };
@@ -97,7 +102,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       title: "收费 : " + $data.numberValue + "元/小时（0-999）",
       type: "line",
       padding: true
-    })
+    }),
+    j: common_vendor.o((...args) => $options.submit && $options.submit(...args))
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/Code/JobEase/JobEase/pages/m1_identify_teacher/m1_identify_teacher.vue"]]);

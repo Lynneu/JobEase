@@ -7074,6 +7074,13 @@ const createSubpackageApp = initCreateSubpackageApp();
 }
 const pages = [
   {
+    path: "pages/m1_login/login",
+    style: {
+      navigationBarTitleText: "登录",
+      enablePullDownRefresh: false
+    }
+  },
+  {
     path: "pages/find_teacher/find_teacher",
     style: {
       navigationBarTitleText: "找导师",
@@ -7085,20 +7092,6 @@ const pages = [
     style: {
       enablePullDownRefresh: true,
       navigationBarTitleText: "找讲座"
-    }
-  },
-  {
-    path: "pages/user_info/user_info",
-    style: {
-      navigationBarTitleText: "个人信息",
-      enablePullDownRefresh: false
-    }
-  },
-  {
-    path: "pages/m1_login/login",
-    style: {
-      navigationBarTitleText: "登录",
-      enablePullDownRefresh: false
     }
   },
   {
@@ -7146,21 +7139,21 @@ const pages = [
   {
     path: "pages/m1_identify_teacher/m1_identify_teacher",
     style: {
-      navigationBarTitleText: "",
+      navigationBarTitleText: "导师认证",
       enablePullDownRefresh: false
     }
   },
   {
     path: "pages/m4_seeker_information/m4_seeker_information",
     style: {
-      navigationBarTitleText: "",
+      navigationBarTitleText: "个人信息",
       enablePullDownRefresh: false
     }
   },
   {
     path: "pages/m4_mentor_information/m4_mentor_information",
     style: {
-      navigationBarTitleText: "",
+      navigationBarTitleText: "导师信息",
       enablePullDownRefresh: false
     }
   },

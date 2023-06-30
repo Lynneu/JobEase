@@ -18,7 +18,7 @@
 			<input placeholder="请再次输入密码" v-model="passwordValue" :password="showPassword" />
 			
 		</view>
-		<view class="login-btn" @click="Login()">注册</view>
+		<view class="login-btn" @click="Login">注册</view>
 	</view>
 </template>
 
@@ -73,7 +73,7 @@
 					return false
 				}
 				// 当使用密码登录并且未输入密码时
-				if (that.type == 2 && !that.passwordValue) {
+				else if (that.type == 2 && !that.passwordValue) {
 					uni.showToast({
 						title: '请输入密码',
 						icon: 'none'
@@ -81,13 +81,18 @@
 					return false
 				}
 				// 当使用验证码登录并且未输入验证码时
-				if (that.type == 1 && !that.testValue) {
+				else if (that.type == 1 && !that.testValue) {
 					uni.showToast({
 						title: '请输入验证码',
 						icon: 'none'
 					})
 					return false
 				}
+				// 未连接到后端，测试用！
+				else uni.navigateTo({ 
+					//url: "../index/index",
+					url: "../m1_role_select/m1_role_select",
+				})
 				uni.request({
 					url: 'http://app/login', // 路径
 					method: 'POST', // 请求方法

@@ -45,7 +45,9 @@ const _sfc_main = {
       this.type = type;
     },
     Zhuce() {
-      this.href("pages/m1_sign/m1_sign", true);
+      common_vendor.index.navigateTo({
+        url: "../m1_sign/m1_sign"
+      });
     },
     Login() {
       let that = this;

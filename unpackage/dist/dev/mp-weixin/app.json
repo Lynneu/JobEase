@@ -1,9 +1,8 @@
 {
   "pages": [
+    "pages/m1_login/login",
     "pages/find_teacher/find_teacher",
     "pages/find_lecture/find_lecture",
-    "pages/user_info/user_info",
-    "pages/m1_login/login",
     "pages/m3_detail_lecture/m3_detail_lecture",
     "pages/m4_release_lecture/m4_release_lecture",
     "pages/m1_sign/m1_sign",

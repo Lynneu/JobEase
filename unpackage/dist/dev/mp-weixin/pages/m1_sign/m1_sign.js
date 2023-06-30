@@ -54,21 +54,23 @@ const _sfc_main = {
           icon: "none"
         });
         return false;
-      }
-      if (that.type == 2 && !that.passwordValue) {
+      } else if (that.type == 2 && !that.passwordValue) {
         common_vendor.index.showToast({
           title: "请输入密码",
           icon: "none"
         });
         return false;
-      }
-      if (that.type == 1 && !that.testValue) {
+      } else if (that.type == 1 && !that.testValue) {
         common_vendor.index.showToast({
           title: "请输入验证码",
           icon: "none"
         });
         return false;
-      }
+      } else
+        common_vendor.index.navigateTo({
+          //url: "../index/index",
+          url: "../m1_role_select/m1_role_select"
+        });
       common_vendor.index.request({
         url: "http://app/login",
         // 路径
@@ -150,7 +152,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     m: $data.passwordValue,
     n: common_vendor.o(($event) => $data.passwordValue = $event.detail.value)
   } : {}, {
-    o: common_vendor.o(($event) => $options.Login())
+    o: common_vendor.o((...args) => $options.Login && $options.Login(...args))
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-eb4da951"], ["__file", "D:/Code/JobEase/JobEase/pages/m1_sign/m1_sign.vue"]]);

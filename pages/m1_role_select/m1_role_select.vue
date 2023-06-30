@@ -71,11 +71,24 @@
 			sure(){
 				//提交选中的值
 				if(this.selectId.length==0){
-					alert("请选择身份");
+					uni.showToast({
+						title: '请选择身份',
+						icon: 'none'
+					})
 					return false;
 				}
 				var listIds = this.selectId.join(",")
 				console.log("提交的数据",listIds)
+				if(listIds.includes("2")){
+					uni.navigateTo({
+						url: "../m1_identify_teacher/m1_identify_teacher"
+					})
+				}
+				else {
+					uni.switchTab({
+						url: "../find_teacher/find_teacher"
+					})
+				}
 			}
 		
 		}

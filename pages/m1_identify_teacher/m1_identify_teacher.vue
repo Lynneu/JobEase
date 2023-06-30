@@ -85,7 +85,7 @@
 			
 		</view>
 		<view class="button-sp-area">
-		    <button type="primary" plain="true">提交认证</button>
+		    <button type="primary" plain="true" @click="submit">提交认证</button>
 		 </view>	
 		
 	</view>
@@ -165,6 +165,11 @@
 					num = `0${num}`
 				}
 				return num
+			},
+			submit() {
+				uni.switchTab({
+					url: "../find_teacher/find_teacher"
+				})
 			}
 			
 		}
