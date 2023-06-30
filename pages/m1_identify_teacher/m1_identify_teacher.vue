@@ -60,11 +60,11 @@
 		</view>
 			</view>
 		</view>
-		
+		<view class="charge">
 		<uni-section :title="'收费 : '+ numberValue+'元/小时（0-999）'" type="line" padding>
-			<uni-number-box  :max="999" :step="50" :value="numberValue" @change="change1" />
+			<uni-number-box  :max="999" :step="10" :value="numberValue" @change="change1" />
 		</uni-section>
-		
+		</view>
 		<view class="uni-form-item uni-column">
 		    <view class="title">
 				<text class="uni-form-item__title">公司邮箱:</text>
@@ -185,9 +185,12 @@
 	}
 	.uni-form-item uni-column
 	{
+		margin-top: 10px;
 		display: flex;
+		height: 20px;
 	}
 	.uni-form-item__title {
+		
 	    font-size: 16px;
 	    line-height: 24px;
 	}
@@ -218,7 +221,11 @@
 		justify-content: flex-start
 	}
 	
-	button {
+	.uni-list {
+		height: 40px;
+		margin-top: 0px;
+	}
+	.button {
 	    margin-top: 30rpx;
 	    margin-bottom: 30rpx;
 	}
@@ -227,4 +234,8 @@
 	    margin: 0 auto;
 	    width: 60%;
 	}
+	.charge{
+		margin-top: 0;
+	}
+	
 </style>

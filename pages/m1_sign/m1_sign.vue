@@ -8,14 +8,14 @@
 			<uni-icons type="closeempty" color="#808080" size="25" v-if="showClearIcon" @click="clearIcon"></uni-icons>
 		</view>
 
-		<view class="password" v-if="type==2">
+		<view class="password" >
 			<!-- <input type="password" placeholder="输入密码" /> 要显示密码就不要设置type="password"-->
 			<input placeholder="请输入密码" v-model="passwordValue" :password="showPassword" />
 			<uni-icons type="eye-filled" color="#808080" size="25" ></uni-icons>
 		</view>
-		<view class="password" v-if="type==2">
+		<view class="password_double">
 			<!-- <input type="password" placeholder="输入密码" /> 要显示密码就不要设置type="password"-->
-			<input placeholder="请再次输入密码" v-model="passwordValue" :password="showPassword" />
+			<input placeholder="请再次输入密码" v-model="passwordValue_double" :password="showPassword_double" />
 			
 		</view>
 		<view class="login-btn" @click="Login">注册</view>

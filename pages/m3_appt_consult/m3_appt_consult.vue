@@ -47,7 +47,7 @@
 	export default {
 		data() {
 			return {
-				array: [{name:'互联网IT'},{name:'通信/硬件'},{name:'设计/传媒'},{name:'人事行政'},{name:'金融/法务'},{name:'生产制造'},{name:'教育培训'},{name:'生物医疗'},{name:'服务业'},{name:'房产/建筑'},{name:'其他'}],
+				array: [{name:'简历优化'},{name:'面试经验'},{name:'就业指导'},{name:'职业规划'},{name:'薪资谈判'},{name:'其他'}],
 				index: 0,
 				numberValue: 0,
 				last_numberValue: 10,

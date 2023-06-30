@@ -8,7 +8,7 @@
 			<uni-icons type="closeempty" color="#808080" size="25" v-if="showClearIcon" @click="clearIcon"></uni-icons>
 		</view>
 
-		<view class="password" v-if="type==2">
+		<view class="password" >
 			<!-- <input type="password" placeholder="输入密码" /> 要显示密码就不要设置type="password"-->
 			<input placeholder="请输入密码" v-model="passwordValue" :password="showPassword" />
 			<uni-icons type="eye-filled" color="#808080" size="25" @click="changePassword"></uni-icons>
@@ -19,6 +19,7 @@
 			<button class="signup-btn" @click="Zhuce">注册</button>
 		</view>
 		<view class="login-btn" @click="Login">登录</view>
+		
 	</view>
 </template>
 
@@ -96,7 +97,7 @@
 				// 未连接到后端，测试用！
 				else uni.switchTab({ 
 					//url: "../index/index",
-					url: "../find_teacher/find_teacher",
+					url: "../m1_role_select/m1_role_select"
 				})
 				uni.request({
 					url: 'http://app/login', // 路径
@@ -115,7 +116,7 @@
 							uni.setStorageSync('userInfo', JSON.stringify(res.data)); // 将用户信息存储在硬盘中
 							uni.switchTab({ // 跳转到新闻页面
 								//url: "../index/index",
-								url: "pages/find_teacher/find_teacher",
+								url: "../m1_role_select/m1_role_select",
 							})
 							uni.showToast({
 								title: '登录成功',
@@ -190,6 +191,7 @@
 		padding: 70px 10px 35px;
 		text-align: center;
 		color: #333333;
+		
 	}
 
 	.login-title {
@@ -245,6 +247,7 @@
 	}
 
 	.login-btn {
+		align-items: center;
 		width: 355px;
 		height: 45px;
 		background: #0000ff;
@@ -265,6 +268,7 @@
 		color: #fff;
 		font-size: 20px;
 		line-height: 40px;
+		
 		left: 10px;
 		bottom: 10px;
 	}
@@ -272,6 +276,7 @@
 		height: 70px;
 		float: right;
 		display: flex;
+margin-top: 40px;
 
 	}
 </style>

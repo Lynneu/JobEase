@@ -180,33 +180,7 @@
 				"text": "个人信息"
 			}
 			]
-		},
-		"TopTabBar": {
-				"color": "#7A7E83",
-				"selectedColor": "#55aa00",
-				"borderStyle": "black",
-				"backgroundColor": "#ffffff",
-				"height": "50px",
-				"fontSize": "15px",
-				"iconWidth": "24px",
-				"spacing": "3px",
-				"list": [{
-					"pagePath": "pages/m2_my_consult/m2_my_consult",
-					"text": "未完成"
-				}, {
-					"pagePath": "pages/m2_my_lecture/m2_my_lecture",
-					
-					"text": "已完成"
-				},
-				{
-					"pagePath": "pages/m2_profile/m2_profile",
-					"text": "已评价"
-				}
-				]
-			},
-		  "usingComponents": {
-		    "fui-button": "components/fui-button/fui-button"
-		  }
-		  
+		}
+		
 
 }
