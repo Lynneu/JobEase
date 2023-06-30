@@ -34,7 +34,7 @@
 			
 			<view class="confirm">
 				<text>\n</text>
-				<button size="mini" type="primary">
+				<button size="mini" type="primary" @click="appointAndpay">
 					<text>预约并支付</text>
 				</button>
 			</view>
@@ -123,6 +123,11 @@
 			},
 			change3(value) {
 				this.last_numberValue = value;
+			},
+			appointAndpay() {
+				uni.switchTab({
+				  url: '../find_teacher/find_teacher'
+				});
 			}
 		}
 	}

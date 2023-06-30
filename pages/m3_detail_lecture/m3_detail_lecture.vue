@@ -19,7 +19,7 @@
 			<text>讲座内容\n</text>
 			<text class="card_title">讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容</text>
 		</uni-card>
-		<button size="mini" type="primary">
+		<button size="mini" type="primary" @click="appointLecture">
 			<text>预约</text>
 		</button>
 	</view>
@@ -32,6 +32,13 @@
 				name:['pp'],
 				
 			};
+		},
+		methods:{
+			appointLecture() {
+				uni.switchTab({
+				  url: '../find_lecture/find_lecture'
+				});
+			}
 		}
 	}
 </script>

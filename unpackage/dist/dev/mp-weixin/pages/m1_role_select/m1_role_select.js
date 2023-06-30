@@ -5,24 +5,16 @@ const _sfc_main = {
     return {
       list: [
         {
-          course_id: "001",
+          course_id: "1",
           title: "求职者",
-          course: "体育课",
-          duration: "0",
+          course: "可付费进行求职咨询，听讲座",
           selected: false
         },
         {
-          course_id: "002",
+          course_id: "2",
           title: "导师",
-          course: "音乐课",
-          duration: "120",
-          selected: false
-        },
-        {
-          course_id: "003",
-          title: "好好学习天天向上",
-          course: "信息科",
-          duration: "80",
+          //course: "可收费提供咨询，举办讲座\n首次进入需进行导师认证",
+          course: "首次进入需进行导师认证",
           selected: false
         }
       ],
@@ -30,7 +22,6 @@ const _sfc_main = {
     };
   },
   methods: {
-    //选择课程
     choice(index) {
       if (this.list[index].selected == true) {
         this.list[index].selected = false;
@@ -49,7 +40,7 @@ const _sfc_main = {
     //提交
     sure() {
       if (this.selectId.length == 0) {
-        alert("请选择学科");
+        alert("请选择身份");
         return false;
       }
       var listIds = this.selectId.join(",");
@@ -67,8 +58,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         d: common_vendor.o(($event) => $options.choice(index), index),
         e: common_vendor.t(item.title),
         f: common_vendor.t(item.course),
-        g: common_vendor.t(item.duration),
-        h: index
+        g: index
       };
     }),
     b: common_vendor.o((...args) => $options.sure && $options.sure(...args))

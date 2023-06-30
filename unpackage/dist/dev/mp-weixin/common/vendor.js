@@ -7095,13 +7095,6 @@ const pages = [
     }
   },
   {
-    path: "pages/m3_appt_lecture/appt_lecture",
-    style: {
-      navigationBarTitleText: "讲座预约",
-      enablePullDownRefresh: false
-    }
-  },
-  {
     path: "pages/m1_login/login",
     style: {
       navigationBarTitleText: "登录",
@@ -7170,6 +7163,34 @@ const pages = [
       navigationBarTitleText: "",
       enablePullDownRefresh: false
     }
+  },
+  {
+    path: "pages/m3_confirm_consult/m3_confirm_consult",
+    style: {
+      navigationBarTitleText: "咨询信息",
+      enablePullDownRefresh: false
+    }
+  },
+  {
+    path: "pages/m2_profile/m2_profile",
+    style: {
+      navigationBarTitleText: "个人",
+      enablePullDownRefresh: false
+    }
+  },
+  {
+    path: "pages/m2_my_consult/m2_my_consult",
+    style: {
+      navigationBarTitleText: "我的咨询",
+      enablePullDownRefresh: false
+    }
+  },
+  {
+    path: "pages/m2_my_lecture/m2_my_lecture",
+    style: {
+      navigationBarTitleText: "我的讲座",
+      enablePullDownRefresh: false
+    }
   }
 ];
 const globalStyle = {
@@ -7201,10 +7222,34 @@ const tabBar = {
       text: "找讲座"
     },
     {
-      pagePath: "pages/user_info/user_info",
+      pagePath: "pages/m2_profile/m2_profile",
       iconPath: "static/image/icon_my.png",
       selectedIconPath: "static/image/icon_my_HL.png",
       text: "个人信息"
+    }
+  ]
+};
+const TopTabBar = {
+  color: "#7A7E83",
+  selectedColor: "#55aa00",
+  borderStyle: "black",
+  backgroundColor: "#ffffff",
+  height: "50px",
+  fontSize: "15px",
+  iconWidth: "24px",
+  spacing: "3px",
+  list: [
+    {
+      pagePath: "pages/m2_my_consult/m2_my_consult",
+      text: "未完成"
+    },
+    {
+      pagePath: "pages/m2_my_lecture/m2_my_lecture",
+      text: "已完成"
+    },
+    {
+      pagePath: "pages/m2_profile/m2_profile",
+      text: "已评价"
     }
   ]
 };
@@ -7215,6 +7260,7 @@ const t = {
   pages,
   globalStyle,
   tabBar,
+  TopTabBar,
   usingComponents
 };
 function n(e2) {
@@ -7505,7 +7551,7 @@ class I {
 function S(e2) {
   return e2 && "string" == typeof e2 ? JSON.parse(e2) : e2;
 }
-const b = true, k = "mp-weixin", T = S([]), P = k, A = S('{\n    "address": [\n        "127.0.0.1",\n        "192.168.179.1",\n        "192.168.6.1",\n        "10.27.113.199"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "local",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "C:/Users/Lynne/Downloads/HBuilderX.3.8.4.20230531/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), E = S('[{"provider":"aliyun","spaceName":"jobeasy-backend","spaceId":"mp-ef98caf3-7d44-4213-8fb1-d6cc2e4a376c","clientSecret":"aVhR2IfVcTMDn69K1i6e3w==","endpoint":"https://api.next.bspapp.com"}]') || [];
+const b = true, k = "mp-weixin", T = S([]), P = k, A = S('{\n    "address": [\n        "127.0.0.1",\n        "192.168.179.1",\n        "192.168.6.1",\n        "172.20.10.9"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "local",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "C:/Users/Lynne/Downloads/HBuilderX.3.8.4.20230531/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), E = S('[{"provider":"aliyun","spaceName":"jobeasy-backend","spaceId":"mp-ef98caf3-7d44-4213-8fb1-d6cc2e4a376c","clientSecret":"aVhR2IfVcTMDn69K1i6e3w==","endpoint":"https://api.next.bspapp.com"}]') || [];
 let x = "";
 try {
   x = "__UNI__40144A1";
@@ -9726,6 +9772,8 @@ let Ns = new class {
     return bs(Ns);
   } }), gs(Ns), Ns.addInterceptor = D, Ns.removeInterceptor = F, Ns.interceptObject = K;
 })();
+var Ds = Ns;
+exports.Ds = Ds;
 exports._export_sfc = _export_sfc;
 exports.createSSRApp = createSSRApp;
 exports.e = e;

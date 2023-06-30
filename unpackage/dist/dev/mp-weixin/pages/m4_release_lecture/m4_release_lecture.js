@@ -83,6 +83,11 @@ const _sfc_main = {
         num = `0${num}`;
       }
       return num;
+    },
+    release() {
+      common_vendor.index.switchTab({
+        url: "../find_lecture/find_lecture"
+      });
     }
   }
 };
@@ -158,7 +163,9 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       type: "line",
       padding: true
     })
-  } : {});
+  } : {}, {
+    v: common_vendor.o((...args) => $options.release && $options.release(...args))
+  });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/Code/JobEase/JobEase/pages/m4_release_lecture/m4_release_lecture.vue"]]);
 wx.createPage(MiniProgramPage);

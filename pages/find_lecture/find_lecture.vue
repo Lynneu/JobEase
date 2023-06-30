@@ -49,7 +49,7 @@
     </view>
     <view class="list-area">
     	<uni-list>
-    		<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
+    		<uni-list-item title="默认 navigateTo 方式跳转页面" to="../m3_detail_lecture/m3_detail_lecture" note="列表描述信息"></uni-list-item>
     		<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
     		<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
     		<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>

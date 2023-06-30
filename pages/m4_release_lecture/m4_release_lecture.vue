@@ -63,7 +63,7 @@
 		</view>
 		
 		<view class="button-sp-area">
-		    <button type="primary" plain="true">按钮</button>
+		    <button type="primary" plain="true" @click="release">按钮</button>
 		 </view>	
 		
 	</view>
@@ -159,6 +159,11 @@
 					num = `0${num}`
 				}
 				return num
+			},
+			release() {
+				uni.switchTab({
+				  url: '../find_lecture/find_lecture'
+				});
 			}
 			
 		}

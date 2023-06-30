@@ -11,15 +11,13 @@
 						<text class="word">预计时长:\n</text>
 					</view>
 					<view class="button_display">
-						<button  size="mini" type="primary" @click="toggle">
+						<button  size="mini" type="primary" @click="open()">
 							<text>同意</text>
 						</button>
 						<button  size="mini" type="primary">
 							<text>拒绝</text>
 						</button>
-						<uni-popup ref="popup" background-color="#000" @change="change">
-								<text class="text">popup 内容</text>
-						</uni-popup>
+						<uni-popup ref="popup" type="center" background-color="#fff">11</uni-popup>
 					</view>
 				</view>
 			</uni-card>
@@ -33,24 +31,35 @@
 	export default {
 		data() {
 			return {
-				type: 'center',
 			};
-		}
-		onReady() {},
+		},
+
 		methods: {
-			change(e) {
-				console.log('当前模式：' + e.type + ',状态：' + e.show);
-			},
-			toggle(type) {
-				this.type = type
-				this.$refs.popup.open(type)
-			}
+			 open(){
+			     // 通过组件定义的ref调用uni-popup方法 ,如果传入参数 ，type 属性将失效 ，仅支持 ['top','left','bottom','right','center']
+			    this.$refs.popup.open('center')
+	        },
 		}
 		
 	}
 </script>
 
 <style lang="scss">
+	@mixin flex {
+			/* #ifndef APP-NVUE */
+			display: flex;
+			/* #endif */
+			flex-direction: row;
+		}
+	
+	@mixin height {
+		/* #ifndef APP-NVUE */
+		height: 100%;
+		/* #endif */
+		/* #ifdef APP-NVUE */
+		flex: 1;
+		/* #endif */
+	}
 	page{
 		background-color: #ffffff;
 	}
@@ -63,5 +72,4 @@
 		padding-left: 220rpx;
 		display: flex;
 	}
-
 </style>

@@ -3,7 +3,6 @@
     "pages/find_teacher/find_teacher",
     "pages/find_lecture/find_lecture",
     "pages/user_info/user_info",
-    "pages/m3_appt_lecture/appt_lecture",
     "pages/m1_login/login",
     "pages/m3_detail_lecture/m3_detail_lecture",
     "pages/m4_release_lecture/m4_release_lecture",
@@ -13,7 +12,11 @@
     "pages/m3_detail_appt_consult/m3_detail_appt_consult",
     "pages/m1_identify_teacher/m1_identify_teacher",
     "pages/m4_seeker_information/m4_seeker_information",
-    "pages/m4_mentor_information/m4_mentor_information"
+    "pages/m4_mentor_information/m4_mentor_information",
+    "pages/m3_confirm_consult/m3_confirm_consult",
+    "pages/m2_profile/m2_profile",
+    "pages/m2_my_consult/m2_my_consult",
+    "pages/m2_my_lecture/m2_my_lecture"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -40,7 +43,7 @@
         "text": "找讲座"
       },
       {
-        "pagePath": "pages/user_info/user_info",
+        "pagePath": "pages/m2_profile/m2_profile",
         "iconPath": "static/image/icon_my.png",
         "selectedIconPath": "static/image/icon_my_HL.png",
         "text": "个人信息"

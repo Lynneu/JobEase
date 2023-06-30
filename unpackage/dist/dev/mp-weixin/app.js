@@ -5,7 +5,6 @@ if (!Math) {
   "./pages/find_teacher/find_teacher.js";
   "./pages/find_lecture/find_lecture.js";
   "./pages/user_info/user_info.js";
-  "./pages/m3_appt_lecture/appt_lecture.js";
   "./pages/m1_login/login.js";
   "./pages/m3_detail_lecture/m3_detail_lecture.js";
   "./pages/m4_release_lecture/m4_release_lecture.js";
@@ -16,6 +15,10 @@ if (!Math) {
   "./pages/m1_identify_teacher/m1_identify_teacher.js";
   "./pages/m4_seeker_information/m4_seeker_information.js";
   "./pages/m4_mentor_information/m4_mentor_information.js";
+  "./pages/m3_confirm_consult/m3_confirm_consult.js";
+  "./pages/m2_profile/m2_profile.js";
+  "./pages/m2_my_consult/m2_my_consult.js";
+  "./pages/m2_my_lecture/m2_my_lecture.js";
 }
 const _sfc_main = {
   onLaunch: function() {

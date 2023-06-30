@@ -34,3 +34,12 @@
   justify-content: center;
   padding: 10px 0;
 }
+.container {
+  margin: 20px;
+}
+.choose {
+  text-align: center;
+}
+.list-area {
+  margin-top: 5px;
+}

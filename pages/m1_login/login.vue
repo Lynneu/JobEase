@@ -15,7 +15,7 @@
 		</view>
 		
 	    <view class="signup"><h5>还未注册账号？点击进行</h5>	<view class="signup-btn" @click="Zhuce">注册</view></view>
-		<view class="login-btn" @click="Login()">登录</view>
+		<view class="login-btn" @click="Login">登录</view>
 	</view>
 </template>
 
@@ -73,7 +73,7 @@
 					return false
 				}
 				// 当使用密码登录并且未输入密码时
-				if (that.type == 2 && !that.passwordValue) {
+				else if (that.type == 2 && !that.passwordValue) {
 					uni.showToast({
 						title: '请输入密码',
 						icon: 'none'
@@ -81,13 +81,18 @@
 					return false
 				}
 				// 当使用验证码登录并且未输入验证码时
-				if (that.type == 1 && !that.testValue) {
+				else if (that.type == 1 && !that.testValue) {
 					uni.showToast({
 						title: '请输入验证码',
 						icon: 'none'
 					})
 					return false
 				}
+				// 未连接到后端，测试用！
+				else uni.switchTab({ 
+					//url: "../index/index",
+					url: "../find_teacher/find_teacher",
+				})
 				uni.request({
 					url: 'http://app/login', // 路径
 					method: 'POST', // 请求方法

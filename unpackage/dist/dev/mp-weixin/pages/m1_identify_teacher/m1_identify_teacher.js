@@ -87,17 +87,13 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     d: common_vendor.o((...args) => $options.bindPickerChange && $options.bindPickerChange(...args)),
     e: $data.index,
     f: $data.array,
-    g: common_vendor.t($data.array[$data.index].name),
-    h: common_vendor.o((...args) => $options.bindPickerChange && $options.bindPickerChange(...args)),
-    i: $data.index,
-    j: $data.array,
-    k: common_vendor.o($options.change1),
-    l: common_vendor.p({
+    g: common_vendor.o($options.change1),
+    h: common_vendor.p({
       max: 999,
       step: 50,
       value: $data.numberValue
     }),
-    m: common_vendor.p({
+    i: common_vendor.p({
       title: "收费 : " + $data.numberValue + "元/小时（0-999）",
       type: "line",
       padding: true
