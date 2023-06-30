@@ -44,7 +44,7 @@
 </script>
 
 <style lang="scss">
-	page{
+	.page{
 		background-color: #ffffff;
 	}
 	.lec_body{

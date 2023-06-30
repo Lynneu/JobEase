@@ -3,20 +3,11 @@
 		<view class="login-title">
 			新用户注册
 		</view>
-		<view class="iphone">
-			<input type="number" placeholder="输入手机号" :value="iphoneValue" @input="clearInput" />
-			<uni-icons type="closeempty" color="#808080" size="25" v-if="showClearIcon" @click="clearIcon"></uni-icons>
-		</view>
-
-		<view class="password" >
-			<!-- <input type="password" placeholder="输入密码" /> 要显示密码就不要设置type="password"-->
-			<input placeholder="请输入密码" v-model="passwordValue" :password="showPassword" />
-			<uni-icons type="eye-filled" color="#808080" size="25" ></uni-icons>
-		</view>
-		<view class="password_double">
-			<!-- <input type="password" placeholder="输入密码" /> 要显示密码就不要设置type="password"-->
-			<input placeholder="请再次输入密码" v-model="passwordValue_double" :password="showPassword_double" />
-			
+		
+		<view class="input-area">
+			<uni-easyinput type="number" trim="all" v-model="iphoneValue" placeholder="请输入手机号" maxlength="11" @input="input"></uni-easyinput>
+			<uni-easyinput type="password" v-model="passwordValue" placeholder="请输入密码"></uni-easyinput>
+			<uni-easyinput type="password" v-model="passwordValue_double" placeholder="请再次输入密码"></uni-easyinput>
 		</view>
 		<view class="login-btn" @click="Login">注册</view>
 	</view>
@@ -28,9 +19,8 @@
 			return {
 				iphoneValue: '', //手机号码
 				passwordValue: '', //密码
+				passwordValue_double: '', //第二次密码
 				testValue: '', //验证码
-				showPassword: true, //是否显示密码
-				showClearIcon: false, //是否显示清除按钮
 				type: 2, //登录的状态 - - - 1是验证码登录、2是密码登录
 				token: '',
 				timer: 0, //验证码时间
@@ -39,24 +29,6 @@
 		},
 
 		methods: {
-			// 显示隐藏密码
-			changePassword: function() {
-				this.showPassword = !this.showPassword;
-			},
-			// 判断是否显示清除按钮
-			clearInput: function(event) {
-				this.iphoneValue = event.detail.value;
-				if (event.detail.value.length > 0) {
-					this.showClearIcon = true;
-				} else {
-					this.showClearIcon = false;
-				}
-			},
-			// 清除内容/隐藏按钮
-			clearIcon: function() {
-				this.iphoneValue = '';
-				this.showClearIcon = false;
-			},
 			// 切换登录的方式
 			setLoginType(type) {
 				this.type = type
@@ -84,6 +56,13 @@
 				else if (that.type == 1 && !that.testValue) {
 					uni.showToast({
 						title: '请输入验证码',
+						icon: 'none'
+					})
+					return false
+				}
+				else if (that.passwordValue != that.passwordValue_double) {
+					uni.showToast({
+						title: '两次输入密码不一致',
 						icon: 'none'
 					})
 					return false
@@ -138,7 +117,9 @@
 
 <style scoped>
 	.login-content {
-		padding: 70px 10px 35px;
+		padding-top: 70px;
+		padding-left: 20px;
+		padding-right: 20px;
 		text-align: center;
 		color: #333333;
 	}
@@ -196,7 +177,7 @@
 	}
 
 	.login-btn {
-		width: 355px;
+		width: 100%;
 		height: 45px;
 		background: #0000ff;
 		border-radius: 36px;
@@ -204,7 +185,10 @@
 		font-size: 20px;
 		text-align: center;
 		line-height: 45px;
-		position: fixed;
-		bottom: 60px;
+		margin-top: 110px;
+		
+	}
+	.input-area {
+		input-area: 10px;
 	}
 </style>

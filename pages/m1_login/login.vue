@@ -3,15 +3,9 @@
 		<view class="login-title">
 			登录
 		</view>
-		<view class="iphone">
-			<input type="number" placeholder="输入手机号" :value="iphoneValue" @input="clearInput" />
-			<uni-icons type="closeempty" color="#808080" size="25" v-if="showClearIcon" @click="clearIcon"></uni-icons>
-		</view>
-
-		<view class="password" >
-			<!-- <input type="password" placeholder="输入密码" /> 要显示密码就不要设置type="password"-->
-			<input placeholder="请输入密码" v-model="passwordValue" :password="showPassword" />
-			<uni-icons type="eye-filled" color="#808080" size="25" @click="changePassword"></uni-icons>
+		<view class="input-area">
+			<uni-easyinput type="number" trim="all" v-model="iphoneValue" placeholder="请输入手机号" maxlength="11" @input="input"></uni-easyinput>
+			<uni-easyinput class="password-area" type="password" v-model="passwordValue" placeholder="请输入密码"></uni-easyinput>
 		</view>
 		
 	    <view class="signup">
@@ -40,23 +34,9 @@
 		},
 
 		methods: {
-
-			changePassword: function() {
-				this.showPassword = !this.showPassword;
-			},
-			// 判断是否显示清除按钮
-			clearInput: function(event) {
-				this.iphoneValue = event.detail.value;
-				if (event.detail.value.length > 0) {
-					this.showClearIcon = true;
-				} else {
-					this.showClearIcon = false;
-				}
-			},
-			// 清除内容/隐藏按钮
-			clearIcon: function() {
-				this.iphoneValue = '';
-				this.showClearIcon = false;
+			
+			input(e) {
+				console.log('输入内容：', e);
 			},
 			// 切换登录的方式
 			setLoginType(type) {
@@ -95,7 +75,7 @@
 					return false
 				}
 				// 未连接到后端，测试用！
-				else uni.switchTab({ 
+				else uni.navigateTo({ 
 					//url: "../index/index",
 					url: "../m1_role_select/m1_role_select"
 				})
@@ -188,7 +168,9 @@
 
 <style scoped>
 	.login-content {
-		padding: 70px 10px 35px;
+		padding-top: 70px;
+		padding-left: 20px;
+		padding-right: 20px;
 		text-align: center;
 		color: #333333;
 		
@@ -199,8 +181,15 @@
 		font-weight: bold;
 		margin-bottom: 31px;
 	}
+	.input-area{
+		padding: 10px;
+		
+	}
+	.password-area {
+		top: 10px;
+	}
 
-	.login-content input {
+	.logininput {
 		height: 50px;
 		background: #F8F8F8;
 		border-radius: 25px;
@@ -215,10 +204,11 @@
 	.test {
 		position: relative;
 		margin-bottom: 30px;
+		width: 100%; 
+		height: 40px;
 	}
 
-	.iphone .uni-icons,
-	.password .uni-icons {
+	.icon-area {
 		position: absolute;
 		top: 14px;
 		right: 30px;
@@ -247,8 +237,7 @@
 	}
 
 	.login-btn {
-		align-items: center;
-		width: 355px;
+		width: 100%;
 		height: 45px;
 		background: #0000ff;
 		border-radius: 36px;
@@ -256,8 +245,8 @@
 		font-size: 20px;
 		text-align: center;
 		line-height: 45px;
-		position: fixed;
-		bottom: 60px;
+		margin-top: 130px;
+			
 	}
 	.signup-btn {
 		width: 80px;
@@ -268,7 +257,6 @@
 		color: #fff;
 		font-size: 20px;
 		line-height: 40px;
-		
 		left: 10px;
 		bottom: 10px;
 	}
@@ -276,7 +264,8 @@
 		height: 70px;
 		float: right;
 		display: flex;
-margin-top: 40px;
+		margin-right: 20px;
+		margin-top: 40px;
 
 	}
 </style>

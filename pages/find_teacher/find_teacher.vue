@@ -41,7 +41,7 @@
 			</uni-drawer>
 		</view>
 		<view class="text" style="-webkit-flex: 1;flex: 1;">
-			<uni-search-bar @confirm="search" :focus="true" v-model="searchValue" @blur="blur" @focus="focus" @input="input"
+			<uni-search-bar @confirm="search" :focus="false" v-model="searchValue" @blur="blur" @focus="focus" @input="input"
 							@cancel="cancel" @clear="clear" placeholder="请输入搜索内容"
 							clearButton="auto" cancelButton="none">
 			</uni-search-bar>

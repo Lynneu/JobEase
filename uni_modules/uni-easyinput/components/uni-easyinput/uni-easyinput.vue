@@ -364,10 +364,12 @@ export default {
 		},
 
 		/**
-		 * 显示隐藏内容，密码框时生效
+		 * 显示隐藏内容
+		 * @param {Object} event
 		 */
-		onEyes() {
+		onEyes(event) {
 			this.showPassword = !this.showPassword;
+			console.log(this.showPassword)
 			this.$emit('eyes', this.showPassword);
 		},
 
