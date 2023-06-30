@@ -1,35 +1,39 @@
 <template>
-	<view class="container">
-		<view class="ui-all">
-			<view class="ui-list">
+	<view class="mi-container">
+		
+			<view class="mi-content">
 				<text>就职公司</text>
 				<text>{{company_name}}</text>
 			</view>
-			<view class="ui-list">
+			
+			<view class="mi-content">
 				<text>真实姓名</text>
 				<text>{{real_name}}</text>
 			</view>
-			<view class="ui-list">
+			
+			<view class="mi-content">
 				<text>公司邮箱</text>
 				<text>{{email}}</text>
 			</view>
-			<view class="ui-list">
+			
+			<view class="mi-content">
 				<text>咨询方向</text>
 				<text>{{consultation_direction}}</text>
 			</view>
-			<uni-section :title="'咨询价格 : '+ numberValue+'元/时间单位'" type="line" padding>
-				<uni-number-box  :max="9999" :step="10" :value="numberValue" @change="change1" />
-			</uni-section>
-			<view class="ui-list">
+			
+			<view class="mi-content">
 				<text>个人简介</text>
-				<text>{{mentor_introduction}}</text>
+				<textarea  maxlength="1000" placeholder="最大输入长度为1000" :value="description" @input="introductionInput" auto-height></textarea>
 			</view>
-			<view class="button-sp-area">
-			    <button type="primary" plain="true">保存修改</button>
-			 </view>
 			
+			<view class="mi-content">
+			<uni-section :title="'咨询价格 : '+ priceValue+'元/时间单位'" type="line" padding>
+				<uni-number-box  :max="9999" :step="10" :value="priceValue" @change="changePrice" />
+			</uni-section>
+			</view>
 			
-		</view>
+			<button class="save" @tap="savaInfo">发布讲座</button>
+			
 	</view>
 </template>
 
@@ -42,30 +46,34 @@
 				real_name: '不可改',
 				email: '不可改',
 				consultation_direction: '不可改',
-				numberValue: 100,
-				mentor_introduction:'可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改 可修改',
+				priceValue: 100,
+				value: '请输入简介',
+				description: '可修改aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
 			}
-
 		},
 		methods: {
-			change1(value) {
-				this.numberValue = value;
+			changePrice(value) {
+				this.priceValue = value;
+			},
+			introductionInput(e) {
+				this.description = e.detail.value;
 			}
 		},
+		
 		onLoad() {			
 		}
 
 	}
 </script>
 
-<style lang="scss">
-	.container {
-		display: block;
+<style lang="less">
+	body {
+	  background-color: white;
 	}
-
-	.ui-all {
+	.mi-container {
+		display: block;
 		padding: 20rpx 40rpx;
-		.ui-list {
+		.mi-content {
 			width: 100%;
 			text-align: left;
 			padding: 20rpx 0;
@@ -79,40 +87,18 @@
 				vertical-align: middle;
 				min-width: 150rpx;
 			}
-
-			picker {
-				width: 90%;
+			
+			textarea {
 				color: #030303;
 				font-size: 30rpx;
-				display: inline-block;
 				vertical-align: middle;
-				position: absolute;
-				top: 30rpx;
-				left: 150rpx;
+				height: 150rpx;
+				width: 100%;
+				margin-top: 30rpx;
 			}
 		}
 
-		.right:after {
-			content: ' ';
-			width: 20rpx;
-			height: 20rpx;
-			border-top: solid 1px #030303;
-			border-right: solid 1px #030303;
-			transform: rotate(45deg);
-			-ms-transform: rotate(45deg);
-			/* IE 9 */
-			-moz-transform: rotate(45deg);
-			/* Firefox */
-			-webkit-transform: rotate(45deg);
-			/* Safari 和 Chrome */
-			-o-transform: rotate(45deg);
-			position: absolute;
-			top: 40rpx;
-			right: 0;
-		}	
-	.button-sp-area {
-	    margin: 0 auto;
-	    width: 60%;
-	}
+		
+	
 	}
 </style>
