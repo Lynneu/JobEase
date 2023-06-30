@@ -18,7 +18,9 @@
 					</view>
 				</view>
 				<view class="sure" @click="sure">确认</view>
+				
 			</view>
+			
 		</view>
 	</view>
 </template>
@@ -36,7 +38,8 @@
 					{
 						course_id: "2",
 						title: "导师",
-						course: "可收费提供咨询，举办讲座\n首次进入需进行导师认证",
+						//course: "可收费提供咨询，举办讲座\n首次进入需进行导师认证",
+						course:"首次进入需进行导师认证",
 						selected: false
 					}
 				],

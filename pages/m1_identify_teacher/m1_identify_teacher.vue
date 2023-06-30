@@ -30,7 +30,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="uni-title uni-common-pl">岗位：</view>
+		<view class="uni-title uni-common-pl">主要咨询：</view>
 		<view class="uni-list">
 			<view class="uni-list-cell">
 				<view class="uni-list-cell-left">
@@ -60,9 +60,12 @@
 		    <view class="title">
 				<text class="uni-form-item__title">验证码:</text>
 			</view>
+			
 		    <view class="uni-input-wrapper">
 		        <input class="uni-input"/>
+				<button>获取验证码 </button>
 		    </view>
+			
 		</view>
 		<view class="button-sp-area">
 		    <button type="primary" plain="true">提交认证</button>
