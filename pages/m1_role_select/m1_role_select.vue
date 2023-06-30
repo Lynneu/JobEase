@@ -47,7 +47,6 @@
 			};
 		},
 		methods: {
-			//选择课程
 			choice(index){
 				if(this.list[index].selected == true){
 					this.list[index].selected = false;
@@ -59,7 +58,11 @@
 					}
 					console.log("选中的值",this.selectId)
 				}else{
+					
+					//for(var i = 0; i < this.selectId.length; i++)
+					//this.list[i]=false;
 					this.list[index].selected = true;
+					
 					this.selectId.push(this.list[index].course_id)
 					console.log("选中的值",this.selectId)
 				}
@@ -68,7 +71,7 @@
 			sure(){
 				//提交选中的值
 				if(this.selectId.length==0){
-					alert("请选择学科");
+					alert("请选择身份");
 					return false;
 				}
 				var listIds = this.selectId.join(",")

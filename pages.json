@@ -149,7 +149,7 @@
             "path" : "pages/m2_my_lecture/m2_my_lecture",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "我的讲座"
+                "navigationBarTitleText": "我的讲座",
                 "enablePullDownRefresh": false
             }
             
