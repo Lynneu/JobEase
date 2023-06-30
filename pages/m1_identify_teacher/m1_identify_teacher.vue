@@ -36,11 +36,28 @@
 				<view class="uni-list-cell-left">
 					当前选择
 				</view>
-				<view class="uni-list-cell-db">
-					<picker @change="bindPickerChange" :value="index" :range="array" range-key="name">
-						<view class="uni-input">{{array[index].name}}</view>
-					</picker>
-				</view>
+				<view class="uni-list">
+				<checkbox-group>
+					<label>
+						<checkbox value="1" checked="true" />简历优化
+					</label>
+					<label>
+						<checkbox value="2" />面试经验
+					</label>
+					<label>
+						<checkbox value="3" />就业指导
+					</label>
+					<label>
+						<checkbox value="4" />职业规划
+					</label>
+					<label>
+						<checkbox value="5" />薪资谈判
+					</label>
+					<label>
+						<checkbox value="6" />其他
+					</label>
+				</checkbox-group>
+		</view>
 			</view>
 		</view>
 		

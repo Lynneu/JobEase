@@ -131,7 +131,7 @@
             "path" : "pages/m2_profile/m2_profile",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "个人",
                 "enablePullDownRefresh": false
             }
             
@@ -140,7 +140,7 @@
             "path" : "pages/m2_my_consult/m2_my_consult",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "我的咨询",
                 "enablePullDownRefresh": false
             }
             
@@ -149,7 +149,7 @@
             "path" : "pages/m2_my_lecture/m2_my_lecture",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "我的讲座"
                 "enablePullDownRefresh": false
             }
             
@@ -182,15 +182,39 @@
 				"text": "找讲座"
 			},
 			{
-				"pagePath": "pages/user_info/user_info",
+				"pagePath": "pages/m2_profile/m2_profile",
 				"iconPath": "static/image/icon_my.png",
 				"selectedIconPath": "static/image/icon_my_HL.png",
 				"text": "个人信息"
 			}
 			]
 		},
+		"TopTabBar": {
+				"color": "#7A7E83",
+				"selectedColor": "#55aa00",
+				"borderStyle": "black",
+				"backgroundColor": "#ffffff",
+				"height": "50px",
+				"fontSize": "15px",
+				"iconWidth": "24px",
+				"spacing": "3px",
+				"list": [{
+					"pagePath": "pages/m2_my_consult/m2_my_consult",
+					"text": "未完成"
+				}, {
+					"pagePath": "pages/m2_my_lecture/m2_my_lecture",
+					
+					"text": "已完成"
+				},
+				{
+					"pagePath": "pages/m2_profile/m2_profile",
+					"text": "已评价"
+				}
+				]
+			},
 		  "usingComponents": {
 		    "fui-button": "components/fui-button/fui-button"
 		  }
+		  
 
 }
