@@ -2,24 +2,28 @@
 	<view class="si-container">
 		
 		<view class="si-content">
-			<text>用户名</text>
-			<text>{{username}}</text>
+			<uni-section :title="'用户名:'+username" type="line"></uni-section>
+			<!--<text>用户名</text>
+			<text>{{username}}</text>-->
 		</view>
 		
 		<view class="si-content">
-			<text>身份</text>
-			<text>求职者</text>
+			<uni-section :title="'身份:'+identity" type="line"></uni-section>
+			<!--<text>身份</text>
+			<text>求职者</text>-->
 		</view>
 			
 		<view class="si-content si-right">
-			<text>就业目标</text>
+			<uni-section title="就业目标:" type="line"></uni-section>
+			<!--<text>就业目标</text>-->
 			<picker @change="changeGoal" mode='selector' range-key="name" :value="index" :range="goal">
 				<view class="si-picker">{{goal[index].name}}</view>
 			</picker>
 		</view>
 		
 		<view class="si-content si-right">
-			<text>求职方向</text>
+			<uni-section title="求职方向:" type="line"></uni-section>
+			<!--<text>求职方向</text>-->
 			<picker @change="changeDirection" mode='selector' range-key="name1" :value="index1" :range="direction">
 				<view class="si-picker">
 					{{direction[index1].name1}}
@@ -34,34 +38,21 @@
 	export default {
 		data() {
 			return {
-				username: '不可改',
+				username: '名字不可改',
+				identity:'求职者',
 				goal: [{
 					id: 0,
-					name: '保密'
+					name: '看看机会'
 				}, {
 					id: 1,
 					name: '找实习'
 				}, {
 					id: 2,
-					name: '找工作'
+					name: '找校招'
 				}],
 				index: 0,
-				/*direction: [{
-				    id: 0,
-				    name1: '保密'
-				}, {
-				    id: 1,
-				    name1: '互联网IT'
-				}, {
-				    id: 2,
-				    name1: '通信/硬件'
-				}, {
-				    id: 3,
-				    name1: '设计/传媒'
-				}],*/
-				//direction: [{name:'前端开发'},{name:'后端开发'},{name:'C++开发'},{name:'Java开发'},{name:'算法'},{name:'测试开发'},{name:'产品经理'},{name:'运营'},{name:'HR'},{name:'其他'}],
 				direction:[
-					{ name1: '保密' },
+					{ name1: '看看机会' },
 					{ name1: '前端开发' },
 					{ name1: '后端开发' },
 					{ name1: 'C++开发' },
@@ -71,6 +62,7 @@
 					{ name1: '产品经理' },
 					{ name1: '运营' },
 					{ name1: 'HR' },
+					{ name1: '商务拓展' },
 					{ name1: '其他' }
 				],
 				index1: 0
@@ -101,39 +93,39 @@
 		.si-content {
 			width: 100%;
 			text-align: left;
-			padding: 20rpx 0;
-			border-bottom: solid 1px #d8d8d8;
+			//padding: 20rpx 0;
+			//border-bottom: solid 1px #d8d8d8;
 			position: relative;
 
-			text {
+			/*text {
 				color: #4a4a4a;
 				font-size: 28rpx;
 				display: inline-block;
 				vertical-align: middle;
 				min-width: 150rpx;
-			}
+			}*/
 
 			picker {
 				width: 90%;
-				color: #0055ff;
-				font-size: 30rpx;
+				color: #757575;
+				font-size: 28rpx;
 				display: inline-block;
 				vertical-align: middle;
 				position: absolute;
-				top: 20rpx;
-				left: 150rpx;
+				top: 23rpx;
+				left: 170rpx;
 			}
 		}
 
 		.si-right:after {
 			content: ' ';
-			width: 20rpx;
-			height: 20rpx;
+			width: 15rpx;
+			height: 15rpx;
 			border-top: solid 1px #030303;
 			border-right: solid 1px #030303;
 			transform: rotate(45deg);
 			position: absolute;
-			top: 30rpx;
+			top: 35rpx;
 			right: 0;
 		}	
 	

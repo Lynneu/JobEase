@@ -1,24 +1,30 @@
 <template>
 	<view class="rl_container">
 			<view class="rl-content">
-				<text>讲座名称</text>
-				<input type="text" maxlength="20" placeholder="20字以内" :value="lectureName" @input="inputName"  />
+				<uni-section title="讲座名称:" type="line"></uni-section>
+				<!--<text>讲座名称</text>
+				<input type="text" maxlength="20" placeholder="20字以内" :value="lectureName" @input="inputName"  />-->
+				<textarea  maxlength="20" placeholder="最大输入长度为20" :value="lectureName" @input="inputName" auto-height></textarea>
 			</view>
 			
+			
 			<view class="rl-content">
-				<text>讲座简介</text>
+				<!--<text>讲座简介</text>-->
+				<uni-section title="讲座简介:" type="line"></uni-section>
 				<textarea  maxlength="200" placeholder="最大输入长度为200" :value="description" @input="descriptionInput" auto-height></textarea>
 			</view>
-			<uni-section >
+			
+			
 			<view class="rl-content rl-right">
-				<text>标签</text>
+				<uni-section title="标签:" type="line"></uni-section>
+				<!--<text>标签</text>-->
 				<picker @change="changeDirection" mode='selector' range-key="name1" :value="index1" :range="direction">
 					<view class="si-picker">
 						{{direction[index1].name1}}
 					</view>
 				</picker>
 			</view>
-			</uni-section>
+			
 			
 			
 			<uni-section :title="'收费 : '+ numberValue+'元/人（0-9999）'" type="line" padding>
@@ -35,6 +41,7 @@
 			</uni-section>
 			
 			<view class="rl-content">
+				<uni-section title="是否限制人数:" type="line"></uni-section>
 				<radio-group @change="changeRestrictions">
 					<label class="uni-list-cell uni-list-cell-pd" v-for="(item, index) in items" :key="item.value">
 						<view>
@@ -204,11 +211,11 @@
 		.rl-content {
 			width: 100%;
 			text-align: left;
-			padding: 20rpx 0;
-			border-bottom: solid 1px #f2f2f2;
+			//padding: 0rpx 0;
+			//border-bottom: solid 1px #f2f2f2;
 			position: relative;
 
-			text {
+			/*text {
 				color: #4a4a4a;
 				font-size: 28rpx;
 				display: inline-block;
@@ -218,29 +225,38 @@
 
 			input {
 				color: #030303;
-				font-size: 30rpx;
+				font-size: 28rpx;
 				display: inline-block;
 				vertical-align: middle;
-			}
+			//	margin-left: 0rpx;
+				border: 1px solid #e8e8e8;
+				height: 80rpx;
+				padding: 10px;
+			}*/
 			
 			picker {
+				//height: 1190rpx;
 				width: 90%;
-				color: #0055ff;
-				font-size: 30rpx;
+				color: #757575;
+				font-size: 28rpx;
 				display: inline-block;
 				vertical-align: middle;
 				position: absolute;
-				top: 20rpx;
+				top: 23rpx;
 				left: 150rpx;
 			}
 
 			textarea {
 				color: #030303;
-				font-size: 30rpx;
+				font-size: 28rpx;
 				vertical-align: middle;
 				height: 150rpx;
 				width: 100%;
-				margin-top: 30rpx;
+				//margin-top: 30rpx;
+				//margin-left: 20rpx;
+				//margin-right: 50rpx;
+				border: 1px solid #e8e8e8;
+				padding: 10px;
 			}
 
 			
@@ -248,13 +264,13 @@
 
 		.rl-right:after {
 			content: ' ';
-			width: 20rpx;
-			height: 20rpx;
+			width: 15rpx;
+			height: 15rpx;
 			border-top: solid 1px #030303;
 			border-right: solid 1px #030303;
 			transform: rotate(45deg);
 			position: absolute;
-			top: 40rpx;
+			top: 35rpx;
 			right: 0;
 		}
 
