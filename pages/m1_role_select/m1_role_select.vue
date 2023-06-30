@@ -11,8 +11,8 @@
 							</view>
 							<view class="list-name">{{item.title}}</view>
 							<view class="list-da">
-								<view>课程：<text>{{item.course}}</text></view>
-								<view>时长：<text>{{item.duration}}</text>分</view>
+								<view><text>{{item.course}}</text></view>
+
 							</view>
 						</view>
 					</view>
@@ -28,26 +28,17 @@
 		data() {
 			return {
 				list: [{
-						course_id: "001",
+						course_id: "1",
 						title: "求职者",
-						course: "体育课",
-						duration: "0",
+						course: "可付费进行求职咨询，听讲座",
 						selected: false
 					},
 					{
-						course_id: "002",
+						course_id: "2",
 						title: "导师",
-						course: "音乐课",
-						duration: "120",
+						course: "可收费提供咨询，举办讲座\n首次进入需进行导师认证",
 						selected: false
-					},
-					{
-						course_id: "003",
-						title: "好好学习天天向上",
-						course: "信息科",
-						duration: "80",
-						selected: false
-					},
+					}
 				],
 				selectId:[],
 			};
@@ -121,8 +112,8 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		font-size: 20upx;
-		padding: 0 10upx;
+		font-size: 30upx;
+		padding: 0 20upx;
 	}
 
 	.noselde-q {
@@ -138,7 +129,7 @@
 		flex-direction: column;
 		background-color: #fff;
 		margin: 0upx 16upx 16upx 16upx;
-		padding: 16upx;
+		padding: 50upx;
 		border-radius: 10upx;
 	}
 
@@ -179,7 +170,7 @@
 	.list-head {
 		display: flex;
 		justify-content: flex-end;
-		margin-bottom: 10upx;
+		margin-bottom: 0upx;
 	}
 
 	.list-name {
@@ -188,7 +179,7 @@
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 2;
-		margin-bottom: 10upx;
+		margin-bottom: 30upx;
 	}
 
 	.list-da {
