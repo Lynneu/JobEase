@@ -60,7 +60,7 @@
 			</view>
 			
 			
-			<button class="save" @tap="savaInfo">发布讲座</button>
+			<button class="save" style="background-color:#007AFF; color: #fff;" @tap="savaInfo">发布讲座</button>
 
 	</view>
 </template>

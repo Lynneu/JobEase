@@ -23,7 +23,7 @@
 			
 			<view class="confirm">
 				<text>\n</text>
-				<button size="mini" type="primary" @click="trigger()">
+				<button size="mini" style="background-color:#007AFF; color: #fff;" @click="trigger()">
 					<text>预约</text>
 				</button>
 			</view>

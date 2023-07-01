@@ -34,10 +34,15 @@ const _sfc_main = {
   },
   methods: {
     changeGoal(e) {
-      this.index = e.detail.value;
+      console.log(this.index);
     },
     changeDirection(e) {
-      this.index1 = e.detail.value;
+      console.log(this.index1);
+    },
+    saveInfo() {
+      common_vendor.index.switchTab({
+        url: "../m2_profile/m2_profile"
+      });
     }
   },
   onLoad() {
@@ -85,8 +90,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       clear: false,
       modelValue: $data.index1
     }),
-    k: common_vendor.o((...args) => _ctx.savaInfo && _ctx.savaInfo(...args))
+    k: common_vendor.o((...args) => $options.saveInfo && $options.saveInfo(...args))
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "E:/hbuilder/JobEase/pages/m4_seeker_information/m4_seeker_information.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/Code/JobEase/JobEase/pages/m4_seeker_information/m4_seeker_information.vue"]]);
 wx.createPage(MiniProgramPage);

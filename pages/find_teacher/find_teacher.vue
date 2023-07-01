@@ -43,7 +43,7 @@
 							</uni-forms>
 							
 							<view class="choose">
-								<button type="primary" size="mini" @click="closeDrawer('showLeft')">筛选</button>
+								<button style="background-color:#007AFF; color: #fff;" size="mini" @click="closeDrawer('showLeft')">筛选</button>
 							</view>
 						</view>
 					</uni-section>
@@ -57,7 +57,7 @@
 			</uni-search-bar>
 		</view>
 		<view class="text" style="width: 170rpx; margin-left: 10px;">
-			<button class="mini-btn" type="primary" size="mini" @click="searchclick">搜索</button>
+			<button class="mini-btn" style="background-color:#007AFF; color: #fff;" size="mini" @click="searchclick">搜索</button>
 		</view>
 	</view>
 		<view class="list-area">

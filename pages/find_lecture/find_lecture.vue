@@ -43,7 +43,7 @@
           			</uni-forms>
           			
           			<view class="choose">
-          				<button type="primary" size="mini" @click="closeDrawer('showLeft')">筛选</button>
+          				<button style="background-color:#007AFF; color: #fff;" size="mini" @click="closeDrawer('showLeft')">筛选</button>
           			</view>
           		</view>
           	</uni-section>
@@ -54,7 +54,7 @@
         <uni-search-bar @confirm="search" :focus="false" v-model="searchValue" @blur="blur" @focus="focus" @input="input" @cancel="cancel" @clear="clear" placeholder="请输入搜索内容" clearButton="auto" cancelButton="none"></uni-search-bar>
       </view>
       <view class="text" style="width: 170rpx; margin-left: 10px;">
-        <button type="primary" size="mini" @click="searchclick">搜索</button>
+        <button style="background-color:#007AFF; color: #fff;" size="mini" @click="searchclick">搜索</button>
       </view>
     </view>
     <view class="list-area">

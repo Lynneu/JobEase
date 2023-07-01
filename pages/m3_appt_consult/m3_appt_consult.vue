@@ -34,7 +34,7 @@
 			
 			<view class="confirm">
 				<text>\n</text>
-				<button size="mini" type="primary" @click="appointAndpay">
+				<button size="mini" style="background-color:#007AFF; color: #fff;" @click="appointAndpay">
 					<text>预约并支付</text>
 				</button>
 			</view>
