@@ -75,9 +75,9 @@
 					return false
 				}
 				// 未连接到后端，测试用！
-				else uni.navigateTo({ 
+				else uni.switchTab({ 
 					//url: "../index/index",
-					url: "../m1_role_select/m1_role_select"
+					url: "../find_teacher/find_teacher"
 				})
 				uni.request({
 					url: 'http://app/login', // 路径
@@ -94,9 +94,9 @@
 							that.token = res.data.token;
 							uni.setStorageSync('token', that.token); // 将登录信息以token的方式存在硬盘中
 							uni.setStorageSync('userInfo', JSON.stringify(res.data)); // 将用户信息存储在硬盘中
-							uni.switchTab({ // 跳转到新闻页面
+							uni.switchTab({
 								//url: "../index/index",
-								url: "../m1_role_select/m1_role_select",
+								url: "../find_teacher/find_teacher",
 							})
 							uni.showToast({
 								title: '登录成功',

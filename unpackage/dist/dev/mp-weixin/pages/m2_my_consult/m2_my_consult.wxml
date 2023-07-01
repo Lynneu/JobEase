@@ -1,1 +1,1 @@
-<view><view class="login-title"> 我的咨询 </view></view>
+<view><view class="inv-h-w"><view class="{{['inv-h', a]}}" bindtap="{{b}}">未完成</view><view class="{{['inv-h', c]}}" bindtap="{{d}}">已完成</view><view class="{{['inv-h', e]}}" bindtap="{{f}}">已评价</view></view><view class="" hidden="{{!g}}"> 未完成000 </view><view class="" hidden="{{!h}}"> 已完成111 </view><view class="" hidden="{{!i}}"> 已评价222 </view></view>

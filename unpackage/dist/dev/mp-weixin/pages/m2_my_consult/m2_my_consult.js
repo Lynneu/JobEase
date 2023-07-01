@@ -2,11 +2,28 @@
 const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   data() {
-    return {};
+    return {
+      Inv: 0
+    };
+  },
+  methods: {
+    changeTab(Inv) {
+      that.navIdx = Inv;
+    }
   }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {};
+  return {
+    a: common_vendor.n($data.Inv == 0 ? "inv-h-se" : ""),
+    b: common_vendor.o(($event) => $data.Inv = 0),
+    c: common_vendor.n($data.Inv == 1 ? "inv-h-se" : ""),
+    d: common_vendor.o(($event) => $data.Inv = 1),
+    e: common_vendor.n($data.Inv == 2 ? "inv-h-se" : ""),
+    f: common_vendor.o(($event) => $data.Inv = 2),
+    g: $data.Inv == 0,
+    h: $data.Inv == 1,
+    i: $data.Inv == 2
+  };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/Code/JobEase/JobEase/pages/m2_my_consult/m2_my_consult.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "E:/hbuilder/JobEase/pages/m2_my_consult/m2_my_consult.vue"]]);
 wx.createPage(MiniProgramPage);

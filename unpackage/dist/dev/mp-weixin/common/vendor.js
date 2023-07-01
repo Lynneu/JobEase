@@ -7544,7 +7544,7 @@ class I {
 function S(e2) {
   return e2 && "string" == typeof e2 ? JSON.parse(e2) : e2;
 }
-const b = true, k = "mp-weixin", T = S([]), P = k, A = S('{\n    "address": [\n        "127.0.0.1",\n        "192.168.179.1",\n        "192.168.6.1",\n        "10.27.113.199"\n    ],\n    "debugPort": 9000,\n    "initialLaunchType": "local",\n    "servePort": 7000,\n    "skipFiles": [\n        "<node_internals>/**",\n        "C:/Users/Lynne/Downloads/HBuilderX.3.8.4.20230531/HBuilderX/plugins/unicloud/**/*.js"\n    ]\n}\n'), E = S('[{"provider":"aliyun","spaceName":"jobeasy-backend","spaceId":"mp-ef98caf3-7d44-4213-8fb1-d6cc2e4a376c","clientSecret":"aVhR2IfVcTMDn69K1i6e3w==","endpoint":"https://api.next.bspapp.com"}]') || [];
+const b = true, k = "mp-weixin", T = S([]), P = k, A = S(""), E = S("[]") || [];
 let x = "";
 try {
   x = "__UNI__40144A1";

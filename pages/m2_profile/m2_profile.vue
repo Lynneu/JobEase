@@ -3,6 +3,7 @@
 		<h5>测试按钮</h5>
 		<button type="primary" @click="mentorinfo">导师信息</button>
 		<button type="primary" @click="seekerinfo">个人信息</button>
+		<button type="primary" @click="lecture">我的讲座</button>
 	</view>
 </template>
 
@@ -23,6 +24,11 @@ import m4_mentor_informationVue from '../m4_mentor_information/m4_mentor_informa
 			seekerinfo() {
 				uni.navigateTo({
 					url: "../m4_seeker_information/m4_seeker_information"
+				})
+			},
+			lecture() {
+				uni.navigateTo({
+					url: "../m2_my_lecture/m2_my_lecture"
 				})
 			}
 		}

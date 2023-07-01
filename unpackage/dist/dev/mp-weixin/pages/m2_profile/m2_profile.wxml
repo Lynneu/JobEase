@@ -1,1 +1,1 @@
-<view><view>测试按钮</view><button type="primary" bindtap="{{a}}">导师信息</button><button type="primary" bindtap="{{b}}">个人信息</button></view>
+<view><view>测试按钮</view><button type="primary" bindtap="{{a}}">导师信息</button><button type="primary" bindtap="{{b}}">个人信息</button><button type="primary" bindtap="{{c}}">我的讲座</button></view>

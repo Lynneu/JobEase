@@ -56,9 +56,9 @@ const _sfc_main = {
         });
         return false;
       } else
-        common_vendor.index.navigateTo({
+        common_vendor.index.switchTab({
           //url: "../index/index",
-          url: "../m1_role_select/m1_role_select"
+          url: "../find_teacher/find_teacher"
         });
       common_vendor.index.request({
         url: "http://app/login",
@@ -78,9 +78,8 @@ const _sfc_main = {
             common_vendor.index.setStorageSync("token", that.token);
             common_vendor.index.setStorageSync("userInfo", JSON.stringify(res.data));
             common_vendor.index.switchTab({
-              // 跳转到新闻页面
               //url: "../index/index",
-              url: "../m1_role_select/m1_role_select"
+              url: "../find_teacher/find_teacher"
             });
             common_vendor.index.showToast({
               title: "登录成功",
@@ -178,5 +177,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     g: common_vendor.o((...args) => $options.Login && $options.Login(...args))
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-1f4898ea"], ["__file", "D:/Code/JobEase/JobEase/pages/m1_login/login.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-1f4898ea"], ["__file", "E:/hbuilder/JobEase/pages/m1_login/login.vue"]]);
 wx.createPage(MiniProgramPage);
