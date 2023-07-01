@@ -7,12 +7,10 @@ const _sfc_main = {
       //手机号码
       passwordValue: "",
       //密码
+      passwordValue_double: "",
+      //第二次密码
       testValue: "",
       //验证码
-      showPassword: true,
-      //是否显示密码
-      showClearIcon: false,
-      //是否显示清除按钮
       type: 2,
       //登录的状态 - - - 1是验证码登录、2是密码登录
       token: "",
@@ -23,24 +21,6 @@ const _sfc_main = {
     };
   },
   methods: {
-    // 显示隐藏密码
-    changePassword: function() {
-      this.showPassword = !this.showPassword;
-    },
-    // 判断是否显示清除按钮
-    clearInput: function(event) {
-      this.iphoneValue = event.detail.value;
-      if (event.detail.value.length > 0) {
-        this.showClearIcon = true;
-      } else {
-        this.showClearIcon = false;
-      }
-    },
-    // 清除内容/隐藏按钮
-    clearIcon: function() {
-      this.iphoneValue = "";
-      this.showClearIcon = false;
-    },
     // 切换登录的方式
     setLoginType(type) {
       this.type = type;
@@ -63,6 +43,12 @@ const _sfc_main = {
       } else if (that.type == 1 && !that.testValue) {
         common_vendor.index.showToast({
           title: "请输入验证码",
+          icon: "none"
+        });
+        return false;
+      } else if (that.passwordValue != that.passwordValue_double) {
+        common_vendor.index.showToast({
+          title: "两次输入密码不一致",
           icon: "none"
         });
         return false;
@@ -115,45 +101,38 @@ const _sfc_main = {
   }
 };
 if (!Array) {
-  const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
-  _easycom_uni_icons2();
+  const _easycom_uni_easyinput2 = common_vendor.resolveComponent("uni-easyinput");
+  _easycom_uni_easyinput2();
 }
-const _easycom_uni_icons = () => "../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
+const _easycom_uni_easyinput = () => "../../uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.js";
 if (!Math) {
-  _easycom_uni_icons();
+  _easycom_uni_easyinput();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return common_vendor.e({
-    a: $data.iphoneValue,
-    b: common_vendor.o((...args) => $options.clearInput && $options.clearInput(...args)),
-    c: $data.showClearIcon
-  }, $data.showClearIcon ? {
-    d: common_vendor.o($options.clearIcon),
+  return {
+    a: common_vendor.o(_ctx.input),
+    b: common_vendor.o(($event) => $data.iphoneValue = $event),
+    c: common_vendor.p({
+      type: "number",
+      trim: "all",
+      placeholder: "请输入手机号",
+      maxlength: "11",
+      modelValue: $data.iphoneValue
+    }),
+    d: common_vendor.o(($event) => $data.passwordValue = $event),
     e: common_vendor.p({
-      type: "closeempty",
-      color: "#808080",
-      size: "25"
-    })
-  } : {}, {
-    f: $data.type == 2
-  }, $data.type == 2 ? {
-    g: $data.showPassword,
-    h: $data.passwordValue,
-    i: common_vendor.o(($event) => $data.passwordValue = $event.detail.value),
-    j: common_vendor.p({
-      type: "eye-filled",
-      color: "#808080",
-      size: "25"
-    })
-  } : {}, {
-    k: $data.type == 2
-  }, $data.type == 2 ? {
-    l: $data.showPassword,
-    m: $data.passwordValue,
-    n: common_vendor.o(($event) => $data.passwordValue = $event.detail.value)
-  } : {}, {
-    o: common_vendor.o((...args) => $options.Login && $options.Login(...args))
-  });
+      type: "password",
+      placeholder: "请输入密码",
+      modelValue: $data.passwordValue
+    }),
+    f: common_vendor.o(($event) => $data.passwordValue_double = $event),
+    g: common_vendor.p({
+      type: "password",
+      placeholder: "请再次输入密码",
+      modelValue: $data.passwordValue_double
+    }),
+    h: common_vendor.o((...args) => $options.Login && $options.Login(...args))
+  };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-eb4da951"], ["__file", "D:/Code/JobEase/JobEase/pages/m1_sign/m1_sign.vue"]]);
 wx.createPage(MiniProgramPage);

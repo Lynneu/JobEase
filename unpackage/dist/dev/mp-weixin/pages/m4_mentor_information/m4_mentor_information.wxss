@@ -23,55 +23,31 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.container {
-  display: block;
+body {
+  background-color: white;
 }
-.ui-all {
+.mi-container {
+  display: block;
   padding: 20rpx 40rpx;
 }
-.ui-all .ui-list {
+.mi-container .mi-content {
   width: 100%;
   text-align: left;
-  padding: 20rpx 0;
-  border-bottom: solid 1px #f2f2f2;
   position: relative;
 }
-.ui-all .ui-list text {
+.mi-container .mi-content text {
   color: #4a4a4a;
   font-size: 28rpx;
   display: inline-block;
   vertical-align: middle;
   min-width: 150rpx;
 }
-.ui-all .ui-list picker {
-  width: 90%;
+.mi-container .mi-content textarea {
   color: #030303;
   font-size: 30rpx;
-  display: inline-block;
   vertical-align: middle;
-  position: absolute;
-  top: 30rpx;
-  left: 150rpx;
-}
-.ui-all .right:after {
-  content: " ";
-  width: 20rpx;
-  height: 20rpx;
-  border-top: solid 1px #030303;
-  border-right: solid 1px #030303;
-  transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  /* IE 9 */
-  -moz-transform: rotate(45deg);
-  /* Firefox */
-  -webkit-transform: rotate(45deg);
-  /* Safari 和 Chrome */
-  -o-transform: rotate(45deg);
-  position: absolute;
-  top: 40rpx;
-  right: 0;
-}
-.ui-all .button-sp-area {
-  margin: 0 auto;
-  width: 60%;
+  height: 150rpx;
+  width: 100%;
+  border: 1px solid #e8e8e8;
+  padding: 10px;
 }

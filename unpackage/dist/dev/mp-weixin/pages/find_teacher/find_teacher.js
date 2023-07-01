@@ -170,7 +170,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     y: common_vendor.o($options.clear),
     z: common_vendor.o(($event) => $data.searchValue = $event),
     A: common_vendor.p({
-      focus: true,
+      focus: false,
       placeholder: "请输入搜索内容",
       clearButton: "auto",
       cancelButton: "none",

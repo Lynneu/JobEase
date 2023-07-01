@@ -23,22 +23,8 @@ const _sfc_main = {
     };
   },
   methods: {
-    changePassword: function() {
-      this.showPassword = !this.showPassword;
-    },
-    // 判断是否显示清除按钮
-    clearInput: function(event) {
-      this.iphoneValue = event.detail.value;
-      if (event.detail.value.length > 0) {
-        this.showClearIcon = true;
-      } else {
-        this.showClearIcon = false;
-      }
-    },
-    // 清除内容/隐藏按钮
-    clearIcon: function() {
-      this.iphoneValue = "";
-      this.showClearIcon = false;
+    input(e) {
+      console.log("输入内容：", e);
     },
     // 切换登录的方式
     setLoginType(type) {
@@ -70,9 +56,9 @@ const _sfc_main = {
         });
         return false;
       } else
-        common_vendor.index.switchTab({
+        common_vendor.index.navigateTo({
           //url: "../index/index",
-          url: "../find_teacher/find_teacher"
+          url: "../m1_role_select/m1_role_select"
         });
       common_vendor.index.request({
         url: "http://app/login",
@@ -94,7 +80,7 @@ const _sfc_main = {
             common_vendor.index.switchTab({
               // 跳转到新闻页面
               //url: "../index/index",
-              url: "pages/find_teacher/find_teacher"
+              url: "../m1_role_select/m1_role_select"
             });
             common_vendor.index.showToast({
               title: "登录成功",
@@ -164,41 +150,33 @@ const _sfc_main = {
   }
 };
 if (!Array) {
-  const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
-  _easycom_uni_icons2();
+  const _easycom_uni_easyinput2 = common_vendor.resolveComponent("uni-easyinput");
+  _easycom_uni_easyinput2();
 }
-const _easycom_uni_icons = () => "../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
+const _easycom_uni_easyinput = () => "../../uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.js";
 if (!Math) {
-  _easycom_uni_icons();
+  _easycom_uni_easyinput();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return common_vendor.e({
-    a: $data.iphoneValue,
-    b: common_vendor.o((...args) => $options.clearInput && $options.clearInput(...args)),
-    c: $data.showClearIcon
-  }, $data.showClearIcon ? {
-    d: common_vendor.o($options.clearIcon),
+  return {
+    a: common_vendor.o($options.input),
+    b: common_vendor.o(($event) => $data.iphoneValue = $event),
+    c: common_vendor.p({
+      type: "number",
+      trim: "all",
+      placeholder: "请输入手机号",
+      maxlength: "11",
+      modelValue: $data.iphoneValue
+    }),
+    d: common_vendor.o(($event) => $data.passwordValue = $event),
     e: common_vendor.p({
-      type: "closeempty",
-      color: "#808080",
-      size: "25"
-    })
-  } : {}, {
-    f: $data.type == 2
-  }, $data.type == 2 ? {
-    g: $data.showPassword,
-    h: $data.passwordValue,
-    i: common_vendor.o(($event) => $data.passwordValue = $event.detail.value),
-    j: common_vendor.o($options.changePassword),
-    k: common_vendor.p({
-      type: "eye-filled",
-      color: "#808080",
-      size: "25"
-    })
-  } : {}, {
-    l: common_vendor.o((...args) => $options.Zhuce && $options.Zhuce(...args)),
-    m: common_vendor.o((...args) => $options.Login && $options.Login(...args))
-  });
+      type: "password",
+      placeholder: "请输入密码",
+      modelValue: $data.passwordValue
+    }),
+    f: common_vendor.o((...args) => $options.Zhuce && $options.Zhuce(...args)),
+    g: common_vendor.o((...args) => $options.Login && $options.Login(...args))
+  };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-1f4898ea"], ["__file", "D:/Code/JobEase/JobEase/pages/m1_login/login.vue"]]);
 wx.createPage(MiniProgramPage);

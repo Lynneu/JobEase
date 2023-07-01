@@ -23,40 +23,64 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.title {
-  padding: 5px 13px;
+body {
+  background-color: white;
 }
-.uni-form-item__title {
-  font-size: 16px;
-  line-height: 24px;
+.rl_container {
+  display: block;
+  padding: 20rpx 40rpx;
 }
-.uni-input-wrapper {
+.rl_container .rl-content {
+  width: 100%;
+  text-align: left;
+  position: relative;
+  /*text {
+  	color: #4a4a4a;
+  	font-size: 28rpx;
+  	display: inline-block;
+  	vertical-align: middle;
+  	min-width: 150rpx;
+  }
+
+  input {
+  	color: #030303;
+  	font-size: 28rpx;
+  	display: inline-block;
+  	vertical-align: middle;
+  //	margin-left: 0rpx;
+  	border: 1px solid #e8e8e8;
+  	height: 80rpx;
+  	padding: 10px;
+  }*/
+}
+.rl_container .r2-content {
   display: flex;
-  padding: 8px 13px;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  background-color: #FFFFFF;
+  align-items: center;
 }
-.uni-input {
-  height: 28px;
-  line-height: 28px;
-  font-size: 15px;
-  padding: 0px;
-  flex: 1;
-  background-color: #FFFFFF;
+.rl_container .r2-content picker {
+  position: absolute;
+  transform: translateX(20%);
+  width: 90%;
+  color: #757575;
+  font-size: 28rpx;
+  display: inline-block;
+  vertical-align: middle;
 }
-.example-body {
-  background-color: #fff;
-  padding: 10px;
+.rl_container .r2-content rl-right:after {
+  content: " ";
+  width: 15rpx;
+  height: 15rpx;
+  border-top: solid 1px #030303;
+  border-right: solid 1px #030303;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 35rpx;
+  right: 0;
 }
-.uni-list-cell {
-  justify-content: flex-start;
-}
-button {
-  margin-top: 30rpx;
-  margin-bottom: 30rpx;
-}
-.button-sp-area {
-  margin: 0 auto;
-  width: 60%;
+.rl_container .save {
+  background: #030303;
+  border: none;
+  color: #ffffff;
+  margin-top: 40rpx;
+  font-size: 28rpx;
 }

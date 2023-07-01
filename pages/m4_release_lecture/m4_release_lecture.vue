@@ -4,25 +4,25 @@
 				<uni-section title="讲座名称:" type="line"></uni-section>
 				<!--<text>讲座名称</text>
 				<input type="text" maxlength="20" placeholder="20字以内" :value="lectureName" @input="inputName"  />-->
-				<textarea  maxlength="20" placeholder="最大输入长度为20" :value="lectureName" @input="inputName" auto-height></textarea>
+				<!-- <textarea  maxlength="20" placeholder="最大输入长度为20" :value="lectureName" @input="inputName" auto-height></textarea> -->
+				<uni-easyinput v-model="lectureName" placeholder="最大输入长度为20" maxlength="20" @input="inputName"></uni-easyinput>
 			</view>
 			
 			
 			<view class="rl-content">
 				<!--<text>讲座简介</text>-->
 				<uni-section title="讲座简介:" type="line"></uni-section>
-				<textarea  maxlength="200" placeholder="最大输入长度为200" :value="description" @input="descriptionInput" auto-height></textarea>
+				<uni-easyinput type="textarea" autoHeight v-model="description" placeholder="最大输入长度为200" maxlength="200" @input="descriptionInput"></uni-easyinput>
 			</view>
 			
 			
-			<view class="rl-content rl-right">
+			<view class="r2-content rl-right">
 				<uni-section title="标签:" type="line"></uni-section>
-				<!--<text>标签</text>-->
-				<picker @change="changeDirection" mode='selector' range-key="name1" :value="index1" :range="direction">
-					<view class="si-picker">
-						{{direction[index1].name1}}
-					</view>
-				</picker>
+				<!--<text>标签</text>-->	
+				<uni-data-select
+				        v-model="index1"
+				        :localdata="direction"
+				        @change="changeDirection"></uni-data-select>
 			</view>
 			
 			
@@ -71,16 +71,16 @@
 				lectureName: '',
 				description: '',
 				direction:[
-					{ name1: '前端开发' },
-					{ name1: '后端开发' },
-					{ name1: 'C++开发' },
-					{ name1: 'Java开发' },
-					{ name1: '算法' },
-					{ name1: '测试开发' },
-					{ name1: '产品经理' },
-					{ name1: '运营' },
-					{ name1: 'HR' },
-					{ name1: '其他' }
+					{ value: 0, text: '前端开发' },
+					{ value: 1, text: '后端开发' },
+					{ value: 2, text: 'C++开发' },
+					{ value: 3, text: 'Java开发' },
+					{ value: 4, text: '算法' },
+					{ value: 5, text: '测试开发' },
+					{ value: 6, text: '产品经理' },
+					{ value: 7, text: '运营' },
+					{ value: 8, text: 'HR' },
+					{ value: 9, text: '其他' }
 				],
 				index1: 0,
 				items: [{
@@ -113,7 +113,7 @@
 		},
 		methods: {
 			changeDirection(e) {
-				this.index1 = e.detail.value;
+				console.log(e)
 			},
 			inputName(e) {
 				this.lectureName = e.detail.value;
@@ -200,7 +200,7 @@
 	}
 </script>
 
-<style lang="less">
+<style lang="scss">
 	body {
 	  background-color: white;
 	}
@@ -209,10 +209,12 @@
 		padding: 20rpx 40rpx;
 
 		.rl-content {
+			
 			width: 100%;
 			text-align: left;
 			//padding: 0rpx 0;
 			//border-bottom: solid 1px #f2f2f2;
+			
 			position: relative;
 
 			/*text {
@@ -234,45 +236,52 @@
 				padding: 10px;
 			}*/
 			
-			picker {
-				//height: 1190rpx;
-				width: 90%;
-				color: #757575;
-				font-size: 28rpx;
-				display: inline-block;
-				vertical-align: middle;
-				position: absolute;
-				top: 23rpx;
-				left: 150rpx;
-			}
 
-			textarea {
-				color: #030303;
-				font-size: 28rpx;
-				vertical-align: middle;
-				height: 150rpx;
-				width: 100%;
-				//margin-top: 30rpx;
-				//margin-left: 20rpx;
-				//margin-right: 50rpx;
-				border: 1px solid #e8e8e8;
-				padding: 10px;
-			}
+			// textarea {
+			// 	color: #030303;
+			// 	font-size: 28rpx;
+			// 	vertical-align: middle;
+			// 	height: 150rpx;
+			// 	width: 100%;
+			// 	//margin-top: 30rpx;
+			// 	//margin-left: 20rpx;
+			// 	//margin-right: 50rpx;
+			// 	border: 1px solid #e8e8e8;
+			// 	margin: 10px;
+			// 	padding-top: 20px;
+			// 	padding-bottom: 20px
+				
+			// }
 
 			
 		}
-
-		.rl-right:after {
-			content: ' ';
-			width: 15rpx;
-			height: 15rpx;
-			border-top: solid 1px #030303;
-			border-right: solid 1px #030303;
-			transform: rotate(45deg);
-			position: absolute;
-			top: 35rpx;
-			right: 0;
+		.r2-content {
+			display: flex;
+			align-items: center;
+			picker {
+				//height: 1190rpx;
+				position: absolute;
+				  transform: translateX(20%);
+				  width: 90%;
+				  color: #757575;
+				  font-size: 28rpx;
+				  display: inline-block;
+				  vertical-align: middle;
+			}
+			rl-right:after {
+				content: ' ';
+				width: 15rpx;
+				height: 15rpx;
+				border-top: solid 1px #030303;
+				border-right: solid 1px #030303;
+				transform: rotate(45deg);
+				position: absolute;
+				top: 35rpx;
+				right: 0;
+			}
 		}
+		
+		
 
 		.save {
 			background: #030303;

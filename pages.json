@@ -145,16 +145,7 @@
                 "enablePullDownRefresh": false
             }
             
-        },
-		{
-		    "path" : "pages/m1_login/test",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "测试",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

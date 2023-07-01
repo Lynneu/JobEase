@@ -3,80 +3,81 @@ const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   data() {
     return {
-      username: "不可改",
+      username: "名字不可改",
+      identity: "求职者",
       goal: [{
         id: 0,
-        name: "保密"
+        name: "看看机会"
       }, {
         id: 1,
         name: "找实习"
       }, {
         id: 2,
-        name: "找工作"
+        name: "找校招"
       }],
       index: 0,
-      direction: [{
-        id: 0,
-        name: "保密"
-      }, {
-        id: 1,
-        name: "互联网IT"
-      }, {
-        id: 2,
-        name: "通信/硬件"
-      }, {
-        id: 3,
-        name: "设计/传媒"
-      }, {
-        id: 4,
-        name: "人事行政"
-      }, {
-        id: 5,
-        name: "金融/法务"
-      }, {
-        id: 6,
-        name: "生产制造"
-      }, {
-        id: 7,
-        name: "教育培训"
-      }, {
-        id: 8,
-        name: "生物医疗"
-      }, {
-        id: 9,
-        name: "服务业"
-      }, {
-        id: 10,
-        name: "房产/建筑"
-      }, {
-        id: 11,
-        name: "其他"
-      }],
+      direction: [
+        { name1: "看看机会" },
+        { name1: "前端开发" },
+        { name1: "后端开发" },
+        { name1: "C++开发" },
+        { name1: "Java开发" },
+        { name1: "算法" },
+        { name1: "测试开发" },
+        { name1: "产品经理" },
+        { name1: "运营" },
+        { name1: "HR" },
+        { name1: "商务拓展" },
+        { name1: "其他" }
+      ],
       index1: 0
     };
   },
   methods: {
-    bindPickerChange(e) {
+    changeGoal(e) {
       this.index = e.detail.value;
     },
-    bindPickerChange1(e) {
+    changeDirection(e) {
       this.index1 = e.detail.value;
     }
   },
   onLoad() {
   }
 };
+if (!Array) {
+  const _easycom_uni_section2 = common_vendor.resolveComponent("uni-section");
+  _easycom_uni_section2();
+}
+const _easycom_uni_section = () => "../../uni_modules/uni-section/components/uni-section/uni-section.js";
+if (!Math) {
+  _easycom_uni_section();
+}
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_vendor.t($data.username),
-    b: common_vendor.t($data.goal[$data.index].name),
-    c: common_vendor.o((...args) => $options.bindPickerChange && $options.bindPickerChange(...args)),
-    d: $data.index,
-    e: $data.goal,
-    f: common_vendor.t($data.direction[$data.index1].name),
-    g: common_vendor.o((...args) => $options.bindPickerChange1 && $options.bindPickerChange1(...args)),
-    h: $data.index1,
-    i: $data.direction
+    a: common_vendor.p({
+      title: "用户名:" + $data.username,
+      type: "line"
+    }),
+    b: common_vendor.p({
+      title: "身份:" + $data.identity,
+      type: "line"
+    }),
+    c: common_vendor.p({
+      title: "就业目标:",
+      type: "line"
+    }),
+    d: common_vendor.t($data.goal[$data.index].name),
+    e: common_vendor.o((...args) => $options.changeGoal && $options.changeGoal(...args)),
+    f: $data.index,
+    g: $data.goal,
+    h: common_vendor.p({
+      title: "求职方向:",
+      type: "line"
+    }),
+    i: common_vendor.t($data.direction[$data.index1].name1),
+    j: common_vendor.o((...args) => $options.changeDirection && $options.changeDirection(...args)),
+    k: $data.index1,
+    l: $data.direction
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/Code/JobEase/JobEase/pages/m4_seeker_information/m4_seeker_information.vue"]]);

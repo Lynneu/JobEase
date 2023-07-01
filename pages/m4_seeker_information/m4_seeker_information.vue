@@ -83,7 +83,7 @@
 	}
 </script>
 
-<style lang="less">
+<style lang="scss">
 	body {
 	  background-color: white;
 	}

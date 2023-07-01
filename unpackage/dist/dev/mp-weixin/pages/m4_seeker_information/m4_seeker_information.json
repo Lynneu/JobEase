@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "个人信息",
   "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "usingComponents": {
+    "uni-section": "../../uni_modules/uni-section/components/uni-section/uni-section"
+  }
 }

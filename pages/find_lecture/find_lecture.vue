@@ -167,7 +167,13 @@ export default {
     },
     searchclick() {
       console.log(this.searchValue())
-    }
+    },
+	changeJob(e) {
+		console.log(e)
+	},
+	changeconsult(e) {
+		console.log(e)
+	}
   },
 }
 </script>

@@ -23,7 +23,7 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-page {
+.page {
   background-color: #ffffff;
 }
 .lec_body {

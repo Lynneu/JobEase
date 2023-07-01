@@ -1,6 +1,8 @@
 
 .login-content.data-v-eb4da951 {
-		padding: 70px 10px 35px;
+		padding-top: 70px;
+		padding-left: 20px;
+		padding-right: 20px;
 		text-align: center;
 		color: #333333;
 }
@@ -50,7 +52,7 @@
 		justify-content: space-between;
 }
 .login-btn.data-v-eb4da951 {
-		width: 355px;
+		width: 100%;
 		height: 45px;
 		background: #0000ff;
 		border-radius: 36px;
@@ -58,6 +60,8 @@
 		font-size: 20px;
 		text-align: center;
 		line-height: 45px;
-		position: fixed;
-		bottom: 60px;
+		margin-top: 110px;
+}
+.input-area.data-v-eb4da951 {
+		input-area: 10px;
 }

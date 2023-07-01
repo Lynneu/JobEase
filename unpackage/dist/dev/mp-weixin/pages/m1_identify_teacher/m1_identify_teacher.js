@@ -95,7 +95,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     g: common_vendor.o($options.change1),
     h: common_vendor.p({
       max: 999,
-      step: 50,
+      step: 10,
       value: $data.numberValue
     }),
     i: common_vendor.p({

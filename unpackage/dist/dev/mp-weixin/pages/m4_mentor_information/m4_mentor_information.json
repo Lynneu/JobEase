@@ -2,7 +2,7 @@
   "navigationBarTitleText": "导师信息",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "uni-number-box": "../../uni_modules/uni-number-box/components/uni-number-box/uni-number-box",
-    "uni-section": "../../uni_modules/uni-section/components/uni-section/uni-section"
+    "uni-section": "../../uni_modules/uni-section/components/uni-section/uni-section",
+    "uni-number-box": "../../uni_modules/uni-number-box/components/uni-number-box/uni-number-box"
   }
 }

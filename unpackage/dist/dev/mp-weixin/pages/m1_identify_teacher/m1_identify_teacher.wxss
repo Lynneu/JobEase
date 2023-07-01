@@ -27,7 +27,9 @@
   padding: 5px 13px;
 }
 .uni-form-item uni-column {
+  margin-top: 10px;
   display: flex;
+  height: 20px;
 }
 .uni-form-item__title {
   font-size: 16px;
@@ -54,11 +56,18 @@
 .uni-list-cell {
   justify-content: flex-start;
 }
-button {
+.uni-list {
+  height: 40px;
+  margin-top: 0px;
+}
+.button {
   margin-top: 30rpx;
   margin-bottom: 30rpx;
 }
 .button-sp-area {
   margin: 0 auto;
   width: 60%;
+}
+.charge {
+  margin-top: 0;
 }

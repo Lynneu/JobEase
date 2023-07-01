@@ -98,6 +98,12 @@ const _sfc_main = {
     },
     searchclick() {
       console.log(this.searchValue());
+    },
+    changeJob(e) {
+      console.log(e);
+    },
+    changeconsult(e) {
+      console.log(e);
     }
   }
 };
@@ -137,7 +143,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       size: "25",
       color: "#007AFF"
     }),
-    c: common_vendor.o(_ctx.changeJob),
+    c: common_vendor.o($options.changeJob),
     d: common_vendor.o(($event) => $data.jobvalue = $event),
     e: common_vendor.p({
       localdata: $data.job,
@@ -148,7 +154,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       label: "咨询职位",
       ["label-width"]: "60"
     }),
-    g: common_vendor.o(_ctx.changeconsult),
+    g: common_vendor.o($options.changeconsult),
     h: common_vendor.o(($event) => $data.consultvalue = $event),
     i: common_vendor.p({
       localdata: $data.consult,
@@ -199,7 +205,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     y: common_vendor.o($options.clear),
     z: common_vendor.o(($event) => $data.searchValue = $event),
     A: common_vendor.p({
-      focus: true,
+      focus: false,
       placeholder: "请输入搜索内容",
       clearButton: "auto",
       cancelButton: "none",
