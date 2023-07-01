@@ -1,28 +1,27 @@
 <template>
 	<view>
-		<uni-section class="lec_title" :title="lecture_title" titleFontSize="20px" type="line"></uni-section>
+		<view class="lec_body">
+			<view class="word">
+				<view class="title">
+					<text>如何拥有良好的睡眠质量</text>
+				</view>
 		
-		<uni-section>
-			<view class="lec_datail">
-				<text>演 讲 人 ：{{lecture_name}} \n</text>
-				<text>讲座时间：{{lecture_time}}\n</text>
-				<text>讲座主题：{{lecture_theme}}\n</text>
-				<text>讲座费用：{{lecture_cost}}\n</text>
-				<text>剩余名额：{{lecture_num}}\n\n</text>
+				<view class="datail">
+					<text v-for="(item,index) in name" :key="index">演 讲 人：{{item}} \n</text>
+					<text>讲座时间：2023\n</text>
+					<text>讲座主题：睡眠学导论\n</text>
+					<text>讲座费用：0\n</text>
+					<text>剩余名额：3\n</text>
+				</view>
 			</view>
-			
-			<uni-card padding="5px">
-				<text class="card_title">讲座内容\n</text>
-				<text class="card_content">{{lecture_content}}</text>
-			</uni-card>
-		</uni-section>
-		
-		<uni-section class="appt_button">
-			<button  size="mini" type="primary" @click="appointLecture">
-				<text>预约</text>
-			</button>
-		</uni-section>
-				
+		</view>
+		<uni-card>
+			<text>讲座内容\n</text>
+			<text class="card_title">讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容</text>
+		</uni-card>
+		<button size="mini" type="primary" @click="appointLecture">
+			<text>预约</text>
+		</button>
 	</view>
 </template>
 
@@ -30,13 +29,7 @@
 	export default {
 		data() {
 			return {
-				lecture_name:'pp',
-				lecture_title: '如何拥有良好的睡眠质量',
-				lecture_time:'2023.06.28 '+' 18:00',
-				lecture_theme:'求职就业',
-				lecture_cost:'30',
-				lecture_num:'3'+'/'+'10',
-				lecture_content:'讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容.'
+				name:['pp'],
 				
 			};
 		},
@@ -46,32 +39,44 @@
 				  url: '../find_lecture/find_lecture'
 				});
 			}
-		},
-		
+		}
 	}
 </script>
 
 <style lang="scss">
-	page{
+	.page{
 		background-color: #ffffff;
 	}
-	.lec_title{
-		padding-top: 15px;
+	.lec_body{
+		padding-left: 3%;
+		padding-right: 3%;
+		padding-top: 5%;
+		
 	}
-	.lec_datail{
-		padding-left: 20px;
+	.word{
+		padding-left: 3%;
+		padding-right: 3%;
+		padding-top: 3%;
+	}
+	.title{
+		font-size: 50rpx;
+		font-weight: 600;
+	}
+	.datail{
 		font-size: 30rpx;
+		font-weight: 600;
+	}
+	.in_word{
+		font-size: 30rpx;
+		font-weight: 600;
+	}
+	.confirm{
+		padding-left: 70%;
+		font-weight: 600;
+		padding-bottom: 3%;
 	}
 	.card_title{
-		font-size: 30rpx;
-		font-weight: bold;
-	}
-	.card_content{
-		font-size: 25rpx;
-		font-weight: 600px;
-	}
-	.appt_button{
-		padding-left: 70%;
+		font-size: 20rpx;
 	}
 
 </style>
