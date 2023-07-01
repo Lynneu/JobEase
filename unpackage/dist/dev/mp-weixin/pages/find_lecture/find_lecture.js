@@ -7,6 +7,8 @@ const _sfc_main = {
       searchValue: "",
       jobvalue: "",
       consultvalue: "",
+      payvalue: "",
+      scorevalue: "",
       title: "uni-fab",
       directionStr: "垂直",
       horizontal: "right",
@@ -39,6 +41,20 @@ const _sfc_main = {
         { value: 1, text: "面试准备" },
         { value: 2, text: "薪资" },
         { value: 3, text: "职业规划" }
+      ],
+      pay: [
+        { value: 0, text: "100元以下" },
+        { value: 1, text: "100-150元" },
+        { value: 2, text: "150-200元" },
+        { value: 3, text: "200元以上" },
+        { value: 4, text: "无限制" }
+      ],
+      score: [
+        { value: 0, text: "4.5以下" },
+        { value: 1, text: "4.5-4.6" },
+        { value: 2, text: "4.7-4.8" },
+        { value: 3, text: "4.9-5.0" },
+        { value: 4, text: "无限制" }
       ]
     };
   },
@@ -104,6 +120,12 @@ const _sfc_main = {
     },
     changeconsult(e) {
       console.log(e);
+    },
+    changepay(e) {
+      console.log(e);
+    },
+    changescore(e) {
+      console.log(e);
     }
   }
 };
@@ -111,7 +133,6 @@ if (!Array) {
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
   const _easycom_uni_data_select2 = common_vendor.resolveComponent("uni-data-select");
   const _easycom_uni_forms_item2 = common_vendor.resolveComponent("uni-forms-item");
-  const _easycom_uni_number_box2 = common_vendor.resolveComponent("uni-number-box");
   const _easycom_uni_forms2 = common_vendor.resolveComponent("uni-forms");
   const _easycom_uni_section2 = common_vendor.resolveComponent("uni-section");
   const _easycom_uni_drawer2 = common_vendor.resolveComponent("uni-drawer");
@@ -119,12 +140,11 @@ if (!Array) {
   const _easycom_uni_list_item2 = common_vendor.resolveComponent("uni-list-item");
   const _easycom_uni_list2 = common_vendor.resolveComponent("uni-list");
   const _easycom_uni_fab2 = common_vendor.resolveComponent("uni-fab");
-  (_easycom_uni_icons2 + _easycom_uni_data_select2 + _easycom_uni_forms_item2 + _easycom_uni_number_box2 + _easycom_uni_forms2 + _easycom_uni_section2 + _easycom_uni_drawer2 + _easycom_uni_search_bar2 + _easycom_uni_list_item2 + _easycom_uni_list2 + _easycom_uni_fab2)();
+  (_easycom_uni_icons2 + _easycom_uni_data_select2 + _easycom_uni_forms_item2 + _easycom_uni_forms2 + _easycom_uni_section2 + _easycom_uni_drawer2 + _easycom_uni_search_bar2 + _easycom_uni_list_item2 + _easycom_uni_list2 + _easycom_uni_fab2)();
 }
 const _easycom_uni_icons = () => "../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
 const _easycom_uni_data_select = () => "../../uni_modules/uni-data-select/components/uni-data-select/uni-data-select.js";
 const _easycom_uni_forms_item = () => "../../uni_modules/uni-forms/components/uni-forms-item/uni-forms-item.js";
-const _easycom_uni_number_box = () => "../../uni_modules/uni-number-box/components/uni-number-box/uni-number-box.js";
 const _easycom_uni_forms = () => "../../uni_modules/uni-forms/components/uni-forms/uni-forms.js";
 const _easycom_uni_section = () => "../../uni_modules/uni-section/components/uni-section/uni-section.js";
 const _easycom_uni_drawer = () => "../../uni_modules/uni-drawer/components/uni-drawer/uni-drawer.js";
@@ -133,7 +153,7 @@ const _easycom_uni_list_item = () => "../../uni_modules/uni-list/components/uni-
 const _easycom_uni_list = () => "../../uni_modules/uni-list/components/uni-list/uni-list.js";
 const _easycom_uni_fab = () => "../../uni_modules/uni-fab/components/uni-fab/uni-fab.js";
 if (!Math) {
-  (_easycom_uni_icons + _easycom_uni_data_select + _easycom_uni_forms_item + _easycom_uni_number_box + _easycom_uni_forms + _easycom_uni_section + _easycom_uni_drawer + _easycom_uni_search_bar + _easycom_uni_list_item + _easycom_uni_list + _easycom_uni_fab)();
+  (_easycom_uni_icons + _easycom_uni_data_select + _easycom_uni_forms_item + _easycom_uni_forms + _easycom_uni_section + _easycom_uni_drawer + _easycom_uni_search_bar + _easycom_uni_list_item + _easycom_uni_list + _easycom_uni_fab)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
@@ -165,72 +185,56 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       label: "咨询方向",
       ["label-width"]: "60"
     }),
-    k: common_vendor.p({
-      min: 1,
-      max: 999,
-      value: 100,
-      background: "#2979FF",
-      color: "#fff"
+    k: common_vendor.o($options.changepay),
+    l: common_vendor.o(($event) => $data.payvalue = $event),
+    m: common_vendor.p({
+      localdata: $data.pay,
+      placeholder: "请选择价格区间",
+      modelValue: $data.payvalue
     }),
-    l: common_vendor.p({
+    n: common_vendor.p({
       label: "价格区间",
       ["label-width"]: "60"
     }),
-    m: common_vendor.p({
-      min: 0,
-      max: 10,
-      value: 5,
-      background: "#2979FF",
-      color: "#fff"
+    o: common_vendor.o($options.changescore),
+    p: common_vendor.o(($event) => $data.scorevalue = $event),
+    q: common_vendor.p({
+      localdata: $data.score,
+      placeholder: "请选择评分区间",
+      modelValue: $data.scorevalue
     }),
-    n: common_vendor.p({
+    r: common_vendor.p({
       label: "评分区间",
       ["label-width"]: "60"
     }),
-    o: common_vendor.o(($event) => $options.closeDrawer("showLeft")),
-    p: common_vendor.p({
+    s: common_vendor.o(($event) => $options.closeDrawer("showLeft")),
+    t: common_vendor.p({
       title: "筛选",
       type: "line"
     }),
-    q: common_vendor.sr("showLeft", "358e3fb5-1"),
-    r: common_vendor.p({
+    v: common_vendor.sr("showLeft", "358e3fb5-1"),
+    w: common_vendor.p({
       mode: "left",
       width: 300
     }),
-    s: common_vendor.o($options.search),
-    t: common_vendor.o($options.blur),
-    v: common_vendor.o($options.focus),
-    w: common_vendor.o($options.input),
-    x: common_vendor.o($options.cancel),
-    y: common_vendor.o($options.clear),
-    z: common_vendor.o(($event) => $data.searchValue = $event),
-    A: common_vendor.p({
+    x: common_vendor.o($options.search),
+    y: common_vendor.o($options.blur),
+    z: common_vendor.o($options.focus),
+    A: common_vendor.o($options.input),
+    B: common_vendor.o($options.cancel),
+    C: common_vendor.o($options.clear),
+    D: common_vendor.o(($event) => $data.searchValue = $event),
+    E: common_vendor.p({
       focus: false,
       placeholder: "请输入搜索内容",
       clearButton: "auto",
       cancelButton: "none",
       modelValue: $data.searchValue
     }),
-    B: common_vendor.o((...args) => $options.searchclick && $options.searchclick(...args)),
-    C: common_vendor.p({
+    F: common_vendor.o((...args) => $options.searchclick && $options.searchclick(...args)),
+    G: common_vendor.p({
       title: "默认 navigateTo 方式跳转页面",
       to: "../m3_detail_lecture/m3_detail_lecture",
-      note: "列表描述信息"
-    }),
-    D: common_vendor.p({
-      title: "列表文字",
-      note: "列表描述信息"
-    }),
-    E: common_vendor.p({
-      title: "列表文字",
-      note: "列表描述信息"
-    }),
-    F: common_vendor.p({
-      title: "列表文字",
-      note: "列表描述信息"
-    }),
-    G: common_vendor.p({
-      title: "列表文字",
       note: "列表描述信息"
     }),
     H: common_vendor.p({
@@ -261,9 +265,25 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       title: "列表文字",
       note: "列表描述信息"
     }),
-    O: common_vendor.sr("fab", "358e3fb5-26"),
-    P: common_vendor.o($options.trigger),
+    O: common_vendor.p({
+      title: "列表文字",
+      note: "列表描述信息"
+    }),
+    P: common_vendor.p({
+      title: "列表文字",
+      note: "列表描述信息"
+    }),
     Q: common_vendor.p({
+      title: "列表文字",
+      note: "列表描述信息"
+    }),
+    R: common_vendor.p({
+      title: "列表文字",
+      note: "列表描述信息"
+    }),
+    S: common_vendor.sr("fab", "358e3fb5-26"),
+    T: common_vendor.o($options.trigger),
+    U: common_vendor.p({
       pattern: $data.pattern,
       content: $data.content,
       horizontal: $data.horizontal,

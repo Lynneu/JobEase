@@ -6,7 +6,11 @@ const _sfc_main = {
       array: [{ name: "前端开发" }, { name: "后端开发" }, { name: "C++开发" }, { name: "Java开发" }, { name: "算法" }, { name: "测试开发" }, { name: "产品经理" }, { name: "运营" }, { name: "HR" }, { name: "其他" }],
       index: 0,
       numberValue: 0,
-      current: 0
+      current: 0,
+      timer: 0,
+      //验证码时间
+      showTimer: true
+      //是否显示验证码时间
     };
   },
   watch: {
@@ -71,6 +75,30 @@ const _sfc_main = {
       common_vendor.index.switchTab({
         url: "../find_teacher/find_teacher"
       });
+    },
+    getTest() {
+      {
+        common_vendor.index.showToast({
+          title: "验证码发送成功",
+          icon: "none"
+        });
+        that.timer = 60;
+        that.timeDown(that.timer);
+      }
+    },
+    // 设置验证码时间动态减少
+    timeDown(num) {
+      let that2 = this;
+      if (num == 0) {
+        that2.showTimer = true;
+        return clearTimeout();
+      } else {
+        that2.showTimer = false;
+        setTimeout(function() {
+          that2.timer = num - 1;
+          that2.timeDown(num - 1);
+        }, 1e3);
+      }
     }
   }
 };
@@ -85,7 +113,7 @@ if (!Math) {
   (_easycom_uni_number_box + _easycom_uni_section)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {
+  return common_vendor.e({
     a: common_vendor.o((...args) => $options.bindTextAreaBlur && $options.bindTextAreaBlur(...args)),
     b: common_vendor.o((...args) => $options.bindTextAreaBlur && $options.bindTextAreaBlur(...args)),
     c: common_vendor.t($data.array[$data.index].name),
@@ -103,8 +131,14 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       type: "line",
       padding: true
     }),
-    j: common_vendor.o((...args) => $options.submit && $options.submit(...args))
-  };
+    j: $data.showTimer
+  }, $data.showTimer ? {
+    k: common_vendor.o((...args) => $options.getTest && $options.getTest(...args))
+  } : {
+    l: common_vendor.t($data.timer + "s")
+  }, {
+    m: common_vendor.o((...args) => $options.submit && $options.submit(...args))
+  });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/Code/JobEase/JobEase/pages/m1_identify_teacher/m1_identify_teacher.vue"]]);
 wx.createPage(MiniProgramPage);

@@ -7,14 +7,14 @@ const _sfc_main = {
         {
           course_id: "1",
           title: "求职者",
-          course: "可付费进行求职咨询，听讲座",
+          course: "可付费进行求职咨询，听讲座\n无需认证",
           selected: false
         },
         {
           course_id: "2",
           title: "导师",
-          //course: "可收费提供咨询，举办讲座\n首次进入需进行导师认证",
-          course: "首次进入需进行导师认证",
+          course: "可收费提供咨询，举办讲座\n首次进入需进行导师认证",
+          //course:"首次进入需进行导师认证",
           selected: false
         }
       ],
@@ -32,6 +32,11 @@ const _sfc_main = {
         }
         console.log("选中的值", this.selectId);
       } else {
+        for (var i = 0; i <= this.selectId.length; i++)
+          this.list[i].selected = false;
+        for (var i = 0; i <= this.selectId.length; i++) {
+          this.selectId.splice(i, 1);
+        }
         this.list[index].selected = true;
         this.selectId.push(this.list[index].course_id);
         console.log("选中的值", this.selectId);
