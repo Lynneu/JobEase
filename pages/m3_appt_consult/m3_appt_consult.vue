@@ -16,7 +16,7 @@
 					</uni-section>
 					<uni-section title="咨询价格:" class="label" type="line" ></uni-section>
 					<uni-section :title="'预约时长 : '+ last_numberValue+'分钟'" type="line" padding class="appt_time">
-						<uni-number-box :step="10" max="120" min="10" :value="last_numberValue" @change="change3" />
+						<uni-number-box :step=10 :max=120 :min=10 :value="last_numberValue" @change="change3" />
 					</uni-section>
 					<uni-section :title="'预约日期:'" type="line"></uni-section>
 					<view class="example-body">

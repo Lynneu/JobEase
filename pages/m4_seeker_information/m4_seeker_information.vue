@@ -46,7 +46,7 @@
 			</uni-data-select>
 		</view>
 		
-		<button class="save" @tap="savaInfo">保存修改</button>
+		<button class="save" @tap="saveInfo">保存修改</button>
 			
 	</view>
 </template>
@@ -87,10 +87,15 @@
 		},
 		methods: {
 			changeGoal(e) {
-				this.index = e.detail.value;
+				console.log(this.index)
 			},
 			changeDirection(e) {
-				this.index1 = e.detail.value;
+				console.log(this.index1)
+			},
+			saveInfo() {
+				uni.switchTab({
+					url: "../m2_profile/m2_profile"
+				})
 			}
 		},
 		onLoad() {			
