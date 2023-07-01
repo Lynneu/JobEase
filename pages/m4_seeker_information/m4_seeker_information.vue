@@ -1,4 +1,7 @@
 <template>
+	<view style="text-align: center;">
+		<image style="width: 30%; height: 200rpx;" mode="aspectFit" src="../../static/logo.png"></image>
+	</view>
 	<view class="si-container">
 		
 		<view class="si-content">
@@ -142,5 +145,8 @@
 			right: 0;
 		}	*/
 	
+	}
+	.save{
+		margin-top: 102px;
 	}
 </style>
