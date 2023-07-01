@@ -39,7 +39,7 @@
 				<view class="uni-list">
 				<checkbox-group>
 					<label>
-						<checkbox value="1" checked="true" />简历优化
+						<checkbox value="1"  />简历优化
 					</label>
 					<label>
 						<checkbox value="2" />面试经验

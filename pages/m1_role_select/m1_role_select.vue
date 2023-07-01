@@ -32,14 +32,14 @@
 				list: [{
 						course_id: "1",
 						title: "求职者",
-						course: "可付费进行求职咨询，听讲座",
+						course: "可付费进行求职咨询，听讲座\n无需认证",
 						selected: false
 					},
 					{
 						course_id: "2",
 						title: "导师",
-						//course: "可收费提供咨询，举办讲座\n首次进入需进行导师认证",
-						course:"首次进入需进行导师认证",
+						course: "可收费提供咨询，举办讲座\n首次进入需进行导师认证",
+						//course:"首次进入需进行导师认证",
 						selected: false
 					}
 				],
@@ -59,8 +59,13 @@
 					console.log("选中的值",this.selectId)
 				}else{
 					
-					//for(var i = 0; i < this.selectId.length; i++)
-					//this.list[i]=false;
+					for(var i = 0; i <= this.selectId.length; i++)
+						this.list[i].selected=false;
+					for(var i = 0; i <= this.selectId.length; i++){
+					        this.selectId.splice(i,1);
+					    
+					}
+					
 					this.list[index].selected = true;
 					
 					this.selectId.push(this.list[index].course_id)
@@ -147,8 +152,8 @@
 		display: flex;
 		flex-direction: column;
 		background-color: #fff;
-		margin: 0upx 16upx 16upx 16upx;
-		padding: 50upx;
+		margin: 10upx 10upx 16upx 16upx;
+		padding: 40upx;
 		border-radius: 10upx;
 	}
 
@@ -197,18 +202,18 @@
 		text-overflow: ellipsis;
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 2;
-		margin-bottom: 30upx;
+		-webkit-line-clamp: 1;
+		margin-bottom: 20upx;
 	}
 
 	.list-da {
 		display: flex;
 		flex-direction: row;
-		font-size: 26upx;
+		font-size: 24upx;
 	}
 
 	.list-da view {
-		width: 50%;
+		width: 100%;
 	}
 
 	.list-da view text {
