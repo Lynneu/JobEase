@@ -25,13 +25,15 @@ const _sfc_main = {
 };
 if (!Array) {
   const _easycom_uni_section2 = common_vendor.resolveComponent("uni-section");
+  const _easycom_uni_easyinput2 = common_vendor.resolveComponent("uni-easyinput");
   const _easycom_uni_number_box2 = common_vendor.resolveComponent("uni-number-box");
-  (_easycom_uni_section2 + _easycom_uni_number_box2)();
+  (_easycom_uni_section2 + _easycom_uni_easyinput2 + _easycom_uni_number_box2)();
 }
 const _easycom_uni_section = () => "../../uni_modules/uni-section/components/uni-section/uni-section.js";
+const _easycom_uni_easyinput = () => "../../uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.js";
 const _easycom_uni_number_box = () => "../../uni_modules/uni-number-box/components/uni-number-box/uni-number-box.js";
 if (!Math) {
-  (_easycom_uni_section + _easycom_uni_number_box)();
+  (_easycom_uni_section + _easycom_uni_easyinput + _easycom_uni_number_box)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
@@ -55,20 +57,27 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       title: "个人简介:",
       type: "line"
     }),
-    f: $data.description,
-    g: common_vendor.o((...args) => $options.introductionInput && $options.introductionInput(...args)),
-    h: common_vendor.o($options.changePrice),
-    i: common_vendor.p({
+    f: common_vendor.o($options.introductionInput),
+    g: common_vendor.o(($event) => $data.description = $event),
+    h: common_vendor.p({
+      type: "textarea",
+      autoHeight: true,
+      placeholder: "最大输入长度为1000",
+      maxlength: "1000",
+      modelValue: $data.description
+    }),
+    i: common_vendor.o($options.changePrice),
+    j: common_vendor.p({
       max: 9999,
       step: 5,
       value: $data.priceValue
     }),
-    j: common_vendor.p({
+    k: common_vendor.p({
       title: "咨询价格 : " + $data.priceValue + "元/时间单位",
       type: "line",
       padding: true
     }),
-    k: common_vendor.o((...args) => _ctx.savaInfo && _ctx.savaInfo(...args))
+    l: common_vendor.o((...args) => _ctx.savaInfo && _ctx.savaInfo(...args))
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "E:/hbuilder/JobEase/pages/m4_mentor_information/m4_mentor_information.vue"]]);

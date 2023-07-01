@@ -3,3 +3,30 @@
 .inv-h{font-size: 30rpx;flex: 1;text-align: center;color: #C9C9C9;height: 100rpx;line-height: 100rpx;}
 .inv-h-se{color: #5BA7FF;border-bottom: 4rpx solid #5BA7FF;}
 page{background-color: #F2F2F2;}
+body{
+	color: white;
+}
+.normal {
+			display: flex;
+			flex: 1;
+			flex-direction: row;
+			align-items: center;
+			overflow: hidden;
+			height: 100rpx;
+}
+.title {
+			font-size: 40rpx;
+}
+.status-red{
+			display: flex;
+			align-items: center;
+			font-size: 25rpx;
+			color: red;
+}
+.status-green{
+			display: flex;
+			align-items: center;
+			font-size: 25rpx;
+			color: greenyellow;
+}
+

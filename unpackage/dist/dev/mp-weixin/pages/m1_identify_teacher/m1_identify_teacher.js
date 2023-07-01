@@ -114,30 +114,28 @@ if (!Math) {
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return common_vendor.e({
-    a: common_vendor.o((...args) => $options.bindTextAreaBlur && $options.bindTextAreaBlur(...args)),
-    b: common_vendor.o((...args) => $options.bindTextAreaBlur && $options.bindTextAreaBlur(...args)),
-    c: common_vendor.t($data.array[$data.index].name),
-    d: common_vendor.o((...args) => $options.bindPickerChange && $options.bindPickerChange(...args)),
-    e: $data.index,
-    f: $data.array,
-    g: common_vendor.o($options.change1),
-    h: common_vendor.p({
+    a: common_vendor.t($data.array[$data.index].name),
+    b: common_vendor.o((...args) => $options.bindPickerChange && $options.bindPickerChange(...args)),
+    c: $data.index,
+    d: $data.array,
+    e: common_vendor.o($options.change1),
+    f: common_vendor.p({
       max: 999,
       step: 10,
       value: $data.numberValue
     }),
-    i: common_vendor.p({
+    g: common_vendor.p({
       title: "收费 : " + $data.numberValue + "元/小时（0-999）",
       type: "line",
       padding: true
     }),
-    j: $data.showTimer
+    h: $data.showTimer
   }, $data.showTimer ? {
-    k: common_vendor.o((...args) => $options.getTest && $options.getTest(...args))
+    i: common_vendor.o((...args) => $options.getTest && $options.getTest(...args))
   } : {
-    l: common_vendor.t($data.timer + "s")
+    j: common_vendor.t($data.timer + "s")
   }, {
-    m: common_vendor.o((...args) => $options.submit && $options.submit(...args))
+    k: common_vendor.o((...args) => $options.submit && $options.submit(...args))
   });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "E:/hbuilder/JobEase/pages/m1_identify_teacher/m1_identify_teacher.vue"]]);

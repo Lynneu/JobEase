@@ -7167,7 +7167,7 @@ const pages = [
   {
     path: "pages/m2_profile/m2_profile",
     style: {
-      navigationBarTitleText: "个人",
+      navigationBarTitleText: "个人信息",
       enablePullDownRefresh: false
     }
   },

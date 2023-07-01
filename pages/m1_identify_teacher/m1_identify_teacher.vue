@@ -1,21 +1,23 @@
 <template>
 	<view>
-		<view class="uni-form-item uni-column">
-		    <view class="title">
-				<text class="uni-form-item__title">就职公司:</text>
-			</view>
+		<view class="uni-name">
+		    <view class="title">就职公司：</view>
 		    <view class="uni-input-wrapper">
 		        <input class="uni-input" maxlength="20" placeholder="最大输入长度为20" />
 		    </view>
 		</view>
-		<view class="uni-title uni-common-pl">真实姓名：</view>
-		<view class="uni-textarea">
-			<textarea maxlength="10" placeholder="最大输入长度为10" @blur="bindTextAreaBlur" auto-height />
+		<view class="uni-name">
+			<view class="title">真实姓名：</view>
+			<view class="uni-input-wrapper">
+				<input class="uni-input" maxlength="10" placeholder="最大输入长度为10"  />
 			</view>
-		<view class="uni-title uni-common-pl">工号：</view>
-		<view class="uni-textarea">
-			<textarea maxlength="10" placeholder="最大输入长度为10" @blur="bindTextAreaBlur" auto-height />
+		</view>
+		<view class="uni-name">
+			<view class="title">工号：</view>
+			<view class="uni-input-wrapper">
+				<input class="uni-input" maxlength="10" placeholder="最大输入长度为10"  />
 			</view>
+		</view>
 		
 		<view class="uni-title uni-common-pl">岗位：</view>
 		<view class="uni-list">
@@ -220,16 +222,29 @@
 <style lang="scss">
 	.title {
 	    padding: 5px 13px;
+		padding-bottom: 10px;
 	}
 	.uni-form-item uni-column
 	{
 		margin-top: 10px;
 		display: flex;
 		height: 20px;
+		padding-bottom: 10px;
 	}
+	
+	.uni-name
+	{
+		margin-top: 20px;
+		display: flex;
+		height: 30px;
+
+	}
+	
+	
+	
 	.uni-form-item__title {
 		
-	    font-size: 14px;
+	    font-size: 15px;
 	    line-height: 24px;
 	}
 	
@@ -242,12 +257,10 @@
 	}
 	
 	.uni-input {
-	    height: 28px;
-	    line-height: 28px;
+	    height: 30px;
 	    font-size: 15px;
-	    padding: 0px;
-	    flex: 1;
 	    background-color: #FFFFFF;
+		margin-right: 30px;
 	}
 	
 	.example-body {

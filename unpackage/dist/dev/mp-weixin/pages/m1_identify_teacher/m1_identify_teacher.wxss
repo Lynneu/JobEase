@@ -25,14 +25,21 @@
 /* 文章场景相关 */
 .title {
   padding: 5px 13px;
+  padding-bottom: 10px;
 }
 .uni-form-item uni-column {
   margin-top: 10px;
   display: flex;
   height: 20px;
+  padding-bottom: 10px;
+}
+.uni-name {
+  margin-top: 20px;
+  display: flex;
+  height: 30px;
 }
 .uni-form-item__title {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 24px;
 }
 .uni-input-wrapper {
@@ -42,12 +49,10 @@
   background-color: #FFFFFF;
 }
 .uni-input {
-  height: 28px;
-  line-height: 28px;
+  height: 30px;
   font-size: 15px;
-  padding: 0px;
-  flex: 1;
   background-color: #FFFFFF;
+  margin-right: 30px;
 }
 .example-body {
   background-color: #fff;
