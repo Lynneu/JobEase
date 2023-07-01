@@ -168,6 +168,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     k: common_vendor.o(($event) => $data.index1 = $event),
     l: common_vendor.p({
       localdata: $data.direction,
+      clear: false,
       modelValue: $data.index1
     }),
     m: common_vendor.o($options.changeLectureprice),

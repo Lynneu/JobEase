@@ -175,13 +175,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       title: "筛选",
       type: "line"
     }),
-<<<<<<< HEAD
-    q: common_vendor.sr("showLeft", "bf40e600-1"),
-    r: common_vendor.p({
-=======
-    v: common_vendor.sr("showLeft", "671efb96-1"),
+    v: common_vendor.sr("showLeft", "bf40e600-1"),
     w: common_vendor.p({
->>>>>>> 19e34f22e6b8da0b233a993009e5e414067cf3ee
       mode: "left",
       width: 300
     }),

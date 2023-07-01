@@ -212,13 +212,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       title: "筛选",
       type: "line"
     }),
-<<<<<<< HEAD
-    q: common_vendor.sr("showLeft", "097d4a80-1"),
-    r: common_vendor.p({
-=======
-    v: common_vendor.sr("showLeft", "358e3fb5-1"),
+    v: common_vendor.sr("showLeft", "097d4a80-1"),
     w: common_vendor.p({
->>>>>>> 19e34f22e6b8da0b233a993009e5e414067cf3ee
       mode: "left",
       width: 300
     }),
@@ -270,10 +265,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       title: "列表文字",
       note: "列表描述信息"
     }),
-<<<<<<< HEAD
-    O: common_vendor.sr("fab", "097d4a80-26"),
-    P: common_vendor.o($options.trigger),
-=======
     O: common_vendor.p({
       title: "列表文字",
       note: "列表描述信息"
@@ -282,7 +273,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       title: "列表文字",
       note: "列表描述信息"
     }),
->>>>>>> 19e34f22e6b8da0b233a993009e5e414067cf3ee
     Q: common_vendor.p({
       title: "列表文字",
       note: "列表描述信息"
@@ -291,7 +281,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       title: "列表文字",
       note: "列表描述信息"
     }),
-    S: common_vendor.sr("fab", "358e3fb5-26"),
+    S: common_vendor.sr("fab", "097d4a80-26"),
     T: common_vendor.o($options.trigger),
     U: common_vendor.p({
       pattern: $data.pattern,
