@@ -13,23 +13,37 @@
 			<text>求职者</text>-->
 		</view>
 			
-		<view class="si-content si-right">
+		<view class="si-content">
 			<uni-section title="就业目标:" type="line"></uni-section>
 			<!--<text>就业目标</text>-->
-			<picker @change="changeGoal" mode='selector' range-key="name" :value="index" :range="goal">
+			<!--<picker @change="changeGoal" mode='selector' range-key="name" :value="index" :range="goal">
 				<view class="si-picker">{{goal[index].name}}</view>
-			</picker>
+			</picker>-->
+			<uni-data-select
+			v-model="index" 
+			:localdata="goal" 
+			:clear="false" 
+			@change="changeGoal">
+			</uni-data-select>
 		</view>
 		
-		<view class="si-content si-right">
+		<view class="si-content">
 			<uni-section title="求职方向:" type="line"></uni-section>
 			<!--<text>求职方向</text>-->
-			<picker @change="changeDirection" mode='selector' range-key="name1" :value="index1" :range="direction">
+			<!--<picker @change="changeDirection" mode='selector' range-key="name1" :value="index1" :range="direction">
 				<view class="si-picker">
 					{{direction[index1].name1}}
 				</view>
-			</picker>
+			</picker>-->
+			<uni-data-select
+			v-model="index1" 
+			:localdata="direction" 
+			:clear="false" 
+			@change="changeDirection">
+			</uni-data-select>
 		</view>
+		
+		<button class="save" @tap="savaInfo">保存修改</button>
 			
 	</view>
 </template>
@@ -41,29 +55,28 @@
 				username: '名字不可改',
 				identity:'求职者',
 				goal: [{
-					id: 0,
-					name: '看看机会'
+					value: 0,
+					text: '看看机会'
 				}, {
-					id: 1,
-					name: '找实习'
+					value: 1,
+					text: '找实习'
 				}, {
-					id: 2,
-					name: '找校招'
+					value: 2,
+					text: '找校招'
 				}],
 				index: 0,
 				direction:[
-					{ name1: '看看机会' },
-					{ name1: '前端开发' },
-					{ name1: '后端开发' },
-					{ name1: 'C++开发' },
-					{ name1: 'Java开发' },
-					{ name1: '算法' },
-					{ name1: '测试开发' },
-					{ name1: '产品经理' },
-					{ name1: '运营' },
-					{ name1: 'HR' },
-					{ name1: '商务拓展' },
-					{ name1: '其他' }
+				  { value: 0, text: '看看机会' },
+				  { value: 1, text: '前端开发' },
+				  { value: 2, text: '后端开发' },
+				  { value: 3, text: 'C++开发' },
+				  { value: 4, text: 'Java开发' },
+				  { value: 5, text: '算法' },
+				  { value: 6, text: '测试开发' },
+				  { value: 7, text: '产品经理' },
+				  { value: 8, text: '运营' },
+				  { value: 9, text: 'HR' },
+				  { value: 10, text: '其他' }
 				],
 				index1: 0
 			}
@@ -105,7 +118,7 @@
 				min-width: 150rpx;
 			}*/
 
-			picker {
+			/*picker {
 				width: 90%;
 				color: #757575;
 				font-size: 28rpx;
@@ -114,10 +127,10 @@
 				position: absolute;
 				top: 23rpx;
 				left: 170rpx;
-			}
+			}*/
 		}
 
-		.si-right:after {
+		/*.si-right:after {
 			content: ' ';
 			width: 15rpx;
 			height: 15rpx;
@@ -127,7 +140,7 @@
 			position: absolute;
 			top: 35rpx;
 			right: 0;
-		}	
+		}	*/
 	
 	}
 </style>

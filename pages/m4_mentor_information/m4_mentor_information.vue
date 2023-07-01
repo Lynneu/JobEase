@@ -27,8 +27,9 @@
 			
 			<view class="mi-content">
 				<uni-section title="个人简介:" type="line"></uni-section>
-				<!--<text>个人简介</text>-->
-				<textarea  maxlength="1000" placeholder="最大输入长度为1000" :value="description" @input="introductionInput" auto-height></textarea>
+				<!--<text>个人简介</text>
+				<textarea  maxlength="1000" placeholder="最大输入长度为1000" :value="description" @input="introductionInput" auto-height></textarea>-->
+				<uni-easyinput type="textarea" autoHeight v-model="description" placeholder="最大输入长度为1000" maxlength="1000" @input="introductionInput"></uni-easyinput>
 			</view>
 			
 			<view class="mi-content">

@@ -16,13 +16,15 @@
 			</view>
 			
 			
-			<view class="r2-content rl-right">
+			<view class="r1-content">
 				<uni-section title="标签:" type="line"></uni-section>
 				<!--<text>标签</text>-->	
-				<uni-data-select
-				        v-model="index1"
-				        :localdata="direction"
-				        @change="changeDirection"></uni-data-select>
+				<uni-data-select 
+				v-model="index1" 
+				:localdata="direction" 
+				:clear="false" 
+				@change="changeDirection">
+				</uni-data-select>
 			</view>
 			
 			
@@ -82,6 +84,7 @@
 					{ value: 8, text: 'HR' },
 					{ value: 9, text: '其他' }
 				],
+				
 				index1: 0,
 				items: [{
 						value: '0',
@@ -209,7 +212,7 @@
 		padding: 20rpx 40rpx;
 
 		.rl-content {
-			
+			font-size: 1rpx;
 			width: 100%;
 			text-align: left;
 			//padding: 0rpx 0;
@@ -255,7 +258,7 @@
 
 			
 		}
-		.r2-content {
+		/*.r2-content {
 			display: flex;
 			align-items: center;
 			picker {
@@ -279,10 +282,11 @@
 				top: 35rpx;
 				right: 0;
 			}
-		}
+		}*/
+		/*.uni-data-select{
+			//width: 300rpx;
+		}*/
 		
-		
-
 		.save {
 			background: #030303;
 			border: none;
