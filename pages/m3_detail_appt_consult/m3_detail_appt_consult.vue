@@ -1,34 +1,25 @@
 <template>
 	<view>
-		<view class="lec_body">
-			<view class="word">
-				<view class="title">
-					<text>王某某</text>
-				</view>
-				<view class="datail">
-					<text>专业标签：pp\n</text>
-					<text>评　　分：10\n</text>
-					<text>工作单位：10\n</text>
-					<text>\n</text>
-				</view>
-				<view class="in_word">
-					<text>
-						导师介绍\n
-					</text>
-					<text>
-						测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试
-					</text>
-				</view>
-			</view>
-			
-			<view class="confirm">
-				<text>\n</text>
-				<button size="mini" style="background-color:#007AFF; color: #fff;" @click="trigger()">
-					<text>预约</text>
-				</button>
-			</view>
-			
+		<view class="tea_title">
+			<uni-title  :title="teacher_name" color="#027fff" type="h1" ></uni-title>
 		</view>
+		<view>
+			<uni-section :title="'专业标签：'+teacher_theme" type="line" padding="0px"></uni-section>
+			<uni-section :title="'评　　分：'+teacher_score+'分'" type="line"></uni-section>
+			<uni-section :title="'工作单位：'+teacher_work" type="line"></uni-section>
+			<uni-section :title="'咨询费用：'+teacher_cost+' 元  / 30min'" type="line"></uni-section>
+			<view class="line"></view>
+			<uni-section title="导师介绍" type="circle"></uni-section>
+		</view>
+		<view class="tea_content">
+			<text>{{teacher_content}}</text>
+		</view>
+		
+		<uni-section class="button_display">
+			<button class="appt_button" size="mini" style="background-color: #007aff; color: #fff;" @click="appointconsult">
+				<text>预约</text>
+			</button>
+		</uni-section>
 	</view>
 </template>
 
@@ -36,11 +27,16 @@
 	export default {
 		data() {
 			return {
-				
+				teacher_name:'小王',
+				teacher_theme:'就业指导',
+				teacher_score:'8',
+				teacher_work:'啥都不行有限公司',
+				teacher_cost:'30',
+				teacher_content:'导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍.',
 			};
 		},
 		methods:{
-			trigger(e){
+			appointconsult(e){
 				console.log(e)
 				uni.navigateTo({
 					url:'../m3_appt_consult/m3_appt_consult'
@@ -51,33 +47,31 @@
 </script>
 
 <style lang="scss">
-
-	.lec_body{
-		padding-left: 3%;
-		padding-right: 3%;
-		padding-top: 5%;
-		padding-bottom: 30%;
-		
+	page{
+		background-color: #ffffff;
 	}
-	.word{
-		padding-left: 3%;
-		padding-right: 3%;
-		padding-top: 3%;
+	.tea_title{
+		padding-left: 10px;
+		padding-top: 15px;
 	}
-	.title{
-		font-size: 50rpx;
-		font-weight: 600;
+	.line{
+		background-color: #c0c0c0;
+		width: 100%;
+		height: 1px;
 	}
-	.datail{
-		font-size: 30rpx;
-		font-weight: 600;
+	.tea_content{
+		font-size: 25rpx;
+		padding-left: 8%;
+		padding-right: 8%;
+		padding-bottom: 20px;
 	}
-	.in_word{
-		justify-content: center;
+	.appt_button{
+		padding-left: 46%;
+		padding-right: 45%;
 	}
-	.confirm{
-		padding-left: 55%;
-		font-weight: 600;
+	.button_display{
+		padding-left: 3px;
+		padding-bottom: 10px;
 	}
 
 </style>
