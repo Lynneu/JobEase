@@ -25,10 +25,20 @@
 									      ></uni-data-select>
 								</uni-forms-item>
 								<uni-forms-item label="价格区间" label-width=60>
-									<uni-number-box :min="1" :max="999" :value="100" background="#2979FF" color="#fff" />
+									<uni-data-select
+									        v-model="payvalue"
+									        :localdata="pay"
+									        @change="changepay"
+											placeholder="请选择价格区间"
+									      ></uni-data-select>
 								</uni-forms-item>
 								<uni-forms-item label="评分区间" label-width=60>
-									<uni-number-box :min="0" :max="10" :value="5" background="#2979FF" color="#fff" />
+									<uni-data-select
+									        v-model="scorevalue"
+									        :localdata="score"
+									        @change="changescore"
+											placeholder="请选择评分区间"
+									      ></uni-data-select>
 								</uni-forms-item>
 							</uni-forms>
 							
@@ -88,6 +98,20 @@
 					{ value: 1, text: "面试准备" },
 					{ value: 2, text: "薪资" },
 					{ value: 3, text: "职业规划" },
+				],
+				pay: [
+					{ value: 0, text: "100元以下" },
+					{ value: 1, text: "100-150元" },
+					{ value: 2, text: "150-200元" },
+					{ value: 3, text: "200元以上" },
+					{ value: 4, text: "无限制" },
+				],
+				score: [
+					{ value: 0, text: "4.5以下" },
+					{ value: 1, text: "4.5-4.6" },
+					{ value: 2, text: "4.7-4.8" },
+					{ value: 3, text: "4.9-5.0" },
+					{ value: 4, text: "无限制" },
 				]
 			}
 		},
@@ -139,6 +163,12 @@
 			},
 			changeconsult(e) {
 				console.log("e:", e);
+			},
+			changepay(e) {
+				console.log(e)
+			},
+			changescore(e) {
+				console.log(e)
 			}
 		},
 		onBackPress() {
