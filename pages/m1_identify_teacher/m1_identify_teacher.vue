@@ -80,8 +80,9 @@
 			
 		    <view class="uni-input-wrapper">
 		        <input class="uni-input"/>
-				<button>获取验证码 </button>
-		    </view>
+				<view class="get-test" type="default" @click="getTest" v-if="showTimer">获取验证码</view>
+				<view class="get-test" type="default" v-else>{{timer+'s'}}</view>
+				</view>
 			
 		</view>
 		<view class="button-sp-area">
@@ -98,9 +99,9 @@
 				array: [{name:'前端开发'},{name:'后端开发'},{name:'C++开发'},{name:'Java开发'},{name:'算法'},{name:'测试开发'},{name:'产品经理'},{name:'运营'},{name:'HR'},{name:'其他'}],
 				index: 0,
 				numberValue: 0,
-				
-				
-				current: 0
+				current: 0,
+				timer: 0, //验证码时间
+				showTimer: true, //是否显示验证码时间
 			}
 		},
 		watch: {
@@ -170,7 +171,44 @@
 				uni.switchTab({
 					url: "../find_teacher/find_teacher"
 				})
+			},
+			
+			getTest() {
+						//uni.request({
+						//	url: 'http://app/login/sendSms', // 路径
+						//	method: 'GET', // 请求方法
+						//	data: {
+						//		phone: that.iphoneValue,
+						//		type: '1',
+						//	}, //发送的数据
+						//success: (res) => {
+						//if (res.data.code == 200)0 
+							{
+								uni.showToast({
+									title: '验证码发送成功',
+									icon: 'none'
+								})
+								that.timer=60//设置时间初始化
+								that.timeDown(that.timer)//调用时间减少
+							}
+						//}
+					//})
+		},
+		// 设置验证码时间动态减少
+		timeDown(num){
+			let that=this;
+			// 当时间为0时,恢复为按钮,清除定时器
+			if(num==0){
+				that.showTimer=true;
+				return clearTimeout();
+			}else{
+				that.showTimer=false;
+				setTimeout(function(){
+					that.timer=num-1
+					that.timeDown(num-1)
+				},1000)//定时每秒减一
 			}
+		},
 			
 		}
 	}
@@ -191,7 +229,7 @@
 	}
 	.uni-form-item__title {
 		
-	    font-size: 16px;
+	    font-size: 14px;
 	    line-height: 24px;
 	}
 	
@@ -237,5 +275,17 @@
 	.charge{
 		margin-top: 0;
 	}
+	
+	.get-test {
+			color: #ff8b33;
+			font-size: 15px;
+			text-align: center;
+			width: 122px;
+			height: 50px;
+			border: 1px solid #FF8B33;
+			border-radius: 25px;
+			line-height: 50px;
+		}
+	
 	
 </style>
