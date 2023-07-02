@@ -16,9 +16,17 @@
 			
 			<uni-section :title="'咨询价格：'+appt_cost+'元/30min'" type="line"></uni-section>
 			
-			<uni-section class="appt_duration" :title="'预约时长 : '+ last_duration+'分钟'" type="line">
-				<uni-number-box class="duration_change" :step=10 :max=120 :min=10 :value="last_duration" @change="duration_change" background="#2979FF" color="#fff" />
-			</uni-section>
+			<view class="appt_duration">
+				<view>
+					<uni-section :title="'预约时长 : '+ last_duration+'分钟'" type="line"></uni-section>
+				</view>
+				<view>
+					<uni-number-box :step=10 :max=120 :min=10 :value="last_duration" @change="duration_change" background="#2979FF" color="#fff" />
+				</view>
+				<view class="extra"></view>
+				
+			</view>
+			
 			
 			<uni-section :title="'预约日期:'" type="line"></uni-section>
 			<view class="appt_date">
@@ -102,7 +110,7 @@
 							console.log('maskClick事件:', e);
 			},
 			duration_change(value) {
-				this.last_numberValue = value;
+				this.last_duration = value;
 			},
 			appointAndpay() {
 				uni.switchTab({
@@ -131,11 +139,8 @@
 	}
 	.appt_duration{
 		display: flex;
-		.duration_change{
-			padding-top: 6px;
-			padding-left: 10%;
-			padding-right: 10%;
-		}
+		justify-content: space-between;
+		align-items: center;
 	}
 	.appt_date {
 		background-color: #fff;
@@ -152,6 +157,9 @@
 	}
 	.confirm{
 		padding-left: 60%;
+	}
+	.extra{
+		width: 2%;
 	}
 
 </style>
