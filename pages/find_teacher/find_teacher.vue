@@ -86,6 +86,8 @@
 				searchValue: '',
 				jobvalue: '',
 				consultvalue: '',
+				payvalue: '',
+				scorevalue: '',
 				job: [
 				  { value: 0, text: "前端" },
 				  { value: 1, text: "后端" },

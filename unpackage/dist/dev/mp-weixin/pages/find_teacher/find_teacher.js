@@ -6,6 +6,8 @@ const _sfc_main = {
       searchValue: "",
       jobvalue: "",
       consultvalue: "",
+      payvalue: "",
+      scorevalue: "",
       job: [
         { value: 0, text: "前端" },
         { value: 1, text: "后端" },
@@ -149,22 +151,22 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       ["label-width"]: "60"
     }),
     k: common_vendor.o($options.changepay),
-    l: common_vendor.o(($event) => _ctx.payvalue = $event),
+    l: common_vendor.o(($event) => $data.payvalue = $event),
     m: common_vendor.p({
       localdata: $data.pay,
       placeholder: "请选择价格区间",
-      modelValue: _ctx.payvalue
+      modelValue: $data.payvalue
     }),
     n: common_vendor.p({
       label: "价格区间",
       ["label-width"]: "60"
     }),
     o: common_vendor.o($options.changescore),
-    p: common_vendor.o(($event) => _ctx.scorevalue = $event),
+    p: common_vendor.o(($event) => $data.scorevalue = $event),
     q: common_vendor.p({
       localdata: $data.score,
       placeholder: "请选择评分区间",
-      modelValue: _ctx.scorevalue
+      modelValue: $data.scorevalue
     }),
     r: common_vendor.p({
       label: "评分区间",

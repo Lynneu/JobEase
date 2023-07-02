@@ -23,9 +23,6 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-page {
-  background-color: #ffffff;
-}
 .word {
   padding-left: 40rpx;
   font-size: 10px;
@@ -33,5 +30,25 @@ page {
 }
 .button_display {
   padding-left: 220rpx;
+  padding-top: 5px;
   display: flex;
+}
+.button_display2 {
+  padding-left: 8px;
+  padding-bottom: 15px;
+  display: flex;
+}
+.information_display {
+  padding: 5px;
+}
+.uni-px-5 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.uni-pb-5 {
+  padding-bottom: 10px;
+}
+.pick_time {
+  padding: 1px;
+  background-color: #ffffff;
 }

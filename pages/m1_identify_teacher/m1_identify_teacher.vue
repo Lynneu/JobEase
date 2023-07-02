@@ -1,96 +1,71 @@
 <template>
-	<view>
-		<view class="uni-name">
-		    <view class="title">就职公司：</view>
-		    <view class="uni-input-wrapper">
-		        <input class="uni-input" maxlength="20" placeholder="最大输入长度为20" />
-		    </view>
-		</view>
-		<view class="uni-name">
-			<view class="title">真实姓名：</view>
-			<view class="uni-input-wrapper">
-				<input class="uni-input" maxlength="10" placeholder="最大输入长度为10"  />
-			</view>
-		</view>
-		<view class="uni-name">
-			<view class="title">工号：</view>
-			<view class="uni-input-wrapper">
-				<input class="uni-input" maxlength="10" placeholder="最大输入长度为10"  />
-			</view>
-		</view>
-		
-		<view class="uni-title uni-common-pl">岗位：</view>
-		<view class="uni-list">
-			<view class="uni-list-cell">
-				<view class="uni-list-cell-left">
-					当前选择
+	<view class="page">
+		<view class="container">
+				<view class="form-container">
+					<uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData">
+						<uni-forms-item label="就职公司" label-width=60 name="company">
+							<uni-easyinput 
+								maxlength="20"
+								trim="all" 
+								v-model="valiFormData.company" 
+								placeholder="最大输入长度为20" 
+								@input="input">
+							</uni-easyinput>
+						</uni-forms-item>
+						<uni-forms-item label="真实姓名" label-width=60 name="name"> 
+							<uni-easyinput
+								maxlength="10"
+								trim="all" 
+								v-model="valiFormData.name" 
+								placeholder="最大输入长度为10" 
+								@input="input">
+							</uni-easyinput>
+						</uni-forms-item>
+						<uni-forms-item label="工号" name="number">
+							<uni-easyinput
+								maxlength="10"
+								trim="all" 
+								v-model="valiFormData.number" 
+								placeholder="最大输入长度为10" 
+								@input="input">
+							</uni-easyinput>
+						</uni-forms-item>
+						<uni-forms-item label="岗位" name="jobchoose">
+							<uni-data-select
+							        v-model="valiFormData.jobchoose"
+							        :localdata="jobs"
+							        @change="bindPickerChange">
+							</uni-data-select>
+						</uni-forms-item>
+						<uni-forms-item label="咨询方向" label-width=60 label-position="top" name="consult">
+							<uni-data-checkbox v-model="valiFormData.consult" multiple :localdata="consults" />
+						</uni-forms-item>
+						<uni-forms-item label="收费标准(元/小时)" label-width=60 name="pay">
+							<uni-number-box :value="0" :step="10" :min="0" :max="999" v-model="valiFormData.pay"/>
+						</uni-forms-item>
+						<uni-forms-item label="公司邮箱" label-width=60 name="email">
+							<uni-easyinput
+								trim="all" 
+								v-model="valiFormData.email" 
+								placeholder="请输入邮箱" 
+								@input="input">
+							</uni-easyinput>
+						</uni-forms-item>
+						<uni-forms-item label="验证码" name="code">
+							<view class="button-group">
+								<uni-easyinput
+									trim="all" 
+									v-model="valiFormData.code" 
+									placeholder="请输入验证码" 
+									@input="input">
+								</uni-easyinput>
+								<button size="mini" class="button">获取验证码</button>
+							</view>
+						</uni-forms-item>
+					</uni-forms>
 				</view>
-				<view class="uni-list-cell-db">
-					<picker @change="bindPickerChange" :value="index" :range="array" range-key="name">
-						<view class="uni-input">{{array[index].name}}</view>
-					</picker>
-				</view>
-			</view>
+				<button style="background-color: #007aff; color: #fff;" @click="submit('valiForm')">提交</button>
 		</view>
-		<view class="uni-title uni-common-pl">主要咨询：</view>
-		<view class="uni-list">
-			<view class="uni-list-cell">
-				<view class="uni-list-cell-left">
-					当前选择
-				</view>
-				<view class="uni-list">
-				<checkbox-group>
-					<label>
-						<checkbox value="1"  />简历优化
-					</label>
-					<label>
-						<checkbox value="2" />面试经验
-					</label>
-					<label>
-						<checkbox value="3" />就业指导
-					</label>
-					<label>
-						<checkbox value="4" />职业规划
-					</label>
-					<label>
-						<checkbox value="5" />薪资谈判
-					</label>
-					<label>
-						<checkbox value="6" />其他
-					</label>
-				</checkbox-group>
-		</view>
-			</view>
-		</view>
-		<view class="charge">
-		<uni-section :title="'收费 : '+ numberValue+'元/小时（0-999）'" type="line" padding>
-			<uni-number-box  :max="999" :step="10" :value="numberValue" @change="change1" />
-		</uni-section>
-		</view>
-		<view class="uni-form-item uni-column">
-		    <view class="title">
-				<text class="uni-form-item__title">公司邮箱:</text>
-			</view>
-		    <view class="uni-input-wrapper">
-		        <input class="uni-input"  />
-		    </view>
-		</view>
-		<view class="uni-form-item uni-column">
-		    <view class="title">
-				<text class="uni-form-item__title">验证码:</text>
-			</view>
-			
-		    <view class="uni-input-wrapper">
-		        <input class="uni-input"/>
-				<view class="get-test" type="default" @click="getTest" v-if="showTimer">获取验证码</view>
-				<view class="get-test" type="default" v-else>{{timer+'s'}}</view>
-				</view>
-			
-		</view>
-		<view class="button-sp-area">
-		    <button type="primary" plain="true" @click="submit">提交认证</button>
-		 </view>	
-		
 	</view>
 </template>
 
@@ -98,207 +73,133 @@
 	export default {
 		data() {
 			return {
-				array: [{name:'前端开发'},{name:'后端开发'},{name:'C++开发'},{name:'Java开发'},{name:'算法'},{name:'测试开发'},{name:'产品经理'},{name:'运营'},{name:'HR'},{name:'其他'}],
-				index: 0,
-				numberValue: 0,
-				current: 0,
-				timer: 0, //验证码时间
-				showTimer: true, //是否显示验证码时间
+				valiFormData: {
+					company: '',
+					name: '',
+					number: '',
+					jobchoose: 0,
+					consult: [0],
+					pay: '',
+					email: '',
+					code: ''
+				},
+				jobs: [
+						{value: 0, text: '前端开发'},
+						{value: 1, text: '后端开发'},
+						{value: 2, text: 'C++开发'},
+						{value: 3, text: 'Java开发'},
+						{value: 4, text: '算法'},
+						{value: 5, text: '测试开发'},
+						{value: 6, text: '产品经理'},
+						{value: 7, text: '运营'},
+						{value: 8, text: 'HR'},
+						{value: 9, text: '其他'},
+					],
+				consults:[
+						{value: 0, text: '简历优化'},
+						{value: 1, text: '面试经验'},
+						{value: 2, text: '就业指导'},
+						{value: 3, text: '职业规划'},
+						{value: 4, text: '薪资谈判'},
+						{value: 5, text: '测试开发'},
+						{value: 6, text: '其他'}
+					],
+				rules: {
+							company: {
+								rules: [{
+									required: true,
+									errorMessage: '公司不能为空'
+								}]
+							},
+							name: {
+								rules: [{
+									required: true,
+									errorMessage: '姓名不能为空'
+								}]
+							},
+							number: {
+								rules: [{
+									required: true,
+									errorMessage: '工号不能为空'
+								}, {
+									format: 'number',
+									errorMessage: '工号只能输入数字'
+								}]
+							},
+							consult: {
+									rules: [{
+											format: 'array'
+										},
+										{
+											validateFunction: function(rule, value, data, callback) {
+												if (value.length < 1) {
+													callback('请至少勾选一个咨询方向')
+												}
+												return true
+											}
+										}
+											]
+							},
+							email: {
+								rules: [{
+									required: true,
+									errorMessage: '邮箱不能为空'
+								},{
+									format: 'email',
+									errorMessage: '请输入正确的邮箱'
+								}]
+							},
+							code: {
+								rules: [{
+									required: true,
+									errorMessage: '验证码不能为空'
+								}]
+							}
+						},
 			}
 		},
-		watch: {
-			datetimeString() {
-				console.log('日期时间单选:', this.datetimeString);
-			},
-		},
-		onLoad() {
-
+		onLoad() {},
+		onReady() {
+			// 设置自定义表单校验规则，必须在节点渲染完毕后执行
+			this.$refs.valiFormData.setRules(this.valiFormData)
 		},
 		methods: {
-			bindPickerChange(e) {
-				console.log('picker发送选择改变，携带值为：' + e.detail.value);
-				this.index = e.detail.value;
-			},
-			
-			bindTextAreaBlur(e) {
-				console.log(e.detail.value);
-			},
-			
-			change1(value) {
-				this.numberValue = value;
-			},
-			change3(value) {
-				this.last_numberValue = value;
-			},
-			change4(value) {
-				this.listen_numberValue = value;
-			},
-			radioChange(evt) {
-				for (let i = 0; i < this.items.length; i++) {
-					if (this.items[i].value === evt.detail.value) {
-						this.current = i;
-						break;
-					}
-				}
-			},
-			change2(e) {
-				console.log('----change2事件:', e);
-			},
-			getDateTime(date, addZero = true){
-				return `${this.getDate(date, addZero)} ${this.getTime(date, addZero)}`
-			},
-			getDate(date, addZero = true){
-				date = new Date(date)
-				const year = date.getFullYear()
-				const month = date.getMonth()+1
-				const day = date.getDate()
-				return `${year}-${addZero ? this.addZero(month) : month}-${addZero ? this.addZero(day) : day}`
-			},
-			getTime(date, addZero = true){
-				date = new Date(date)
-				const hour = date.getHours()
-				const minute = date.getMinutes()
-				const second = date.getSeconds()
-				return this.hideSecond ?
-				`${addZero ? this.addZero(hour) : hour}:${addZero ? this.addZero(minute) : minute}` :
-				`${addZero ? this.addZero(hour) : hour}:${addZero ? this.addZero(minute) : minute}:${addZero ? this.addZero(second) : second}`
-			},
-			addZero(num) {
-				if (num < 10) {
-					num = `0${num}`
-				}
-				return num
-			},
-			submit() {
-				uni.switchTab({
-					url: "../find_teacher/find_teacher"
-				})
-			},
-			
-			getTest() {
-						//uni.request({
-						//	url: 'http://app/login/sendSms', // 路径
-						//	method: 'GET', // 请求方法
-						//	data: {
-						//		phone: that.iphoneValue,
-						//		type: '1',
-						//	}, //发送的数据
-						//success: (res) => {
-						//if (res.data.code == 200)0 
-							{
+			submit(ref) {
+							this.$refs[ref].validate().then(res => {
+								console.log('success', res);
 								uni.showToast({
-									title: '验证码发送成功',
-									icon: 'none'
+									title: `校验通过`
 								})
-								that.timer=60//设置时间初始化
-								that.timeDown(that.timer)//调用时间减少
-							}
-						//}
-					//})
-		},
-		// 设置验证码时间动态减少
-		timeDown(num){
-			let that=this;
-			// 当时间为0时,恢复为按钮,清除定时器
-			if(num==0){
-				that.showTimer=true;
-				return clearTimeout();
-			}else{
-				that.showTimer=false;
-				setTimeout(function(){
-					that.timer=num-1
-					that.timeDown(num-1)
-				},1000)//定时每秒减一
-			}
-		},
-			
+							}).catch(err => {
+								console.log('err', err);
+							})
+						},
+	
 		}
 	}
 </script>
 
-
-
-
-<style lang="scss">
-	.title {
-	    padding: 5px 13px;
-		padding-bottom: 10px;
-	}
-	.uni-form-item uni-column
-	{
-		margin-top: 10px;
-		display: flex;
-		height: 20px;
-		padding-bottom: 10px;
-	}
-	
-	.uni-name
-	{
-		margin-top: 20px;
-		display: flex;
-		height: 30px;
-
-	}
-	
-	
-	
-	.uni-form-item__title {
-		
-	    font-size: 15px;
-	    line-height: 24px;
-	}
-	
-	.uni-input-wrapper {
-
-	    padding: 8px 13px;
-	    flex-direction: row;
-	    flex-wrap: nowrap;
-	    background-color: #FFFFFF;
-	}
-	
-	.uni-input {
-	    height: 30px;
-	    font-size: 15px;
-	    background-color: #FFFFFF;
-		margin-right: 30px;
-	}
-	
-	.example-body {
+<style>
+	.page {
 		background-color: #fff;
-		padding: 10px;
 	}
-	
-	.uni-list-cell {
-		justify-content: flex-start
+	.container {
+		padding: 15px;
 	}
-	
-	.uni-list {
-		height: 40px;
-		margin-top: 0px;
-	}
-	.button {
-	    margin-top: 30rpx;
-	    margin-bottom: 30rpx;
-	}
-	
-	.button-sp-area {
-	    margin: 0 auto;
-	    width: 60%;
-	}
-	.charge{
-		margin-top: 0;
-	}
-	
-	.get-test {
-			color: #ff8b33;
-			font-size: 15px;
-			text-align: center;
-			width: 122px;
-			height: 50px;
-			border: 1px solid #FF8B33;
-			border-radius: 25px;
-			line-height: 50px;
+	.form-item {
+			display: flex;
+			align-items: center;
 		}
-	
-	
+	.button-group {
+			display: flex;
+			justify-content: space-around;
+		}
+	.button {
+			display: flex;
+			align-items: center;
+			height: 35px;
+			margin-left: 10px;
+			background-color: #007aff;
+			color: #fff;
+		}
 </style>
