@@ -1,25 +1,28 @@
 <template>
 	<view>
-		<view class="tea_title">
-			<uni-title  :title="teacher_name" color="#027fff" type="h1" ></uni-title>
-		</view>
-		<view>
-			<uni-section :title="'专业标签：'+teacher_theme" type="line" padding="0px"></uni-section>
-			<uni-section :title="'评　　分：'+teacher_score+'分'" type="line"></uni-section>
-			<uni-section :title="'工作单位：'+teacher_work" type="line"></uni-section>
-			<uni-section :title="'咨询费用：'+teacher_cost+' 元  / 30min'" type="line"></uni-section>
-			<view class="line"></view>
-			<uni-section title="导师介绍" type="circle"></uni-section>
-		</view>
-		<view class="tea_content">
-			<text>{{teacher_content}}</text>
+		<view class="main_body">
+			<view class="tea_title">
+				<uni-title  :title="teacher_name" color="#027fff" type="h1" ></uni-title>
+			</view>
+			<view>
+				<uni-section :title="'专业标签：'+teacher_theme" type="line" padding="0px"></uni-section>
+				<uni-section :title="'评　　分：'+teacher_score+'分'" type="line"></uni-section>
+				<uni-section :title="'工作单位：'+teacher_work" type="line"></uni-section>
+				<uni-section :title="'咨询费用：'+teacher_cost+' 元  / 30min'" type="line"></uni-section>
+				<view class="line"></view>
+				<uni-section title="导师介绍" type="circle"></uni-section>
+			</view>
+			<view class="tea_content">
+				<text>{{teacher_content}}</text>
+			</view>
+			
+			<uni-section class="button_display">
+				<button class="appt_button" style="background-color: #007aff; color: #fff;" @click="appointconsult">
+					<text>预约</text>
+				</button>
+			</uni-section>
 		</view>
 		
-		<uni-section class="button_display">
-			<button class="appt_button" size="mini" style="background-color: #007aff; color: #fff;" @click="appointconsult">
-				<text>预约</text>
-			</button>
-		</uni-section>
 	</view>
 </template>
 
@@ -50,6 +53,9 @@
 	page{
 		background-color: #ffffff;
 	}
+	.main_body{
+		padding: 20rpx;
+	}
 	.tea_title{
 		padding-left: 10px;
 		padding-top: 15px;
@@ -66,12 +72,14 @@
 		padding-bottom: 20px;
 	}
 	.appt_button{
-		padding-left: 46%;
-		padding-right: 45%;
+		border: none;
+		color: #ffffff;
+		margin-top: 40rpx;
+		font-size: 28rpx;	
 	}
 	.button_display{
-		padding-left: 3px;
-		padding-bottom: 10px;
+		padding-left: 40px;
+		padding-right: 40px;
 	}
 
 </style>
