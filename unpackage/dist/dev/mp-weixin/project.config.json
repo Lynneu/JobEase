@@ -22,17 +22,7 @@
   "libVersion": "2.32.3",
   "appid": "wx347c45fa9c8c2e33",
   "projectname": "JobEase",
-  "condition": {
-    "miniprogram": {
-      "list": [
-        {
-          "name": "pages/m3_confirm_consult/m3_confirm_consult",
-          "pathName": "pages/m3_confirm_consult/m3_confirm_consult",
-          "query": ""
-        }
-      ]
-    }
-  },
+  "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2

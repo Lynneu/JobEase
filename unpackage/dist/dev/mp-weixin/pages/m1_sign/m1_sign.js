@@ -21,6 +21,9 @@ const _sfc_main = {
     };
   },
   methods: {
+    input(e) {
+      console.log("输入内容：", e);
+    },
     // 切换登录的方式
     setLoginType(type) {
       this.type = type;
@@ -110,7 +113,7 @@ if (!Math) {
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_vendor.o(_ctx.input),
+    a: common_vendor.o($options.input),
     b: common_vendor.o(($event) => $data.iphoneValue = $event),
     c: common_vendor.p({
       type: "number",

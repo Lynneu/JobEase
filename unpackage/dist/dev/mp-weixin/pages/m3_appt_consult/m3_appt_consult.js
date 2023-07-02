@@ -49,7 +49,7 @@ const _sfc_main = {
       console.log("maskClick事件:", e);
     },
     duration_change(value) {
-      this.last_numberValue = value;
+      this.last_duration = value;
     },
     appointAndpay() {
       common_vendor.index.switchTab({
@@ -95,18 +95,18 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       title: "咨询价格：" + $data.appt_cost + "元/30min",
       type: "line"
     }),
-    g: common_vendor.o($options.duration_change),
-    h: common_vendor.p({
+    g: common_vendor.p({
+      title: "预约时长 : " + $data.last_duration + "分钟",
+      type: "line"
+    }),
+    h: common_vendor.o($options.duration_change),
+    i: common_vendor.p({
       step: 10,
       max: 120,
       min: 10,
       value: $data.last_duration,
       background: "#2979FF",
       color: "#fff"
-    }),
-    i: common_vendor.p({
-      title: "预约时长 : " + $data.last_duration + "分钟",
-      type: "line"
     }),
     j: common_vendor.p({
       title: "预约日期:",

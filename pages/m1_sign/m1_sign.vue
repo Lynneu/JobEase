@@ -29,6 +29,9 @@
 		},
 
 		methods: {
+			input(e) {
+				console.log('输入内容：', e);
+			},
 			// 切换登录的方式
 			setLoginType(type) {
 				this.type = type

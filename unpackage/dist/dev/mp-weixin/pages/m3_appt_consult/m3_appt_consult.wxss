@@ -37,11 +37,8 @@ page {
 }
 .appt_duration {
   display: flex;
-}
-.appt_duration .duration_change {
-  padding-top: 6px;
-  padding-left: 10%;
-  padding-right: 10%;
+  justify-content: space-between;
+  align-items: center;
 }
 .appt_date {
   background-color: #fff;
@@ -58,4 +55,7 @@ page {
 }
 .confirm {
   padding-left: 60%;
+}
+.extra {
+  width: 2%;
 }

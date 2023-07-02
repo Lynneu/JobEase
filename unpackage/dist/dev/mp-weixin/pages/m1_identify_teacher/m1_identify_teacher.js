@@ -3,6 +3,12 @@ const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   data() {
     return {
+      show_again: 0,
+      //  显示发送验证码||请稍后按钮
+      count: "",
+      // 等待时间
+      timer: null,
+      //定时器
       valiFormData: {
         company: "",
         name: "",
@@ -92,7 +98,7 @@ const _sfc_main = {
   onLoad() {
   },
   onReady() {
-    this.$refs.valiFormData.setRules(this.valiFormData);
+    this.$refs.valiForm.setRules(this.rules);
   },
   methods: {
     submit(ref) {
@@ -101,9 +107,42 @@ const _sfc_main = {
         common_vendor.index.showToast({
           title: `校验通过`
         });
+        common_vendor.index.switchTab({
+          url: "../find_teacher/find_teacher"
+        });
       }).catch((err) => {
         console.log("err", err);
       });
+    },
+    sendCode() {
+      const count = 60;
+      if (!this.timer) {
+        this.count = count;
+        this.show_again = 1;
+        this.timer = setInterval(() => {
+          if (this.count > 0 && this.count <= count) {
+            this.count--;
+          } else {
+            clearInterval(this.timer);
+            this.timer = null;
+            this.show_again = 0;
+          }
+        }, 1e3);
+      }
+    },
+    sendCodeAgain() {
+      if (this.count <= 0) {
+        this.sendCode();
+      } else {
+        common_vendor.index.showToast({
+          title: `请稍后重试(${this.count})`,
+          icon: "none",
+          duration: 1500
+        });
+      }
+    },
+    jobchange(e) {
+      console.log(e);
     }
   }
 };
@@ -126,110 +165,113 @@ if (!Math) {
   (_easycom_uni_easyinput + _easycom_uni_forms_item + _easycom_uni_data_select + _easycom_uni_data_checkbox + _easycom_uni_number_box + _easycom_uni_forms)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {
-    a: common_vendor.o(_ctx.input),
-    b: common_vendor.o(($event) => $data.valiFormData.company = $event),
-    c: common_vendor.p({
+  return common_vendor.e({
+    a: common_vendor.o(($event) => $data.valiFormData.company = $event),
+    b: common_vendor.p({
       maxlength: "20",
       trim: "all",
       placeholder: "最大输入长度为20",
       modelValue: $data.valiFormData.company
     }),
-    d: common_vendor.p({
+    c: common_vendor.p({
       label: "就职公司",
       ["label-width"]: "60",
       name: "company"
     }),
-    e: common_vendor.o(_ctx.input),
-    f: common_vendor.o(($event) => $data.valiFormData.name = $event),
-    g: common_vendor.p({
+    d: common_vendor.o(($event) => $data.valiFormData.name = $event),
+    e: common_vendor.p({
       maxlength: "10",
       trim: "all",
       placeholder: "最大输入长度为10",
       modelValue: $data.valiFormData.name
     }),
-    h: common_vendor.p({
+    f: common_vendor.p({
       label: "真实姓名",
       ["label-width"]: "60",
       name: "name"
     }),
-    i: common_vendor.o(_ctx.input),
-    j: common_vendor.o(($event) => $data.valiFormData.number = $event),
-    k: common_vendor.p({
+    g: common_vendor.o(($event) => $data.valiFormData.number = $event),
+    h: common_vendor.p({
       maxlength: "10",
       trim: "all",
       placeholder: "最大输入长度为10",
       modelValue: $data.valiFormData.number
     }),
-    l: common_vendor.p({
+    i: common_vendor.p({
       label: "工号",
       name: "number"
     }),
-    m: common_vendor.o(_ctx.bindPickerChange),
-    n: common_vendor.o(($event) => $data.valiFormData.jobchoose = $event),
-    o: common_vendor.p({
+    j: common_vendor.o($options.jobchange),
+    k: common_vendor.o(($event) => $data.valiFormData.jobchoose = $event),
+    l: common_vendor.p({
       localdata: $data.jobs,
       modelValue: $data.valiFormData.jobchoose
     }),
-    p: common_vendor.p({
+    m: common_vendor.p({
       label: "岗位",
       name: "jobchoose"
     }),
-    q: common_vendor.o(($event) => $data.valiFormData.consult = $event),
-    r: common_vendor.p({
+    n: common_vendor.o(($event) => $data.valiFormData.consult = $event),
+    o: common_vendor.p({
       multiple: true,
       localdata: $data.consults,
       modelValue: $data.valiFormData.consult
     }),
-    s: common_vendor.p({
+    p: common_vendor.p({
       label: "咨询方向",
       ["label-width"]: "60",
       ["label-position"]: "top",
       name: "consult"
     }),
-    t: common_vendor.o(($event) => $data.valiFormData.pay = $event),
-    v: common_vendor.p({
+    q: common_vendor.o(($event) => $data.valiFormData.pay = $event),
+    r: common_vendor.p({
       value: 0,
       step: 10,
       min: 0,
       max: 999,
       modelValue: $data.valiFormData.pay
     }),
-    w: common_vendor.p({
+    s: common_vendor.p({
       label: "收费标准(元/小时)",
       ["label-width"]: "60",
       name: "pay"
     }),
-    x: common_vendor.o(_ctx.input),
-    y: common_vendor.o(($event) => $data.valiFormData.email = $event),
-    z: common_vendor.p({
+    t: common_vendor.o(($event) => $data.valiFormData.email = $event),
+    v: common_vendor.p({
       trim: "all",
       placeholder: "请输入邮箱",
       modelValue: $data.valiFormData.email
     }),
-    A: common_vendor.p({
+    w: common_vendor.p({
       label: "公司邮箱",
       ["label-width"]: "60",
       name: "email"
     }),
-    B: common_vendor.o(_ctx.input),
-    C: common_vendor.o(($event) => $data.valiFormData.code = $event),
-    D: common_vendor.p({
+    x: common_vendor.o(($event) => $data.valiFormData.code = $event),
+    y: common_vendor.p({
       trim: "all",
       placeholder: "请输入验证码",
       modelValue: $data.valiFormData.code
     }),
+    z: $data.show_again == 0
+  }, $data.show_again == 0 ? {
+    A: common_vendor.o((...args) => $options.sendCode && $options.sendCode(...args))
+  } : {}, {
+    B: $data.show_again == 1
+  }, $data.show_again == 1 ? {
+    C: common_vendor.t($data.count),
+    D: common_vendor.o((...args) => $options.sendCodeAgain && $options.sendCodeAgain(...args))
+  } : {}, {
     E: common_vendor.p({
       label: "验证码",
       name: "code"
     }),
     F: common_vendor.sr("valiForm", "9a65af6a-0"),
     G: common_vendor.p({
-      rules: $data.rules,
       modelValue: $data.valiFormData
     }),
     H: common_vendor.o(($event) => $options.submit("valiForm"))
-  };
+  });
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/Code/JobEase/JobEase/pages/m1_identify_teacher/m1_identify_teacher.vue"]]);
 wx.createPage(MiniProgramPage);

@@ -2,14 +2,13 @@
 	<view class="page">
 		<view class="container">
 				<view class="form-container">
-					<uni-forms ref="valiForm" :rules="rules" :modelValue="valiFormData">
+					<uni-forms ref="valiForm" :modelValue="valiFormData">
 						<uni-forms-item label="就职公司" label-width=60 name="company">
 							<uni-easyinput 
 								maxlength="20"
 								trim="all" 
 								v-model="valiFormData.company" 
-								placeholder="最大输入长度为20" 
-								@input="input">
+								placeholder="最大输入长度为20" >
 							</uni-easyinput>
 						</uni-forms-item>
 						<uni-forms-item label="真实姓名" label-width=60 name="name"> 
@@ -17,8 +16,7 @@
 								maxlength="10"
 								trim="all" 
 								v-model="valiFormData.name" 
-								placeholder="最大输入长度为10" 
-								@input="input">
+								placeholder="最大输入长度为10">
 							</uni-easyinput>
 						</uni-forms-item>
 						<uni-forms-item label="工号" name="number">
@@ -26,15 +24,14 @@
 								maxlength="10"
 								trim="all" 
 								v-model="valiFormData.number" 
-								placeholder="最大输入长度为10" 
-								@input="input">
+								placeholder="最大输入长度为10">
 							</uni-easyinput>
 						</uni-forms-item>
 						<uni-forms-item label="岗位" name="jobchoose">
 							<uni-data-select
 							        v-model="valiFormData.jobchoose"
 							        :localdata="jobs"
-							        @change="bindPickerChange">
+							        @change="jobchange">
 							</uni-data-select>
 						</uni-forms-item>
 						<uni-forms-item label="咨询方向" label-width=60 label-position="top" name="consult">
@@ -47,8 +44,7 @@
 							<uni-easyinput
 								trim="all" 
 								v-model="valiFormData.email" 
-								placeholder="请输入邮箱" 
-								@input="input">
+								placeholder="请输入邮箱">
 							</uni-easyinput>
 						</uni-forms-item>
 						<uni-forms-item label="验证码" name="code">
@@ -56,10 +52,10 @@
 								<uni-easyinput
 									trim="all" 
 									v-model="valiFormData.code" 
-									placeholder="请输入验证码" 
-									@input="input">
+									placeholder="请输入验证码">
 								</uni-easyinput>
-								<button size="mini" class="button">获取验证码</button>
+								<button size="mini" v-if="show_again==0" @click="sendCode" class="button">获取验证码</button>
+								<button size="mini" v-if="show_again==1" @click="sendCodeAgain" class="button" style="background-color: #b2b6b8; color: #fff;">请稍后重试({{ count }})</button>
 							</view>
 						</uni-forms-item>
 					</uni-forms>
@@ -73,6 +69,9 @@
 	export default {
 		data() {
 			return {
+				show_again: 0, //  显示发送验证码||请稍后按钮
+				count: "", // 等待时间
+				timer: null, //定时器
 				valiFormData: {
 					company: '',
 					name: '',
@@ -161,7 +160,7 @@
 		onLoad() {},
 		onReady() {
 			// 设置自定义表单校验规则，必须在节点渲染完毕后执行
-			this.$refs.valiFormData.setRules(this.valiFormData)
+			this.$refs.valiForm.setRules(this.rules)
 		},
 		methods: {
 			submit(ref) {
@@ -170,10 +169,43 @@
 								uni.showToast({
 									title: `校验通过`
 								})
+								uni.switchTab({
+									url: "../find_teacher/find_teacher"
+								})
 							}).catch(err => {
 								console.log('err', err);
 							})
 						},
+			sendCode() {
+			      const count = 60;
+			      if (!this.timer) {
+			        this.count = count;
+			        this.show_again = 1; // 移动到定时器外部
+			        this.timer = setInterval(() => {
+			          if (this.count > 0 && this.count <= count) {
+			            this.count--;
+			          } else {
+			            clearInterval(this.timer);
+			            this.timer = null;
+			            this.show_again = 0;
+			          }
+			        }, 1000);
+			      }
+			    },
+			    sendCodeAgain() {
+			      if (this.count <= 0) {
+			        this.sendCode();
+			      } else {
+			        uni.showToast({
+			          title: `请稍后重试(${this.count})`,
+			          icon: "none",
+			          duration: 1500,
+			        });
+			      }
+			    },
+				jobchange(e) {
+					console.log(e);
+				}
 	
 		}
 	}

@@ -26,6 +26,9 @@
 page {
   background-color: #ffffff;
 }
+.main_body {
+  padding: 20rpx;
+}
 .lec_title {
   padding-left: 10px;
   padding-top: 15px;
@@ -42,10 +45,12 @@ page {
   padding-bottom: 20px;
 }
 .appt_button {
-  padding-left: 46%;
-  padding-right: 45%;
+  border: none;
+  color: #ffffff;
+  margin-top: 40rpx;
+  font-size: 28rpx;
 }
 .button_display {
-  padding-left: 3px;
-  padding-bottom: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
