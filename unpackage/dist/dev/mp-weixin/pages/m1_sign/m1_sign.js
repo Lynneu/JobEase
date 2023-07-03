@@ -3,56 +3,44 @@ const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   data() {
     return {
-      iphoneValue: "",
-      //手机号码
-      passwordValue: "",
-      //密码
-      passwordValue_double: "",
+      //user.phone: '', //手机号码
+      //user.password: '', //密码
+      password_double: "",
       //第二次密码
-      testValue: "",
-      //验证码
-      type: 2,
-      //登录的状态 - - - 1是验证码登录、2是密码登录
-      token: "",
-      timer: 0,
-      //验证码时间
-      showTimer: true
-      //是否显示验证码时间
+      user: {
+        "phone": "",
+        "password": ""
+      }
     };
   },
   methods: {
     input(e) {
       console.log("输入内容：", e);
     },
-    // 切换登录的方式
-    setLoginType(type) {
-      this.type = type;
-    },
     // 密码登录
     Login() {
       let that = this;
-      if (!that.iphoneValue || !this.isMobile(that.iphoneValue)) {
+      if (!that.user.phone || !this.isMobile(that.user.phone)) {
         common_vendor.index.showToast({
           title: "请输入正确电话号码",
           icon: "none"
         });
         return false;
-      } else if (that.type == 2 && !that.passwordValue) {
+      } else if (!that.user.password) {
         common_vendor.index.showToast({
           title: "请输入密码",
           icon: "none"
         });
         return false;
-      } else if (that.type == 1 && !that.testValue) {
-        common_vendor.index.showToast({
-          title: "请输入验证码",
-          icon: "none"
-        });
-        return false;
-      } else if (that.passwordValue != that.passwordValue_double) {
+      } else if (that.user.password != that.password_double) {
         common_vendor.index.showToast({
           title: "两次输入密码不一致",
           icon: "none"
+        });
+        return false;
+      } else if (that.user.password.length < 4 || that.user.password.length > 15) {
+        common_vendor.index.showToast({
+          title: "密码不符合规范，长度需在4-15"
         });
         return false;
       } else
@@ -66,10 +54,10 @@ const _sfc_main = {
         method: "POST",
         // 请求方法
         data: {
-          phone: that.iphoneValue,
+          phone: that.user.phone,
           type: that.type,
           code: that.testValue,
-          password: that.passwordValue
+          password: that.user.password
         },
         //发送的数据
         success: (res) => {
@@ -114,25 +102,25 @@ if (!Math) {
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
     a: common_vendor.o($options.input),
-    b: common_vendor.o(($event) => $data.iphoneValue = $event),
+    b: common_vendor.o(($event) => $data.user.phone = $event),
     c: common_vendor.p({
       type: "number",
       trim: "all",
       placeholder: "请输入手机号",
       maxlength: "11",
-      modelValue: $data.iphoneValue
+      modelValue: $data.user.phone
     }),
-    d: common_vendor.o(($event) => $data.passwordValue = $event),
+    d: common_vendor.o(($event) => $data.user.password = $event),
     e: common_vendor.p({
       type: "password",
       placeholder: "请输入密码",
-      modelValue: $data.passwordValue
+      modelValue: $data.user.password
     }),
-    f: common_vendor.o(($event) => $data.passwordValue_double = $event),
+    f: common_vendor.o(($event) => $data.password_double = $event),
     g: common_vendor.p({
       type: "password",
       placeholder: "请再次输入密码",
-      modelValue: $data.passwordValue_double
+      modelValue: $data.password_double
     }),
     h: common_vendor.o((...args) => $options.Login && $options.Login(...args))
   };

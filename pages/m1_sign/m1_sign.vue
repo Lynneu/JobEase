@@ -5,9 +5,9 @@
 		</view>
 		
 		<view class="input-area">
-			<uni-easyinput type="number" trim="all" v-model="iphoneValue" placeholder="请输入手机号" maxlength="11" @input="input"></uni-easyinput>
-			<uni-easyinput type="password" v-model="passwordValue" placeholder="请输入密码"></uni-easyinput>
-			<uni-easyinput type="password" v-model="passwordValue_double" placeholder="请再次输入密码"></uni-easyinput>
+			<uni-easyinput type="number" trim="all" v-model="user.phone" placeholder="请输入手机号" maxlength="11" @input="input"></uni-easyinput>
+			<uni-easyinput type="password" v-model="user.password" placeholder="请输入密码"></uni-easyinput>
+			<uni-easyinput type="password" v-model="password_double" placeholder="请再次输入密码"></uni-easyinput>
 		</view>
 		<view class="login-btn" @click="Login">注册</view>
 	</view>
@@ -17,14 +17,14 @@
 	export default {
 		data() {
 			return {
-				iphoneValue: '', //手机号码
-				passwordValue: '', //密码
-				passwordValue_double: '', //第二次密码
-				testValue: '', //验证码
-				type: 2, //登录的状态 - - - 1是验证码登录、2是密码登录
-				token: '',
-				timer: 0, //验证码时间
-				showTimer: true, //是否显示验证码时间
+				//user.phone: '', //手机号码
+				//user.password: '', //密码
+				password_double: '', //第二次密码
+				user:{
+					 "phone": "",
+					 "password": "",
+				}
+
 			}
 		},
 
@@ -32,15 +32,11 @@
 			input(e) {
 				console.log('输入内容：', e);
 			},
-			// 切换登录的方式
-			setLoginType(type) {
-				this.type = type
-			},
 			// 密码登录
 			Login() {
 				let that = this
 				//当手机号为空或者手机号不正确时
-				if (!that.iphoneValue || !this.isMobile(that.iphoneValue)) {
+				if (!that.user.phone || !this.isMobile(that.user.phone)) {
 					uni.showToast({
 						title: '请输入正确电话号码',
 						icon: 'none'
@@ -48,25 +44,26 @@
 					return false
 				}
 				// 当使用密码登录并且未输入密码时
-				else if (that.type == 2 && !that.passwordValue) {
+				else if (!that.user.password) {
 					uni.showToast({
 						title: '请输入密码',
 						icon: 'none'
 					})
 					return false
 				}
-				// 当使用验证码登录并且未输入验证码时
-				else if (that.type == 1 && !that.testValue) {
+
+				else if (that.user.password != that.password_double) {
 					uni.showToast({
-						title: '请输入验证码',
+						title: '两次输入密码不一致',
 						icon: 'none'
 					})
 					return false
 				}
-				else if (that.passwordValue != that.passwordValue_double) {
+				else if(that.user.password.length<4||that.user.password.length>15)
+				{
 					uni.showToast({
-						title: '两次输入密码不一致',
-						icon: 'none'
+						title: '密码不符合规范，长度需在4-15',
+						
 					})
 					return false
 				}
@@ -79,10 +76,10 @@
 					url: 'http://app/login', // 路径
 					method: 'POST', // 请求方法
 					data: {
-						phone: that.iphoneValue,
+						phone: that.user.phone,
 						type: that.type,
 						code: that.testValue,
-						password: that.passwordValue
+						password: that.user.password
 					}, //发送的数据
 					success: (res) => {
 						if (res.data.code == 200) {
