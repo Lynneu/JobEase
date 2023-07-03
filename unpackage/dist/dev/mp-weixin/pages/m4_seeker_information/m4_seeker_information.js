@@ -3,8 +3,6 @@ const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   data() {
     return {
-      username: "名字不可改",
-      identity: "求职者",
       goal: [{
         value: 0,
         text: "看看机会"
@@ -15,7 +13,6 @@ const _sfc_main = {
         value: 2,
         text: "找校招"
       }],
-      index: 0,
       direction: [
         { value: 0, text: "看看机会" },
         { value: 1, text: "前端开发" },
@@ -29,23 +26,42 @@ const _sfc_main = {
         { value: 9, text: "HR" },
         { value: 10, text: "其他" }
       ],
-      index1: 0
+      seeker: {
+        "_id": "",
+        "username": "",
+        "index": 0,
+        "index1": 0
+      }
     };
   },
+  /*onLoad({seeker}) {
+  	//this.seeker=JSON.parse(seeker)
+  	try {
+  	    this.seeker = JSON.parse(seeker);
+  	  } catch (error) {
+  	    console.log('Error during parsing seeker:', error);
+  	  }
+  },*/
   methods: {
     changeGoal(e) {
-      console.log(this.index);
+      console.log(this.seeker.index);
     },
     changeDirection(e) {
-      console.log(this.index1);
+      console.log(this.seeker.index1);
     },
-    saveInfo() {
+    /*submit(){
+    	const db = uniCloud.database();
+    	let seeker={...this.seeker}//this.item的每一项放在{}里
+    	delete seeker._id; // 不包含 _id 字段
+    	db.collection("contacts").doc(this.seeker._id).update(seeker).then(e=>{
+    		console.log(e)
+    	}) 
+    }*/
+    submit() {
       common_vendor.index.switchTab({
         url: "../m2_profile/m2_profile"
       });
     }
-  },
-  onLoad() {
   }
 };
 if (!Array) {
@@ -61,11 +77,11 @@ if (!Math) {
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
     a: common_vendor.p({
-      title: "用户名:" + $data.username,
+      title: "用户名:" + $data.seeker.username,
       type: "line"
     }),
     b: common_vendor.p({
-      title: "身份:" + $data.identity,
+      title: "身份:求职者",
       type: "line"
     }),
     c: common_vendor.p({
@@ -73,25 +89,25 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       type: "line"
     }),
     d: common_vendor.o($options.changeGoal),
-    e: common_vendor.o(($event) => $data.index = $event),
+    e: common_vendor.o(($event) => $data.seeker.index = $event),
     f: common_vendor.p({
       localdata: $data.goal,
       clear: false,
-      modelValue: $data.index
+      modelValue: $data.seeker.index
     }),
     g: common_vendor.p({
       title: "求职方向:",
       type: "line"
     }),
     h: common_vendor.o($options.changeDirection),
-    i: common_vendor.o(($event) => $data.index1 = $event),
+    i: common_vendor.o(($event) => $data.seeker.index1 = $event),
     j: common_vendor.p({
       localdata: $data.direction,
       clear: false,
-      modelValue: $data.index1
+      modelValue: $data.seeker.index1
     }),
-    k: common_vendor.o((...args) => $options.saveInfo && $options.saveInfo(...args))
+    k: common_vendor.o((...args) => $options.submit && $options.submit(...args))
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/Code/JobEase/JobEase/pages/m4_seeker_information/m4_seeker_information.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "E:/hbuilder/JobEase/pages/m4_seeker_information/m4_seeker_information.vue"]]);
 wx.createPage(MiniProgramPage);

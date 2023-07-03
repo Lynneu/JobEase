@@ -3,8 +3,6 @@ const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   data() {
     return {
-      lectureName: "",
-      description: "",
       direction: [
         { value: 0, text: "前端开发" },
         { value: 1, text: "后端开发" },
@@ -17,7 +15,8 @@ const _sfc_main = {
         { value: 8, text: "HR" },
         { value: 9, text: "其他" }
       ],
-      index1: 0,
+      start: Date.now(),
+      end: Date.now() + 14 * 24 * 36e5,
       items: [
         {
           value: "0",
@@ -29,43 +28,24 @@ const _sfc_main = {
           name: "限制人数"
         }
       ],
-      current: 0,
-      listen_numberValue: 0,
-      numberValue: 0,
-      start: Date.now(),
-      end: Date.now() + 14 * 24 * 36e5,
-      datetimeString: this.getDateTime(/* @__PURE__ */ new Date(), false),
-      last_numberValue: 30
+      lecture: {
+        "lectureName": "",
+        "description": "",
+        index1: 0,
+        numberValue: 0,
+        "datetimeString": this.getDateTime(/* @__PURE__ */ new Date(), false),
+        last_numberValue: 30,
+        current: 0,
+        listen_numberValue: 1
+      }
     };
-  },
-  watch: {
-    datetimeString() {
-      console.log("日期时间单选:", this.datetimeString);
-    }
   },
   methods: {
     changeDirection(e) {
       console.log(e);
     },
-    inputName(e) {
-      this.lectureName = e.detail.value;
-    },
-    descriptionInput(e) {
-      this.description = e.detail.value;
-    },
-    changeNumber(value) {
-      this.listen_numberValue = value;
-    },
-    changeRestrictions(evt) {
-      for (let i = 0; i < this.items.length; i++) {
-        if (this.items[i].value === evt.detail.value) {
-          this.current = i;
-          break;
-        }
-      }
-    },
     changeLectureprice(value) {
-      this.numberValue = value;
+      this.lecture.numberValue = value;
     },
     changeStart(e) {
       console.log("----change2事件:", e);
@@ -94,18 +74,21 @@ const _sfc_main = {
       return num;
     },
     changeLast(value) {
-      this.last_numberValue = value;
+      this.lecture.last_numberValue = value;
     },
-    savaInfo() {
-      let that = this;
-      let lectureName = that.lectureName;
-      that.description;
-      that.numberValue;
-      that.index1;
-      that.datetimeString;
-      that.last_numberValue;
-      that.listen_numberValue;
-      if (!lectureName) {
+    changeRestrictions(evt) {
+      for (let i = 0; i < this.items.length; i++) {
+        if (this.items[i].value === evt.detail.value) {
+          this.lecture.current = i;
+          break;
+        }
+      }
+    },
+    changeNumber(value) {
+      this.lecture.listen_numberValue = value;
+    },
+    submit() {
+      if (!this.lecture.lectureName) {
         common_vendor.index.showToast({
           title: "请填写讲座名称",
           icon: "none",
@@ -113,6 +96,22 @@ const _sfc_main = {
         });
         return;
       }
+      if (!this.lecture.description) {
+        common_vendor.index.showToast({
+          title: "请填写讲座简介",
+          icon: "none",
+          duration: 2e3
+        });
+        return;
+      }
+      common_vendor.index.showToast({
+        title: "发布成功",
+        icon: "none",
+        duration: 2e3
+      });
+      common_vendor.index.switchTab({
+        url: "../find_lecture/find_lecture"
+      });
     }
   },
   onLoad() {
@@ -140,99 +139,100 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       title: "讲座名称:",
       type: "line"
     }),
-    b: common_vendor.o($options.inputName),
-    c: common_vendor.o(($event) => $data.lectureName = $event),
-    d: common_vendor.p({
+    b: common_vendor.o(($event) => $data.lecture.lectureName = $event),
+    c: common_vendor.p({
       placeholder: "最大输入长度为20",
       maxlength: "20",
-      modelValue: $data.lectureName
+      modelValue: $data.lecture.lectureName
     }),
-    e: common_vendor.p({
+    d: common_vendor.p({
       title: "讲座简介:",
       type: "line"
     }),
-    f: common_vendor.o($options.descriptionInput),
-    g: common_vendor.o(($event) => $data.description = $event),
-    h: common_vendor.p({
-      type: "textarea",
+    e: common_vendor.o(($event) => $data.lecture.description = $event),
+    f: common_vendor.p({
+      placeholder: "最大输入长度为50",
+      maxlength: "50",
       autoHeight: true,
-      placeholder: "最大输入长度为200",
-      maxlength: "200",
-      modelValue: $data.description
+      modelValue: $data.lecture.description
     }),
-    i: common_vendor.p({
+    g: common_vendor.p({
       title: "标签:",
       type: "line"
     }),
-    j: common_vendor.o($options.changeDirection),
-    k: common_vendor.o(($event) => $data.index1 = $event),
-    l: common_vendor.p({
+    h: common_vendor.o($options.changeDirection),
+    i: common_vendor.o(($event) => $data.lecture.index1 = $event),
+    j: common_vendor.p({
       localdata: $data.direction,
       clear: false,
-      modelValue: $data.index1
+      modelValue: $data.lecture.index1
     }),
-    m: common_vendor.o($options.changeLectureprice),
-    n: common_vendor.p({
-      max: 9999,
+    k: common_vendor.o($options.changeLectureprice),
+    l: common_vendor.o(($event) => $data.lecture.numberValue = $event),
+    m: common_vendor.p({
+      max: 999,
       step: 5,
-      value: $data.numberValue
+      value: $data.lecture.numberValue,
+      modelValue: $data.lecture.numberValue
+    }),
+    n: common_vendor.p({
+      title: "收费 : " + $data.lecture.numberValue + "元/人（0-999）",
+      type: "line",
+      padding: true
     }),
     o: common_vendor.p({
-      title: "收费 : " + $data.numberValue + "元/人（0-9999）",
-      type: "line",
-      padding: true
-    }),
-    p: common_vendor.p({
-      title: "开始时间:" + $data.datetimeString,
+      title: "开始时间:" + $data.lecture.datetimeString,
       type: "line"
     }),
-    q: common_vendor.o($options.changeStart),
-    r: common_vendor.o(($event) => $data.datetimeString = $event),
-    s: common_vendor.p({
+    p: common_vendor.o($options.changeStart),
+    q: common_vendor.o(($event) => $data.lecture.datetimeString = $event),
+    r: common_vendor.p({
       type: "datetime",
+      ["clear-icon"]: false,
       start: $data.start,
       end: $data.end,
-      modelValue: $data.datetimeString
+      modelValue: $data.lecture.datetimeString
     }),
-    t: common_vendor.o($options.changeLast),
-    v: common_vendor.p({
-      max: 9999,
+    s: common_vendor.o($options.changeLast),
+    t: common_vendor.p({
+      max: 999,
       step: 10,
-      value: $data.last_numberValue
+      value: $data.lecture.last_numberValue
     }),
-    w: common_vendor.p({
-      title: "预期时间 : " + $data.last_numberValue + "分钟",
+    v: common_vendor.p({
+      title: "预期时间 : " + $data.lecture.last_numberValue + "分钟",
       type: "line",
       padding: true
     }),
-    x: common_vendor.p({
+    w: common_vendor.p({
       title: "是否限制人数:",
       type: "line"
     }),
-    y: common_vendor.f($data.items, (item, index, i0) => {
+    x: common_vendor.f($data.items, (item, index, i0) => {
       return {
         a: item.value,
-        b: index === $data.current,
+        b: index === $data.lecture.current,
         c: common_vendor.t(item.name),
         d: item.value
       };
     }),
-    z: common_vendor.o((...args) => $options.changeRestrictions && $options.changeRestrictions(...args)),
-    A: $data.current === 1
-  }, $data.current === 1 ? {
-    B: common_vendor.o($options.changeNumber),
-    C: common_vendor.p({
+    y: common_vendor.o((...args) => $options.changeRestrictions && $options.changeRestrictions(...args)),
+    z: $data.lecture.current === 1
+  }, $data.lecture.current === 1 ? {
+    A: common_vendor.o($options.changeNumber),
+    B: common_vendor.p({
+      min: 1,
       max: 9999,
-      value: $data.listen_numberValue
+      value: $data.lecture.listen_numberValue
     }),
-    D: common_vendor.p({
-      title: "允许 : " + $data.listen_numberValue + "人听讲座",
+    C: common_vendor.p({
+      title: "允许 : " + $data.lecture.listen_numberValue + "人听讲座",
       type: "line",
       padding: true
     })
   } : {}, {
-    E: common_vendor.o((...args) => $options.savaInfo && $options.savaInfo(...args))
+    D: common_vendor.o((...args) => $options.submit && $options.submit(...args))
   });
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/Code/JobEase/JobEase/pages/m4_release_lecture/m4_release_lecture.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "E:/hbuilder/JobEase/pages/m4_release_lecture/m4_release_lecture.vue"]]);
 wx.createPage(MiniProgramPage);

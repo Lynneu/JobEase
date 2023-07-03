@@ -266,12 +266,12 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       label: "验证码",
       name: "code"
     }),
-    F: common_vendor.sr("valiForm", "9a65af6a-0"),
+    F: common_vendor.sr("valiForm", "4b9ff3d6-0"),
     G: common_vendor.p({
       modelValue: $data.valiFormData
     }),
     H: common_vendor.o(($event) => $options.submit("valiForm"))
   });
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/Code/JobEase/JobEase/pages/m1_identify_teacher/m1_identify_teacher.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "E:/hbuilder/JobEase/pages/m1_identify_teacher/m1_identify_teacher.vue"]]);
 wx.createPage(MiniProgramPage);

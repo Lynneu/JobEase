@@ -35,19 +35,3 @@ body {
   text-align: left;
   position: relative;
 }
-.mi-container .mi-content text {
-  color: #4a4a4a;
-  font-size: 28rpx;
-  display: inline-block;
-  vertical-align: middle;
-  min-width: 150rpx;
-}
-.mi-container .mi-content textarea {
-  color: #030303;
-  font-size: 30rpx;
-  vertical-align: middle;
-  height: 150rpx;
-  width: 100%;
-  border: 1px solid #e8e8e8;
-  padding: 10px;
-}

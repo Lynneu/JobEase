@@ -29,40 +29,9 @@ body {
 .si-container {
   display: block;
   padding: 20rpx 40rpx;
-  /*.si-right:after {
-  	content: ' ';
-  	width: 15rpx;
-  	height: 15rpx;
-  	border-top: solid 1px #030303;
-  	border-right: solid 1px #030303;
-  	transform: rotate(45deg);
-  	position: absolute;
-  	top: 35rpx;
-  	right: 0;
-  }	*/
 }
 .si-container .si-content {
   width: 100%;
   text-align: left;
   position: relative;
-  /*text {
-  	color: #4a4a4a;
-  	font-size: 28rpx;
-  	display: inline-block;
-  	vertical-align: middle;
-  	min-width: 150rpx;
-  }*/
-  /*picker {
-  	width: 90%;
-  	color: #757575;
-  	font-size: 28rpx;
-  	display: inline-block;
-  	vertical-align: middle;
-  	position: absolute;
-  	top: 23rpx;
-  	left: 170rpx;
-  }*/
-}
-.save {
-  margin-top: 102px;
 }

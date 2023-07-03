@@ -8,16 +8,25 @@ const _sfc_main = {
       email: "邮箱不可改",
       consultation_direction: "咨询方向不可改",
       priceValue: 100,
-      value: "请输入简介",
-      description: "可修改aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      description: "可修改"
     };
   },
   methods: {
     changePrice(value) {
       this.priceValue = value;
     },
-    introductionInput(e) {
-      this.description = e.detail.value;
+    submit() {
+      if (!this.description) {
+        common_vendor.index.showToast({
+          title: "请填写简介",
+          icon: "none",
+          duration: 2e3
+        });
+        return;
+      }
+      common_vendor.index.switchTab({
+        url: "../m2_profile/m2_profile"
+      });
     }
   },
   onLoad() {
@@ -57,28 +66,26 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       title: "个人简介:",
       type: "line"
     }),
-    f: common_vendor.o($options.introductionInput),
-    g: common_vendor.o(($event) => $data.description = $event),
-    h: common_vendor.p({
-      type: "textarea",
+    f: common_vendor.o(($event) => $data.description = $event),
+    g: common_vendor.p({
+      placeholder: "最大输入长度为200",
+      maxlength: "200",
       autoHeight: true,
-      placeholder: "最大输入长度为1000",
-      maxlength: "1000",
       modelValue: $data.description
     }),
-    i: common_vendor.o($options.changePrice),
-    j: common_vendor.p({
+    h: common_vendor.o($options.changePrice),
+    i: common_vendor.p({
       max: 9999,
       step: 5,
       value: $data.priceValue
     }),
-    k: common_vendor.p({
-      title: "咨询价格 : " + $data.priceValue + "元/时间单位",
+    j: common_vendor.p({
+      title: "咨询价格 : " + $data.priceValue + "元/小时",
       type: "line",
       padding: true
     }),
-    l: common_vendor.o((...args) => _ctx.savaInfo && _ctx.savaInfo(...args))
+    k: common_vendor.o((...args) => $options.submit && $options.submit(...args))
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/Code/JobEase/JobEase/pages/m4_mentor_information/m4_mentor_information.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "E:/hbuilder/JobEase/pages/m4_mentor_information/m4_mentor_information.vue"]]);
 wx.createPage(MiniProgramPage);

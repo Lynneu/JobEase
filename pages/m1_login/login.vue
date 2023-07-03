@@ -4,8 +4,8 @@
 			登录
 		</view>
 		<view class="input-area">
-			<uni-easyinput type="number" trim="all" v-model="iphoneValue" placeholder="请输入手机号" maxlength="11" @input="input"></uni-easyinput>
-			<uni-easyinput class="password-area" type="password" v-model="passwordValue" placeholder="请输入密码"></uni-easyinput>
+			<uni-easyinput type="number" trim="all" v-model="user.phone" placeholder="请输入手机号" maxlength="11" @input="input"></uni-easyinput>
+			<uni-easyinput class="password-area" type="password" v-model="user.password" placeholder="请输入密码"></uni-easyinput>
 		</view>
 		
 	    <view class="signup">
@@ -21,15 +21,14 @@
 	export default {
 		data() {
 			return {
-				iphoneValue: '', //手机号码
-				passwordValue: '', //密码
-				testValue: '', //验证码
+				//user.phone: '', //手机号码
+				//user.password: '', //密码
 				showPassword: true, //是否显示密码
 				showClearIcon: false, //是否显示清除按钮
-				type: 2, //登录的状态 - - - 1是验证码登录、2是密码登录
-				token: '',
-				timer: 0, //验证码时间
-				showTimer: true, //是否显示验证码时间
+				user:{
+					 "phone": "",
+					 "password": "",
+				}
 			}
 		},
 
@@ -38,10 +37,7 @@
 			input(e) {
 				console.log('输入内容：', e);
 			},
-			// 切换登录的方式
-			setLoginType(type) {
-				this.type = type
-			},
+
 			Zhuce(){
 				uni.navigateTo({
 					url: "../m1_sign/m1_sign"
@@ -51,7 +47,7 @@
 			Login() {
 				let that = this
 				//当手机号为空或者手机号不正确时
-				if (!that.iphoneValue || !this.isMobile(that.iphoneValue)) {
+				if (!that.user.phone || !this.isMobile(that.user.phone)) {
 					uni.showToast({
 						title: '请输入正确电话号码',
 						icon: 'none'
@@ -59,17 +55,17 @@
 					return false
 				}
 				// 当使用密码登录并且未输入密码时
-				else if (that.type == 2 && !that.passwordValue) {
+				else if (!that.user.password) {
 					uni.showToast({
 						title: '请输入密码',
 						icon: 'none'
 					})
 					return false
 				}
-				// 当使用验证码登录并且未输入验证码时
-				else if (that.type == 1 && !that.testValue) {
+				else if(that.user.password.length<4||that.user.password.length>15)
+				{
 					uni.showToast({
-						title: '请输入验证码',
+						title: '密码错误',
 						icon: 'none'
 					})
 					return false
@@ -80,13 +76,17 @@
 					url: "../find_teacher/find_teacher"
 				})
 				uni.request({
+					/*const db = uniCloud.database();
+					db.collection("lecture").add(this.lecture).then(e=>{
+						console.log(e)
+					})*/
 					url: 'http://app/login', // 路径
 					method: 'POST', // 请求方法
 					data: {
-						phone: that.iphoneValue,
+						phone: that.user.phone,
 						type: that.type,
 						code: that.testValue,
-						password: that.passwordValue
+						password: that.user.password
 					}, //发送的数据
 					success: (res) => {
 						if (res.data.code == 200) {
@@ -111,57 +111,13 @@
 					}
 				})
 			},
-			// 获取验证码
-			getTest() {
-				let that = this
-				//当手机号为空或者手机号不正确时
-				if (!that.iphoneValue || !this.isMobile(that.iphoneValue)) {
-					uni.showToast({
-						title: '请输入正确电话号码',
-						icon: 'none'
-					})
-					return false
-				}
-				uni.request({
-					url: 'http://app/login/sendSms', // 路径
-					method: 'GET', // 请求方法
-					data: {
-						phone: that.iphoneValue,
-						type: '1',
-					}, //发送的数据
-					success: (res) => {
-						if (res.data.code == 200) {
-							uni.showToast({
-								title: '验证码发送成功',
-								icon: 'none'
-							})
-							that.timer=60//设置时间初始化
-							that.timeDown(that.timer)//调用时间减少
-						}
-					}
-				})
-			},
-			// 设置验证码时间动态减少
-			timeDown(num){
-				let that=this;
-				// 当时间为0时,恢复为按钮,清除定时器
-				if(num==0){
-					that.showTimer=true;
-					return clearTimeout();
-				}else{
-					that.showTimer=false;
-					setTimeout(function(){
-						that.timer=num-1
-						that.timeDown(num-1)
-					},1000)//定时每秒减一
-				}
-			},
-			// 下面是可以封装起来引入的部分
-			// 判断是否是正确的手机号码
+			
 			isMobile(str) {
 				let reg = /^1\d{10}$/;
 				return reg.test(str)
 			},
+			
+			
 		}
 	}
 </script>
