@@ -186,7 +186,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       modelValue: $data.valiFormData.name
     }),
     f: common_vendor.p({
-      label: "真实姓名",
+      label: "用户名",
       ["label-width"]: "60",
       name: "name"
     }),

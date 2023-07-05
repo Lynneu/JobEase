@@ -11,7 +11,7 @@
 								placeholder="最大输入长度为20" >
 							</uni-easyinput>
 						</uni-forms-item>
-						<uni-forms-item label="真实姓名" label-width=60 name="name"> 
+						<uni-forms-item label="用户名" label-width=60 name="name"> 
 							<uni-easyinput
 								maxlength="10"
 								trim="all" 

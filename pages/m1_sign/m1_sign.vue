@@ -62,8 +62,8 @@
 				else if(that.user.password.length<4||that.user.password.length>15)
 				{
 					uni.showToast({
-						title: '密码不符合规范，长度需在4-15',
-						
+						title: '密码长度需在4-15',
+						icon: 'none'
 					})
 					return false
 				}
