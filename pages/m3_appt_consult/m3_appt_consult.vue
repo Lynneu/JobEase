@@ -7,7 +7,7 @@
 			<uni-section title="咨询主题:" class="label" type="line"></uni-section>
 			<view class="appt_theme">
 				<uni-data-select 
-				v-model="index1" 
+				v-model="appt_label" 
 				:localdata="appt_theme" 
 				:clear="false" 
 				@change="apptpick_theme()">
@@ -21,7 +21,7 @@
 					<uni-section :title="'预约时长 : '+ last_duration+'分钟'" type="line"></uni-section>
 				</view>
 				<view>
-					<uni-number-box :step=10 :max=120 :min=10 :value="last_duration" @change="duration_change" background="#2979FF" color="#fff" />
+					<uni-number-box :step=30 :max=120 :min=0 :value="last_duration" @change="duration_change" background="#2979FF" color="#fff" />
 				</view>
 				<view class="extra"></view>
 				
@@ -30,7 +30,7 @@
 			
 			<uni-section :title="'预约日期:'" type="line"></uni-section>
 			<view class="appt_date">
-				<uni-datetime-picker type="date" :start="start" :end="end" @maskClick="date_change" />
+				<uni-datetime-picker v-model="getdate" type="date" :start="start" :clear-icon="false" :end="end" @maskClick="date_change" />
 			</view>
 			
 			<uni-section :title="'开始时间:'" type="line" subTitle="可接受的咨询时间(多选)">
@@ -60,45 +60,47 @@
 			return {
 				teacher_name:'pp',
 				
-				index1: 0,
+				appt_label: 0,
 				appt_theme:[
-					{ value: 0, text: '请选择咨询主题' },
-					{ value: 1, text: '简历优化' },
-					{ value: 2, text: '面试经验' },
-					{ value: 3, text: '就业指导' },
-					{ value: 4, text: '职业规划' },
-					{ value: 5, text: '薪资谈判' },
-					{ value: 6, text: '其他' }
+					{ value: 0, text: '简历优化' },
+					{ value: 1, text: '面试经验' },
+					{ value: 2, text: '就业指导' },
+					{ value: 3, text: '职业规划' },
+					{ value: 4, text: '薪资谈判' },
+					{ value: 5, text: '其他' }
 				],
 				
-				appt_cost:'20',
-				apply_cost:'120',
+				appt_cost:20,
+				apply_cost:0,
 				index: 0,
-				last_duration: 10,
+				last_duration: 0,
+				appt_label: 0,
 				
+				getdate:Date.now(),
 				start:Date.now(),
 				end:Date.now()+14 * 24 * 3600000,
 				
-				apptpick_time: [],
+				gethours: new Date().getHours()+1,
+				
+				apptpick_time:[],
 				Times: [
-					{text: '08:00', value: 0}, 
-					{text: '09:00', value: 1},
-					{text: '10:00', value: 2},
-					{text: '11:00', value: 3},
-					{text: '12:00', value: 4},
-					{text: '13:00', value: 5},
-					{text: '14:00', value: 6},
-					{text: '15:00', value: 7},
-					{text: '16:00', value: 8},
-					{text: '17:00', value: 9},
-					{text: '18:00', value: 10},
-					{text: '19:00', value: 11},
-					{text: '20:00', value: 12},
-					{text: '21:00', value: 13},
-					{text: '22:00', value: 14},
-					{text: '23:00', value: 15}
+					{text: '08:00', value: 8}, 
+					{text: '09:00', value: 9},
+					{text: '10:00', value: 10},
+					{text: '11:00', value: 11},
+					{text: '12:00', value: 12},
+					{text: '13:00', value: 13},
+					{text: '14:00', value: 14},
+					{text: '15:00', value: 15},
+					{text: '16:00', value: 16},
+					{text: '17:00', value: 17},
+					{text: '18:00', value: 18},
+					{text: '19:00', value: 19},
+					{text: '20:00', value: 20},
+					{text: '21:00', value: 21},
+					{text: '22:00', value: 22},
+					{text: '23:00', value: 23}
 					],
-
 			};
 		},
 		
@@ -107,15 +109,50 @@
 				console.log(e)
 			},
 			date_change(e){
-							console.log('maskClick事件:', e);
+				console.log('maskClick事件:', e);
 			},
 			duration_change(value) {
 				this.last_duration = value;
+				this.apply_cost=value * this.appt_cost / 30;
+			},
+			checktime(pick) {
+				return pick >= this.gethours;
 			},
 			appointAndpay() {
+				if (this.last_duration==0) {
+					uni.showToast({
+						title: '预约时长需大于零',
+						icon: 'none',
+						duration: 2000
+					});
+					return;
+				}
+				if (Object.keys(this.apptpick_time).length==0) {
+					uni.showToast({
+						title: '请选择开始时间',
+						icon: 'none',
+						duration: 2000
+					});
+					return;
+				}
+				console.log('cuowu')
+				if (this.apptpick_time.slice(0,1)< this.gethours) {
+					uni.showToast({
+						title: '请选择正确时间',
+						icon: 'none',
+						duration: 2000
+					});
+					return;
+				}
+				uni.showToast({
+					title: '预约成功',
+					icon: 'none',
+					duration: 2000
+				});
 				uni.switchTab({
 				  url: '../find_teacher/find_teacher'
 				});
+				
 			}
 		},
 		

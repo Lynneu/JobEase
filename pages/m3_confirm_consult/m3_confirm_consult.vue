@@ -1,64 +1,31 @@
 <template>
 	<view>
 		<view class="information_display">
-			<uni-card padding="5px" margin="6px">
-				<view class="card_display">
-					<view>
-						<uni-section title="咨询信息" type="line"></uni-section>
-						<text class="word">咨询价格：{{consult_cost}} 元\n</text>
-						<text class="word">咨询主题：{{consult_theme}}\n</text>
-						<text class="word">咨询日期：{{consult_date}}\n</text>
-						<text class="word">预计时长：{{consult_duration}} min \n</text>
-					</view>
-					<view class="button_display">
-						<button  size="mini" style="background-color: #007aff; color: #fff;" @click="open()">
-							<text>同意</text>
-						</button>
-						<button  size="mini" style="background-color: #007aff; color: #fff;">
-							<text>拒绝</text>
-						</button>
-					</view>
-				</view>
-			</uni-card>
-			<uni-card padding="5px" margin="6px">
-				<view class="card_display">
-					<view>
-						<uni-section title="咨询信息" type="line"></uni-section>
-						<text class="word">咨询价格：{{consult_cost}} 元\n</text>
-						<text class="word">咨询主题：{{consult_theme}}\n</text>
-						<text class="word">咨询日期：{{consult_date}}\n</text>
-						<text class="word">预计时长：{{consult_duration}} min \n</text>
-					</view>
-					<view class="button_display">
-						<button  size="mini" style="background-color: #007aff; color: #fff;" @click="open()">
-							<text>同意</text>
-						</button>
-						<button  size="mini" style="background-color: #007aff; color: #fff;">
-							<text>拒绝</text>
-						</button>
-					</view>
-				</view>
-			</uni-card>
-			<uni-card padding="5px" margin="6px">
-				<view class="card_display">
-					<view>
-						<uni-section title="咨询信息" type="line"></uni-section>
-						<text class="word">咨询价格：{{consult_cost}} 元\n</text>
-						<text class="word">咨询主题：{{consult_theme}}\n</text>
-						<text class="word">咨询日期：{{consult_date}}\n</text>
-						<text class="word">预计时长：{{consult_duration}} min \n</text>
-					</view>
-					<view class="button_display">
-						<button  size="mini" style="background-color: #007aff; color: #fff;" @click="open()">
-							<text>同意</text>
-						</button>
-						<button  size="mini" style="background-color: #007aff; color: #fff;">
-							<text>拒绝</text>
-						</button>
-					</view>
-				</view>
-			</uni-card>
+			<uni-list>
+				<uni-list-item direction="column">
+					<template v-slot:body>
+						<view>
+							<uni-section title="咨询信息" type="line"></uni-section>
+							<text class="word">咨询价格：{{consult_cost}} 元\n</text>
+							<text class="word">咨询主题：{{consult_theme}}\n</text>
+							<text class="word">咨询日期：{{consult_date}}\n</text>
+							<text class="word">预计时长：{{consult_duration}} min \n</text>
+						</view>
+						<view class="button_display">
+							<button  size="mini" style="background-color: #007aff; color: #fff;" @click="open()">
+								<text>同意</text>
+							</button>
+							<button  size="mini" style="background-color: #007aff; color: #fff;">
+								<text>拒绝</text>
+							</button>
+						</view>
+					</template>
+				</uni-list-item>
+			</uni-list>
+		
 		</view>	
+		
+
 		
 		<uni-popup ref="popup" :mask-click="false" type="center" background-color="#fff">
 			<view class="pick_time">
@@ -144,6 +111,7 @@
 	.information_display{
 		padding: 5px;
 	}
+
 	.uni-px-5 {
 		 padding-left: 10px;
 	    padding-right: 10px;
