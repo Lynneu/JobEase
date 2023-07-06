@@ -48,7 +48,6 @@
 					<text>预约并支付</text>
 				</button>
 			</view>
-			
 		</view>
 		
 	</view>
@@ -138,20 +137,22 @@
 					});
 					return;
 				}
-				if (this.consult.appt_time1.slice(0,1)< this.gethours) {
-					uni.showToast({
-						title: '请选择正确时间',
-						icon: 'none',
-						duration: 2000
-					});
+				if(this.consult.appt_date <= Date.now()){
+					if (this.consult.appt_time1.slice(0,1)  < this.gethours) {
+						uni.showToast({
+							title: '请选择正确时间',
+							icon: 'none',
+							duration: 2000
+						});
+					}	
 					return;
 				}
 				
 				const db = uniCloud.database();
 				db.collection("consult").add(this.consult).then(e=>{
 					console.log(e)
-				})			   
-	   
+				})				
+						
 				uni.showToast({
 					title: '预约成功',
 					icon: 'none',
