@@ -28,6 +28,10 @@
 				user:{
 					 "phone": "",
 					 "password": "",
+				},
+				user_find:{
+					 "phone": "",
+					 "password": "",
 				}
 			}
 		},
@@ -71,15 +75,48 @@
 					return false
 				}
 				// 未连接到后端，测试用！
-				else uni.switchTab({ 
-					//url: "../index/index",
+				else 
+				{
+					const db = uniCloud.database();
+					db.collection('user').where({
+					  phone: {
+					    $eq: this.user.phone
+					  }
+					}).limit(1).get().then(res => {
+					  if (res.result && res.result.data && res.result.data.length > 0) {
+					    this.user_find = res.result.data[0]
+						if(this.user_find.password==this.user.password)
+						{
+							uni.switchTab({
+							url: "../find_teacher/find_teacher"
+							})
+						}
+						else
+						{
+							uni.showToast({
+								title: '密码错误',
+								icon: 'none'
+							})
+							return false
+						}
+					  } else {
+					    uni.showToast({
+					    	title: '手机号未注册',
+					    	icon: 'none'
+					    })
+						return false
+					  }
+					})
+					/*
+					uni.switchTab({ 
 					url: "../find_teacher/find_teacher"
-				})
-				uni.request({
+					})*/
+				}
+				/*uni.request({
 					/*const db = uniCloud.database();
 					db.collection("lecture").add(this.lecture).then(e=>{
 						console.log(e)
-					})*/
+					})*
 					url: 'http://app/login', // 路径
 					method: 'POST', // 请求方法
 					data: {
@@ -109,7 +146,7 @@
 							})
 						}
 					}
-				})
+				})*/
 			},
 			
 			isMobile(str) {

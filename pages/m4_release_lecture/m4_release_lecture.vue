@@ -85,7 +85,7 @@
 					
 				],
 				lecture:{
-					"user_tele":12345678911 ,
+					"phone":12345678911 ,
 				    "lecture_title": "",
 				    "lecture_content": "",
 				    "lecture_label": 0,

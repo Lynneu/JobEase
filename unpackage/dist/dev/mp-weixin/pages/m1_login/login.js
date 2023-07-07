@@ -12,6 +12,10 @@ const _sfc_main = {
       user: {
         "phone": "",
         "password": ""
+      },
+      user_find: {
+        "phone": "",
+        "password": ""
       }
     };
   },
@@ -44,48 +48,35 @@ const _sfc_main = {
           icon: "none"
         });
         return false;
-      } else
-        common_vendor.index.switchTab({
-          //url: "../index/index",
-          url: "../find_teacher/find_teacher"
-        });
-      common_vendor.index.request({
-        /*const db = uniCloud.database();
-        db.collection("lecture").add(this.lecture).then(e=>{
-        	console.log(e)
-        })*/
-        url: "http://app/login",
-        // 路径
-        method: "POST",
-        // 请求方法
-        data: {
-          phone: that.user.phone,
-          type: that.type,
-          code: that.testValue,
-          password: that.user.password
-        },
-        //发送的数据
-        success: (res) => {
-          if (res.data.code == 200) {
-            that.token = res.data.token;
-            common_vendor.index.setStorageSync("token", that.token);
-            common_vendor.index.setStorageSync("userInfo", JSON.stringify(res.data));
-            common_vendor.index.switchTab({
-              //url: "../index/index",
-              url: "../find_teacher/find_teacher"
-            });
-            common_vendor.index.showToast({
-              title: "登录成功",
-              icon: "none"
-            });
+      } else {
+        const db = common_vendor.Ds.database();
+        db.collection("user").where({
+          phone: {
+            $eq: this.user.phone
+          }
+        }).limit(1).get().then((res) => {
+          if (res.result && res.result.data && res.result.data.length > 0) {
+            this.user_find = res.result.data[0];
+            if (this.user_find.password == this.user.password) {
+              common_vendor.index.switchTab({
+                url: "../find_teacher/find_teacher"
+              });
+            } else {
+              common_vendor.index.showToast({
+                title: "密码错误",
+                icon: "none"
+              });
+              return false;
+            }
           } else {
             common_vendor.index.showToast({
-              title: "登录失败",
+              title: "手机号未注册",
               icon: "none"
             });
+            return false;
           }
-        }
-      });
+        });
+      }
     },
     isMobile(str) {
       let reg = /^1\d{10}$/;
