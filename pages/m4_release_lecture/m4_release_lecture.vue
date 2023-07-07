@@ -86,8 +86,6 @@
 				],
 				lecture:{
 					"user_tele":12345678911 ,
-					"user_name": "kk",
-				    //"lecture_id":0,
 				    "lecture_title": "",
 				    "lecture_content": "",
 				    "lecture_label": 0,
