@@ -35,7 +35,7 @@
 			
 			<uni-section :title="'开始时间:'" type="line" subTitle="可接受的咨询时间(多选)">
 				<view class="uni-px-5 uni-pb-5">
-					<uni-data-checkbox mode="tag" multiple v-model="consult.appt_time1" :localdata="Times"></uni-data-checkbox>
+					<uni-data-checkbox :max=3 mode="tag" multiple v-model="consult.appt_time1" :localdata="Times"></uni-data-checkbox>
 				</view>
 			</uni-section>
 				
@@ -182,7 +182,6 @@
 	.appt_theme{
 		padding-left: 22px;
 		padding-right: 22px;
-		
 	}
 	.appt_duration{
 		display: flex;
