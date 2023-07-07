@@ -18,7 +18,6 @@
 			<uni-data-select
 			v-model="user_detail.goal" 
 			:localdata="goal" 
-			:clear="false" 
 			@change="changeGoal">
 			</uni-data-select>
 		</view>
@@ -28,7 +27,6 @@
 			<uni-data-select
 			v-model="user_detail.post" 
 			:localdata="direction" 
-			:clear="false" 
 			@change="changeDirection">
 			</uni-data-select>
 		</view>
@@ -38,7 +36,6 @@
 			<uni-data-select
 			v-model="user_detail.tip_student" 
 			:localdata="tag" 
-			:clear="false" 
 			@change="changeTag">
 			</uni-data-select>
 		</view>
@@ -52,52 +49,54 @@
 	export default {
 		data() {
 			return {
-				goal: [{
-					value: 0,
-					text: '看看机会'
-				}, {
-					value: 1,
-					text: '找实习'
-				}, {
-					value: 2,
-					text: '找校招'
-				}],
+				goal: [
+					{value: 0,text: '找实习'	}, 
+					{value: 1,text: '找校招'	},
+					],
 				direction:[
-				  { value: 0, text: '看看机会' },
-				  { value: 1, text: '前端开发' },
-				  { value: 2, text: '后端开发' },
-				  { value: 3, text: 'C++开发' },
-				  { value: 4, text: 'Java开发' },
-				  { value: 5, text: '算法' },
-				  { value: 6, text: '测试开发' },
-				  { value: 7, text: '产品经理' },
-				  { value: 8, text: '运营' },
-				  { value: 9, text: 'HR' },
-				  { value: 10, text: '其他' }
+				 { value: 0, text: '前端开发' },
+				 { value: 1, text: '后端开发' },
+				 { value: 2, text: 'C++开发' },
+				 { value: 3, text: 'Java开发' },
+				 { value: 4, text: '算法' },
+				 { value: 5, text: '测试开发' },
+				 { value: 6, text: '产品经理' },
+				 { value: 7, text: '运营' },
+				 { value: 8, text: 'HR' },
+				 { value: 9, text: '其他' }
 				],
 				tag:[
-				  { value: 0, text: '看看机会' },
-				  { value: 1, text: '简历优化' },
-				  { value: 2, text: '面试经验' },
-				  { value: 3, text: '就业指导' },
-				  { value: 4, text: '职业规划' },
-				  { value: 5, text: '薪资谈判' },
-				  { value: 6, text: '其他' }
+				 { value: 0, text: '简历优化' },
+				 { value: 1, text: '面试经验' },
+				 { value: 2, text: '就业指导' },
+				 { value: 3, text: '职业规划' },
+				 { value: 4, text: '薪资谈判' },
+				 { value: 5, text: '其他' }
 				],
 				user_detail:{
 					"_id":"",
+					"phone":"",
 					"username":"",
-					"goal":0,
+					//"isTeacher":"",
+					//"status":"",
+					//"email":"",
+					//"comment":"",
+					//"co":"",
+					//"job_number":"",
+					//"price":"",
+					//"score":"",
 					"post":0,
-					"tip_student":0
+					//"tip_teacher":0,
+					"tip_student":0,
+					"goal":0
 				}
 			}
 		},
 		onLoad() {
 			  const db = uniCloud.database()
 			   db.collection('user_detail').where({
-			     username: {
-			       $eq: '我先试一试'
+			     phone: {
+			       $eq: "12345678900"
 			     }
 			   }).limit(1).get().then(res => {
 			     if (res.result && res.result.data && res.result.data.length > 0) {
@@ -119,7 +118,7 @@
 			changeTag(e) {
 				console.log(this.user_detail.tip_student)
 			},
-			submit(){
+			submit() {
 				if (!this.user_detail.username) {
 				   uni.showToast({
 				      title: '用户名不能为空',
@@ -128,15 +127,21 @@
 				   });
 				   return;
 				}
-				const db = uniCloud.database();
-				let user_detail={...this.user_detail}//this.item的每一项放在{}里
-				delete user_detail._id; // 不包含 _id 字段
-				db.collection("user_detail").doc(this.user_detail._id).update(user_detail).then(e=>{
-					console.log(e)
-				}) 
-				uni.switchTab({
-					url: "../m2_profile/m2_profile"
-				})
+			  const db = uniCloud.database();
+			  let user_detail = { ...this.user_detail };
+			  delete user_detail._id;
+			  db.collection("user_detail")
+			    .doc(this.user_detail._id)
+			    .update(user_detail)
+			    .then((res) => {
+			      console.log(res);
+			    })
+			    .catch((err) => {
+			      console.error("Error updating data:", err);
+			    });
+				//uni.switchTab({
+					//url: "../m2_profile/m2_profile"
+				//})
 			}
 		}
 	}
