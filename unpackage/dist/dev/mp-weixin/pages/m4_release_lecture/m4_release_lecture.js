@@ -29,16 +29,14 @@ const _sfc_main = {
         }
       ],
       lecture: {
-        "phone": 12345678911,
-        "lecture_title": "",
-        "lecture_content": "",
-        "lecture_label": 0,
-        "lecture_price": 0,
-        "lecture_time": this.getDateTime(/* @__PURE__ */ new Date(), false),
-        "lecture_duration": 30,
-        "lecture_limit": 0,
-        "lecture_number": 1,
-        "lecture_reserved": 0
+        "lectureName": "",
+        "description": "",
+        index1: 0,
+        numberValue: 0,
+        "datetimeString": this.getDateTime(/* @__PURE__ */ new Date(), false),
+        last_numberValue: 30,
+        current: 0,
+        listen_numberValue: 1
       }
     };
   },
@@ -47,7 +45,7 @@ const _sfc_main = {
       console.log(e);
     },
     changeLectureprice(value) {
-      this.lecture.lecture_price = value;
+      this.lecture.numberValue = value;
     },
     changeStart(e) {
       console.log("----change2事件:", e);
@@ -76,21 +74,21 @@ const _sfc_main = {
       return num;
     },
     changeLast(value) {
-      this.lecture.lecture_duration = value;
+      this.lecture.last_numberValue = value;
     },
     changeRestrictions(evt) {
       for (let i = 0; i < this.items.length; i++) {
         if (this.items[i].value === evt.detail.value) {
-          this.lecture.lecture_limit = i;
+          this.lecture.current = i;
           break;
         }
       }
     },
     changeNumber(value) {
-      this.lecture.lecture_number = value;
+      this.lecture.listen_numberValue = value;
     },
     submit() {
-      if (!this.lecture.lecture_title) {
+      if (!this.lecture.lectureName) {
         common_vendor.index.showToast({
           title: "请填写讲座名称",
           icon: "none",
@@ -98,7 +96,7 @@ const _sfc_main = {
         });
         return;
       }
-      if (!this.lecture.lecture_content) {
+      if (!this.lecture.description) {
         common_vendor.index.showToast({
           title: "请填写讲座简介",
           icon: "none",
@@ -106,10 +104,6 @@ const _sfc_main = {
         });
         return;
       }
-      const db = common_vendor.Ds.database();
-      db.collection("lecture").add(this.lecture).then((e) => {
-        console.log(e);
-      });
       common_vendor.index.showToast({
         title: "发布成功",
         icon: "none",
@@ -145,68 +139,68 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       title: "讲座名称:",
       type: "line"
     }),
-    b: common_vendor.o(($event) => $data.lecture.lecture_title = $event),
+    b: common_vendor.o(($event) => $data.lecture.lectureName = $event),
     c: common_vendor.p({
       placeholder: "最大输入长度为20",
       maxlength: "20",
-      modelValue: $data.lecture.lecture_title
+      modelValue: $data.lecture.lectureName
     }),
     d: common_vendor.p({
       title: "讲座简介:",
       type: "line"
     }),
-    e: common_vendor.o(($event) => $data.lecture.lecture_content = $event),
+    e: common_vendor.o(($event) => $data.lecture.description = $event),
     f: common_vendor.p({
       placeholder: "最大输入长度为50",
       maxlength: "50",
       autoHeight: true,
-      modelValue: $data.lecture.lecture_content
+      modelValue: $data.lecture.description
     }),
     g: common_vendor.p({
-      title: "标签(点击选择):",
+      title: "标签:",
       type: "line"
     }),
     h: common_vendor.o($options.changeDirection),
-    i: common_vendor.o(($event) => $data.lecture.lecture_label = $event),
+    i: common_vendor.o(($event) => $data.lecture.index1 = $event),
     j: common_vendor.p({
       localdata: $data.direction,
       clear: false,
-      modelValue: $data.lecture.lecture_label
+      modelValue: $data.lecture.index1
     }),
     k: common_vendor.o($options.changeLectureprice),
-    l: common_vendor.o(($event) => $data.lecture.lecture_price = $event),
+    l: common_vendor.o(($event) => $data.lecture.numberValue = $event),
     m: common_vendor.p({
       max: 999,
       step: 5,
-      value: $data.lecture.lecture_price,
-      modelValue: $data.lecture.lecture_price
+      value: $data.lecture.numberValue,
+      modelValue: $data.lecture.numberValue
     }),
     n: common_vendor.p({
-      title: "收费 : " + $data.lecture.lecture_price + "元/人（0-999）",
+      title: "收费 : " + $data.lecture.numberValue + "元/人（0-999）",
       type: "line",
       padding: true
     }),
     o: common_vendor.p({
-      title: "开始时间:" + $data.lecture.lecture_time,
+      title: "开始时间:" + $data.lecture.datetimeString,
       type: "line"
     }),
     p: common_vendor.o($options.changeStart),
-    q: common_vendor.o(($event) => $data.lecture.lecture_time = $event),
+    q: common_vendor.o(($event) => $data.lecture.datetimeString = $event),
     r: common_vendor.p({
       type: "datetime",
       ["clear-icon"]: false,
       start: $data.start,
       end: $data.end,
-      modelValue: $data.lecture.lecture_time
+      modelValue: $data.lecture.datetimeString
     }),
     s: common_vendor.o($options.changeLast),
     t: common_vendor.p({
       max: 999,
       step: 10,
-      value: $data.lecture.lecture_duration
+      value: $data.lecture.last_numberValue
     }),
     v: common_vendor.p({
-      title: "预期时间 : " + $data.lecture.lecture_duration + "分钟",
+      title: "预期时间 : " + $data.lecture.last_numberValue + "分钟",
       type: "line",
       padding: true
     }),
@@ -217,22 +211,22 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     x: common_vendor.f($data.items, (item, index, i0) => {
       return {
         a: item.value,
-        b: index === $data.lecture.lecture_limit,
+        b: index === $data.lecture.current,
         c: common_vendor.t(item.name),
         d: item.value
       };
     }),
     y: common_vendor.o((...args) => $options.changeRestrictions && $options.changeRestrictions(...args)),
-    z: $data.lecture.lecture_limit === 1
-  }, $data.lecture.lecture_limit === 1 ? {
+    z: $data.lecture.current === 1
+  }, $data.lecture.current === 1 ? {
     A: common_vendor.o($options.changeNumber),
     B: common_vendor.p({
       min: 1,
       max: 9999,
-      value: $data.lecture.lecture_number
+      value: $data.lecture.listen_numberValue
     }),
     C: common_vendor.p({
-      title: "允许 : " + $data.lecture.lecture_number + "人听讲座",
+      title: "允许 : " + $data.lecture.listen_numberValue + "人听讲座",
       type: "line",
       padding: true
     })

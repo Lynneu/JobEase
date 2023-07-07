@@ -27,21 +27,17 @@ const _sfc_main = {
 };
 if (!Array) {
   const _easycom_uni_section2 = common_vendor.resolveComponent("uni-section");
-  const _easycom_uni_list_item2 = common_vendor.resolveComponent("uni-list-item");
-  const _easycom_uni_list2 = common_vendor.resolveComponent("uni-list");
-  const _easycom_uni_data_checkbox2 = common_vendor.resolveComponent("uni-data-checkbox");
   const _easycom_uni_card2 = common_vendor.resolveComponent("uni-card");
+  const _easycom_uni_data_checkbox2 = common_vendor.resolveComponent("uni-data-checkbox");
   const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
-  (_easycom_uni_section2 + _easycom_uni_list_item2 + _easycom_uni_list2 + _easycom_uni_data_checkbox2 + _easycom_uni_card2 + _easycom_uni_popup2)();
+  (_easycom_uni_section2 + _easycom_uni_card2 + _easycom_uni_data_checkbox2 + _easycom_uni_popup2)();
 }
 const _easycom_uni_section = () => "../../uni_modules/uni-section/components/uni-section/uni-section.js";
-const _easycom_uni_list_item = () => "../../uni_modules/uni-list/components/uni-list-item/uni-list-item.js";
-const _easycom_uni_list = () => "../../uni_modules/uni-list/components/uni-list/uni-list.js";
-const _easycom_uni_data_checkbox = () => "../../uni_modules/uni-data-checkbox/components/uni-data-checkbox/uni-data-checkbox.js";
 const _easycom_uni_card = () => "../../uni_modules/uni-card/components/uni-card/uni-card.js";
+const _easycom_uni_data_checkbox = () => "../../uni_modules/uni-data-checkbox/components/uni-data-checkbox/uni-data-checkbox.js";
 const _easycom_uni_popup = () => "../../uni_modules/uni-popup/components/uni-popup/uni-popup.js";
 if (!Math) {
-  (_easycom_uni_section + _easycom_uni_list_item + _easycom_uni_list + _easycom_uni_data_checkbox + _easycom_uni_card + _easycom_uni_popup)();
+  (_easycom_uni_section + _easycom_uni_card + _easycom_uni_data_checkbox + _easycom_uni_popup)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
@@ -55,25 +51,52 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     e: common_vendor.t($data.consult_duration),
     f: common_vendor.o(($event) => $options.open()),
     g: common_vendor.p({
-      direction: "column"
+      padding: "5px",
+      margin: "6px"
     }),
     h: common_vendor.p({
+      title: "咨询信息",
+      type: "line"
+    }),
+    i: common_vendor.t($data.consult_cost),
+    j: common_vendor.t($data.consult_theme),
+    k: common_vendor.t($data.consult_date),
+    l: common_vendor.t($data.consult_duration),
+    m: common_vendor.o(($event) => $options.open()),
+    n: common_vendor.p({
+      padding: "5px",
+      margin: "6px"
+    }),
+    o: common_vendor.p({
+      title: "咨询信息",
+      type: "line"
+    }),
+    p: common_vendor.t($data.consult_cost),
+    q: common_vendor.t($data.consult_theme),
+    r: common_vendor.t($data.consult_date),
+    s: common_vendor.t($data.consult_duration),
+    t: common_vendor.o(($event) => $options.open()),
+    v: common_vendor.p({
+      padding: "5px",
+      margin: "6px"
+    }),
+    w: common_vendor.p({
       title: "选择咨询时间(单选)",
       type: "line"
     }),
-    i: common_vendor.o(($event) => $data.picktime = $event),
-    j: common_vendor.p({
+    x: common_vendor.o(($event) => $data.picktime = $event),
+    y: common_vendor.p({
       localdata: $data.time,
       mode: "list",
       modelValue: $data.picktime
     }),
-    k: common_vendor.o((...args) => $options.close && $options.close(...args)),
-    l: common_vendor.o((...args) => $options.close && $options.close(...args)),
-    m: common_vendor.p({
+    z: common_vendor.o((...args) => $options.close && $options.close(...args)),
+    A: common_vendor.o((...args) => $options.close && $options.close(...args)),
+    B: common_vendor.p({
       margin: "1px"
     }),
-    n: common_vendor.sr("popup", "82708b80-3"),
-    o: common_vendor.p({
+    C: common_vendor.sr("popup", "82708b80-6"),
+    D: common_vendor.p({
       ["mask-click"]: false,
       type: "center",
       ["background-color"]: "#fff"

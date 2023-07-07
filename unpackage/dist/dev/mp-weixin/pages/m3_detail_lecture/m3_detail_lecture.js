@@ -9,7 +9,7 @@ const _sfc_main = {
       lecture_theme: "求职就业",
       lecture_cost: "30",
       lecture_num: "3 / 10",
-      lecture_content: ""
+      lecture_content: "讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容讲座内容."
     };
   },
   methods: {

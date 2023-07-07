@@ -26,11 +26,11 @@
 body {
   background-color: white;
 }
-.si-container {
+.mi-container {
   display: block;
   padding: 20rpx 40rpx;
 }
-.si-container .si-content {
+.mi-container .mi-content {
   width: 100%;
   text-align: left;
   position: relative;
