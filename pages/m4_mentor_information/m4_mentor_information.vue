@@ -1,3 +1,4 @@
+<!--7.8 14:51-->
 <template>
 	<view class="si-container">
 		<view style="text-align: center;">
@@ -36,7 +37,7 @@
 		
 		<view class="mi-content">
 			<uni-section :title="'咨询价格 (0-999): '+ user_detail.price+'元/小时'" type="line" padding>
-				<uni-number-box  :min="0" :max="999" :step="5" :value="user_detail.price" @change="changePrice" />
+				<uni-number-box  :min="0" :max="999" :step="10" :value="user_detail.price" @change="changePrice" />
 			</uni-section>
 		</view>
 		

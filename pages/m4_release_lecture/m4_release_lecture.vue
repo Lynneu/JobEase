@@ -1,3 +1,4 @@
+<!--7.8 14:51-->
 <template>
 	<view class="rl-container">
 			<view class="rl-content">
@@ -18,7 +19,7 @@
 			
 			<view class="r1-content">
 			<uni-section :title="'收费 : '+ lecture.lecture_price+'元/人（0-999）'" type="line" padding>
-				<uni-number-box  v-model="lecture.lecture_price" :max="999" :step="5" :value="lecture.lecture_price" @change="changeLectureprice" />
+				<uni-number-box  v-model="lecture.lecture_price" :max="999" :step="10" :value="lecture.lecture_price" @change="changeLectureprice" />
 			</uni-section>
 			</view>
 			
@@ -45,8 +46,8 @@
 				</radio-group>
 			</view>
 			<view v-if="lecture.lecture_limit === 1" class="rl-content">
-				  <uni-section :title="'允许 : '+ lecture.lecture_number+'人听讲座'" type="line" padding>
-				  	<uni-number-box  :min="1" :max="9999"  :value="lecture.lecture_number" @change="changeNumber" />
+				  <uni-section :title="'允许 : '+ lecture.lecture_number+'人听讲座(0-100)'" type="line" padding>
+				  	<uni-number-box  :min="1" :max="100" :step="10" :value="lecture.lecture_number" @change="changeNumber" />
 				  </uni-section>
 			</view>
 			
@@ -60,6 +61,16 @@
 		data() {
 			return {
 				direction:[
+					/*{ value: 0, text: '前端开发' },
+					{ value: 1, text: '后端开发' },
+					{ value: 2, text: 'C++开发' },
+					{ value: 3, text: 'Java开发' },
+					{ value: 4, text: '算法' },
+					{ value: 5, text: '测试开发' },
+					{ value: 6, text: '产品经理' },
+					{ value: 7, text: '运营' },
+					{ value: 8, text: 'HR' },
+					{ value: 9, text: '其他' }*/
 					{ value: 0, text: '前端开发' },
 					{ value: 1, text: '后端开发' },
 					{ value: 2, text: 'C++开发' },
@@ -69,7 +80,12 @@
 					{ value: 6, text: '产品经理' },
 					{ value: 7, text: '运营' },
 					{ value: 8, text: 'HR' },
-					{ value: 9, text: '其他' }
+					{ value: 10, text: '简历优化' },
+					{ value: 11, text: '面试经验' },
+					{ value: 12, text: '就业指导' },
+					{ value: 13, text: '职业规划' },
+					{ value: 14, text: '薪资谈判' },
+					{ value: 15, text: '其他' }
 				],
 				start: Date.now(),
 				end: Date.now() + 14 * 24 * 3600000,
@@ -208,4 +224,3 @@
 		}
 	}
 </style>
-
