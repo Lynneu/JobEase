@@ -100,7 +100,7 @@
 					"appt_duration": 0,
 					"appt_date":'',
 					"appt_time1": [],
-					"appt_time2": 23,
+					"appt_time2": 0,
 					"appt_cost": 0,
 					"appt_state": 0
 				}
