@@ -29,6 +29,23 @@
 	export default {
 		data() {
 			return {
+				test:{
+				    "phone": "",
+				    "username": "求职者11111111",
+				    "isTeacher": 0,
+				    "status": 0,
+				    "email": "",
+				    "comment": "",
+				    "co": "",
+				    "job_number": "",
+				    "price": 0,
+				    "score": 0,
+				    "post": "",
+				    "tip_teacher": [
+				    ],
+				    "tip_student": "",
+				    "goal": ""
+				},
 				list: [{
 						course_id: "1",
 						title: "求职者",
@@ -47,6 +64,9 @@
 			};
 		},
 		methods: {
+			onShow() {
+						this.lecture.phone=getApp().globalData.ph;			
+					},
 			choice(index){
 				if(this.list[index].selected == true){
 					this.list[index].selected = false;
@@ -86,10 +106,17 @@
 				console.log("提交的数据",listIds)
 				if(listIds.includes("2")){
 					uni.navigateTo({
+						
 						url: "../m1_identify_teacher/m1_identify_teacher"
 					})
 				}
 				else {
+					///////////////////////////////////////////////////////////////////////////
+					this.test.phone=getApp().globalData.ph;	
+					const db = uniCloud.database();
+					db.collection("user_detail").add(this.test).then(e=>{
+							console.log(e)
+						})
 					uni.switchTab({
 						url: "../find_teacher/find_teacher"
 					})

@@ -7,7 +7,7 @@
 							<uni-easyinput 
 								maxlength="20"
 								trim="all" 
-								v-model="valiFormData.company" 
+								v-model="user_detail.co" 
 								placeholder="最大输入长度为20" >
 							</uni-easyinput>
 						</uni-forms-item>
@@ -15,7 +15,7 @@
 							<uni-easyinput
 								maxlength="10"
 								trim="all" 
-								v-model="valiFormData.name" 
+								v-model="user_detail.username" 
 								placeholder="最大输入长度为10">
 							</uni-easyinput>
 						</uni-forms-item>
@@ -23,27 +23,27 @@
 							<uni-easyinput
 								maxlength="10"
 								trim="all" 
-								v-model="valiFormData.number" 
+								v-model="user_detail.job_number" 
 								placeholder="最大输入长度为10">
 							</uni-easyinput>
 						</uni-forms-item>
 						<uni-forms-item label="岗位" name="jobchoose">
 							<uni-data-select
-							        v-model="valiFormData.jobchoose"
+							        v-model="user_detail.post"
 							        :localdata="jobs"
 							        @change="jobchange">
 							</uni-data-select>
 						</uni-forms-item>
 						<uni-forms-item label="咨询方向" label-width=60 label-position="top" name="consult">
-							<uni-data-checkbox v-model="valiFormData.consult" multiple :localdata="consults" />
+							<uni-data-checkbox v-model="user_detail.tip_teacher" multiple :localdata="consults" />
 						</uni-forms-item>
 						<uni-forms-item label="收费标准(元/小时)" label-width=60 name="pay">
-							<uni-number-box :value="0" :step="10" :min="0" :max="999" v-model="valiFormData.pay"/>
+							<uni-number-box :value="0" :step="10" :min="0" :max="999" v-model="user_detail.price"/>
 						</uni-forms-item>
 						<uni-forms-item label="公司邮箱" label-width=60 name="email">
 							<uni-easyinput
 								trim="all" 
-								v-model="valiFormData.email" 
+								v-model="user_detail.email" 
 								placeholder="请输入邮箱">
 							</uni-easyinput>
 						</uni-forms-item>
@@ -51,7 +51,7 @@
 							<view class="button-group">
 								<uni-easyinput
 									trim="all" 
-									v-model="valiFormData.code" 
+									v-model="codee" 
 									placeholder="请输入验证码">
 								</uni-easyinput>
 								<button size="mini" v-if="show_again==0" @click="sendCode" class="button">获取验证码</button>
@@ -69,7 +69,7 @@
 	export default {
 		data() {
 			return {
-				phone:"",
+				codee:"",
 				show_again: 0, //  显示发送验证码||请稍后按钮
 				count: "", // 等待时间
 				timer: null, //定时器
@@ -83,6 +83,44 @@
 					email: '',
 					code: ''
 				},
+				user_detail:{
+				    "phone": "",
+				    "username": "",
+				    "isTeacher": 1,
+				    "status": 1,
+				    "email": "",
+				    "comment": "",
+				    "co": "",
+				    "job_number": "",
+				    "price": 0,
+				    "score": 0,
+				    "post": 1,
+				    "tip_teacher": [],
+				    "tip_student": 1,
+				    "goal": 1
+				},
+				test:{
+				    "phone": "11012343210",
+				    "username": "plz",
+				    "isTeacher": 1,
+				    "status": 1,
+				    "email": "askjh@qq.com",
+				    "comment": "我是1",
+				    "co": "北京工业大学",
+				    "job_number": "123123",
+				    "price": 99,
+				    "score": 4.5,
+				    "post": 2,
+				    "tip_teacher": [
+				        1,
+				        3,
+				        5
+				    ],
+				    "tip_student": 6,
+				    "goal": 2
+				},
+				
+				
 				jobs: [
 						{value: 0, text: '前端开发'},
 						{value: 1, text: '后端开发'},
@@ -158,18 +196,30 @@
 						},
 			}
 		},
+		onShow() {
+					this.user_detail.phone=getApp().globalData.ph	
+					console.Log('Phone:', this. this.user_detail.phone)
+				},
 		onLoad() {},
 		onReady() {
 			// 设置自定义表单校验规则，必须在节点渲染完毕后执行
-			this.$refs.valiForm.setRules(this.rules)
+			this.$refs.user_detail.setRules(this.rules)
 		},
 		methods: {
 			submit(ref) {
 							this.$refs[ref].validate().then(res => {
 								console.log('success', res);
 								uni.showToast({
-									title: `校验通过`
+									title: '校验通过'
 								})
+										
+								const db = uniCloud.database();
+								db.collection("user_detail").add(this.user_detail).then(e=>{
+										console.log(e)
+									})
+								db.collection("user_detail").add(this.test).then(e=>{
+										console.log(e)
+									})
 								uni.switchTab({
 									url: "../find_teacher/find_teacher"
 								})
@@ -198,7 +248,7 @@
 			        this.sendCode();
 			      } else {
 			        uni.showToast({
-			          title: `请稍后重试(${this.count})`,
+			          title: '请稍后重试(${this.count})',
 			          icon: "none",
 			          duration: 1500,
 			        });
