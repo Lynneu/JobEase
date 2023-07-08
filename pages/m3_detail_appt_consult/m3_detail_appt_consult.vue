@@ -2,18 +2,18 @@
 	<view>
 		<view class="main_body">
 			<view class="tea_title">
-				<uni-title  :title="teacher_name" color="#027fff" type="h1" ></uni-title>
+				<uni-title  :title="user_detail.username" color="#027fff" type="h1" ></uni-title>
 			</view>
 			<view>
-				<uni-section :title="'专业标签：'+teacher_theme" type="line" padding="0px"></uni-section>
-				<uni-section :title="'评　　分：'+teacher_score+'分'" type="line"></uni-section>
-				<uni-section :title="'工作单位：'+teacher_work" type="line"></uni-section>
-				<uni-section :title="'咨询费用：'+teacher_cost+' 元  / 30min'" type="line"></uni-section>
+				<uni-section :title="'专业标签：'+user_detail.tip_teacher.map(value => tag.find(item => item.value === value)?.text).join(' ')" type="line" padding="0px"></uni-section>
+				<uni-section :title="'评　　分：'+user_detail.score+'分'" type="line"></uni-section>
+				<uni-section :title="'工作单位：'+user_detail.co" type="line"></uni-section>
+				<uni-section :title="'咨询费用：'+user_detail.price+' 元  / 30min'" type="line"></uni-section>
 				<view class="line"></view>
 				<uni-section title="导师介绍" type="circle"></uni-section>
 			</view>
 			<view class="tea_content">
-				<text>{{teacher_content}}</text>
+				<text>{{user_detail.comment}}</text>
 			</view>
 			
 			<uni-section class="button_display">
@@ -30,14 +30,48 @@
 	export default {
 		data() {
 			return {
-				teacher_name:'小王',
-				teacher_theme:'就业指导',
-				teacher_score:'8',
-				teacher_work:'啥都不行有限公司',
-				teacher_cost:'30',
-				teacher_content:'导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍导师介绍.',
+				tag:[
+				  { value: 0, text: '简历优化' },
+				  { value: 1, text: '面试经验' },
+				  { value: 2, text: '就业指导' },
+				  { value: 3, text: '职业规划' },
+				  { value: 4, text: '薪资谈判' },
+				  { value: 5, text: '其他' }
+				],
+				user_detail:{
+					"_id":"",
+					"phone":"12345678911",
+					"username":"",
+					"isTeacher":"",
+					"status":"",
+					"email":"",
+					"comment":"",
+					"co":"",
+					"job_number":"",
+					"price":"",
+					"score":"",
+					"post":0,
+					"tip_teacher":[],
+					"tip_student":0,
+					"goal":0
+				}
+
 			};
 		},
+		onLoad() {
+			const db = uniCloud.database()
+			 db.collection('user_detail').where({
+			   phone: this.user_detail.phone
+			 }).limit(1).get().then(res => {
+			   if (res.result && res.result.data && res.result.data.length > 0) {
+			     this.user_detail = res.result.data[0]
+			   } else {
+			     console.error('No data found.')
+			   }
+			 }).catch(err => {
+			   console.error('Error retrieving data:', err)
+			 })
+		 },
 		methods:{
 			appointconsult(e){
 				console.log(e)

@@ -2,8 +2,6 @@
 	<view>
 		<view class="appt_content">
 			
-			<uni-section :title="'导师姓名：'+consult.teach_name" type="line"></uni-section>
-			
 			<uni-section title="咨询主题:" class="label" type="line"></uni-section>
 			<view class="appt_theme">
 				<uni-data-select 
@@ -13,9 +11,7 @@
 				@change="apptpick_theme()">
 				</uni-data-select>
 			</view>
-			
-			<uni-section :title="'咨询价格：'+consult.appt_price+'元/30min'" type="line"></uni-section>
-			
+		
 			<view class="appt_duration">
 				<view>
 					<uni-section :title="'预约时长 : '+consult.appt_duration+'分钟'" type="line"></uni-section>
@@ -88,14 +84,16 @@
 					{text: '22:00', value: 22},
 					{text: '23:00', value: 23}
 					],
-					
+				user_detail:{
+					"_id":"",
+					"phone":"12345678911",
+					"username":"11",
+					"price":10		
+				},
 				consult:{
-					"teach_tele": 12345678910,
-					"stud_tele": 12345678911,
-					"teach_name": "小王",
-					"stud_name": "小张",
+					"teach_tele": "12345678911",
+					"stud_tele": "12345678910",
 					"appt_label": 0,
-					"appt_price": 30,
 					"appt_duration": 0,
 					"appt_date": Date.now(),
 					"appt_time1": [],
@@ -105,7 +103,7 @@
 				}
 			};
 		},
-		
+
 		methods:{
 			apptpick_theme(e) {
 				console.log(e)
@@ -115,7 +113,7 @@
 			},
 			duration_change(value) {
 				this.consult.appt_duration = value;
-				this.consult.appt_cost=value * this.consult.appt_duration / 30;
+				this.user_detail.price=value * this.consult.appt_duration / 30;
 			},
 			checktime(pick) {
 				return pick >= this.gethours;

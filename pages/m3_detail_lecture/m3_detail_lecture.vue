@@ -66,7 +66,7 @@ export default {
             db.collection("lecture").get() // 获取数据表的信息
                 .then(res => {
                     console.log(res)
-                    this.lecture = res.result.data[1]
+                    this.lecture = res.result.data[0]
                     const phone = this.lecture.phone; // 从lecture数据库获取phone
                     db.collection("user_detail").where({
                             phone

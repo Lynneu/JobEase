@@ -17,7 +17,7 @@
 									<text class="time" v-for="time in item.appt_time1">{{time}}:00 </text>
 								</view>
 								<view class="button_display" >
-									<button  size="mini" style="background-color: #007aff; color: #fff;" @click="open(),getlen(item.appt_time1)">
+									<button  size="mini" style="background-color: #007aff; color: #fff;" @click="open(),getlen(item.appt_time1),informationupdate(item)">
 										<text>同意</text>
 									</button>
 									<button  size="mini" style="background-color: #007aff; color: #fff;">
@@ -75,7 +75,9 @@
 				],
 			};
 		},	
-		
+		onLoad({item}) {
+			this.item = JSON.parse(item)
+		 },
 		methods: {
 			open(){
 			    this.$refs.popup.open('center')
@@ -106,8 +108,7 @@
 						duration: 2000
 					});	
 					return;
-				}	
-				
+				}
 				uni.showToast({
 					title: '预约成功',
 					icon: 'none',
