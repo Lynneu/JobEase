@@ -7,6 +7,7 @@ const _sfc_main = {
       //user.password: '', //密码
       password_double: "",
       //第二次密码
+      flag: 0,
       user: {
         "phone": "",
         "password": ""
@@ -44,45 +45,29 @@ const _sfc_main = {
           icon: "none"
         });
         return false;
-      } else
-        common_vendor.index.navigateTo({
-          //url: "../index/index",
-          url: "../m1_role_select/m1_role_select"
-        });
-      common_vendor.index.request({
-        url: "http://app/login",
-        // 路径
-        method: "POST",
-        // 请求方法
-        data: {
-          phone: that.user.phone,
-          type: that.type,
-          code: that.testValue,
-          password: that.user.password
-        },
-        //发送的数据
-        success: (res) => {
-          if (res.data.code == 200) {
-            that.token = res.data.token;
-            common_vendor.index.setStorageSync("token", that.token);
-            common_vendor.index.setStorageSync("userInfo", JSON.stringify(res.data));
-            common_vendor.index.switchTab({
-              // 跳转到新闻页面
-              //url: "../index/index",
-              url: "pages/find_teacher/find_teacher"
-            });
+      } else {
+        const db = common_vendor.Ds.database();
+        db.collection("user").where({
+          phone: {
+            $eq: this.user.phone
+          }
+        }).limit(1).get().then((res) => {
+          if (res.result && res.result.data && res.result.data.length > 0) {
             common_vendor.index.showToast({
-              title: "登录成功",
+              title: "手机号已注册",
               icon: "none"
             });
+            return false;
           } else {
-            common_vendor.index.showToast({
-              title: "登录失败",
-              icon: "none"
+            db.collection("user").add(this.user).then((e) => {
+              console.log(e);
+            });
+            common_vendor.index.navigateTo({
+              url: "../m1_role_select/m1_role_select"
             });
           }
-        }
-      });
+        });
+      }
     },
     // 下面是可以封装起来引入的部分
     // 判断是否是正确的手机号码
