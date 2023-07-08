@@ -5,7 +5,7 @@
 				<view v-if="error">{{error.message}}</view>
 				<view v-else>
 					<uni-list>
-						<uni-list-item v-for="item in data.filter((item) => item.appt_state === 0)" :where=" `item.appt_state = 0`" :key="item._id" direction="column" link>
+						<uni-list-item v-for="item in data.filter((item) => item.appt_state === 0)" :where=" `item.appt_state = 0`" :key="item._id" direction="column" @click="updatefn(item)">
 							<template v-slot:body>
 								<view>
 									<text class="title">咨询信息\n</text>
@@ -40,6 +40,15 @@
 			};
 		},	
 		methods: {
+			updatefn(item){
+				console.log('cehsi')
+				uni.navigateTo({
+					url:'../m3_confirm_consult/m3_choosetime/m3_choosetime?item='+JSON.stringify(item),
+					success: res => {},
+					fail: () =>{},
+					complete: () => {}
+				});
+			}
 		}
 		
 	}
