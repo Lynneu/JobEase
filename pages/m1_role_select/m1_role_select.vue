@@ -104,22 +104,51 @@
 				}
 				var listIds = this.selectId.join(",")
 				console.log("提交的数据",listIds)
-				if(listIds.includes("2")){
+				if(listIds.includes("2")){//导师已认证不跳转，没认证跳转
+					getApp().globalData.st = 1
+					
 					uni.navigateTo({
-						
 						url: "../m1_identify_teacher/m1_identify_teacher"
 					})
 				}
 				else {
+					getApp().globalData.st = 0
+					db.collection('user_detail').where({
+						phone: {
+							    $eq: this.user.phone
+						}
+						}).limit(1).get().then(res => {
+							if (res.result && res.result.data && res.result.data.length > 0)
+							{
+								this.test = res.result.data[0]
+								getApp().globalData.st = 0
+							}
+							else
+							{
+								this.test.phone=getApp().globalData.ph;
+								const db = uniCloud.database();
+								db.collection("user_detail").add(this.test).then(e=>{
+										console.log(e)
+									})
+								
+							}
+							uni.switchTab({
+								url: "../find_teacher/find_teacher"
+							})
+							
+					})
+												
+					
+					
 					///////////////////////////////////////////////////////////////////////////
-					this.test.phone=getApp().globalData.ph;	
-					const db = uniCloud.database();
+					//this.test.phone=getApp().globalData.ph;	
+					/*const db = uniCloud.database();
 					db.collection("user_detail").add(this.test).then(e=>{
 							console.log(e)
 						})
 					uni.switchTab({
 						url: "../find_teacher/find_teacher"
-					})
+					})*/
 				}
 			}
 		

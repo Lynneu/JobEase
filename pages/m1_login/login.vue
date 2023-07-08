@@ -30,6 +30,22 @@
 				user_find:{
 					 "phone": "",
 					 "password": "",
+				},
+				testing:{
+				    "phone": "",
+				    "username": "test",
+				    "isTeacher": 1,
+				    "status": 1,
+				    "email": "",
+				    "comment": "",
+				    "co": "",
+				    "job_number": "",
+				    "price": 0,
+				    "score": 0,
+				    "post": "",
+				    "tip_teacher": [],
+				    "tip_student": "",
+				    "goal": ""
 				}
 			}
 		},
@@ -85,10 +101,30 @@
 					    this.user_find = res.result.data[0]
 						if(this.user_find.password==this.user.password)
 						{
+							db.collection('user_detail').where({
+														  phone: {
+														    $eq: this.user.phone
+														  }
+														}).limit(1).get().then(res => {
+														    this.testing = res.result.data[0]
+														})
+														
+														getApp().globalData.st = this.testing.status
+							
+							
 							getApp().globalData.ph = this.user.phone
-							uni.switchTab({
-							url: "../find_teacher/find_teacher"
-							})
+							if(this.testing.status==0)
+							{
+								uni.switchTab({
+								url: "../find_teacher/find_teacher"
+								})
+							}
+							else{
+								uni.navigateTo({
+								//url: "../m3_confirm_consult/m3_confirm_consult"
+								url: "../m4_release_lecture/m4_release_lecture"
+								})
+							}
 						}
 						else
 						{
@@ -106,46 +142,9 @@
 						return false
 					  }
 					})
-					/*
-					uni.switchTab({ 
-					url: "../find_teacher/find_teacher"
-					})*/
+					
 				}
-				/*uni.request({
-					/*const db = uniCloud.database();
-					db.collection("lecture").add(this.lecture).then(e=>{
-						console.log(e)
-					})*
-					url: 'http://app/login', // 路径
-					method: 'POST', // 请求方法
-					data: {
-						phone: that.user.phone,
-						type: that.type,
-						code: that.testValue,
-						password: that.user.password
-					}, //发送的数据
-					success: (res) => {
-						if (res.data.code == 200) {
-							//存储token
-							that.token = res.data.token;
-							uni.setStorageSync('token', that.token); // 将登录信息以token的方式存在硬盘中
-							uni.setStorageSync('userInfo', JSON.stringify(res.data)); // 将用户信息存储在硬盘中
-							uni.switchTab({
-								//url: "../index/index",
-								url: "../find_teacher/find_teacher",
-							})
-							uni.showToast({
-								title: '登录成功',
-								icon: 'none'
-							})
-						} else {
-							uni.showToast({
-								title: '登录失败',
-								icon: 'none'
-							})
-						}
-					}
-				})*/
+				
 			},
 			
 			isMobile(str) {
