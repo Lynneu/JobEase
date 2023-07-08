@@ -113,6 +113,7 @@
 		onLoad(option) {
 			console.log(option.phone)
 			this.user_detail.phone=option.phone
+			this.consult.teach_tele=option.phone
 			
 			const db = uniCloud.database()
 			 db.collection('user_detail').where({
@@ -137,7 +138,7 @@
 			},
 			duration_change(value) {
 				this.consult.appt_duration = value;
-				this.consult.appt_cost=value * this.consult.appt_duration / 30;
+				this.consult.appt_cost=value * this.user_detail.price / 30;
 			},
 			checktime(pick) {
 				return pick >= this.gethours;
