@@ -198,9 +198,9 @@
 			      duration: 2000
 			   });
 			
-			 // uni.switchTab({
-			   //   url: "../find_lecture/find_lecture"
-			   //});
+			  uni.switchTab({
+			    url: "../find_lecture/find_lecture"
+			 });
 			}
 		},
 		onLoad() {

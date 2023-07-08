@@ -98,7 +98,7 @@
 		//	console.log('Phone:', this.user_detail.phone);
 		},
 		onLoad() {
-			  getApp().globalData.ph = "12345678111";	
+			  //getApp().globalData.ph = "12345678977";	
 			  const db = uniCloud.database()
 			   db.collection('user_detail').where({
 			     phone: {
@@ -145,9 +145,9 @@
 			    .catch((err) => {
 			      console.error("Error updating data:", err);
 			    });
-				//uni.switchTab({
-					//url: "../m2_profile/m2_profile"
-				//})
+				uni.switchTab({
+					url: "../m2_profile/m2_profile"
+				})
 			}
 		}
 	}

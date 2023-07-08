@@ -36,7 +36,7 @@
 		</view>
 		
 		<view class="mi-content">
-			<uni-section :title="'咨询价格 (0-999): '+ user_detail.price+'元/小时'" type="line" padding>
+			<uni-section :title="'咨询价格 (0-999): '+ user_detail.price+'元/30min'" type="line" padding>
 				<uni-number-box  :min="0" :max="999" :step="10" :value="user_detail.price" @change="changePrice" />
 			</uni-section>
 		</view>
@@ -88,7 +88,7 @@
 			//console.log('Phone:', this.user_detail.phone);
 		},
 		onLoad() {
-			//getApp().globalData.ph = "19876543210";			
+			//getApp().globalData.ph = "12345678911";			
 			console.log('Phone:', this.user_detail.phone);
 			  const db = uniCloud.database()
 			   db.collection('user_detail').where({
@@ -138,9 +138,9 @@
 			    .catch((err) => {
 			      console.error("Error updating data:", err);
 			    });
-				//uni.switchTab({
-					//url: "../m2_profile/m2_profile"
-				//})
+				uni.switchTab({
+					url: "../m2_profile/m2_profile"
+				})
 			}
 		}
 	}
