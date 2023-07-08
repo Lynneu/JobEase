@@ -62,7 +62,7 @@
 	</view>
 		<view class="list-area">
 			<uni-list>
-				<uni-list-item title="默认 navigateTo 方式跳转页面" to="../m3_detail_appt_consult/m3_detail_appt_consult" note="列表描述信息"></uni-list-item>
+				<uni-list-item title="默认 navigateTo 方式跳转页面" to="../m3_detail_appt_consult/m3_detail_appt_consult?phone=12345678911" note="列表描述信息"></uni-list-item>
 				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
 				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
 				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>

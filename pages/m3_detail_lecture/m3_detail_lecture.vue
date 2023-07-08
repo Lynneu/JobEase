@@ -66,7 +66,8 @@ export default {
             
         };
     },
-    onLoad() {
+    onLoad(option) {
+		console.log(option.lecture)
         this.getMsg()
     },
     methods: {

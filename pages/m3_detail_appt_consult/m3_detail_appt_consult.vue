@@ -58,7 +58,7 @@
 
 			};
 		},
-		onLoad() {
+		onLoad: function () {
 			const db = uniCloud.database()
 			 db.collection('user_detail').where({
 			   phone: this.user_detail.phone
