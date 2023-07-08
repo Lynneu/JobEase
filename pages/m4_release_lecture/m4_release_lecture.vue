@@ -1,4 +1,4 @@
-<!--7.8 14:51-->
+<!--7.8 17:44-->
 <template>
 	<view class="rl-container">
 			<view class="rl-content">
@@ -46,8 +46,8 @@
 				</radio-group>
 			</view>
 			<view v-if="lecture.lecture_limit === 1" class="rl-content">
-				  <uni-section :title="'允许 : '+ lecture.lecture_number+'人听讲座(0-100)'" type="line" padding>
-				  	<uni-number-box  :min="1" :max="100" :step="10" :value="lecture.lecture_number" @change="changeNumber" />
+				  <uni-section :title="'允许 : '+ lecture.lecture_number+'人听讲座(1-999)'" type="line" padding>
+				  	<uni-number-box  :min="1" :max="999" :step="10" :value="lecture.lecture_number" @change="changeNumber" />
 				  </uni-section>
 			</view>
 			
@@ -101,7 +101,7 @@
 					
 				],
 				lecture:{
-					"phone":"12345678911" ,
+					"phone":"",
 				    "lecture_title":"",
 				    "lecture_content": "",
 				    "lecture_label": 0,
@@ -114,7 +114,10 @@
 				}
 			}
 		},
-		
+		onShow() {
+			this.lecture.phone=getApp().globalData.ph;			
+			//console.log('Phone:', this.lecture.phone);
+		},
 		methods: {
 			changeDirection(e) {
 				console.log(e)
@@ -197,13 +200,14 @@
 			      duration: 2000
 			   });
 			
-			  uni.switchTab({
-			      url: "../find_lecture/find_lecture"
-			   });
+			 // uni.switchTab({
+			   //   url: "../find_lecture/find_lecture"
+			   //});
 			}
 			
 		},
 		onLoad() {
+			
 		}
 	}
 </script>
