@@ -73,23 +73,30 @@
 							        @click="navigateToTutorDetail(tutor.phone)"
 							    >
 									<template v-slot:header>
-										<text>{{`${tutor.username} - ${getJobText(tutor.post)}`}}</text>
-										<view style="display: flex;;">
-										    <text style="font-size: 0.8em; color: #f0ad4e;">{{`${tutor.score}分`}}</text>
-										    <text style="font-size: 0.8em; color: #999;">{{`, 价格 ${tutor.price}/30min`}}</text>
+										<view>
+											<text>{{`${tutor.username} - ${getJobText(tutor.post)}`}}</text>
+										</view>
+									</template>
+									<template v-slot:body>
+										<view style="display: flex;">
+											<text style="font-size: 0.9em; color: #f0ad4e;">{{`${tutor.score}分`}}</text>
+											<text style="font-size: 0.8em; color: #999;">{{`, 价格 ¥${tutor.price}/小时`}}</text>
 										</view>
 									</template>
 							        <template v-slot:footer>
-							            <view>
+							            <view style="display: flex;flex-wrap: wrap;">
 							                <uni-tag 
-												style="font-size: 0.8em;"
+												style="font-size: 0.8em;margin-right: 10px;margin-top: 5px;"
 							                	v-for="(tip, idx) in tutor.tip_teacher" 
 							                	:key="idx" 
 							                	:text="getConsultText(tip)" 
 							                	type="primary" 
-							                	inverted>
-							                </uni-tag><br>
+							                	>
+							                </uni-tag>
 							            </view>
+										<view class="comment-area">
+											<text>{{tutor.comment}}</text>
+										</view>
 							        </template>
 							    </uni-list-item>
 							</uni-list>
@@ -251,12 +258,12 @@
         background-color: #fff;
         border-radius: 10px;
         margin: 5px;
-        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.1);
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
     }
 
     /* Setting the tutor's name and job to be bold, and larger */
     .uni-list-item text {
-        font-size: 1.2em;
+        font-size: 1.1em;
         font-weight: bold;
     }
 
@@ -267,10 +274,10 @@
     }
 
     /* Aligning the price and score information more neatly */
-    .uni-list-item view {
-        display: flex;
-		padding-top: 5px;
-         }
+  //   .uni-list-item view {
+  //       display: flex;
+		// padding-top: 5px;
+  //        }
 		
     .uni-list-item view .uni-tag {
         margin-right: 10px;  /* 增加你需要的间距 */
@@ -304,4 +311,10 @@
         border-radius: 10px;
         padding: 5px 50px;
     }
+	.comment-area {
+		padding-top: 10px;
+		color: #999;
+		font-size: 0.7em;
+		font-weight: normal;
+	}
 </style>

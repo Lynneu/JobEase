@@ -3,8 +3,6 @@ const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   data() {
     return {
-      //user.phone: '', //手机号码
-      //user.password: '', //密码
       showPassword: true,
       //是否显示密码
       showClearIcon: false,
@@ -16,6 +14,22 @@ const _sfc_main = {
       user_find: {
         "phone": "",
         "password": ""
+      },
+      testing: {
+        "phone": "",
+        "username": "test",
+        "isTeacher": 1,
+        "status": 1,
+        "email": "",
+        "comment": "",
+        "co": "",
+        "job_number": "",
+        "price": 0,
+        "score": 0,
+        "post": "",
+        "tip_teacher": [],
+        "tip_student": "",
+        "goal": ""
       }
     };
   },
@@ -58,9 +72,24 @@ const _sfc_main = {
           if (res.result && res.result.data && res.result.data.length > 0) {
             this.user_find = res.result.data[0];
             if (this.user_find.password == this.user.password) {
-              common_vendor.index.switchTab({
-                url: "../find_teacher/find_teacher"
+              db.collection("user_detail").where({
+                phone: {
+                  $eq: this.user.phone
+                }
+              }).limit(1).get().then((res2) => {
+                this.testing = res2.result.data[0];
               });
+              getApp().globalData.st = this.testing.status;
+              getApp().globalData.ph = this.user.phone;
+              if (this.testing.status == 0) {
+                common_vendor.index.switchTab({
+                  url: "../find_teacher/find_teacher"
+                });
+              } else {
+                common_vendor.index.switchTab({
+                  url: "../m2_profile/m2_profile"
+                });
+              }
             } else {
               common_vendor.index.showToast({
                 title: "密码错误",
@@ -99,7 +128,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     c: common_vendor.p({
       type: "number",
       trim: "all",
-      placeholder: "请输入手机号",
+      placeholder: "请输入11位手机号",
       maxlength: "11",
       modelValue: $data.user.phone
     }),
@@ -113,5 +142,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     g: common_vendor.o((...args) => $options.Login && $options.Login(...args))
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-1f4898ea"], ["__file", "E:/hbuilder/JobEase/pages/m1_login/login.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-1f4898ea"], ["__file", "/Users/lynneu/Documents/GitHub/JobEase/pages/m1_login/login.vue"]]);
 wx.createPage(MiniProgramPage);

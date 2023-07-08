@@ -31,7 +31,7 @@ const attrs = [
 const _sfc_main = {
   name: "UniClouddb",
   setup(props) {
-    const dataListRef = props.ssrKey ? props.getone ? common_vendor.shallowSsrRef(void 0, props.ssrKey) : common_vendor.ssrRef([], props.ssrKey) : props.getone ? common_vendor.shallowSsrRef(void 0, "Qwgnj2Md1B4luXuRg8RiDQ==") : common_vendor.ssrRef([], "BA6B40nhR7tAWk1AEMndBw==");
+    const dataListRef = props.ssrKey ? props.getone ? common_vendor.shallowSsrRef(void 0, props.ssrKey) : common_vendor.ssrRef([], props.ssrKey) : props.getone ? common_vendor.shallowSsrRef(void 0, "SNC0FF6AnOrJdtlrVS1w1g==") : common_vendor.ssrRef([], "yxuWH3IPe0ZDuJvZ41qVcw==");
     const instance = common_vendor.getCurrentInstance();
     common_vendor.onMounted(() => {
       if ((!dataListRef.value || dataListRef.value.length === 0) && !props.manual && props.loadtime === loadMode.auto) {
@@ -549,5 +549,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   };
 }
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "D:/code/HBuilderX.3.8.4/HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-components/lib/unicloud-db/unicloud-db.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Applications/HBuilderX.app/Contents/HBuilderX/plugins/uniapp-cli-vite/node_modules/@dcloudio/uni-components/lib/unicloud-db/unicloud-db.vue"]]);
 wx.createComponent(Component);

@@ -62,6 +62,7 @@ const _sfc_main = {
             db.collection("user").add(this.user).then((e) => {
               console.log(e);
             });
+            getApp().globalData.ph = this.user.phone;
             common_vendor.index.navigateTo({
               url: "../m1_role_select/m1_role_select"
             });
@@ -92,14 +93,14 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     c: common_vendor.p({
       type: "number",
       trim: "all",
-      placeholder: "请输入手机号",
+      placeholder: "请输入11位手机号",
       maxlength: "11",
       modelValue: $data.user.phone
     }),
     d: common_vendor.o(($event) => $data.user.password = $event),
     e: common_vendor.p({
       type: "password",
-      placeholder: "请输入密码",
+      placeholder: "请输入4-15位密码",
       modelValue: $data.user.password
     }),
     f: common_vendor.o(($event) => $data.password_double = $event),
@@ -111,5 +112,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     h: common_vendor.o((...args) => $options.Login && $options.Login(...args))
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-eb4da951"], ["__file", "E:/hbuilder/JobEase/pages/m1_sign/m1_sign.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-eb4da951"], ["__file", "/Users/lynneu/Documents/GitHub/JobEase/pages/m1_sign/m1_sign.vue"]]);
 wx.createPage(MiniProgramPage);

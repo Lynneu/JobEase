@@ -1,0 +1,1 @@
+{"bsonType":"object","required":[],"permission":{"read":true,"create":true,"update":true,"delete":true},"properties":{"_id":{"description":"存储文档 ID（用户 ID），系统自动生成"},"password":{"bsonType":"string","title":"密码","description":"密码，加密存储","trim":"both"},"phone":{"title":"手机号码","description":"手机号码","trim":"both"}}}

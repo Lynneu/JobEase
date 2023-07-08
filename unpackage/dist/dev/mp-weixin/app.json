@@ -15,7 +15,8 @@
     "pages/m3_confirm_consult/m3_confirm_consult",
     "pages/m2_profile/m2_profile",
     "pages/m2_my_consult/m2_my_consult",
-    "pages/m2_my_lecture/m2_my_lecture"
+    "pages/m2_my_lecture/m2_my_lecture",
+    "pages/m3_confirm_consult/m3_choosetime/m3_choosetime"
   ],
   "window": {
     "navigationBarTextStyle": "black",

@@ -19,7 +19,7 @@
     "condition": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.32.3",
+  "libVersion": "2.33.0",
   "appid": "wx347c45fa9c8c2e33",
   "projectname": "JobEase",
   "condition": {},

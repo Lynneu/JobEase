@@ -29,6 +29,11 @@ const _sfc_main = {
       common_vendor.index.navigateTo({
         url: "../m2_my_lecture/m2_my_lecture"
       });
+    },
+    goToRoleSelect() {
+      common_vendor.index.navigateTo({
+        url: "../m1_role_select/m1_role_select"
+      });
     }
   }
 };
@@ -78,8 +83,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       size: "18",
       color: "#999"
     }),
-    k: common_vendor.o($options.seekerinfo)
+    k: common_vendor.o($options.goToRoleSelect)
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "E:/hbuilder/JobEase/pages/m2_profile/m2_profile.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/lynneu/Documents/GitHub/JobEase/pages/m2_profile/m2_profile.vue"]]);
 wx.createPage(MiniProgramPage);

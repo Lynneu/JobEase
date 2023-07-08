@@ -3,6 +3,22 @@ const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   data() {
     return {
+      test: {
+        "phone": "000",
+        "username": "求职者11111111",
+        "isTeacher": 0,
+        "status": 0,
+        "email": "",
+        "comment": "",
+        "co": "",
+        "job_number": "",
+        "price": 0,
+        "score": 0,
+        "post": "",
+        "tip_teacher": [],
+        "tip_student": "",
+        "goal": ""
+      },
       list: [
         {
           course_id: "1",
@@ -22,6 +38,9 @@ const _sfc_main = {
     };
   },
   methods: {
+    onShow() {
+      this.test.phone = getApp().globalData.ph;
+    },
     choice(index) {
       if (this.list[index].selected == true) {
         this.list[index].selected = false;
@@ -44,6 +63,7 @@ const _sfc_main = {
     },
     //提交
     sure() {
+      this.test.phone = getApp().globalData.ph;
       if (this.selectId.length == 0) {
         common_vendor.index.showToast({
           title: "请选择身份",
@@ -53,13 +73,53 @@ const _sfc_main = {
       }
       var listIds = this.selectId.join(",");
       console.log("提交的数据", listIds);
+      const db = common_vendor.Ds.database();
       if (listIds.includes("2")) {
+        getApp().globalData.st = 1;
+        db.collection("user_detail").where({
+          phone: {
+            $eq: this.test.phone
+          }
+        }).limit(1).get().then((res) => {
+          if (res.result && res.result.data && res.result.data.length > 0) {
+            this.test = res.result.data[0];
+            if (this.test.isTeacher == 0) {
+              common_vendor.index.navigateTo({
+                url: "../m1_identify_teacher/m1_identify_teacher"
+              });
+            } else {
+              common_vendor.index.switchTab({
+                url: "../m2_profile/m2_profile"
+              });
+            }
+          } else {
+            common_vendor.index.navigateTo({
+              url: "../m1_identify_teacher/m1_identify_teacher"
+            });
+          }
+        });
         common_vendor.index.navigateTo({
           url: "../m1_identify_teacher/m1_identify_teacher"
         });
       } else {
-        common_vendor.index.switchTab({
-          url: "../find_teacher/find_teacher"
+        getApp().globalData.st = 0;
+        db.collection("user_detail").where({
+          phone: {
+            $eq: this.test.phone
+          }
+        }).limit(1).get().then((res) => {
+          if (res.result && res.result.data && res.result.data.length > 0) {
+            this.test = res.result.data[0];
+            getApp().globalData.st = 0;
+          } else {
+            this.test.phone = getApp().globalData.ph;
+            db.collection("user_detail").add(this.test).then((e) => {
+              console.log(e);
+            });
+          }
+          common_vendor.index.switchTab({
+            url: "../find_teacher/find_teacher"
+          });
         });
       }
     }
@@ -81,5 +141,5 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     b: common_vendor.o((...args) => $options.sure && $options.sure(...args))
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "E:/hbuilder/JobEase/pages/m1_role_select/m1_role_select.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/lynneu/Documents/GitHub/JobEase/pages/m1_role_select/m1_role_select.vue"]]);
 wx.createPage(MiniProgramPage);

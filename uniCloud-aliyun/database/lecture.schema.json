@@ -1,0 +1,1 @@
+{"bsonType":"object","required":[],"permission":{"read":true,"create":true,"update":true,"delete":true},"properties":{"_id":{"description":"ID，系统自动生成"},"phone":{},"lecture_title":{},"lecture_content":{},"lecture_label":{},"lecture_price":{},"lecture_time":{},"lecture_duration":{},"lecture_limit":{},"lecture_number":{},"lecture_reserved":{}}}

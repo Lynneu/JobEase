@@ -43,3 +43,64 @@
 .list-area {
   margin-top: 5px;
 }
+
+/* Setting the list items to have a uniform background, and round edges */
+.uni-list-item {
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Setting the tutor's name and job to be bold, and larger */
+.uni-list-item text {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+/* Making the consult tags stand out a bit more */
+.uni-tag {
+  background-color: #007AFF;
+  color: #fff;
+}
+
+/* Aligning the price and score information more neatly */
+.uni-list-item view .uni-tag {
+  margin-right: 10px;
+  /* 增加你需要的间距 */
+}
+.uni-list-item view .uni-tag:last-child {
+  margin-right: 0;
+  /* 为最后一个标签移除右边距 */
+}
+
+/* Style for search bar */
+.uni-search-bar {
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for drawer */
+.uni-drawer {
+  padding: 10px;
+  background-color: #fff;
+}
+
+/* Style for drawer forms */
+.form-container {
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Style for drawer button */
+.choose button {
+  border-radius: 10px;
+  padding: 5px 50px;
+}
+.comment-area {
+  padding-top: 10px;
+  color: #999;
+  font-size: 0.7em;
+  font-weight: normal;
+}

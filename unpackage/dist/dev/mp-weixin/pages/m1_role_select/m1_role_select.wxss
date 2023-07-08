@@ -12,8 +12,8 @@ page{
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		font-size: 20rpx;
-		padding: 0 10rpx;
+		font-size: 30rpx;
+		padding: 0 20rpx;
 }
 .selde-q {
 		width: 18rpx;

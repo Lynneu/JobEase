@@ -14,10 +14,26 @@ const _sfc_main = {
         name: "",
         number: "",
         jobchoose: 0,
-        consult: [0],
+        consult: [],
         pay: "",
         email: "",
         code: ""
+      },
+      user_detail: {
+        "phone": "",
+        "username": "",
+        "isTeacher": 1,
+        "status": 1,
+        "email": "",
+        "comment": "",
+        "co": "",
+        "job_number": "",
+        "price": 0,
+        "score": 0,
+        "post": 1,
+        "tip_teacher": [],
+        "tip_student": 1,
+        "goal": 1
       },
       jobs: [
         { value: 0, text: "前端开发" },
@@ -37,8 +53,7 @@ const _sfc_main = {
         { value: 2, text: "就业指导" },
         { value: 3, text: "职业规划" },
         { value: 4, text: "薪资谈判" },
-        { value: 5, text: "测试开发" },
-        { value: 6, text: "其他" }
+        { value: 5, text: "其他" }
       ],
       rules: {
         company: {
@@ -105,7 +120,19 @@ const _sfc_main = {
       this.$refs[ref].validate().then((res) => {
         console.log("success", res);
         common_vendor.index.showToast({
-          title: `校验通过`
+          title: "校验通过"
+        });
+        this.user_detail.phone = getApp().globalData.ph;
+        this.user_detail.username = this.valiFormData.name;
+        this.user_detail.email = this.valiFormData.email;
+        this.user_detail.co = this.valiFormData.company;
+        this.user_detail.job_number = this.valiFormData.number;
+        this.user_detail.price = this.valiFormData.pay;
+        this.user_detail.post = this.valiFormData.jobchoose;
+        this.user_detail.tip_teacher = this.valiFormData.consult;
+        const db = common_vendor.Ds.database();
+        db.collection("user_detail").add(this.user_detail).then((e) => {
+          console.log(e);
         });
         common_vendor.index.switchTab({
           url: "../find_teacher/find_teacher"
@@ -186,7 +213,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       modelValue: $data.valiFormData.name
     }),
     f: common_vendor.p({
-      label: "用户名",
+      label: "用户名称",
       ["label-width"]: "60",
       name: "name"
     }),
@@ -266,12 +293,12 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       label: "验证码",
       name: "code"
     }),
-    F: common_vendor.sr("valiForm", "4b9ff3d6-0"),
+    F: common_vendor.sr("valiForm", "67d438eb-0"),
     G: common_vendor.p({
       modelValue: $data.valiFormData
     }),
     H: common_vendor.o(($event) => $options.submit("valiForm"))
   });
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "E:/hbuilder/JobEase/pages/m1_identify_teacher/m1_identify_teacher.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/lynneu/Documents/GitHub/JobEase/pages/m1_identify_teacher/m1_identify_teacher.vue"]]);
 wx.createPage(MiniProgramPage);

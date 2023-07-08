@@ -3,105 +3,89 @@ const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   data() {
     return {
-      consult_cost: "120",
-      consult_theme: "就业指导",
-      consult_date: "2023.6.18",
-      consult_duration: "30",
-      picktime: 0,
-      time: [
-        { text: "08:00", value: 0 },
-        { text: "09:00", value: 1 },
-        { text: "10:00", value: 2 },
-        { text: "11:00", value: 3 }
-      ]
+      appt_theme: [
+        { value: 0, text: "简历优化" },
+        { value: 1, text: "面试经验" },
+        { value: 2, text: "就业指导" },
+        { value: 3, text: "职业规划" },
+        { value: 4, text: "薪资谈判" },
+        { value: 5, text: "其他" }
+      ],
+      phone: ""
     };
   },
+  onShow() {
+    this.phone = getApp().globalData.ph;
+  },
   methods: {
-    open() {
-      this.$refs.popup.open("center");
-    },
-    close() {
-      this.$refs.popup.close();
+    updatefn(item) {
+      console.log("cehsi");
+      common_vendor.index.navigateTo({
+        url: "../m3_confirm_consult/m3_choosetime/m3_choosetime?item=" + JSON.stringify(item),
+        success: (res) => {
+        },
+        fail: () => {
+        },
+        complete: () => {
+        }
+      });
     }
   }
 };
 if (!Array) {
-  const _easycom_uni_section2 = common_vendor.resolveComponent("uni-section");
-  const _easycom_uni_card2 = common_vendor.resolveComponent("uni-card");
-  const _easycom_uni_data_checkbox2 = common_vendor.resolveComponent("uni-data-checkbox");
-  const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
-  (_easycom_uni_section2 + _easycom_uni_card2 + _easycom_uni_data_checkbox2 + _easycom_uni_popup2)();
+  const _easycom_uni_list_item2 = common_vendor.resolveComponent("uni-list-item");
+  const _easycom_uni_list2 = common_vendor.resolveComponent("uni-list");
+  const _easycom_unicloud_db2 = common_vendor.resolveComponent("unicloud-db");
+  (_easycom_uni_list_item2 + _easycom_uni_list2 + _easycom_unicloud_db2)();
 }
-const _easycom_uni_section = () => "../../uni_modules/uni-section/components/uni-section/uni-section.js";
-const _easycom_uni_card = () => "../../uni_modules/uni-card/components/uni-card/uni-card.js";
-const _easycom_uni_data_checkbox = () => "../../uni_modules/uni-data-checkbox/components/uni-data-checkbox/uni-data-checkbox.js";
-const _easycom_uni_popup = () => "../../uni_modules/uni-popup/components/uni-popup/uni-popup.js";
+const _easycom_uni_list_item = () => "../../uni_modules/uni-list/components/uni-list-item/uni-list-item.js";
+const _easycom_uni_list = () => "../../uni_modules/uni-list/components/uni-list/uni-list.js";
+const _easycom_unicloud_db = () => "../../node-modules/@dcloudio/uni-components/lib/unicloud-db/unicloud-db.js";
 if (!Math) {
-  (_easycom_uni_section + _easycom_uni_card + _easycom_uni_data_checkbox + _easycom_uni_popup)();
+  (_easycom_uni_list_item + _easycom_uni_list + _easycom_unicloud_db)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_vendor.p({
-      title: "咨询信息",
-      type: "line"
+    a: common_vendor.w(({
+      data,
+      loading,
+      error,
+      options
+    }, s0, i0) => {
+      return common_vendor.e({
+        a: error
+      }, error ? {
+        b: common_vendor.t(error.message)
+      } : {
+        c: common_vendor.f(data.filter((item) => item.appt_state === 0 && item.teach_tele === $data.phone), (item, k1, i1) => {
+          return {
+            a: common_vendor.t(item.appt_cost),
+            b: common_vendor.t($data.appt_theme[item.appt_label].text),
+            c: common_vendor.t(item.appt_date),
+            d: common_vendor.t(item.appt_duration),
+            e: item._id,
+            f: common_vendor.o(($event) => $options.updatefn(item), item._id),
+            g: "38044095-2-" + i0 + "-" + i1 + "," + ("38044095-1-" + i0)
+          };
+        }),
+        d: common_vendor.p({
+          where: `item.appt_state = 0`,
+          direction: "column"
+        }),
+        e: "38044095-1-" + i0 + ",38044095-0"
+      }, {
+        f: i0,
+        g: s0
+      });
+    }, {
+      name: "d",
+      path: "a",
+      vueId: "38044095-0"
     }),
-    b: common_vendor.t($data.consult_cost),
-    c: common_vendor.t($data.consult_theme),
-    d: common_vendor.t($data.consult_date),
-    e: common_vendor.t($data.consult_duration),
-    f: common_vendor.o(($event) => $options.open()),
-    g: common_vendor.p({
-      padding: "5px",
-      margin: "6px"
-    }),
-    h: common_vendor.p({
-      title: "咨询信息",
-      type: "line"
-    }),
-    i: common_vendor.t($data.consult_cost),
-    j: common_vendor.t($data.consult_theme),
-    k: common_vendor.t($data.consult_date),
-    l: common_vendor.t($data.consult_duration),
-    m: common_vendor.o(($event) => $options.open()),
-    n: common_vendor.p({
-      padding: "5px",
-      margin: "6px"
-    }),
-    o: common_vendor.p({
-      title: "咨询信息",
-      type: "line"
-    }),
-    p: common_vendor.t($data.consult_cost),
-    q: common_vendor.t($data.consult_theme),
-    r: common_vendor.t($data.consult_date),
-    s: common_vendor.t($data.consult_duration),
-    t: common_vendor.o(($event) => $options.open()),
-    v: common_vendor.p({
-      padding: "5px",
-      margin: "6px"
-    }),
-    w: common_vendor.p({
-      title: "选择咨询时间(单选)",
-      type: "line"
-    }),
-    x: common_vendor.o(($event) => $data.picktime = $event),
-    y: common_vendor.p({
-      localdata: $data.time,
-      mode: "list",
-      modelValue: $data.picktime
-    }),
-    z: common_vendor.o((...args) => $options.close && $options.close(...args)),
-    A: common_vendor.o((...args) => $options.close && $options.close(...args)),
-    B: common_vendor.p({
-      margin: "1px"
-    }),
-    C: common_vendor.sr("popup", "82708b80-6"),
-    D: common_vendor.p({
-      ["mask-click"]: false,
-      type: "center",
-      ["background-color"]: "#fff"
+    b: common_vendor.p({
+      collection: "consult"
     })
   };
 }
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "E:/hbuilder/JobEase/pages/m3_confirm_consult/m3_confirm_consult.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/lynneu/Documents/GitHub/JobEase/pages/m3_confirm_consult/m3_confirm_consult.vue"]]);
 wx.createPage(MiniProgramPage);
