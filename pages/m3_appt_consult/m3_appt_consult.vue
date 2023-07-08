@@ -2,6 +2,8 @@
 	<view>
 		<view class="appt_content">
 			
+			<uni-section :title="'导师姓名：'+user_detail.username" type="line"></uni-section>
+			
 			<uni-section title="咨询主题:" class="label" type="line"></uni-section>
 			<view class="appt_theme">
 				<uni-data-select 
@@ -11,7 +13,9 @@
 				@change="apptpick_theme()">
 				</uni-data-select>
 			</view>
-		
+			
+			<uni-section :title="'咨询价格：'+user_detail.price+'元/30min'" type="line"></uni-section>
+			
 			<view class="appt_duration">
 				<view>
 					<uni-section :title="'预约时长 : '+consult.appt_duration+'分钟'" type="line"></uni-section>
@@ -85,15 +89,15 @@
 					{text: '23:00', value: 23}
 					],
 				user_detail:{
-					"_id":"",
+					"username":"",
 					"phone":"12345678911",
-					"username":"11",
-					"price":10		
+					"price":""
 				},
 				consult:{
 					"teach_tele": "12345678911",
 					"stud_tele": "12345678910",
 					"appt_label": 0,
+					"appt_price": 30,
 					"appt_duration": 0,
 					"appt_date": Date.now(),
 					"appt_time1": [],
@@ -103,7 +107,20 @@
 				}
 			};
 		},
-
+		onLoad() {
+			const db = uniCloud.database()
+			 db.collection('user_detail').where({
+			   phone: this.user_detail.phone
+			 }).limit(1).get().then(res => {
+			   if (res.result && res.result.data && res.result.data.length > 0) {
+			     this.user_detail = res.result.data[0]
+			   } else {
+			     console.error('No data found.')
+			   }
+			 }).catch(err => {
+			   console.error('Error retrieving data:', err)
+			 })
+		 },
 		methods:{
 			apptpick_theme(e) {
 				console.log(e)
@@ -113,7 +130,7 @@
 			},
 			duration_change(value) {
 				this.consult.appt_duration = value;
-				this.user_detail.price=value * this.consult.appt_duration / 30;
+				this.consult.appt_cost=value * this.consult.appt_duration / 30;
 			},
 			checktime(pick) {
 				return pick >= this.gethours;

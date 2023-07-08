@@ -6,7 +6,7 @@
 
             </view>
             <view>
-                <uni-section :title="'演 讲 人 ：'+ username" type="line" padding="0px"></uni-section>
+                <uni-section :title="'演 讲 人 ：'+ user_detail.username" type="line" padding="0px"></uni-section>
                 <uni-section :title="'讲座时间：'+ lecture.lecture_time" type="line"></uni-section>
                 <uni-section :title="'讲座主题：'+ direction[lecture.lecture_label].text" type="line"></uni-section>
                 <uni-section :title="'讲座费用：'+lecture.lecture_price+' 元  / 30min'" type="line"></uni-section>
@@ -45,6 +45,7 @@ export default {
                 { value: 9, text: '其他' }
             ],
             lecture: {
+				_id:"64a9065821821b46a5e93a35",
                 phone: 0,
                 lecture_title: '',
                 lecture_time: '0000.00.00 ' + ' 00:00',
@@ -54,7 +55,15 @@ export default {
                 lecture_reserved: 0,
                 lecture_content: ''
             },
-            username: ''
+			user_detail:{
+				username: '',
+			},
+			appt_lecture:{
+				lecture_id:'',
+				phone:'12345678900',
+				lecture_state:0
+			}
+            
         };
     },
     onLoad() {
@@ -63,7 +72,7 @@ export default {
     methods: {
         getMsg() {
             const db = uniCloud.database() // 创建数据库连接
-            db.collection("lecture").get() // 获取数据表的信息
+            db.collection("lecture").doc(this.lecture._id).get() // 获取数据表的信息
                 .then(res => {
                     console.log(res)
                     this.lecture = res.result.data[0]
@@ -75,7 +84,7 @@ export default {
                         .then(res => {
                             console.log(res)
                             if (res.result.data.length > 0) {
-                                this.username = res.result.data[0].username; // 获取查询结果中的username，并赋值给this.username
+                                this.user_detail.username = res.result.data[0].username; // 获取查询结果中的username，并赋值给this.username
                             }
                         })
                         .catch(err => {
@@ -87,6 +96,10 @@ export default {
                 })
         },
         appointLecture() {
+			const db = uniCloud.database();
+			db.collection("appt_lecture").add(this.appt_lecture).then(e=>{
+				console.log(e)
+			})	
 			uni.switchTab({
 							  url: '../find_lecture/find_lecture'
 							});
