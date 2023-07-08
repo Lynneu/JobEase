@@ -28,7 +28,7 @@
 			</view>
 			
 			<view class="r1-content">
-			<uni-section :title="'预期时间 : '+ lecture.lecture_duration+'分钟'" type="line" padding>
+			<uni-section :title="'预期时长 : '+ lecture.lecture_duration+'分钟(0-999)'" type="line" padding>
 				<uni-number-box   :max="999" :step="10" :value="lecture.lecture_duration" @change="changeLast" />
 			</uni-section>
 			</view>

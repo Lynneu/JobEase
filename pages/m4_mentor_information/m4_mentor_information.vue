@@ -83,11 +83,10 @@
 			}
 		},
 		onShow() {
-			this.user_detail.phone=getApp().globalData.ph;			
-			//console.log('Phone:', this.user_detail.phone);
+			this.user_detail.phone=getApp().globalData.ph;		
 		},
 		onLoad() {
-			getApp().globalData.ph = "12345678911";			
+			//getApp().globalData.ph = "13912345678";			
 			console.log('Phone:', this.user_detail.phone);
 			  const db = uniCloud.database()
 			   db.collection('user_detail').where({
