@@ -5,8 +5,8 @@
 		</view>
 		
 		<view class="input-area">
-			<uni-easyinput type="number" trim="all" v-model="user.phone" placeholder="请输入手机号" maxlength="11" @input="input"></uni-easyinput>
-			<uni-easyinput type="password" v-model="user.password" placeholder="请输入密码"></uni-easyinput>
+			<uni-easyinput type="number" trim="all" v-model="user.phone" placeholder="请输入11位手机号" maxlength="11" @input="input"></uni-easyinput>
+			<uni-easyinput type="password" v-model="user.password" placeholder="请输入4-15位密码"></uni-easyinput>
 			<uni-easyinput type="password" v-model="password_double" placeholder="请再次输入密码"></uni-easyinput>
 		</view>
 		<view class="login-btn" @click="Login">注册</view>
@@ -68,37 +68,11 @@
 					})
 					return false
 				}
-				// 未连接到后端，测试用！/
 				else 
 				{
-					//int flag=1
-					
-					const db = uniCloud.database();
-					
-					/*flag=db.collection("user").where({
-						phone:
-						{
-							$eq:this.user.phone
-						}
-					}).get().count()
-					/*}).get().then(res=>{
-						uni.showToast({
-							title: '手机号已注册',
-							icon: 'none'
-						})
-						flag=0
-					})
-					if(flag=!0)
-					{
-						uni.showToast({
-							title: '手机号已注册',
-							icon: 'none'
-						})
-						return false
-						
-					}*/
 
-					//else
+					const db = uniCloud.database();
+				
 					db.collection('user').where({
 					  phone: {
 					    $eq: this.user.phone
@@ -115,6 +89,7 @@
 					    db.collection("user").add(this.user).then(e=>{
 					    		console.log(e)
 					    	})
+						getApp().globalData.ph = this.user.phone
 					    uni.navigateTo({ 
 					    	url: "../m1_role_select/m1_role_select",
 					    })

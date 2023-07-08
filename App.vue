@@ -1,5 +1,9 @@
 <script>
 	export default {
+		globalData: {  
+		    ph: '19876543211',//手机号
+			st:0//身份，0求职者，1导师
+		  },
 		onLaunch: function() {
 		},
 		onShow: function() {

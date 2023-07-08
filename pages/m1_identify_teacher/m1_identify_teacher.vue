@@ -11,7 +11,7 @@
 								placeholder="最大输入长度为20" >
 							</uni-easyinput>
 						</uni-forms-item>
-						<uni-forms-item label="用户名" label-width=60 name="name"> 
+						<uni-forms-item label="用户名称" label-width=60 name="name"> 
 							<uni-easyinput
 								maxlength="10"
 								trim="all" 
@@ -69,6 +69,7 @@
 	export default {
 		data() {
 			return {
+				phone:"",
 				show_again: 0, //  显示发送验证码||请稍后按钮
 				count: "", // 等待时间
 				timer: null, //定时器
@@ -76,8 +77,8 @@
 					company: '',
 					name: '',
 					number: '',
-					jobchoose: 0,
-					consult: [0],
+					jobchoose: 9,
+					consult: [],
 					pay: '',
 					email: '',
 					code: ''

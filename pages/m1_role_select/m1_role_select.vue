@@ -114,8 +114,8 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		font-size: 20upx;
-		padding: 0 10upx;
+		font-size: 30upx;
+		padding: 0 20upx;
 	}
 
 	.selde-q {

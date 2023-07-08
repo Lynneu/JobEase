@@ -4,7 +4,7 @@
 			登录
 		</view>
 		<view class="input-area">
-			<uni-easyinput type="number" trim="all" v-model="user.phone" placeholder="请输入手机号" maxlength="11" @input="input"></uni-easyinput>
+			<uni-easyinput type="number" trim="all" v-model="user.phone" placeholder="请输入11位手机号" maxlength="11" @input="input"></uni-easyinput>
 			<uni-easyinput class="password-area" type="password" v-model="user.password" placeholder="请输入密码"></uni-easyinput>
 		</view>
 		
@@ -21,8 +21,6 @@
 	export default {
 		data() {
 			return {
-				//user.phone: '', //手机号码
-				//user.password: '', //密码
 				showPassword: true, //是否显示密码
 				showClearIcon: false, //是否显示清除按钮
 				user:{
@@ -74,7 +72,7 @@
 					})
 					return false
 				}
-				// 未连接到后端，测试用！
+				
 				else 
 				{
 					const db = uniCloud.database();
@@ -87,6 +85,7 @@
 					    this.user_find = res.result.data[0]
 						if(this.user_find.password==this.user.password)
 						{
+							getApp().globalData.ph = this.user.phone
 							uni.switchTab({
 							url: "../find_teacher/find_teacher"
 							})
