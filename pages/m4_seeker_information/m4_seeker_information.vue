@@ -1,4 +1,4 @@
-<!--7.8 17:44-->
+<!--7.8 20:29-->
 <template>
 	<view class="si-container">
 		<view style="text-align: center;">
@@ -98,6 +98,7 @@
 		//	console.log('Phone:', this.user_detail.phone);
 		},
 		onLoad() {
+			  getApp().globalData.ph = "12345678111";	
 			  const db = uniCloud.database()
 			   db.collection('user_detail').where({
 			     phone: {

@@ -1,4 +1,4 @@
-<!--7.8 17:44-->
+<!--7.8 20:29-->
 <template>
 	<view class="rl-container">
 			<view class="rl-content">
@@ -80,12 +80,12 @@
 					{ value: 6, text: '产品经理' },
 					{ value: 7, text: '运营' },
 					{ value: 8, text: 'HR' },
-					{ value: 10, text: '简历优化' },
-					{ value: 11, text: '面试经验' },
-					{ value: 12, text: '就业指导' },
-					{ value: 13, text: '职业规划' },
-					{ value: 14, text: '薪资谈判' },
-					{ value: 15, text: '其他' }
+					{ value: 9, text: '简历优化' },
+					{ value: 10, text: '面试经验' },
+					{ value: 11, text: '就业指导' },
+					{ value: 12, text: '职业规划' },
+					{ value: 13, text: '薪资谈判' },
+					{ value: 14, text: '其他' }
 				],
 				start: Date.now(),
 				end: Date.now() + 14 * 24 * 3600000,
@@ -167,8 +167,6 @@
 			changeNumber(value) {
 				this.lecture.lecture_number = value;
 			},
-		
-		
 			submit() {
 			   if (!this.lecture.lecture_title) {
 			      uni.showToast({
@@ -204,11 +202,9 @@
 			   //   url: "../find_lecture/find_lecture"
 			   //});
 			}
-			
 		},
 		onLoad() {
-			
-		}
+	}
 	}
 </script>
 
