@@ -93,8 +93,7 @@
 			}
 		},
 		onShow() {
-			this.user_detail.phone=getApp().globalData.ph;			
-		//	console.log('Phone:', this.user_detail.phone);
+			this.user_detail.phone=getApp().globalData.ph;		
 		},
 		onLoad() {
 			  //getApp().globalData.ph = "12345678977";	
