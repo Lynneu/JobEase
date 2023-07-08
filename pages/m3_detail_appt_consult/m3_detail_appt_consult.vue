@@ -8,7 +8,7 @@
 				<uni-section :title="'专业标签：'+user_detail.tip_teacher.map(value => tag.find(item => item.value === value)?.text).join(' ')" type="line" padding="0px"></uni-section>
 				<uni-section :title="'评　　分：'+user_detail.score+'分'" type="line"></uni-section>
 				<uni-section :title="'工作单位：'+user_detail.co" type="line"></uni-section>
-				<uni-section :title="'咨询费用：'+user_detail.price+' 元  / 30min'" type="line"></uni-section>
+				<uni-section :title="'咨询费用：'+user_detail.price+' 元  / 小时'" type="line"></uni-section>
 				<view class="line"></view>
 				<uni-section title="导师介绍" type="circle"></uni-section>
 			</view>
@@ -40,7 +40,7 @@
 				],
 				user_detail:{
 					"_id":"",
-					"phone":"12345678911",
+					"phone":"",
 					"username":"",
 					"isTeacher":"",
 					"status":"",
@@ -58,7 +58,10 @@
 
 			};
 		},
-		onLoad: function () {
+		onLoad: function (option) {
+			console.log(option.phone)
+			this.user_detail.phone=option.phone
+			
 			const db = uniCloud.database()
 			 db.collection('user_detail').where({
 			   phone: this.user_detail.phone
@@ -72,11 +75,12 @@
 			   console.error('Error retrieving data:', err)
 			 })
 		 },
+		 
 		methods:{
 			appointconsult(e){
 				console.log(e)
 				uni.navigateTo({
-					url:'../m3_appt_consult/m3_appt_consult'
+					url:'../m3_appt_consult/m3_appt_consult?phone='+this.user_detail.phone
 				});
 			},
 		}

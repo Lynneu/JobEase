@@ -14,14 +14,14 @@
 				</uni-data-select>
 			</view>
 			
-			<uni-section :title="'咨询价格：'+user_detail.price+'元/30min'" type="line"></uni-section>
+			<uni-section :title="'咨询价格：'+user_detail.price+'元/小时'" type="line"></uni-section>
 			
 			<view class="appt_duration">
 				<view>
-					<uni-section :title="'预约时长 : '+consult.appt_duration+'分钟'" type="line"></uni-section>
+					<uni-section :title="'预约时长 : '+consult.appt_duration+'小时'" type="line"></uni-section>
 				</view>
 				<view>
-					<uni-number-box :step=30 :max=120 :min=0 :value="consult.appt_duration" @change="duration_change" background="#2979FF" color="#fff" />
+					<uni-number-box :step=1 :max=2 :min=0 :value="consult.appt_duration" @change="duration_change" background="#2979FF" color="#fff" />
 				</view>
 				<view class="extra"></view>
 				
@@ -90,16 +90,15 @@
 					],
 				user_detail:{
 					"username":"",
-					"phone":"12345678911",
+					"phone":"12345678900",
 					"price":""
 				},
 				consult:{
-					"teach_tele": "12345678911",
-					"stud_tele": "12345678910",
+					"teach_tele": "",
+					"stud_tele": "",
 					"appt_label": 0,
-					"appt_price": 30,
 					"appt_duration": 0,
-					"appt_date": Date.now(),
+					"appt_date":'',
 					"appt_time1": [],
 					"appt_time2": 23,
 					"appt_cost": 0,
@@ -107,7 +106,15 @@
 				}
 			};
 		},
-		onLoad() {
+		onShow() {
+			this.consult.stud_tele=getApp().globalData.ph;			
+			//console.log('Phone:', this.lecture.phone);
+		},
+		onLoad(option) {
+			console.log(option.phone)
+			this.user_detail.phone=option.phone
+			this.consult.teach_tele=option.phone
+			
 			const db = uniCloud.database()
 			 db.collection('user_detail').where({
 			   phone: this.user_detail.phone
@@ -120,6 +127,7 @@
 			 }).catch(err => {
 			   console.error('Error retrieving data:', err)
 			 })
+			 this.consult.teach_tele=this.user_detail.phone;
 		 },
 		methods:{
 			apptpick_theme(e) {
@@ -130,15 +138,24 @@
 			},
 			duration_change(value) {
 				this.consult.appt_duration = value;
-				this.consult.appt_cost=value * this.consult.appt_duration / 30;
+				this.consult.appt_cost=value * this.user_detail.price;
 			},
 			checktime(pick) {
 				return pick >= this.gethours;
 			},
 			appointAndpay() {
+				console.log('dianle')
 				if (this.consult.appt_duration==0) {
 					uni.showToast({
 						title: '预约时长需大于零',
+						icon: 'none',
+						duration: 2000
+					});
+					return;
+				}
+				if (!this.consult.appt_date) {
+					uni.showToast({
+						title: '请选择预约日期',
 						icon: 'none',
 						duration: 2000
 					});
@@ -162,12 +179,13 @@
 					}	
 					return;
 				}
-				
+				console.log('注释掉的出来了')
 				const db = uniCloud.database();
-				db.collection("consult").add(this.consult).then(e=>{
-					console.log(e)
-				})				
-						
+				db.collection("consult").add(this.consult).then(res => {
+				  console.log(res)
+				}).catch(err => {
+				  console.error('Error adding data:', err)
+				});					
 				uni.showToast({
 					title: '预约成功',
 					icon: 'none',
@@ -177,8 +195,6 @@
 				  url: '../find_teacher/find_teacher'
 				});
 			}
-		},
-		onLoad() {
 		}
 		
 	}

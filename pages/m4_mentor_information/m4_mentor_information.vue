@@ -1,4 +1,3 @@
-<!--7.8 20:29-->
 <template>
 	<view class="si-container">
 		<view style="text-align: center;">
@@ -88,7 +87,7 @@
 			//console.log('Phone:', this.user_detail.phone);
 		},
 		onLoad() {
-			//getApp().globalData.ph = "19876543210";			
+			getApp().globalData.ph = "12345678911";			
 			console.log('Phone:', this.user_detail.phone);
 			  const db = uniCloud.database()
 			   db.collection('user_detail').where({
@@ -138,9 +137,9 @@
 			    .catch((err) => {
 			      console.error("Error updating data:", err);
 			    });
-				//uni.switchTab({
-					//url: "../m2_profile/m2_profile"
-				//})
+				uni.switchTab({
+					url: "../m2_profile/m2_profile"
+				})
 			}
 		}
 	}
