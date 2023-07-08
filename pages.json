@@ -61,7 +61,12 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "身份选择",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": false,
+				"app-plus": {  
+					 "titleNView": {  
+						 "autoBackButton":false
+						 }	
+				  }
             }
             
         }

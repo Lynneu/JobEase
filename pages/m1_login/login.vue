@@ -118,11 +118,15 @@
 								uni.switchTab({
 								url: "../find_teacher/find_teacher"
 								})
+								
 							}
 							else{
-								uni.navigateTo({
+								/*uni.navigateTo({
 								//url: "../m3_confirm_consult/m3_confirm_consult"
 								url: "../m4_release_lecture/m4_release_lecture"
+								})*/
+								uni.switchTab({
+								url: "../m2_profile/m2_profile"
 								})
 							}
 						}
