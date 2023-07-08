@@ -61,20 +61,28 @@
 		</view>
 	</view>
 		<view class="list-area">
-			<uni-list>
-				<uni-list-item title="默认 navigateTo 方式跳转页面" to="../m3_detail_appt_consult/m3_detail_appt_consult?phone=12345678911" note="列表描述信息"></uni-list-item>
-				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
-				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
-				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
-				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
-				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
-				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
-				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
-				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
-				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
-				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
-				<uni-list-item title="列表文字" note="列表描述信息"></uni-list-item>
-			</uni-list>				
+			<unicloud-db v-slot:default="{data, loading, error, options}" collection="user_detail" where="isTeacher==1 && status==1">
+				<view v-if="error">{{error.message}}</view>
+				<view v-else>
+					<uni-list>
+					    <uni-list-item 
+					        v-for="(tutor, index) in data" 
+					        :key="index"
+					        :title="`${tutor.username} - ${tutor.post}`" 
+					        :note="tutor.comment"
+					        @click="navigateToTutorDetail(tutor.phone)"
+					    >
+					        <template v-slot:extra>
+					            <view>
+					                <text>标签：{{tutor.tip_teacher.join(', ')}}</text><br>
+					                <text>价格：{{tutor.price}}</text><br>
+					                <text>评分：{{tutor.score}}</text>
+					            </view>
+					        </template>
+					    </uni-list-item>
+					</uni-list>
+				</view>
+			</unicloud-db>		
 		</view>
 	</view>
 </template>
@@ -88,6 +96,7 @@
 				consultvalue: '',
 				payvalue: '',
 				scorevalue: '',
+				tutors: [],
 				job: [
 				  { value: 0, text: "前端" },
 				  { value: 1, text: "后端" },
@@ -171,7 +180,12 @@
 			},
 			changescore(e) {
 				console.log(e)
-			}
+			},
+			navigateToTutorDetail(id) {
+			        uni.navigateTo({
+			            url: `../m3_detail_appt/m3_detail_appt?id=${id}`  // 这里的 '/pages/tutorDetail/tutorDetail' 应替换为你的导师详情页面路径
+			        });
+			    },
 		},
 		onBackPress() {
 			// #ifdef APP-PLUS
