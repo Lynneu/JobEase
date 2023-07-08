@@ -7,7 +7,7 @@
 							<uni-easyinput 
 								maxlength="20"
 								trim="all" 
-								v-model="user_detail.co" 
+								v-model="valiFormData.company" 
 								placeholder="最大输入长度为20" >
 							</uni-easyinput>
 						</uni-forms-item>
@@ -15,7 +15,7 @@
 							<uni-easyinput
 								maxlength="10"
 								trim="all" 
-								v-model="user_detail.username" 
+								v-model="valiFormData.name" 
 								placeholder="最大输入长度为10">
 							</uni-easyinput>
 						</uni-forms-item>
@@ -23,27 +23,27 @@
 							<uni-easyinput
 								maxlength="10"
 								trim="all" 
-								v-model="user_detail.job_number" 
+								v-model="valiFormData.number" 
 								placeholder="最大输入长度为10">
 							</uni-easyinput>
 						</uni-forms-item>
 						<uni-forms-item label="岗位" name="jobchoose">
 							<uni-data-select
-							        v-model="user_detail.post"
+							        v-model="valiFormData.jobchoose"
 							        :localdata="jobs"
 							        @change="jobchange">
 							</uni-data-select>
 						</uni-forms-item>
 						<uni-forms-item label="咨询方向" label-width=60 label-position="top" name="consult">
-							<uni-data-checkbox v-model="user_detail.tip_teacher" multiple :localdata="consults" />
+							<uni-data-checkbox v-model="valiFormData.consult" multiple :localdata="consults" />
 						</uni-forms-item>
 						<uni-forms-item label="收费标准(元/小时)" label-width=60 name="pay">
-							<uni-number-box :value="0" :step="10" :min="0" :max="999" v-model="user_detail.price"/>
+							<uni-number-box :value="0" :step="10" :min="0" :max="999" v-model="valiFormData.pay"/>
 						</uni-forms-item>
 						<uni-forms-item label="公司邮箱" label-width=60 name="email">
 							<uni-easyinput
 								trim="all" 
-								v-model="user_detail.email" 
+								v-model="valiFormData.email" 
 								placeholder="请输入邮箱">
 							</uni-easyinput>
 						</uni-forms-item>
@@ -51,7 +51,7 @@
 							<view class="button-group">
 								<uni-easyinput
 									trim="all" 
-									v-model="codee" 
+									v-model="valiFormData.code" 
 									placeholder="请输入验证码">
 								</uni-easyinput>
 								<button size="mini" v-if="show_again==0" @click="sendCode" class="button">获取验证码</button>
@@ -69,7 +69,6 @@
 	export default {
 		data() {
 			return {
-				codee:"",
 				show_again: 0, //  显示发送验证码||请稍后按钮
 				count: "", // 等待时间
 				timer: null, //定时器
@@ -77,50 +76,28 @@
 					company: '',
 					name: '',
 					number: '',
-					jobchoose: 9,
+					jobchoose: 0,
 					consult: [],
 					pay: '',
 					email: '',
 					code: ''
 				},
 				user_detail:{
-				    "phone": "",
-				    "username": "",
-				    "isTeacher": 1,
-				    "status": 1,
-				    "email": "",
-				    "comment": "",
-				    "co": "",
-				    "job_number": "",
-				    "price": 0,
-				    "score": 0,
-				    "post": 1,
-				    "tip_teacher": [],
-				    "tip_student": 1,
-				    "goal": 1
+								    "phone": "",
+								    "username": "",
+								    "isTeacher": 1,
+								    "status": 1,
+								    "email": "",
+								    "comment": "",
+								    "co": "",
+								    "job_number": "",
+								    "price": 0,
+								    "score": 0,
+								    "post": 1,
+								    "tip_teacher": [],
+								    "tip_student": 1,
+								    "goal": 1
 				},
-				test:{
-				    "phone": "11012343210",
-				    "username": "plz",
-				    "isTeacher": 1,
-				    "status": 1,
-				    "email": "askjh@qq.com",
-				    "comment": "我是1",
-				    "co": "北京工业大学",
-				    "job_number": "123123",
-				    "price": 99,
-				    "score": 4.5,
-				    "post": 2,
-				    "tip_teacher": [
-				        1,
-				        3,
-				        5
-				    ],
-				    "tip_student": 6,
-				    "goal": 2
-				},
-				
-				
 				jobs: [
 						{value: 0, text: '前端开发'},
 						{value: 1, text: '后端开发'},
@@ -139,8 +116,7 @@
 						{value: 2, text: '就业指导'},
 						{value: 3, text: '职业规划'},
 						{value: 4, text: '薪资谈判'},
-						{value: 5, text: '测试开发'},
-						{value: 6, text: '其他'}
+						{value: 5, text: '其他'}
 					],
 				rules: {
 							company: {
@@ -196,28 +172,30 @@
 						},
 			}
 		},
-		onShow() {
-					this.user_detail.phone=getApp().globalData.ph	
-					console.Log('Phone:', this. this.user_detail.phone)
-				},
 		onLoad() {},
 		onReady() {
 			// 设置自定义表单校验规则，必须在节点渲染完毕后执行
-			this.$refs.user_detail.setRules(this.rules)
+			this.$refs.valiForm.setRules(this.rules)
 		},
 		methods: {
 			submit(ref) {
 							this.$refs[ref].validate().then(res => {
-								console.log('success', res);
+								console.log('success', res)
 								uni.showToast({
 									title: '校验通过'
 								})
-										
+								this.user_detail.phone=getApp().globalData.ph
+								this.user_detail.username=this.valiFormData.name
+								this.user_detail.email=this.valiFormData.email
+								this.user_detail.co=this.valiFormData.company
+								this.user_detail.job_number=this.valiFormData.number
+								this.user_detail.price=this.valiFormData.pay
+								this.user_detail.post=this.valiFormData.jobchoose
+								this.user_detail.tip_teacher=this.valiFormData.consult
+								
+								
 								const db = uniCloud.database();
 								db.collection("user_detail").add(this.user_detail).then(e=>{
-										console.log(e)
-									})
-								db.collection("user_detail").add(this.test).then(e=>{
 										console.log(e)
 									})
 								uni.switchTab({
@@ -248,7 +226,7 @@
 			        this.sendCode();
 			      } else {
 			        uni.showToast({
-			          title: '请稍后重试(${this.count})',
+			          title: `请稍后重试(${this.count})`,
 			          icon: "none",
 			          duration: 1500,
 			        });
