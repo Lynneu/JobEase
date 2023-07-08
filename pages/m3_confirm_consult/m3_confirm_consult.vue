@@ -5,7 +5,7 @@
 				<view v-if="error">{{error.message}}</view>
 				<view v-else>
 					<uni-list>
-						<uni-list-item v-for="item in data.filter((item) => item.appt_state === 0)" :where=" `item.appt_state = 0`" :key="item._id" direction="column" @click="updatefn(item)">
+						<uni-list-item v-for="item in data.filter((item) => item.appt_state === 0 && item.teach_tele === phone )" :where=" `item.appt_state = 0`" :key="item._id" direction="column" @click="updatefn(item)">
 							<template v-slot:body>
 								<view>
 									<text class="title">咨询信息\n</text>
@@ -36,9 +36,14 @@
 					{ value: 4, text: '薪资谈判' },
 					{ value: 5, text: '其他' }
 				],
+				phone:'',
 
 			};
 		},	
+		onShow() {
+			this.phone=getApp().globalData.ph;
+			//console.log('Phone:', this.lecture.phone);
+		},
 		methods: {
 			updatefn(item){
 				console.log('cehsi')
