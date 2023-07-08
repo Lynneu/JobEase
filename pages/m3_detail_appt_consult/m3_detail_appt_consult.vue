@@ -59,8 +59,11 @@
 			};
 		},
 		onLoad: function (option) {
-			console.log(option.phone)
-			this.user_detail.phone=option.phone
+			console.log('手机号上传')
+			console.log(option.id)
+			this.user_detail.phone=option.id
+			console.log('手机号上传成功')
+			console.log(this.user_detail.phone)
 			
 			const db = uniCloud.database()
 			 db.collection('user_detail').where({
