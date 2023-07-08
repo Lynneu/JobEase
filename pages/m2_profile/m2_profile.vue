@@ -43,7 +43,7 @@
 			<uni-icons type="forward" size="18" color="#999"></uni-icons>
 		</view>
 	</uni-card>
-	<uni-card @click="seekerinfo">
+	<uni-card @click="goToRoleSelect">
 		<view class="uni-flex uni-row">
 			<view class="normal">身份切换</view>
 			<uni-icons type="forward" size="18" color="#999"></uni-icons>
@@ -83,6 +83,11 @@ import m4_mentor_informationVue from '../m4_mentor_information/m4_mentor_informa
 			lecture() {
 				uni.navigateTo({
 					url: "../m2_my_lecture/m2_my_lecture"
+				})
+			},
+			goToRoleSelect() {
+				uni.navigateTo({
+					url: "../m1_role_select/m1_role_select"
 				})
 			}
 		}
