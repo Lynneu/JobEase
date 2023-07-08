@@ -211,7 +211,7 @@
 			navigateToTutorDetail(id) {
 				console.log(id)
 			    uni.navigateTo({
-			        url: `../m3_detail_appt/m3_detail_appt?id=${id}`  // 这里的 '/pages/tutorDetail/tutorDetail' 应替换为你的导师详情页面路径
+			        url: `../m3_detail_appt_consult/m3_detail_appt_consult?id=${id}`  
 			    });
 			},
 		},
