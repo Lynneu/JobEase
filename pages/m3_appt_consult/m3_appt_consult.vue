@@ -14,14 +14,14 @@
 				</uni-data-select>
 			</view>
 			
-			<uni-section :title="'咨询价格：'+user_detail.price+'元/30min'" type="line"></uni-section>
+			<uni-section :title="'咨询价格：'+user_detail.price+'元/小时'" type="line"></uni-section>
 			
 			<view class="appt_duration">
 				<view>
-					<uni-section :title="'预约时长 : '+consult.appt_duration+'分钟'" type="line"></uni-section>
+					<uni-section :title="'预约时长 : '+consult.appt_duration+'小时'" type="line"></uni-section>
 				</view>
 				<view>
-					<uni-number-box :step=30 :max=120 :min=0 :value="consult.appt_duration" @change="duration_change" background="#2979FF" color="#fff" />
+					<uni-number-box :step=1 :max=2 :min=0 :value="consult.appt_duration" @change="duration_change" background="#2979FF" color="#fff" />
 				</view>
 				<view class="extra"></view>
 				
@@ -138,7 +138,7 @@
 			},
 			duration_change(value) {
 				this.consult.appt_duration = value;
-				this.consult.appt_cost=value * this.user_detail.price / 30;
+				this.consult.appt_cost=value * this.user_detail.price;
 			},
 			checktime(pick) {
 				return pick >= this.gethours;

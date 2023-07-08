@@ -9,7 +9,7 @@
                 <uni-section :title="'演 讲 人 ：'+ user_detail.username" type="line" padding="0px"></uni-section>
                 <uni-section :title="'讲座时间：'+ lecture.lecture_time" type="line"></uni-section>
                 <uni-section :title="'讲座主题：'+ direction[lecture.lecture_label].text" type="line"></uni-section>
-                <uni-section :title="'讲座费用：'+lecture.lecture_price+' 元  / 30min'" type="line"></uni-section>
+                <uni-section :title="'讲座费用：'+lecture.lecture_price+' 元'" type="line"></uni-section>
                 <uni-section :title="'讲座名额：'+lecture.lecture_reserved+' / '+lecture.lecture_number+' 人'+limit[lecture.lecture_limit].text" type="line"></uni-section>
                 <view class="line"></view>
                 <uni-section title="讲座内容" type="circle"></uni-section>
@@ -33,16 +33,12 @@ export default {
     data() {
         return {
             direction: [
-                { value: 0, text: '前端开发' },
-                { value: 1, text: '后端开发' },
-                { value: 2, text: 'C++开发' },
-                { value: 3, text: 'Java开发' },
-                { value: 4, text: '算法' },
-                { value: 5, text: '测试开发' },
-                { value: 6, text: '产品经理' },
-                { value: 7, text: '运营' },
-                { value: 8, text: 'HR' },
-                { value: 9, text: '其他' }
+                { value: 0, text: '简历优化' },
+                { value: 1, text: '面试经验' },
+                { value: 2, text: '就业指导' },
+                { value: 3, text: '职业规划' },
+                { value: 4, text: '薪资谈判' },
+                { value: 5, text: '其他' }
             ],
             lecture: {
 				_id:"",

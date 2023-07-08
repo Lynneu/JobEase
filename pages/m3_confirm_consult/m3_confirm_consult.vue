@@ -5,14 +5,14 @@
 				<view v-if="error">{{error.message}}</view>
 				<view v-else>
 					<uni-list>
-						<uni-list-item v-for="item in data.filter((item) => item.appt_state === 0)" :where=" `item.appt_state = 0`" :key="item._id" direction="column">
+						<uni-list-item v-for="item in data.filter((item) => item.appt_state === 0)" :where=" `item.appt_state = 0`" :key="item._id" direction="column" link>
 							<template v-slot:body>
 								<view>
-									<uni-section title="咨询信息" type="line"></uni-section>
+									<text class="title">咨询信息\n</text>
 									<text class="word">咨询价格：{{item.appt_cost}} 元\n</text>
 									<text class="word">咨询主题：{{appt_theme[item.appt_label].text}}\n</text>
 									<text class="word">咨询日期：{{item.appt_date}}\n</text>
-									<text class="word">预计时长：{{item.appt_duration}} min \n</text>
+									<text class="word">预计时长：{{item.appt_duration}} 小时 \n</text>
 								</view>
 							</template>
 						</uni-list-item>
@@ -46,6 +46,13 @@
 </script>
 
 <style lang="scss">
+	.title{
+		padding-left: 40rpx;
+		padding-bottom: 5rpx;
+		font-size: 15px;
+		font-weight: 600;
+		color: #007aff;
+	}
 	.word{
 		padding-left: 40rpx;
 		padding-bottom: 5rpx;
