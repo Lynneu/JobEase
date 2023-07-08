@@ -61,28 +61,40 @@
 		</view>
 	</view>
 		<view class="list-area">
-			<unicloud-db v-slot:default="{data, loading, error, options}" collection="user_detail" where="isTeacher==1 && status==1">
-				<view v-if="error">{{error.message}}</view>
-				<view v-else>
-					<uni-list>
-					    <uni-list-item 
-					        v-for="(tutor, index) in data" 
-					        :key="index"
-					        :title="`${tutor.username} - ${tutor.post}`" 
-					        :note="tutor.comment"
-					        @click="navigateToTutorDetail(tutor.phone)"
-					    >
-					        <template v-slot:extra>
-					            <view>
-					                <text>标签：{{tutor.tip_teacher.join(', ')}}</text><br>
-					                <text>价格：{{tutor.price}}</text><br>
-					                <text>评分：{{tutor.score}}</text>
-					            </view>
-					        </template>
-					    </uni-list-item>
-					</uni-list>
-				</view>
-			</unicloud-db>		
+			<unicloud-db v-slot:default="{data, loading, error, options}" collection="user_detail" where="isTeacher==1">
+						<view v-if="error">{{error.message}}</view>
+						<view v-else>
+							<uni-list :border="false" style="background-color: #f8f8f8;">
+							    <uni-list-item 
+									:border="false"
+							        v-for="(tutor, index) in data" 
+									direction="column"
+							        :key="index"
+							        @click="navigateToTutorDetail(tutor.phone)"
+							    >
+									<template v-slot:header>
+										<text>{{`${tutor.username} - ${getJobText(tutor.post)}`}}</text>
+										<view style="display: flex;;">
+										    <text style="font-size: 0.8em; color: #f0ad4e;">{{`${tutor.score}分`}}</text>
+										    <text style="font-size: 0.8em; color: #999;">{{`, 价格 ${tutor.price}/30min`}}</text>
+										</view>
+									</template>
+							        <template v-slot:footer>
+							            <view>
+							                <uni-tag 
+												style="font-size: 0.8em;"
+							                	v-for="(tip, idx) in tutor.tip_teacher" 
+							                	:key="idx" 
+							                	:text="getConsultText(tip)" 
+							                	type="primary" 
+							                	inverted>
+							                </uni-tag><br>
+							            </view>
+							        </template>
+							    </uni-list-item>
+							</uni-list>
+						</view>
+					</unicloud-db>		
 		</view>
 	</view>
 </template>
@@ -98,17 +110,24 @@
 				scorevalue: '',
 				tutors: [],
 				job: [
-				  { value: 0, text: "前端" },
-				  { value: 1, text: "后端" },
-				  { value: 2, text: "产品经理" },
-				  { value: 3, text: "运营" },
-				  { value: 4, text: "策划" },
+				    { value: 0, text: '前端开发' },
+				    { value: 1, text: '后端开发' },
+				    { value: 2, text: 'C++开发' },
+				    { value: 3, text: 'Java开发' },
+				    { value: 4, text: '算法' },
+				    { value: 5, text: '测试开发' },
+				    { value: 6, text: '产品经理' },
+				    { value: 7, text: '运营' },
+				    { value: 8, text: 'HR' },
+				    { value: 9, text: '其他' }
 				],
 				consult: [
-					{ value: 0, text: "简历修改" },
-					{ value: 1, text: "面试准备" },
-					{ value: 2, text: "薪资" },
-					{ value: 3, text: "职业规划" },
+					{ value: 0, text: '简历优化' },
+					{ value: 1, text: '面试经验' },
+					{ value: 2, text: '就业指导' },
+					{ value: 3, text: '职业规划' },
+					{ value: 4, text: '薪资谈判' },
+					{ value: 5, text: '其他' }
 				],
 				pay: [
 					{ value: 0, text: "100元以下" },
@@ -181,11 +200,20 @@
 			changescore(e) {
 				console.log(e)
 			},
+			getJobText(value) {
+				let jobObj = this.job.find(job => job.value === value);
+				return jobObj ? jobObj.text : '';
+			},
+			getConsultText(tip) {
+						let consultObj = this.consult.find(cons => cons.value === tip);
+						return consultObj ? consultObj.text : '';
+					},
 			navigateToTutorDetail(id) {
-			        uni.navigateTo({
-			            url: `../m3_detail_appt/m3_detail_appt?id=${id}`  // 这里的 '/pages/tutorDetail/tutorDetail' 应替换为你的导师详情页面路径
-			        });
-			    },
+				console.log(id)
+			    uni.navigateTo({
+			        url: `../m3_detail_appt/m3_detail_appt?id=${id}`  // 这里的 '/pages/tutorDetail/tutorDetail' 应替换为你的导师详情页面路径
+			    });
+			},
 		},
 		onBackPress() {
 			// #ifdef APP-PLUS
@@ -217,4 +245,63 @@
 .list-area {
 	margin-top: 5px;
 }
+
+    /* Setting the list items to have a uniform background, and round edges */
+    .uni-list-item {
+        background-color: #fff;
+        border-radius: 10px;
+        margin: 5px;
+        box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.1);
+    }
+
+    /* Setting the tutor's name and job to be bold, and larger */
+    .uni-list-item text {
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    /* Making the consult tags stand out a bit more */
+    .uni-tag {
+        background-color: #007AFF;
+        color: #fff;
+    }
+
+    /* Aligning the price and score information more neatly */
+    .uni-list-item view {
+        display: flex;
+		padding-top: 5px;
+         }
+		
+    .uni-list-item view .uni-tag {
+        margin-right: 10px;  /* 增加你需要的间距 */
+    }
+    
+    .uni-list-item view .uni-tag:last-child {
+        margin-right: 0;  /* 为最后一个标签移除右边距 */
+    }
+    /* Style for search bar */
+    .uni-search-bar {
+        background-color: #fff;
+        border-radius: 20px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
+
+    /* Style for drawer */
+    .uni-drawer {
+        padding: 10px;
+        background-color: #fff;
+    }
+
+    /* Style for drawer forms */
+    .form-container {
+        padding: 20px;
+        border-radius: 10px;
+        
+    }
+    
+    /* Style for drawer button */
+    .choose button {
+        border-radius: 10px;
+        padding: 5px 50px;
+    }
 </style>
