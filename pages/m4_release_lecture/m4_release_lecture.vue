@@ -1,4 +1,3 @@
-<!--7.8 20:29-->
 <template>
 	<view class="rl-container">
 			<view class="rl-content">
@@ -13,7 +12,7 @@
 			
 			<view class="r1-content">
 				<uni-section title="标签(点击选择):" type="line"></uni-section>
-				<uni-data-select v-model="lecture.lecture_label" :localdata="direction" :clear="false" @change="changeDirection">
+				<uni-data-select v-model="lecture.lecture_label" :localdata="tag" :clear="false" @change="changeTag">
 				</uni-data-select>
 			</view>
 			
@@ -60,32 +59,13 @@
 	export default {
 		data() {
 			return {
-				direction:[
-					/*{ value: 0, text: '前端开发' },
-					{ value: 1, text: '后端开发' },
-					{ value: 2, text: 'C++开发' },
-					{ value: 3, text: 'Java开发' },
-					{ value: 4, text: '算法' },
-					{ value: 5, text: '测试开发' },
-					{ value: 6, text: '产品经理' },
-					{ value: 7, text: '运营' },
-					{ value: 8, text: 'HR' },
-					{ value: 9, text: '其他' }*/
-					{ value: 0, text: '前端开发' },
-					{ value: 1, text: '后端开发' },
-					{ value: 2, text: 'C++开发' },
-					{ value: 3, text: 'Java开发' },
-					{ value: 4, text: '算法' },
-					{ value: 5, text: '测试开发' },
-					{ value: 6, text: '产品经理' },
-					{ value: 7, text: '运营' },
-					{ value: 8, text: 'HR' },
-					{ value: 9, text: '简历优化' },
-					{ value: 10, text: '面试经验' },
-					{ value: 11, text: '就业指导' },
-					{ value: 12, text: '职业规划' },
-					{ value: 13, text: '薪资谈判' },
-					{ value: 14, text: '其他' }
+				tag:[
+					{ value: 0, text: '简历优化' },
+					{ value: 1, text: '面试经验' },
+					{ value: 2, text: '就业指导' },
+					{ value: 3, text: '职业规划' },
+					{ value: 4, text: '薪资谈判' },
+					{ value: 5, text: '其他' }
 				],
 				start: Date.now(),
 				end: Date.now() + 14 * 24 * 3600000,
@@ -119,7 +99,7 @@
 			//console.log('Phone:', this.lecture.phone);
 		},
 		methods: {
-			changeDirection(e) {
+			changeTag(e) {
 				console.log(e)
 			},
 			changeLectureprice(value) {

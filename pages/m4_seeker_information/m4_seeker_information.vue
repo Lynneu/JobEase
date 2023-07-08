@@ -1,4 +1,3 @@
-<!--7.8 20:29-->
 <template>
 	<view class="si-container">
 		<view style="text-align: center;">

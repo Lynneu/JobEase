@@ -1,4 +1,3 @@
-<!--7.8 20:29-->
 <template>
 	<view class="si-container">
 		<view style="text-align: center;">
@@ -36,7 +35,7 @@
 		</view>
 		
 		<view class="mi-content">
-			<uni-section :title="'咨询价格 (0-999): '+ user_detail.price+'元/30min'" type="line" padding>
+			<uni-section :title="'咨询价格 (0-999): '+ user_detail.price+'元/小时'" type="line" padding>
 				<uni-number-box  :min="0" :max="999" :step="10" :value="user_detail.price" @change="changePrice" />
 			</uni-section>
 		</view>
@@ -88,7 +87,7 @@
 			//console.log('Phone:', this.user_detail.phone);
 		},
 		onLoad() {
-			//getApp().globalData.ph = "12345678911";			
+			getApp().globalData.ph = "12345678911";			
 			console.log('Phone:', this.user_detail.phone);
 			  const db = uniCloud.database()
 			   db.collection('user_detail').where({
