@@ -1,6 +1,6 @@
 <template>
 	<view class="index">
-		<view class="new_box" style="margin-top: 20upx;">
+		<view class="new_box" style="margin-top: 100px;">
 			<view class="bbox">
 				<view class="list-box" v-for="(item,index) in list" :key="index">
 					<view class="list-ed">
@@ -195,6 +195,7 @@
 <style>
 	page{
 		background-color: #eee;
+		
 	}
 	/* 已选择 */
 	.selde {
