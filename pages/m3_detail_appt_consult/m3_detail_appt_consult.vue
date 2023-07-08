@@ -40,7 +40,7 @@
 				],
 				user_detail:{
 					"_id":"",
-					"phone":"12345678911",
+					"phone":"",
 					"username":"",
 					"isTeacher":"",
 					"status":"",
@@ -58,7 +58,10 @@
 
 			};
 		},
-		onLoad: function () {
+		onLoad: function (option) {
+			console.log(option.phone)
+			this.user_detail.phone=option.phone
+			
 			const db = uniCloud.database()
 			 db.collection('user_detail').where({
 			   phone: this.user_detail.phone
@@ -72,11 +75,12 @@
 			   console.error('Error retrieving data:', err)
 			 })
 		 },
+		 
 		methods:{
 			appointconsult(e){
 				console.log(e)
 				uni.navigateTo({
-					url:'../m3_appt_consult/m3_appt_consult'
+					url:'../m3_appt_consult/m3_appt_consult?phone='+this.user_detail.phone
 				});
 			},
 		}

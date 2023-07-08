@@ -10,7 +10,7 @@
                 <uni-section :title="'讲座时间：'+ lecture.lecture_time" type="line"></uni-section>
                 <uni-section :title="'讲座主题：'+ direction[lecture.lecture_label].text" type="line"></uni-section>
                 <uni-section :title="'讲座费用：'+lecture.lecture_price+' 元  / 30min'" type="line"></uni-section>
-                <uni-section :title="'讲座名额：'+lecture.lecture_reserved+' / '+lecture.lecture_number+' 人'" type="line"></uni-section>
+                <uni-section :title="'讲座名额：'+lecture.lecture_reserved+' / '+lecture.lecture_number+' 人'+limit[lecture.lecture_limit].text" type="line"></uni-section>
                 <view class="line"></view>
                 <uni-section title="讲座内容" type="circle"></uni-section>
             </view>
@@ -45,16 +45,21 @@ export default {
                 { value: 9, text: '其他' }
             ],
             lecture: {
-				_id:"64a9065821821b46a5e93a35",
+				_id:"",
                 phone: 0,
                 lecture_title: '',
                 lecture_time: '0000.00.00 ' + ' 00:00',
                 lecture_label: 0,
                 lecture_price: 0,
+				lecture_limit:0,
                 lecture_number: 0,
                 lecture_reserved: 0,
                 lecture_content: ''
             },
+			limit:[
+				{ value: 0, text: '无限制' },
+				{ value: 1, text: '' }
+			],
 			user_detail:{
 				username: '',
 			},
@@ -66,12 +71,16 @@ export default {
             
         };
     },
-    onLoad(option) {
+    onLoad:function(option) {
+		
 		console.log(option.lecture)
+		this.lecture._id=option.lecture;
+		
+		this.appt_lecture.lecture_id=this.lecture._id;
         this.getMsg()
     },
     methods: {
-        getMsg() {
+		getMsg() {
             const db = uniCloud.database() // 创建数据库连接
             db.collection("lecture").doc(this.lecture._id).get() // 获取数据表的信息
                 .then(res => {
@@ -96,14 +105,49 @@ export default {
                     console.log(err)
                 })
         },
+		updateLectureReserved() {
+	
+		  const db = uniCloud.database();
+		  const lectureId = this.lecture._id;
+		  const newReservedValue = this.lecture.lecture_reserved + 1;
+		  db.collection("lecture").doc(lectureId).update({
+		    lecture_reserved: newReservedValue
+		  }).then(res => {
+		    console.log("lecture_reserved updated successfully");
+		    // 更新成功后，可以在此处执行其他操作或更新界面
+		  }).catch(err => {
+		    console.error("Failed to update lecture_reserved:", err);
+		  });
+		},
         appointLecture() {
+			
+			if(this.lecture.lecture_limit == 1){
+				if (this.lecture.lecture_reserved === this.lecture.lecture_number) {
+					uni.showToast({
+						title: '预约人数已满',
+						icon: 'none',
+						duration: 2000
+					});
+				}
+				return;
+			}
+			
+			this.updateLectureReserved();
 			const db = uniCloud.database();
-			db.collection("appt_lecture").add(this.appt_lecture).then(e=>{
-				console.log(e)
-			})	
+			db.collection("appt_lecture").add(this.appt_lecture).then(e => {
+			  console.log(e);
+			}).catch(err => {
+			  console.error(err);
+			});
+			
+			uni.showToast({
+				title: '预约成功',
+				icon: 'none',
+				duration: 2000
+			});
 			uni.switchTab({
-							  url: '../find_lecture/find_lecture'
-							});
+    			url: '../find_lecture/find_lecture'
+			});
         }
     },
 
