@@ -146,6 +146,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/m3_confirm_consult/m3_choosetime/m3_choosetime",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "时间选择",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
