@@ -279,20 +279,15 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             a: common_vendor.t(`${tutor.lecture_title}`),
             b: common_vendor.t(`已预约${tutor.lecture_reserved}人`),
             c: common_vendor.t(`, 价格 ¥${tutor.lecture_price}/小时`),
-            d: common_vendor.f(tutor.lecture_label, (tip, idx, i2) => {
-              return {
-                a: idx,
-                b: "7538e855-14-" + i0 + "-" + i1 + "-" + i2 + "," + ("7538e855-13-" + i0 + "-" + i1),
-                c: common_vendor.p({
-                  text: $options.getConsultText(tip),
-                  type: "primary"
-                })
-              };
+            d: "7538e855-14-" + i0 + "-" + i1 + "," + ("7538e855-13-" + i0 + "-" + i1),
+            e: common_vendor.p({
+              text: $options.getConsultText(tutor.lecture_label),
+              type: "primary"
             }),
-            e: common_vendor.t(tutor.lecture_content),
-            f: index,
-            g: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor._id), index),
-            h: "7538e855-13-" + i0 + "-" + i1 + "," + ("7538e855-12-" + i0)
+            f: common_vendor.t(tutor.lecture_content),
+            g: index,
+            h: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor._id), index),
+            i: "7538e855-13-" + i0 + "-" + i1 + "," + ("7538e855-12-" + i0)
           };
         }),
         d: common_vendor.p({

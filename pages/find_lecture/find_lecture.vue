@@ -75,12 +75,10 @@
     							        <template v-slot:footer>
     							            <view style="display: flex;flex-wrap: wrap;">
     							                <uni-tag 
-    												style="font-size: 0.8em;margin-right: 10px;margin-top: 5px;"
-    							                	v-for="(tip, idx) in tutor.lecture_label" 
-    							                	:key="idx" 
-    							                	:text="getConsultText(tip)" 
-    							                	type="primary" 
-    							                	>
+    							                  style="font-size: 0.8em; margin-right: 10px; margin-top: 5px;"
+    							                  :text="getConsultText(tutor.lecture_label)" 
+    							                  type="primary" 
+    							                >
     							                </uni-tag>
     							            </view>
     										<view class="comment-area">
