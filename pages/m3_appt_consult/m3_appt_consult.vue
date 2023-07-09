@@ -69,7 +69,7 @@
 				start:Date.now(),
 				end:Date.now()+14 * 24 * 3600000,
 				gethours: new Date().getHours()+1,
-				
+				timenow:'',
 				Times: [
 					{text: '08:00', value: 8}, 
 					{text: '09:00', value: 9},
@@ -140,10 +140,26 @@
 				this.consult.appt_duration = value;
 				this.consult.appt_cost=value * this.user_detail.price;
 			},
+			getimenow(){
+				var currentDate = new Date();
+				
+				// 获取年、月、日
+				var year = currentDate.getFullYear().toString();
+				var month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+				var day = currentDate.getDate().toString().padStart(2, '0');
+				
+				// 拼接日期字符串
+				var dateString = year + '-' + month + '-' + day;
+				this.timenow = dateString;
+				
+				// 打印结果
+				console.log(dateString);
+			},
 			checktime(pick) {
 				return pick >= this.gethours;
 			},
 			appointAndpay() {
+				this.getimenow()
 				console.log('dianle')
 				if (this.consult.appt_duration==0) {
 					uni.showToast({
@@ -169,31 +185,37 @@
 					});
 					return;
 				}
-				if(this.consult.appt_date <= Date.now()){
+				console.log(this.consult.appt_date+'1')
+				console.log(this.timenow + '2')
+				if( this.consult.appt_date === this.timenow ){
 					if (this.consult.appt_time1.slice(0,1)  < this.gethours) {
 						uni.showToast({
 							title: '请选择正确时间',
 							icon: 'none',
 							duration: 2000
 						});
+						return;
 					}	
-					return;
 				}
+			
 				console.log('注释掉的出来了')
 				const db = uniCloud.database();
 				db.collection("consult").add(this.consult).then(res => {
 				  console.log(res)
 				}).catch(err => {
 				  console.error('Error adding data:', err)
-				});					
+				});	
+			    
 				uni.showToast({
 					title: '预约成功',
 					icon: 'none',
 					duration: 2000
 				});
+				
 				uni.switchTab({
 				  url: '../find_teacher/find_teacher'
 				});
+				
 			}
 		}
 		

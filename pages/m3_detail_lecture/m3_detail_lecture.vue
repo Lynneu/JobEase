@@ -10,7 +10,7 @@
                 <uni-section :title="'讲座时间：'+ lecture.lecture_time" type="line"></uni-section>
                 <uni-section :title="'讲座主题：'+ direction[lecture.lecture_label].text" type="line"></uni-section>
                 <uni-section :title="'讲座费用：'+lecture.lecture_price+' 元'" type="line"></uni-section>
-                <uni-section :title="'讲座名额：'+lecture.lecture_reserved+' / '+lecture.lecture_number+' 人'+limit[lecture.lecture_limit].text" type="line"></uni-section>
+                <uni-section :title="'剩余名额：'+limit" type="line"></uni-section>
                 <view class="line"></view>
                 <uni-section title="讲座内容" type="circle"></uni-section>
             </view>
@@ -52,23 +52,25 @@ export default {
                 lecture_reserved: 0,
                 lecture_content: ''
             },
-			limit:[
-				{ value: 0, text: ' （无限制）' },
-				{ value: 1, text: '' }
-			],
+			limit:'',
+			nolimit:'无限额',
+			ylimit:'有限额',
 			user_detail:{
 				username: '',
 			},
 			appt_lecture:{
 				lecture_id:'',
-				phone:'12345678900',
+				phone:'',
 				lecture_state:0
 			}
             
         };
     },
+	onShow() {
+		this.appt_lecture.phone=getApp().globalData.ph;			
+		//console.log('Phone:', this.lecture.phone);
+	},
     onLoad:function(option) {
-		
 		console.log(option.lecture)
 		this.lecture._id=option.lecture;
 		
@@ -82,6 +84,8 @@ export default {
                 .then(res => {
                     console.log(res)
                     this.lecture = res.result.data[0]
+					console.log(this.lecture.lecture_limit+'测试1')
+					this.islimit(this.lecture.lecture_limit)
                     const phone = this.lecture.phone; // 从lecture数据库获取phone
                     db.collection("user_detail").where({
                             phone
@@ -101,6 +105,14 @@ export default {
                     console.log(err)
                 })
         },
+		islimit(lim){
+			if(lim == 0){
+				this.limit = this.nolimit
+			}
+			if(lim == 1){
+				this.limit = this.lecture.lecture_reserved+' / '+this.lecture.lecture_number+' 人'
+			}
+		},
 		updateLectureReserved() {
 	
 		  const db = uniCloud.database();
@@ -117,16 +129,24 @@ export default {
 		},
         appointLecture() {
 			
+			console.log('点击')
+			
+		
 			if(this.lecture.lecture_limit == 1){
-				if (this.lecture.lecture_reserved === this.lecture.lecture_number) {
+				console.log('筛选1')
+				if (this.lecture.lecture_reserved >= this.lecture.lecture_number) {
+					console.log('筛选2')
 					uni.showToast({
 						title: '预约人数已满',
 						icon: 'none',
 						duration: 2000
 					});
+					return;
+					console.log('tishi')
 				}
-				return;
+				
 			}
+			console.log('筛选成功')
 			
 			this.updateLectureReserved();
 			const db = uniCloud.database();
