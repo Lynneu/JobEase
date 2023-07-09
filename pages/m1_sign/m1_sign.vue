@@ -6,8 +6,8 @@
 		
 		<view class="input-area">
 			<uni-easyinput type="number" trim="all" v-model="user.phone" placeholder="请输入11位手机号" maxlength="11" @input="input"></uni-easyinput>
-			<uni-easyinput type="password" v-model="user.password" placeholder="请输入4-15位密码"></uni-easyinput>
-			<uni-easyinput type="password" v-model="password_double" placeholder="请再次输入密码"></uni-easyinput>
+			<uni-easyinput type="password" v-model="user.password" placeholder="请输入4-15位密码" maxlength="15" ></uni-easyinput>
+			<uni-easyinput type="password" v-model="password_double" placeholder="请再次输入密码" maxlength="15"></uni-easyinput>
 		</view>
 		<view class="login-btn" @click="Login">注册</view>
 	</view>
@@ -29,6 +29,15 @@
 		},
 
 		methods: {
+			/*fpNumInput(e) {
+							const o = e.target;
+							const inputRule = /[^a-zA-Z]/g		
+  //修改inputRule 的值
+							this.$nextTick(function() {
+								this.form.fpNum = o.value.replace(inputRule , '');
+							})
+						},*/
+
 			input(e) {
 				console.log('输入内容：', e);
 			},
@@ -69,24 +78,10 @@
 				}
 				else 
 				{
-					/*for (var i = 0; i < that.user.password.length; i++) 
-					{
-						t=that.user.password[i]
-						if(t>='0'&&t<='9') continue
-						else if(t>='A'&&t<='Z') continue
-						else if(t>='a'&&t<='z') continue
-						else if(t=='-'||t=='_') continue
-						else {
-							uni.showToast({
-								title: '密码仅允许英文字母、数字、符号-_',
-								icon: 'none'
-							})
-							return false
-							break
-						}
-					}*/
-					    var value = that.user.password;
-					    const test = /[A-Za-z0-9-_]/;
+					
+					    var value = this.user.password;
+					    //const test = /[A-Za-z0-9]+/;
+						const test =/^[0-9a-zA-Z_-]{1,}$/
 					    if(!test.test(value)){
 					       uni.showToast({
 					       	title: '密码仅允许英文字母、数字、符号-_',
@@ -94,7 +89,14 @@
 					       })
 					       return false
 					    }
-
+					
+					   if ( !this.ispass(that.user.password)) {
+					   	uni.showToast({
+					   		title: '密码仅允许英文字母、数字、符号-_',
+					   		icon: 'none'
+					   	})
+					   	return false
+					   }
 					const db = uniCloud.database();
 				
 					db.collection('user').where({
@@ -165,6 +167,10 @@
 			// 判断是否是正确的手机号码
 			isMobile(str) {
 				let reg = /^1\d{10}$/;
+				return reg.test(str)
+			},
+			ispass(str) {
+				let reg = /[A-Za-z0-9-_]/;
 				return reg.test(str)
 			},
 		}
