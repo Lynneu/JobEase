@@ -85,11 +85,11 @@ const _sfc_main = {
               getApp().globalData.ph = this.user.phone;
               if (this.testing.status == 0) {
                 common_vendor.index.switchTab({
-                  url: "../find_teacher/find_teacher"
+                  url: "../index/index"
                 });
               } else {
                 common_vendor.index.switchTab({
-                  url: "../m2_profile/m2_profile"
+                  url: "../index/index"
                 });
               }
             } else {

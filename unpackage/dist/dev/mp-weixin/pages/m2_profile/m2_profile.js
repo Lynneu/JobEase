@@ -2,14 +2,22 @@
 const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   data() {
-    return {};
+    return {
+      user_detail: {
+        username: ""
+      }
+    };
+  },
+  onLoad() {
+    if (getApp().globalData.st == 0) {
+      this.st = true;
+    } else {
+      this.st = false;
+    }
+    this.phone = getApp().globalData.ph;
+    this.getMsg();
   },
   methods: {
-    mentorinfo() {
-      common_vendor.index.navigateTo({
-        url: "../m4_mentor_information/m4_mentor_information"
-      });
-    },
     myconsult() {
       common_vendor.index.navigateTo({
         url: "../m2_my_consult/m2_my_consult"
@@ -21,9 +29,15 @@ const _sfc_main = {
       });
     },
     seekerinfo() {
-      common_vendor.index.navigateTo({
-        url: "../m4_seeker_information/m4_seeker_information"
-      });
+      if (this.st == true) {
+        common_vendor.index.navigateTo({
+          url: "../m4_seeker_information/m4_seeker_information"
+        });
+      } else {
+        common_vendor.index.navigateTo({
+          url: "../m4_mentor_information/m4_mentor_information"
+        });
+      }
     },
     lecture() {
       common_vendor.index.navigateTo({
@@ -33,6 +47,21 @@ const _sfc_main = {
     goToRoleSelect() {
       common_vendor.index.navigateTo({
         url: "../m1_role_select/m1_role_select"
+      });
+    },
+    getMsg() {
+      const db = common_vendor.Ds.database();
+      db.collection("user_detail").where({
+        phone: {
+          $eq: this.phone
+        }
+      }).get().then((res) => {
+        console.log(res);
+        if (res.result.data.length > 0) {
+          this.user_detail.username = res.result.data[0].username;
+        }
+      }).catch((err) => {
+        console.log(err);
       });
     }
   }
@@ -49,41 +78,36 @@ if (!Math) {
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_vendor.p({
+    a: common_vendor.t($data.user_detail.username),
+    b: common_vendor.p({
       type: "chatbubble",
       size: "18",
       color: "#999"
     }),
-    b: common_vendor.p({
+    c: common_vendor.p({
       type: "forward",
       size: "18",
       color: "#999"
     }),
-    c: common_vendor.o($options.seekerinfo),
-    d: common_vendor.p({
+    d: common_vendor.o($options.seekerinfo),
+    e: common_vendor.p({
       type: "forward",
       size: "18",
       color: "#999"
     }),
-    e: common_vendor.o($options.myconsult),
-    f: common_vendor.p({
+    f: common_vendor.o($options.myconsult),
+    g: common_vendor.p({
       type: "forward",
       size: "18",
       color: "#999"
     }),
-    g: common_vendor.o($options.mylecture),
-    h: common_vendor.p({
+    h: common_vendor.o($options.mylecture),
+    i: common_vendor.p({
       type: "forward",
       size: "18",
       color: "#999"
     }),
-    i: common_vendor.o($options.mentorinfo),
-    j: common_vendor.p({
-      type: "forward",
-      size: "18",
-      color: "#999"
-    }),
-    k: common_vendor.o($options.goToRoleSelect)
+    j: common_vendor.o($options.goToRoleSelect)
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/lynneu/Documents/GitHub/JobEase/pages/m2_profile/m2_profile.vue"]]);

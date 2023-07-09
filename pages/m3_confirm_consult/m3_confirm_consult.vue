@@ -1,53 +1,48 @@
 <template>
 	<view>
 		<view class="information_display">
-			<unicloud-db v-slot:default="{data,loading,error,options}" collection="consult">
-				<view v-if="error">{{error.message}}</view>
-				<view v-else>
-					<uni-list>
-						<uni-list-item v-for="item in data.filter((item) => item.appt_state === 0 && item.teach_tele === phone )" :where=" `item.appt_state = 0`" :key="item._id" direction="column" @click="updatefn(item)">
-							<template v-slot:body>
-								<view>
-									<text class="title">咨询信息</text>
-									<text class="title2">待审核\n</text>
-									<text class="word">咨询价格：{{item.appt_cost}} 元\n</text>
-									<text class="word">咨询主题：{{appt_theme[item.appt_label].text}}\n</text>
-									<text class="word">咨询日期：{{item.appt_date}}\n</text>
-									<text class="word">预计时长：{{item.appt_duration}} 小时 \n</text>
-								</view>
-							</template>
-						</uni-list-item>
-					</uni-list>
-					
-				</view>
-			</unicloud-db>
-			<unicloud-db v-slot:default="{data,loading,error,options}" collection="consult">
-				<view v-if="error">{{error.message}}</view>
-				<view v-else>
-					<uni-list>
-						<uni-list-item v-for="item in data.filter((item) => item.appt_state === 1 && item.teach_tele === phone )" :where=" `item.appt_state = 0`" :key="item._id" direction="column" @click="warning">
-							<template v-slot:body>
-								<view>
-									<text class="title">咨询信息</text>
-									<text class="title2">未完成\n</text>
-									<text class="word">咨询价格：{{item.appt_cost}} 元\n</text>
-									<text class="word">咨询主题：{{appt_theme[item.appt_label].text}}\n</text>
-									<text class="word">咨询日期：{{item.appt_date}}\n</text>
-									<text class="word">预计时长：{{item.appt_duration}} 小时 \n</text>
-									
-								</view>
-							</template>
-						</uni-list-item>
-					</uni-list>
-					
-				</view>
-			</unicloud-db>
+			<view>
+				<uni-list>
+					<uni-list-item v-for="item in consultData1" :key="item._id" direction="column" @click="updatefn(item)">
+						<template v-slot:body>
+							<view>
+								<text class="title">咨询信息</text>
+								<text class="title2">待审核\n</text>
+								<text class="word">咨询价格：{{item.appt_cost}} 元\n</text>
+								<text class="word">咨询主题：{{appt_theme[item.appt_label].text}}\n</text>
+								<text class="word">咨询日期：{{item.appt_date}}\n</text>
+								<text class="word">预计时长：{{item.appt_duration}} 小时 \n</text>
+							</view>
+						</template>
+					</uni-list-item>
+				</uni-list>
+			</view>
+			<view>
+				<uni-list>
+					<uni-list-item v-for="item in consultData2" :key="item._id" direction="column" @click="warning">
+						<template v-slot:body>
+							<view>
+								<text class="title">咨询信息</text>
+								<text class="title2">未完成\n</text>
+								<text class="word">咨询价格：{{item.appt_cost}} 元\n</text>
+								<text class="word">咨询主题：{{appt_theme[item.appt_label].text}}\n</text>
+								<text class="word">咨询日期：{{item.appt_date}}\n</text>
+								<text class="word">预计时长：{{item.appt_duration}} 小时 \n</text>
+								
+							</view>
+						</template>
+					</uni-list-item>
+				</uni-list>
+			</view>
 		</view>	
 	</view>
 </template>
+<!-- omit the rest of the code for brevity -->
+
 
 <script>
 	export default {
+		name: 'pageconfirmConsult',
 		data() {
 			return {
 				appt_theme:[
@@ -59,14 +54,28 @@
 					{ value: 5, text: '其他' }
 				],
 				phone:'',
+				consultData1: [],  // Use this to store the data of the first unicloud-db component
+				consultData2: [],  // Use this to store the data of the second unicloud-db component
 
 			};
 		},	
 		onShow() {
-			this.phone=getApp().globalData.ph;
-			//console.log('Phone:', this.lecture.phone);
+			this.phone = getApp().globalData.ph;
+			console.log(this.phone)
+			this.getData();
 		},
 		methods: {
+			async getData() {
+				try {
+					let db = uniCloud.database();
+					let res1 = await db.collection('consult').where({appt_state: 0, teach_tele: this.phone}).get();
+					this.consultData1 = res1.result.data;
+					let res2 = await db.collection('consult').where({appt_state: 1, teach_tele: this.phone}).get();
+					this.consultData2 = res2.result.data;
+				} catch (error) {
+					console.log(error);
+				}
+			},
 			updatefn(item){
 				console.log('cehsi')
 				uni.navigateTo({

@@ -1,52 +1,32 @@
 <template>
-	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
-		</view>
-	</view>
+  <div>
+    <pageconfirmConsult v-if="role == '1'" />
+    <pagefindTeacher v-else-if="role == '0'" />
+  </div>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				title: 'Hello'
-			}
-		},
-		onLoad() {
+import pagefindTeacher from '../find_teacher/find_teacher.vue'
+import pageconfirmConsult from '../m3_confirm_consult/m3_confirm_consult'
 
-		},
-		methods: {
-
-		}
-	}
+export default {
+  name: 'NewPage',
+  components: {
+    pagefindTeacher,
+    pageconfirmConsult
+  },
+  data() {
+    return {
+      role: ''  // 从某个地方获取用户角色
+    };
+	},
+  onShow: function() {
+  	  this.role = getApp().globalData.st
+	  console.log(this.role)
+  },
+}
 </script>
 
-<style lang="scss">
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: $uni-text-color;
-	}
+<style scoped>
+/* 页面样式 */
 </style>

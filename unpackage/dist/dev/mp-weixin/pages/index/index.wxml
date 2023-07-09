@@ -1,0 +1,1 @@
+<view class="data-v-1cf27b2a"><pageconfirm-consult wx:if="{{a}}" class="data-v-1cf27b2a" u-i="1cf27b2a-0" bind:__l="__l"/><pagefind-teacher wx:elif="{{b}}" class="data-v-1cf27b2a" u-i="1cf27b2a-1" bind:__l="__l"/></view>

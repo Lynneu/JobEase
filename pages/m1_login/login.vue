@@ -122,7 +122,7 @@
 							if(this.testing.status==0)
 							{
 								uni.switchTab({
-								url: "../find_teacher/find_teacher"
+								url: "../index/index"
 								})
 								
 							}
@@ -132,7 +132,7 @@
 								url: "../m4_release_lecture/m4_release_lecture"
 								})*/
 								uni.switchTab({
-								url: "../m2_profile/m2_profile"
+								url: "../index/index"
 								})
 							}
 						}

@@ -17,12 +17,15 @@ if (!Math) {
   "./pages/m3_confirm_consult/m3_confirm_consult.js";
   "./pages/m2_profile/m2_profile.js";
   "./pages/m2_my_consult/m2_my_consult.js";
+  "./pages/m2_my_consult/detail/m2_consult_detail.js";
   "./pages/m2_my_lecture/m2_my_lecture.js";
+  "./pages/m2_my_lecture/detail/m2_lecture_detail.js";
   "./pages/m3_confirm_consult/m3_choosetime/m3_choosetime.js";
+  "./pages/index/index.js";
 }
 const _sfc_main = {
   globalData: {
-    ph: "19876543211",
+    ph: "12345678911",
     //手机号
     st: 0
     //身份，0求职者，1导师

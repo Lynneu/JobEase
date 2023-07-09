@@ -173,7 +173,16 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+		{
+		    "path" : "pages/index/index",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -191,7 +200,7 @@
 			"iconWidth": "24px",
 			"spacing": "3px",
 			"list": [{
-				"pagePath": "pages/find_teacher/find_teacher",
+				"pagePath": "pages/index/index",
 				"iconPath": "static/image/icon_teacher.png",
 				"selectedIconPath": "static/image/icon_teacher_HL.png",
 				"text": "找导师"

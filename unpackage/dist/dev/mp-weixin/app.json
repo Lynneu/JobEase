@@ -15,8 +15,11 @@
     "pages/m3_confirm_consult/m3_confirm_consult",
     "pages/m2_profile/m2_profile",
     "pages/m2_my_consult/m2_my_consult",
+    "pages/m2_my_consult/detail/m2_consult_detail",
     "pages/m2_my_lecture/m2_my_lecture",
-    "pages/m3_confirm_consult/m3_choosetime/m3_choosetime"
+    "pages/m2_my_lecture/detail/m2_lecture_detail",
+    "pages/m3_confirm_consult/m3_choosetime/m3_choosetime",
+    "pages/index/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -31,7 +34,7 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/find_teacher/find_teacher",
+        "pagePath": "pages/index/index",
         "iconPath": "static/image/icon_teacher.png",
         "selectedIconPath": "static/image/icon_teacher_HL.png",
         "text": "找导师"

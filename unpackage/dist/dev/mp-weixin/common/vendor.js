@@ -7253,6 +7253,13 @@ const pages = [
     }
   },
   {
+    path: "pages/m2_my_consult/detail/m2_consult_detail",
+    style: {
+      navigationBarTitleText: "咨询详情",
+      enablePullDownRefresh: false
+    }
+  },
+  {
     path: "pages/m2_my_lecture/m2_my_lecture",
     style: {
       navigationBarTitleText: "我的讲座",
@@ -7260,9 +7267,23 @@ const pages = [
     }
   },
   {
+    path: "pages/m2_my_lecture/detail/m2_lecture_detail",
+    style: {
+      navigationBarTitleText: "讲座详情",
+      enablePullDownRefresh: false
+    }
+  },
+  {
     path: "pages/m3_confirm_consult/m3_choosetime/m3_choosetime",
     style: {
       navigationBarTitleText: "时间选择",
+      enablePullDownRefresh: false
+    }
+  },
+  {
+    path: "pages/index/index",
+    style: {
+      navigationBarTitleText: "",
       enablePullDownRefresh: false
     }
   }
@@ -7284,7 +7305,7 @@ const tabBar = {
   spacing: "3px",
   list: [
     {
-      pagePath: "pages/find_teacher/find_teacher",
+      pagePath: "pages/index/index",
       iconPath: "static/image/icon_teacher.png",
       selectedIconPath: "static/image/icon_teacher_HL.png",
       text: "找导师"
