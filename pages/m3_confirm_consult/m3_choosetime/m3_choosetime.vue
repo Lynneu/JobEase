@@ -96,10 +96,10 @@
 				});
 				
 				uni.navigateTo({
-					url:'../m3_confirm_consult/m3_confirm_consult'
+					url:'../m3_confirm_consult'
 				});
-				
-				
+				console.log('跳转')
+					
 			},
 			refuse(){
 				
@@ -117,10 +117,12 @@
 					icon: 'none',
 					duration: 2000
 				});
-				
+
 				uni.navigateTo({
-					url:'../m3_confirm_consult/m3_confirm_consult'
+					url:'../m3_confirm_consult'
 				});
+				
+				console.log('跳转')
 				
 			}
 			

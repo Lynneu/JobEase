@@ -53,7 +53,7 @@ export default {
                 lecture_content: ''
             },
 			limit:[
-				{ value: 0, text: '无限制' },
+				{ value: 0, text: ' （无限制）' },
 				{ value: 1, text: '' }
 			],
 			user_detail:{
