@@ -18,6 +18,7 @@ const _sfc_main = {
       recoData: null,
       userphone: "",
       userTag: "",
+      role: "",
       pattern: {
         color: "#7A7E83",
         backgroundColor: "#fff",
@@ -64,6 +65,7 @@ const _sfc_main = {
     return false;
   },
   onShow: async function() {
+    this.role = getApp().globalData.st;
     this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
   },
   methods: {
@@ -230,7 +232,7 @@ if (!Math) {
   (_easycom_uni_icons + _easycom_uni_data_select + _easycom_uni_forms_item + _easycom_uni_forms + _easycom_uni_section + _easycom_uni_drawer + _easycom_uni_search_bar + _easycom_uni_tag + _easycom_uni_list_item + _easycom_uni_list + _easycom_unicloud_db + _easycom_uni_fab)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {
+  return common_vendor.e({
     a: common_vendor.o(($event) => $options.showDrawer("showLeft")),
     b: common_vendor.p({
       type: "bars",
@@ -343,16 +345,18 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     E: common_vendor.p({
       collection: "lecture"
     }),
-    F: common_vendor.sr("fab", "7538e855-15"),
-    G: common_vendor.o($options.trigger),
-    H: common_vendor.p({
+    F: $data.role == "1"
+  }, $data.role == "1" ? {
+    G: common_vendor.sr("fab", "7538e855-15"),
+    H: common_vendor.o($options.trigger),
+    I: common_vendor.p({
       pattern: $data.pattern,
       content: $data.content,
       horizontal: $data.horizontal,
       vertical: $data.vertical,
       direction: $data.direction
     })
-  };
+  } : {});
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/lynneu/Documents/GitHub/JobEase/pages/find_lecture/find_lecture.vue"]]);
 wx.createPage(MiniProgramPage);

@@ -90,7 +90,7 @@
     						</view>
     					</unicloud-db>		
     		</view>
-    <uni-fab ref="fab" :pattern="pattern" :content="content" :horizontal="horizontal" :vertical="vertical" :direction="direction" @trigger="trigger" />
+    <uni-fab v-if="role == '1'" ref="fab" :pattern="pattern" :content="content" :horizontal="horizontal" :vertical="vertical" :direction="direction" @trigger="trigger" />
   </view>
 </template>
 
@@ -113,6 +113,7 @@ export default {
 	  recoData: null,
 	  userphone: '',
 	  userTag: '',
+	  role: '',
       pattern: {
         color: '#7A7E83',
         backgroundColor: '#fff',
@@ -159,6 +160,7 @@ export default {
     return false
   },
   onShow: async function() {
+	  this.role = getApp().globalData.st
 	  this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
   },
   methods: {

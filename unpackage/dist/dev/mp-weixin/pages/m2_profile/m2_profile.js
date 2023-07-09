@@ -29,7 +29,7 @@ const _sfc_main = {
       });
     },
     seekerinfo() {
-      if (this.st == true) {
+      if (getApp().globalData.st == 0) {
         common_vendor.index.navigateTo({
           url: "../m4_seeker_information/m4_seeker_information"
         });
