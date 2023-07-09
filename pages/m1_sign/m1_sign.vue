@@ -17,8 +17,7 @@
 	export default {
 		data() {
 			return {
-				//user.phone: '', //手机号码
-				//user.password: '', //密码
+				t:'',
 				password_double: '', //第二次密码
 				flag:0,
 				user:{
@@ -70,6 +69,31 @@
 				}
 				else 
 				{
+					/*for (var i = 0; i < that.user.password.length; i++) 
+					{
+						t=that.user.password[i]
+						if(t>='0'&&t<='9') continue
+						else if(t>='A'&&t<='Z') continue
+						else if(t>='a'&&t<='z') continue
+						else if(t=='-'||t=='_') continue
+						else {
+							uni.showToast({
+								title: '密码仅允许英文字母、数字、符号-_',
+								icon: 'none'
+							})
+							return false
+							break
+						}
+					}*/
+					    var value = that.user.password;
+					    const test = /[A-Za-z0-9-_]/;
+					    if(!test.test(value)){
+					       uni.showToast({
+					       	title: '密码仅允许英文字母、数字、符号-_',
+					       	icon: 'none'
+					       })
+					       return false
+					    }
 
 					const db = uniCloud.database();
 				
