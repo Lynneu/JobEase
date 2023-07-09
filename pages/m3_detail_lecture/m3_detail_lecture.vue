@@ -54,7 +54,7 @@ export default {
             },
 			limit:'',
 			nolimit:'无限额',
-			ylimit:'有限额',
+			isappt:0,
 			user_detail:{
 				username: '',
 			},
@@ -127,43 +127,66 @@ export default {
 		    console.error("Failed to update lecture_reserved:", err);
 		  });
 		},
-        appointLecture() {
-			
-			console.log('点击')
-			
-		
-			if(this.lecture.lecture_limit == 1){
-				console.log('筛选1')
-				if (this.lecture.lecture_reserved >= this.lecture.lecture_number) {
-					console.log('筛选2')
+		checkappt(){
+			const db = uniCloud.database();
+			db.collection("appt_lecture").where({
+				
+				lecture_id : this.appt_lecture.lecture_id,
+				phone : this.appt_lecture.phone
+			}).limit(1).get().then(res => {
+				if (res.result && res.result.data && res.result.data.length > 0)
+					{
+						uni.showToast({
+							title: '已预约',
+							icon: 'none',
+							duration: 2000
+						});
+					}
+				else{
+					if(this.lecture.lecture_limit == 1){
+						console.log('筛选1')
+						if (this.lecture.lecture_reserved >= this.lecture.lecture_number) {
+							console.log('筛选2')
+							uni.showToast({
+								title: '预约人数已满',
+								icon: 'none',
+								duration: 2000
+							});
+							return;
+							console.log('tishi')
+						}
+						
+					}
+					console.log('筛选成功')
+					
+					this.updateLectureReserved();
+					const db = uniCloud.database();
+					db.collection("appt_lecture").add(this.appt_lecture).then(e => {
+					  console.log(e);
+					}).catch(err => {
+					  console.error(err);
+					});
+					
 					uni.showToast({
-						title: '预约人数已满',
+						title: '预约成功',
 						icon: 'none',
 						duration: 2000
 					});
-					return;
-					console.log('tishi')
+					
+					uni.switchTab({
+						url: '../find_lecture/find_lecture'
+					});
+					
 				}
 				
-			}
-			console.log('筛选成功')
+			})	
+
+		},
+        appointLecture() {
 			
-			this.updateLectureReserved();
-			const db = uniCloud.database();
-			db.collection("appt_lecture").add(this.appt_lecture).then(e => {
-			  console.log(e);
-			}).catch(err => {
-			  console.error(err);
-			});
 			
-			uni.showToast({
-				title: '预约成功',
-				icon: 'none',
-				duration: 2000
-			});
-			uni.switchTab({
-    			url: '../find_lecture/find_lecture'
-			});
+			this.checkappt()
+
         }
     },
 
