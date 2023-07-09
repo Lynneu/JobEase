@@ -72,9 +72,6 @@ const _sfc_main = {
           rules: [{
             required: true,
             errorMessage: "工号不能为空"
-          }, {
-            format: "number",
-            errorMessage: "工号只能输入数字"
           }]
         },
         consult: {
@@ -119,9 +116,6 @@ const _sfc_main = {
     submit(ref) {
       this.$refs[ref].validate().then((res) => {
         console.log("success", res);
-        common_vendor.index.showToast({
-          title: "校验通过"
-        });
         this.user_detail.phone = getApp().globalData.ph;
         this.user_detail.username = this.valiFormData.name;
         this.user_detail.email = this.valiFormData.email;
@@ -130,12 +124,39 @@ const _sfc_main = {
         this.user_detail.price = this.valiFormData.pay;
         this.user_detail.post = this.valiFormData.jobchoose;
         this.user_detail.tip_teacher = this.valiFormData.consult;
+        var value = this.user_detail.co;
+        const test = /^[a-zA-Z\u4e00-\u9fff]+$/;
+        if (!test.test(value)) {
+          common_vendor.index.showToast({
+            title: "就职公司仅允许中文、英文",
+            icon: "none"
+          });
+          return false;
+        }
+        var value = this.user_detail.username;
+        const test2 = /^[a-zA-Z0-9\u4e00-\u9fff_-]+$/;
+        if (!test2.test(value)) {
+          common_vendor.index.showToast({
+            title: "用户名仅允许中文、英文、数字、符号-_",
+            icon: "none"
+          });
+          return false;
+        }
+        var value = this.user_detail.job_number;
+        const test1 = /^[a-zA-Z0-9]+$/;
+        if (!test1.test(value)) {
+          common_vendor.index.showToast({
+            title: "工号仅允许英文、数字",
+            icon: "none"
+          });
+          return false;
+        }
         const db = common_vendor.Ds.database();
         db.collection("user_detail").add(this.user_detail).then((e) => {
           console.log(e);
         });
         common_vendor.index.switchTab({
-          url: "../find_teacher/find_teacher"
+          url: "../m2_profile/m2_profile"
         });
       }).catch((err) => {
         console.log("err", err);
@@ -207,9 +228,9 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     d: common_vendor.o(($event) => $data.valiFormData.name = $event),
     e: common_vendor.p({
-      maxlength: "10",
+      maxlength: "20",
       trim: "all",
-      placeholder: "最大输入长度为10",
+      placeholder: "最大输入长度为20",
       modelValue: $data.valiFormData.name
     }),
     f: common_vendor.p({

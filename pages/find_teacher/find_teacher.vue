@@ -61,13 +61,13 @@
 		</view>
 	</view>
 		<view class="list-area">
-			<unicloud-db v-slot:default="{data, loading, error, options}" collection="user_detail" where="isTeacher==1">
+			<unicloud-db ref="udb" v-slot:default="{data, loading, error, options}" collection="user_detail" where="isTeacher==1">
 						<view v-if="error">{{error.message}}</view>
 						<view v-else>
 							<uni-list :border="false" style="background-color: #f8f8f8;">
 							    <uni-list-item 
 									:border="false"
-							        v-for="(tutor, index) in data" 
+							        v-for="(tutor, index) in filteredData || data" 
 									direction="column"
 							        :key="index"
 							        @click="navigateToTutorDetail(tutor.phone)"
@@ -116,6 +116,7 @@
 				payvalue: '',
 				scorevalue: '',
 				tutors: [],
+				filteredData: null,
 				job: [
 				    { value: 0, text: '前端开发' },
 				    { value: 1, text: '后端开发' },
@@ -189,8 +190,48 @@
 			showDrawer() {
 				this.$refs.showLeft.open();
 			},
-			closeDrawer() {
-				this.$refs.showLeft.close();
+			filter() {
+				  this.tutors = this.$refs.udb.dataList
+				  console.log('111')
+				  console.log(this.tutors)
+			      let data = this.tutors; 
+			      if (this.jobvalue !== '') {
+			        data = data.filter(tutor => tutor.post === this.jobvalue);
+			      }
+			      if (this.consultvalue !== '') {
+			          data = data.filter(tutor => tutor.tip_teacher.includes(this.consultvalue));
+			      }
+			      if (this.payvalue !== '') {
+			          const payRanges = [
+			              { min: 0, max: 100 },
+			              { min: 100, max: 150 },
+			              { min: 150, max: 200 },
+			              { min: 200, max: Infinity },
+			              { min: 0, max: Infinity },
+			          ];
+			      
+			          const { min, max } = payRanges[this.payvalue];
+			      
+			          data = data.filter(tutor => tutor.price >= min && tutor.price < max);
+			      }
+			      if (this.scorevalue !== '') {
+			        const scoreRanges = [
+			            { min: 0, max: 4.5 },
+			            { min: 4.5, max: 4.6 },
+			            { min: 4.7, max: 4.8 },
+			            { min: 4.9, max: 5.0 },
+			            { min: 0, max: 5.0 },
+			        ];
+			                  
+			        const { min, max } = scoreRanges[this.scorevalue];
+			                  
+			        data = data.filter(tutor => tutor.score >= min && tutor.score < max);
+			      }
+			      this.filteredData = data;
+			    },
+			closeDrawer(ref) {
+			  this.$refs[ref].close();
+			  this.filter(); // 在关闭筛选抽屉时调用filter函数进行过滤
 			},
 			searchclick() {
 				console.log(this.searchValue)

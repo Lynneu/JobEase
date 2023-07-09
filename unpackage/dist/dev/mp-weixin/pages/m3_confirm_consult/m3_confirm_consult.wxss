@@ -30,6 +30,10 @@
   font-weight: 600;
   color: #007aff;
 }
+.title2 {
+  padding-left: 45%;
+  color: #007aff;
+}
 .word {
   padding-left: 40rpx;
   padding-bottom: 5rpx;

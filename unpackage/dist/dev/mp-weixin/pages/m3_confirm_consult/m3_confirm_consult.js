@@ -11,11 +11,10 @@ const _sfc_main = {
         { value: 4, text: "薪资谈判" },
         { value: 5, text: "其他" }
       ],
-      phone: ""
+      phone: "12345678911"
     };
   },
   onShow() {
-    this.phone = getApp().globalData.ph;
   },
   methods: {
     updatefn(item) {
@@ -28,6 +27,12 @@ const _sfc_main = {
         },
         complete: () => {
         }
+      });
+    },
+    warning() {
+      common_vendor.index.showToast({
+        title: "咨询未完成",
+        icon: "none"
       });
     }
   }
@@ -83,6 +88,45 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       vueId: "38044095-0"
     }),
     b: common_vendor.p({
+      collection: "consult"
+    }),
+    c: common_vendor.w(({
+      data,
+      loading,
+      error,
+      options
+    }, s0, i0) => {
+      return common_vendor.e({
+        a: error
+      }, error ? {
+        b: common_vendor.t(error.message)
+      } : {
+        c: common_vendor.f(data.filter((item) => item.appt_state === 1 && item.teach_tele === $data.phone), (item, k1, i1) => {
+          return {
+            a: common_vendor.t(item.appt_cost),
+            b: common_vendor.t($data.appt_theme[item.appt_label].text),
+            c: common_vendor.t(item.appt_date),
+            d: common_vendor.t(item.appt_duration),
+            e: item._id,
+            f: common_vendor.o($options.warning, item._id),
+            g: "38044095-5-" + i0 + "-" + i1 + "," + ("38044095-4-" + i0)
+          };
+        }),
+        d: common_vendor.p({
+          where: `item.appt_state = 0`,
+          direction: "column"
+        }),
+        e: "38044095-4-" + i0 + ",38044095-3"
+      }, {
+        f: i0,
+        g: s0
+      });
+    }, {
+      name: "d",
+      path: "c",
+      vueId: "38044095-3"
+    }),
+    d: common_vendor.p({
       collection: "consult"
     })
   };

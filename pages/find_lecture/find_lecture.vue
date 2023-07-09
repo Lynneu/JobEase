@@ -8,14 +8,6 @@
           	<uni-section title="筛选" type="line">
           		<view class="form-container">
           			<uni-forms>
-          				<uni-forms-item label="咨询职位" label-width=60>
-          					<uni-data-select
-          					        v-model="jobvalue"
-          					        :localdata="job"
-          					        @change="changeJob"
-          							placeholder="请选择职位"
-          					      ></uni-data-select>
-          				</uni-forms-item>
           				<uni-forms-item label="咨询方向" label-width=60>
           					<uni-data-select
           					        v-model="consultvalue"
@@ -32,12 +24,12 @@
           							placeholder="请选择价格区间"
           					      ></uni-data-select>
           				</uni-forms-item>
-          				<uni-forms-item label="评分区间" label-width=60>
+          				<uni-forms-item label="讲座时长" label-width=60>
           					<uni-data-select
-          					        v-model="scorevalue"
-          					        :localdata="score"
-          					        @change="changescore"
-          							placeholder="请选择评分区间"
+          					        v-model="timevalue"
+          					        :localdata="time"
+          					        @change="changetime"
+          							placeholder="请选择讲座时长"
           					      ></uni-data-select>
           				</uni-forms-item>
           			</uni-forms>
@@ -58,13 +50,13 @@
       </view>
     </view>
     <view class="list-area">
-    			<unicloud-db v-slot:default="{data, loading, error, options}" collection="lecture" >
+    			<unicloud-db ref="udb" v-slot:default="{data, loading, error, options}" collection="lecture" >
     						<view v-if="error">{{error.message}}</view>
     						<view v-else>
     							<uni-list :border="false" style="background-color: #f8f8f8;">
     							    <uni-list-item 
     									:border="false"
-    							        v-for="(tutor, index) in data" 
+    							        v-for="(tutor, index) in filteredData || data"
     									direction="column"
     							        :key="index"
     							        @click="navigateToTutorDetail(tutor._id)"
@@ -110,16 +102,16 @@ export default {
   data() {
     return {
       searchValue: '',
-	  jobvalue: '',
 	  consultvalue: '',
 	  payvalue: '',
-	  scorevalue: '',
+	  timevalue: '',
       title: 'uni-fab',
       directionStr: '垂直',
       horizontal: 'right',
       vertical: 'bottom',
       direction: 'horizontal',
 	  lectrue: [],
+	  filteredData: null,
       pattern: {
         color: '#7A7E83',
         backgroundColor: '#fff',
@@ -135,18 +127,6 @@ export default {
         text: '发布讲座',
         active: false
       }],
-	  job: [
-	      { value: 0, text: '前端开发' },
-	      { value: 1, text: '后端开发' },
-	      { value: 2, text: 'C++开发' },
-	      { value: 3, text: 'Java开发' },
-	      { value: 4, text: '算法' },
-	      { value: 5, text: '测试开发' },
-	      { value: 6, text: '产品经理' },
-	      { value: 7, text: '运营' },
-	      { value: 8, text: 'HR' },
-	      { value: 9, text: '其他' }
-	  ],
 	  consult: [
 	  	{ value: 0, text: '简历优化' },
 	  	{ value: 1, text: '面试经验' },
@@ -162,12 +142,11 @@ export default {
 		{ value: 3, text: "200元以上" },
 		{ value: 4, text: "无限制" },
 	  ],
-	  score: [
-		{ value: 0, text: "4.5以下" },
-		{ value: 1, text: "4.5-4.6" },
-		{ value: 2, text: "4.7-4.8" },
-		{ value: 3, text: "4.9-5.0" },
-		{ value: 4, text: "无限制" },
+	  time: [
+		{ value: 0, text: "30分钟以下" },
+		{ value: 1, text: "30-60分钟" },
+		{ value: 2, text: "60分钟以上" },
+		{ value: 3, text: "无限制" },
 	  ]
     }
   },
@@ -223,8 +202,43 @@ export default {
     showDrawer(ref) {
       this.$refs[ref].open();
     },
+    filter() {
+		  this.lectrue = this.$refs.udb.dataList
+		  console.log(this.lectrue)
+          let data = this.lectrue; 
+          if (this.consultvalue !== '') {
+            data = data.filter(lecture => lecture.lecture_label === this.consultvalue);
+          }
+          if (this.payvalue !== '') {
+              const payRanges = [
+                  { min: 0, max: 100 },
+                  { min: 100, max: 150 },
+                  { min: 150, max: 200 },
+                  { min: 200, max: Infinity },
+                  { min: 0, max: Infinity },
+              ];
+			  console.log('pay:'+this.payvalue)
+              const { min, max } = payRanges[this.payvalue];
+          
+              data = data.filter(lecture => lecture.lecture_price >= min && lecture.lecture_price < max);
+          }
+          if (this.timevalue !== '') {
+            const timeRanges = [
+                { min: 0, max: 30 },
+                { min: 30, max: 60 },
+                { min: 60, max: Infinity },
+                { min: 0, max: Infinity },
+            ];
+            console.log('time:'+this.timevalue)
+            const { min, max } = timeRanges[this.timevalue];
+                      
+            data = data.filter(lecture => lecture.lecture_duration >= min && lecture.lecture_duration < max);
+          }
+          this.filteredData = data;
+        },
     closeDrawer(ref) {
       this.$refs[ref].close();
+      this.filter(); // 在关闭筛选抽屉时调用filter函数进行过滤
     },
     searchclick() {
       console.log(this.searchValue())
@@ -238,7 +252,7 @@ export default {
 	changepay(e) {
 		console.log(e)
 	},
-	changescore(e) {
+	changetime(e) {
 		console.log(e)
 	},
 	getConsultText(tip) {

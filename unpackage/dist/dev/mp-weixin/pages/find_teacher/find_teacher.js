@@ -9,6 +9,7 @@ const _sfc_main = {
       payvalue: "",
       scorevalue: "",
       tutors: [],
+      filteredData: null,
       job: [
         { value: 0, text: "前端开发" },
         { value: 1, text: "后端开发" },
@@ -82,8 +83,44 @@ const _sfc_main = {
     showDrawer() {
       this.$refs.showLeft.open();
     },
-    closeDrawer() {
-      this.$refs.showLeft.close();
+    filter() {
+      this.tutors = this.$refs.udb.dataList;
+      console.log("111");
+      console.log(this.tutors);
+      let data = this.tutors;
+      if (this.jobvalue !== "") {
+        data = data.filter((tutor) => tutor.post === this.jobvalue);
+      }
+      if (this.consultvalue !== "") {
+        data = data.filter((tutor) => tutor.tip_teacher.includes(this.consultvalue));
+      }
+      if (this.payvalue !== "") {
+        const payRanges = [
+          { min: 0, max: 100 },
+          { min: 100, max: 150 },
+          { min: 150, max: 200 },
+          { min: 200, max: Infinity },
+          { min: 0, max: Infinity }
+        ];
+        const { min, max } = payRanges[this.payvalue];
+        data = data.filter((tutor) => tutor.price >= min && tutor.price < max);
+      }
+      if (this.scorevalue !== "") {
+        const scoreRanges = [
+          { min: 0, max: 4.5 },
+          { min: 4.5, max: 4.6 },
+          { min: 4.7, max: 4.8 },
+          { min: 4.9, max: 5 },
+          { min: 0, max: 5 }
+        ];
+        const { min, max } = scoreRanges[this.scorevalue];
+        data = data.filter((tutor) => tutor.score >= min && tutor.score < max);
+      }
+      this.filteredData = data;
+    },
+    closeDrawer(ref) {
+      this.$refs[ref].close();
+      this.filter();
     },
     searchclick() {
       console.log(this.searchValue);
@@ -234,7 +271,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       }, error ? {
         b: common_vendor.t(error.message)
       } : {
-        c: common_vendor.f(data, (tutor, index, i1) => {
+        c: common_vendor.f($data.filteredData || data, (tutor, index, i1) => {
           return {
             a: common_vendor.t(`${tutor.username} - ${$options.getJobText(tutor.post)}`),
             b: common_vendor.t(`${tutor.score}分`),
@@ -272,7 +309,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       path: "G",
       vueId: "0c1b2ad5-13"
     }),
-    H: common_vendor.p({
+    H: common_vendor.sr("udb", "0c1b2ad5-13"),
+    I: common_vendor.p({
       collection: "user_detail",
       where: "isTeacher==1"
     })

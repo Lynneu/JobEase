@@ -5,16 +5,16 @@ const _sfc_main = {
   data() {
     return {
       searchValue: "",
-      jobvalue: "",
       consultvalue: "",
       payvalue: "",
-      scorevalue: "",
+      timevalue: "",
       title: "uni-fab",
       directionStr: "垂直",
       horizontal: "right",
       vertical: "bottom",
       direction: "horizontal",
       lectrue: [],
+      filteredData: null,
       pattern: {
         color: "#7A7E83",
         backgroundColor: "#fff",
@@ -30,18 +30,6 @@ const _sfc_main = {
         text: "发布讲座",
         active: false
       }],
-      job: [
-        { value: 0, text: "前端开发" },
-        { value: 1, text: "后端开发" },
-        { value: 2, text: "C++开发" },
-        { value: 3, text: "Java开发" },
-        { value: 4, text: "算法" },
-        { value: 5, text: "测试开发" },
-        { value: 6, text: "产品经理" },
-        { value: 7, text: "运营" },
-        { value: 8, text: "HR" },
-        { value: 9, text: "其他" }
-      ],
       consult: [
         { value: 0, text: "简历优化" },
         { value: 1, text: "面试经验" },
@@ -57,12 +45,11 @@ const _sfc_main = {
         { value: 3, text: "200元以上" },
         { value: 4, text: "无限制" }
       ],
-      score: [
-        { value: 0, text: "4.5以下" },
-        { value: 1, text: "4.5-4.6" },
-        { value: 2, text: "4.7-4.8" },
-        { value: 3, text: "4.9-5.0" },
-        { value: 4, text: "无限制" }
+      time: [
+        { value: 0, text: "30分钟以下" },
+        { value: 1, text: "30-60分钟" },
+        { value: 2, text: "60分钟以上" },
+        { value: 3, text: "无限制" }
       ]
     };
   },
@@ -117,8 +104,41 @@ const _sfc_main = {
     showDrawer(ref) {
       this.$refs[ref].open();
     },
+    filter() {
+      this.lectrue = this.$refs.udb.dataList;
+      console.log(this.lectrue);
+      let data = this.lectrue;
+      if (this.consultvalue !== "") {
+        data = data.filter((lecture) => lecture.lecture_label === this.consultvalue);
+      }
+      if (this.payvalue !== "") {
+        const payRanges = [
+          { min: 0, max: 100 },
+          { min: 100, max: 150 },
+          { min: 150, max: 200 },
+          { min: 200, max: Infinity },
+          { min: 0, max: Infinity }
+        ];
+        console.log("pay:" + this.payvalue);
+        const { min, max } = payRanges[this.payvalue];
+        data = data.filter((lecture) => lecture.lecture_price >= min && lecture.lecture_price < max);
+      }
+      if (this.timevalue !== "") {
+        const timeRanges = [
+          { min: 0, max: 30 },
+          { min: 30, max: 60 },
+          { min: 60, max: Infinity },
+          { min: 0, max: Infinity }
+        ];
+        console.log("time:" + this.timevalue);
+        const { min, max } = timeRanges[this.timevalue];
+        data = data.filter((lecture) => lecture.lecture_duration >= min && lecture.lecture_duration < max);
+      }
+      this.filteredData = data;
+    },
     closeDrawer(ref) {
       this.$refs[ref].close();
+      this.filter();
     },
     searchclick() {
       console.log(this.searchValue());
@@ -132,7 +152,7 @@ const _sfc_main = {
     changepay(e) {
       console.log(e);
     },
-    changescore(e) {
+    changetime(e) {
       console.log(e);
     },
     getConsultText(tip) {
@@ -185,76 +205,65 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       size: "25",
       color: "#007AFF"
     }),
-    c: common_vendor.o($options.changeJob),
-    d: common_vendor.o(($event) => $data.jobvalue = $event),
+    c: common_vendor.o($options.changeconsult),
+    d: common_vendor.o(($event) => $data.consultvalue = $event),
     e: common_vendor.p({
-      localdata: $data.job,
-      placeholder: "请选择职位",
-      modelValue: $data.jobvalue
-    }),
-    f: common_vendor.p({
-      label: "咨询职位",
-      ["label-width"]: "60"
-    }),
-    g: common_vendor.o($options.changeconsult),
-    h: common_vendor.o(($event) => $data.consultvalue = $event),
-    i: common_vendor.p({
       localdata: $data.consult,
       placeholder: "请选择咨询方向",
       modelValue: $data.consultvalue
     }),
-    j: common_vendor.p({
+    f: common_vendor.p({
       label: "咨询方向",
       ["label-width"]: "60"
     }),
-    k: common_vendor.o($options.changepay),
-    l: common_vendor.o(($event) => $data.payvalue = $event),
-    m: common_vendor.p({
+    g: common_vendor.o($options.changepay),
+    h: common_vendor.o(($event) => $data.payvalue = $event),
+    i: common_vendor.p({
       localdata: $data.pay,
       placeholder: "请选择价格区间",
       modelValue: $data.payvalue
     }),
-    n: common_vendor.p({
+    j: common_vendor.p({
       label: "价格区间",
       ["label-width"]: "60"
     }),
-    o: common_vendor.o($options.changescore),
-    p: common_vendor.o(($event) => $data.scorevalue = $event),
-    q: common_vendor.p({
-      localdata: $data.score,
-      placeholder: "请选择评分区间",
-      modelValue: $data.scorevalue
+    k: common_vendor.o($options.changetime),
+    l: common_vendor.o(($event) => $data.timevalue = $event),
+    m: common_vendor.p({
+      localdata: $data.time,
+      placeholder: "请选择讲座时长",
+      modelValue: $data.timevalue
     }),
-    r: common_vendor.p({
-      label: "评分区间",
+    n: common_vendor.p({
+      label: "讲座时长",
       ["label-width"]: "60"
     }),
-    s: common_vendor.o(($event) => $options.closeDrawer("showLeft")),
-    t: common_vendor.p({
+    o: common_vendor.o(($event) => $options.closeDrawer("showLeft")),
+    p: common_vendor.p({
       title: "筛选",
       type: "line"
     }),
-    v: common_vendor.sr("showLeft", "7538e855-1"),
-    w: common_vendor.p({
+    q: common_vendor.sr("showLeft", "7538e855-1"),
+    r: common_vendor.p({
       mode: "left",
       width: 300
     }),
-    x: common_vendor.o($options.search),
-    y: common_vendor.o($options.blur),
-    z: common_vendor.o($options.focus),
-    A: common_vendor.o($options.input),
-    B: common_vendor.o($options.cancel),
-    C: common_vendor.o($options.clear),
-    D: common_vendor.o(($event) => $data.searchValue = $event),
-    E: common_vendor.p({
+    s: common_vendor.o($options.search),
+    t: common_vendor.o($options.blur),
+    v: common_vendor.o($options.focus),
+    w: common_vendor.o($options.input),
+    x: common_vendor.o($options.cancel),
+    y: common_vendor.o($options.clear),
+    z: common_vendor.o(($event) => $data.searchValue = $event),
+    A: common_vendor.p({
       focus: false,
       placeholder: "请输入搜索内容",
       clearButton: "auto",
       cancelButton: "none",
       modelValue: $data.searchValue
     }),
-    F: common_vendor.o((...args) => $options.searchclick && $options.searchclick(...args)),
-    G: common_vendor.w(({
+    B: common_vendor.o((...args) => $options.searchclick && $options.searchclick(...args)),
+    C: common_vendor.w(({
       data,
       loading,
       error,
@@ -265,7 +274,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       }, error ? {
         b: common_vendor.t(error.message)
       } : {
-        c: common_vendor.f(data, (tutor, index, i1) => {
+        c: common_vendor.f($data.filteredData || data, (tutor, index, i1) => {
           return {
             a: common_vendor.t(`${tutor.lecture_title}`),
             b: common_vendor.t(`已预约${tutor.lecture_reserved}人`),
@@ -273,7 +282,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             d: common_vendor.f(tutor.lecture_label, (tip, idx, i2) => {
               return {
                 a: idx,
-                b: "7538e855-16-" + i0 + "-" + i1 + "-" + i2 + "," + ("7538e855-15-" + i0 + "-" + i1),
+                b: "7538e855-14-" + i0 + "-" + i1 + "-" + i2 + "," + ("7538e855-13-" + i0 + "-" + i1),
                 c: common_vendor.p({
                   text: $options.getConsultText(tip),
                   type: "primary"
@@ -283,14 +292,14 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             e: common_vendor.t(tutor.lecture_content),
             f: index,
             g: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor._id), index),
-            h: "7538e855-15-" + i0 + "-" + i1 + "," + ("7538e855-14-" + i0)
+            h: "7538e855-13-" + i0 + "-" + i1 + "," + ("7538e855-12-" + i0)
           };
         }),
         d: common_vendor.p({
           border: false,
           direction: "column"
         }),
-        e: "7538e855-14-" + i0 + ",7538e855-13",
+        e: "7538e855-12-" + i0 + ",7538e855-11",
         f: common_vendor.p({
           border: false
         })
@@ -300,15 +309,16 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       });
     }, {
       name: "d",
-      path: "G",
-      vueId: "7538e855-13"
+      path: "C",
+      vueId: "7538e855-11"
     }),
-    H: common_vendor.p({
+    D: common_vendor.sr("udb", "7538e855-11"),
+    E: common_vendor.p({
       collection: "lecture"
     }),
-    I: common_vendor.sr("fab", "7538e855-17"),
-    J: common_vendor.o($options.trigger),
-    K: common_vendor.p({
+    F: common_vendor.sr("fab", "7538e855-15"),
+    G: common_vendor.o($options.trigger),
+    H: common_vendor.p({
       pattern: $data.pattern,
       content: $data.content,
       horizontal: $data.horizontal,

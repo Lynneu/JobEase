@@ -65,8 +65,9 @@ const _sfc_main = {
         duration: 2e3
       });
       common_vendor.index.navigateTo({
-        url: "../m3_confirm_consult/m3_confirm_consult"
+        url: "../m3_confirm_consult"
       });
+      console.log("跳转");
     },
     refuse() {
       this.item.appt_state = this.refuse_consult;
@@ -82,8 +83,9 @@ const _sfc_main = {
         duration: 2e3
       });
       common_vendor.index.navigateTo({
-        url: "../m3_confirm_consult/m3_confirm_consult"
+        url: "../m3_confirm_consult"
       });
+      console.log("跳转");
     }
   }
 };

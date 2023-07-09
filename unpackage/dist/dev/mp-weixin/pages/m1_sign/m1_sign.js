@@ -3,8 +3,7 @@ const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   data() {
     return {
-      //user.phone: '', //手机号码
-      //user.password: '', //密码
+      t: "",
       password_double: "",
       //第二次密码
       flag: 0,
@@ -15,6 +14,14 @@ const _sfc_main = {
     };
   },
   methods: {
+    /*fpNumInput(e) {
+    					const o = e.target;
+    					const inputRule = /[^a-zA-Z]/g		
+    //修改inputRule 的值
+    					this.$nextTick(function() {
+    						this.form.fpNum = o.value.replace(inputRule , '');
+    					})
+    				},*/
     input(e) {
       console.log("输入内容：", e);
     },
@@ -46,6 +53,22 @@ const _sfc_main = {
         });
         return false;
       } else {
+        var value = this.user.password;
+        const test = /^[0-9a-zA-Z_-]{1,}$/;
+        if (!test.test(value)) {
+          common_vendor.index.showToast({
+            title: "密码仅允许英文字母、数字、符号-_",
+            icon: "none"
+          });
+          return false;
+        }
+        if (!this.ispass(that.user.password)) {
+          common_vendor.index.showToast({
+            title: "密码仅允许英文字母、数字、符号-_",
+            icon: "none"
+          });
+          return false;
+        }
         const db = common_vendor.Ds.database();
         db.collection("user").where({
           phone: {
@@ -75,6 +98,10 @@ const _sfc_main = {
     isMobile(str) {
       let reg = /^1\d{10}$/;
       return reg.test(str);
+    },
+    ispass(str) {
+      let reg = /[A-Za-z0-9-_]/;
+      return reg.test(str);
     }
   }
 };
@@ -101,12 +128,14 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     e: common_vendor.p({
       type: "password",
       placeholder: "请输入4-15位密码",
+      maxlength: "15",
       modelValue: $data.user.password
     }),
     f: common_vendor.o(($event) => $data.password_double = $event),
     g: common_vendor.p({
       type: "password",
       placeholder: "请再次输入密码",
+      maxlength: "15",
       modelValue: $data.password_double
     }),
     h: common_vendor.o((...args) => $options.Login && $options.Login(...args))
