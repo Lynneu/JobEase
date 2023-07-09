@@ -67,7 +67,7 @@
 							<uni-list :border="false" style="background-color: #f8f8f8;">
 							    <uni-list-item 
 									:border="false"
-							        v-for="(tutor, index) in filteredData || data" 
+							        v-for="(tutor, index) in filteredData || recoData" 
 									direction="column"
 							        :key="index"
 							        @click="navigateToTutorDetail(tutor.phone)"
@@ -116,6 +116,7 @@
 				payvalue: '',
 				scorevalue: '',
 				tutors: [],
+				recoData: null,
 				filteredData: null,
 				job: [
 				    { value: 0, text: '前端开发' },
@@ -152,6 +153,9 @@
 					{ value: 4, text: "无限制" },
 				]
 			}
+		},
+		onShow: async function() {
+			  this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
 		},
 		methods: {
 			search(res) {
@@ -262,6 +266,37 @@
 			        url: `../m3_detail_appt_consult/m3_detail_appt_consult?id=${id}`  
 			    });
 			},
+			async recommendAlgorithm(tutors) {
+				this.userphone = getApp().globalData.ph
+				console.log(this.userphone)
+				const db = uniCloud.database()
+				db.collection('user_detail')
+				.where({
+					phone: {
+					  $eq: this.userphone
+					}
+				}).get()
+				.then((res)=>{
+					console.log('res:'+res.result.data[0].tip_student)
+					this.userTag = res.result.data[0].tip_student
+					console.log(this.userTag)
+				}).catch((err)=>{
+					console.log(err.message)
+				})
+				console.log(tutors)
+				// 不进行过滤，让所有讲座都参与排序
+				tutors = tutors.slice().sort((a, b) => {
+				let scoreA = a.tip_teacher.includes(this.userTag) ? 1 : 0;
+				let scoreB = b.tip_teacher.includes(this.userTag) ? 1 : 0;
+				  // 如果评分相同，以评分顺序进行排序
+				  if (scoreA === scoreB) {
+				    return new Date(b.score) - new Date(a.score);
+				  }
+				  // 以匹配评分进行排序
+				  return scoreB - scoreA;
+				});
+				return tutors
+			}
 		},
 		onBackPress() {
 			// #ifdef APP-PLUS

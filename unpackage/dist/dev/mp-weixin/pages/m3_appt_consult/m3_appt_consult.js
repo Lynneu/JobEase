@@ -14,6 +14,7 @@ const _sfc_main = {
       start: Date.now(),
       end: Date.now() + 14 * 24 * 36e5,
       gethours: (/* @__PURE__ */ new Date()).getHours() + 1,
+      timenow: "",
       Times: [
         { text: "08:00", value: 8 },
         { text: "09:00", value: 9 },
@@ -82,10 +83,20 @@ const _sfc_main = {
       this.consult.appt_duration = value;
       this.consult.appt_cost = value * this.user_detail.price;
     },
+    getimenow() {
+      var currentDate = /* @__PURE__ */ new Date();
+      var year = currentDate.getFullYear().toString();
+      var month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+      var day = currentDate.getDate().toString().padStart(2, "0");
+      var dateString = year + "-" + month + "-" + day;
+      this.timenow = dateString;
+      console.log(dateString);
+    },
     checktime(pick) {
       return pick >= this.gethours;
     },
     appointAndpay() {
+      this.getimenow();
       console.log("dianle");
       if (this.consult.appt_duration == 0) {
         common_vendor.index.showToast({
@@ -111,15 +122,17 @@ const _sfc_main = {
         });
         return;
       }
-      if (this.consult.appt_date <= Date.now()) {
+      console.log(this.consult.appt_date + "1");
+      console.log(this.timenow + "2");
+      if (this.consult.appt_date === this.timenow) {
         if (this.consult.appt_time1.slice(0, 1) < this.gethours) {
           common_vendor.index.showToast({
             title: "请选择正确时间",
             icon: "none",
             duration: 2e3
           });
+          return;
         }
-        return;
       }
       console.log("注释掉的出来了");
       const db = common_vendor.Ds.database();

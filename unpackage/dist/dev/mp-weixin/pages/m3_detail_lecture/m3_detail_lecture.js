@@ -23,19 +23,21 @@ const _sfc_main = {
         lecture_reserved: 0,
         lecture_content: ""
       },
-      limit: [
-        { value: 0, text: " （无限制）" },
-        { value: 1, text: "" }
-      ],
+      limit: "",
+      nolimit: "无限额",
+      isappt: 0,
       user_detail: {
         username: ""
       },
       appt_lecture: {
         lecture_id: "",
-        phone: "12345678900",
+        phone: "",
         lecture_state: 0
       }
     };
+  },
+  onShow() {
+    this.appt_lecture.phone = getApp().globalData.ph;
   },
   onLoad: function(option) {
     console.log(option.lecture);
@@ -49,6 +51,8 @@ const _sfc_main = {
       db.collection("lecture").doc(this.lecture._id).get().then((res) => {
         console.log(res);
         this.lecture = res.result.data[0];
+        console.log(this.lecture.lecture_limit + "测试1");
+        this.islimit(this.lecture.lecture_limit);
         const phone = this.lecture.phone;
         db.collection("user_detail").where({
           phone
@@ -64,6 +68,14 @@ const _sfc_main = {
         console.log(err);
       });
     },
+    islimit(lim) {
+      if (lim == 0) {
+        this.limit = this.nolimit;
+      }
+      if (lim == 1) {
+        this.limit = this.lecture.lecture_reserved + " / " + this.lecture.lecture_number + " 人";
+      }
+    },
     updateLectureReserved() {
       const db = common_vendor.Ds.database();
       const lectureId = this.lecture._id;
@@ -76,32 +88,52 @@ const _sfc_main = {
         console.error("Failed to update lecture_reserved:", err);
       });
     },
-    appointLecture() {
-      if (this.lecture.lecture_limit == 1) {
-        if (this.lecture.lecture_reserved === this.lecture.lecture_number) {
+    checkappt() {
+      const db = common_vendor.Ds.database();
+      db.collection("appt_lecture").where({
+        lecture_id: this.appt_lecture.lecture_id,
+        phone: this.appt_lecture.phone
+      }).limit(1).get().then((res) => {
+        if (res.result && res.result.data && res.result.data.length > 0) {
           common_vendor.index.showToast({
-            title: "预约人数已满",
+            title: "已预约",
             icon: "none",
             duration: 2e3
           });
+        } else {
+          if (this.lecture.lecture_limit == 1) {
+            console.log("筛选1");
+            if (this.lecture.lecture_reserved >= this.lecture.lecture_number) {
+              console.log("筛选2");
+              common_vendor.index.showToast({
+                title: "预约人数已满",
+                icon: "none",
+                duration: 2e3
+              });
+              return;
+            }
+          }
+          console.log("筛选成功");
+          this.updateLectureReserved();
+          const db2 = common_vendor.Ds.database();
+          db2.collection("appt_lecture").add(this.appt_lecture).then((e) => {
+            console.log(e);
+          }).catch((err) => {
+            console.error(err);
+          });
+          common_vendor.index.showToast({
+            title: "预约成功",
+            icon: "none",
+            duration: 2e3
+          });
+          common_vendor.index.switchTab({
+            url: "../find_lecture/find_lecture"
+          });
         }
-        return;
-      }
-      this.updateLectureReserved();
-      const db = common_vendor.Ds.database();
-      db.collection("appt_lecture").add(this.appt_lecture).then((e) => {
-        console.log(e);
-      }).catch((err) => {
-        console.error(err);
       });
-      common_vendor.index.showToast({
-        title: "预约成功",
-        icon: "none",
-        duration: 2e3
-      });
-      common_vendor.index.switchTab({
-        url: "../find_lecture/find_lecture"
-      });
+    },
+    appointLecture() {
+      this.checkappt();
     }
   }
 };
@@ -140,7 +172,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       type: "line"
     }),
     f: common_vendor.p({
-      title: "讲座名额：" + $data.lecture.lecture_reserved + " / " + $data.lecture.lecture_number + " 人" + $data.limit[$data.lecture.lecture_limit].text,
+      title: "剩余名额：" + $data.limit,
       type: "line"
     }),
     g: common_vendor.p({

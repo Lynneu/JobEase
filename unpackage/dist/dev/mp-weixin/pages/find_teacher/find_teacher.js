@@ -9,6 +9,7 @@ const _sfc_main = {
       payvalue: "",
       scorevalue: "",
       tutors: [],
+      recoData: null,
       filteredData: null,
       job: [
         { value: 0, text: "前端开发" },
@@ -45,6 +46,9 @@ const _sfc_main = {
         { value: 4, text: "无限制" }
       ]
     };
+  },
+  onShow: async function() {
+    this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
   },
   methods: {
     search(res) {
@@ -150,6 +154,32 @@ const _sfc_main = {
       common_vendor.index.navigateTo({
         url: `../m3_detail_appt_consult/m3_detail_appt_consult?id=${id}`
       });
+    },
+    async recommendAlgorithm(tutors) {
+      this.userphone = getApp().globalData.ph;
+      console.log(this.userphone);
+      const db = common_vendor.Ds.database();
+      db.collection("user_detail").where({
+        phone: {
+          $eq: this.userphone
+        }
+      }).get().then((res) => {
+        console.log("res:" + res.result.data[0].tip_student);
+        this.userTag = res.result.data[0].tip_student;
+        console.log(this.userTag);
+      }).catch((err) => {
+        console.log(err.message);
+      });
+      console.log(tutors);
+      tutors = tutors.slice().sort((a, b) => {
+        let scoreA = a.tip_teacher.includes(this.userTag) ? 1 : 0;
+        let scoreB = b.tip_teacher.includes(this.userTag) ? 1 : 0;
+        if (scoreA === scoreB) {
+          return new Date(b.score) - new Date(a.score);
+        }
+        return scoreB - scoreA;
+      });
+      return tutors;
     }
   },
   onBackPress() {
@@ -271,7 +301,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       }, error ? {
         b: common_vendor.t(error.message)
       } : {
-        c: common_vendor.f($data.filteredData || data, (tutor, index, i1) => {
+        c: common_vendor.f($data.filteredData || $data.recoData, (tutor, index, i1) => {
           return {
             a: common_vendor.t(`${tutor.username} - ${$options.getJobText(tutor.post)}`),
             b: common_vendor.t(`${tutor.score}分`),
