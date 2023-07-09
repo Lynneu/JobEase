@@ -58,12 +58,12 @@
 					{ value: 4, text: '薪资谈判' },
 					{ value: 5, text: '其他' }
 				],
-				phone:'12345678911',
+				phone:'',
 
 			};
 		},	
 		onShow() {
-			//this.phone=getApp().globalData.ph;
+			this.phone=getApp().globalData.ph;
 			//console.log('Phone:', this.lecture.phone);
 		},
 		methods: {

@@ -222,7 +222,7 @@
 			            { min: 4.9, max: 5.0 },
 			            { min: 0, max: 5.0 },
 			        ];
-			                  
+	
 			        const { min, max } = scoreRanges[this.scorevalue];
 			                  
 			        data = data.filter(tutor => tutor.score >= min && tutor.score < max);
