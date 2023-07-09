@@ -157,7 +157,7 @@
 				]
 			}
 		},
-		onShow: async function() {
+		mounted: async function() {
 			  this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
 		},
 		methods: {

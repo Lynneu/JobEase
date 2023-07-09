@@ -311,16 +311,16 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         c: common_vendor.f($data.filteredData || $data.recoData, (tutor, index, i1) => {
           return {
             a: common_vendor.t(`${tutor.lecture_title}`),
-            b: common_vendor.t(`已预约${tutor.lecture_reserved}人`),
-            c: common_vendor.t(`, 价格 ¥${tutor.lecture_price}/小时`),
-            d: "7538e855-14-" + i0 + "-" + i1 + "," + ("7538e855-13-" + i0 + "-" + i1),
-            e: common_vendor.p({
+            b: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor._id), index),
+            c: common_vendor.t(`已预约${tutor.lecture_reserved}人`),
+            d: common_vendor.t(`, 价格 ¥${tutor.lecture_price}/小时`),
+            e: "7538e855-14-" + i0 + "-" + i1 + "," + ("7538e855-13-" + i0 + "-" + i1),
+            f: common_vendor.p({
               text: $options.getConsultText(tutor.lecture_label),
               type: "primary"
             }),
-            f: common_vendor.t(tutor.lecture_content),
-            g: index,
-            h: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor._id), index),
+            g: common_vendor.t(tutor.lecture_content),
+            h: index,
             i: "7538e855-13-" + i0 + "-" + i1 + "," + ("7538e855-12-" + i0)
           };
         }),

@@ -68,9 +68,17 @@
 
 			};
 		},	
-		onShow() {
-			this.phone = getApp().globalData.ph;
-			console.log(this.phone)
+		 mounted() {
+			try {
+			    const phone = getApp().globalData.ph;
+			    if (phone !== this.phone) {
+			      this.phone = phone;
+			      this.$forceUpdate(); // 强制重新渲染
+			    }
+			    console.log(this.phone)
+			  } catch (error) {
+			    console.error(error);
+			  }
 			this.getData();
 		},
 		methods: {

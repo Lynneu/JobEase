@@ -48,7 +48,7 @@ const _sfc_main = {
       ]
     };
   },
-  onShow: async function() {
+  mounted: async function() {
     this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
   },
   methods: {
@@ -305,9 +305,10 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         c: common_vendor.f($data.filteredData || $data.recoData, (tutor, index, i1) => {
           return {
             a: common_vendor.t(`${tutor.username} - ${$options.getJobText(tutor.post)}`),
-            b: common_vendor.t(`${tutor.score}分`),
-            c: common_vendor.t(`, 价格 ¥${tutor.price}/小时`),
-            d: common_vendor.f(tutor.tip_teacher, (tip, idx, i2) => {
+            b: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor.phone), index),
+            c: common_vendor.t(`${tutor.score}分`),
+            d: common_vendor.t(`, 价格 ¥${tutor.price}/小时`),
+            e: common_vendor.f(tutor.tip_teacher, (tip, idx, i2) => {
               return {
                 a: idx,
                 b: "0c1b2ad5-16-" + i0 + "-" + i1 + "-" + i2 + "," + ("0c1b2ad5-15-" + i0 + "-" + i1),
@@ -317,9 +318,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                 })
               };
             }),
-            e: common_vendor.t(tutor.comment),
-            f: index,
-            g: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor.phone), index),
+            f: common_vendor.t(tutor.comment),
+            g: index,
             h: "0c1b2ad5-15-" + i0 + "-" + i1 + "," + ("0c1b2ad5-14-" + i0)
           };
         }),

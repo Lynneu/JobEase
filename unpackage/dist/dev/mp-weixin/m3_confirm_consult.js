@@ -19,9 +19,17 @@ const _sfc_main = {
       // Use this to store the data of the second unicloud-db component
     };
   },
-  onShow() {
-    this.phone = getApp().globalData.ph;
-    console.log(this.phone);
+  mounted() {
+    try {
+      const phone = getApp().globalData.ph;
+      if (phone !== this.phone) {
+        this.phone = phone;
+        this.$forceUpdate();
+      }
+      console.log(this.phone);
+    } catch (error) {
+      console.error(error);
+    }
     this.getData();
   },
   methods: {
@@ -47,12 +55,6 @@ const _sfc_main = {
         complete: () => {
         }
       });
-    },
-    warning() {
-      common_vendor.index.showToast({
-        title: "咨询未完成",
-        icon: "none"
-      });
     }
   }
 };
@@ -70,12 +72,12 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
     a: common_vendor.f($data.consultData1, (item, k0, i0) => {
       return {
-        a: common_vendor.t(item.appt_cost),
-        b: common_vendor.t($data.appt_theme[item.appt_label].text),
-        c: common_vendor.t(item.appt_date),
-        d: common_vendor.t(item.appt_duration),
-        e: item._id,
-        f: common_vendor.o(($event) => $options.updatefn(item), item._id),
+        a: common_vendor.o(($event) => $options.updatefn(item), item._id),
+        b: common_vendor.t(item.appt_cost),
+        c: common_vendor.t($data.appt_theme[item.appt_label].text),
+        d: common_vendor.t(item.appt_date),
+        e: common_vendor.t(item.appt_duration),
+        f: item._id,
         g: "38044095-1-" + i0 + ",38044095-0"
       };
     }),
@@ -89,8 +91,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         c: common_vendor.t(item.appt_date),
         d: common_vendor.t(item.appt_duration),
         e: item._id,
-        f: common_vendor.o($options.warning, item._id),
-        g: "38044095-3-" + i0 + ",38044095-2"
+        f: "38044095-3-" + i0 + ",38044095-2"
       };
     }),
     d: common_vendor.p({

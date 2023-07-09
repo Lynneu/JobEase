@@ -20,7 +20,7 @@ export default {
       role: ''  // 从某个地方获取用户角色
     };
 	},
-  onShow: function() {
+  onLoad: function() {
   	  this.role = getApp().globalData.st
 	  console.log(this.role)
   },

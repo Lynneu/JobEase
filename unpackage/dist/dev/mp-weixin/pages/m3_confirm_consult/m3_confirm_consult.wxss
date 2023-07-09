@@ -43,3 +43,16 @@
 .information_display {
   padding: 5px;
 }
+.title_display {
+  display: flex;
+}
+.button {
+  flex: 1;
+  text-align: right;
+  padding-right: 10%;
+}
+.button_text {
+  font-size: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
