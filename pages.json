@@ -192,6 +192,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/m7_mentor_search/m7_mentor_search",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "导师搜索",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
