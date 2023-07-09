@@ -116,6 +116,15 @@
 				   });
 				   return;
 				}
+				var value = this.user_detail.username
+				const test2 =/^[a-zA-Z0-9\u4e00-\u9fff_-]+$/
+				if(!test2.test(value)){
+				   uni.showToast({
+				   	title: '用户名仅允许中文、英文、数字、符号-_',
+				   	icon: 'none'
+				   })
+				   return false
+				}
 				if (!this.user_detail.comment) {
 					uni.showToast({
 						title: '请填写简介',

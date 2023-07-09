@@ -96,7 +96,7 @@
 			this.user_detail.phone=getApp().globalData.ph;		
 		},
 		onLoad() {
-			  //getApp().globalData.ph = "12345678977";	
+			 // getApp().globalData.ph = "12345678977";	
 			  const db = uniCloud.database()
 			   db.collection('user_detail').where({
 			     phone: {
@@ -130,6 +130,15 @@
 				      duration: 2000
 				   });
 				   return;
+				}
+				var value = this.user_detail.username
+				const test2 =/^[a-zA-Z0-9\u4e00-\u9fff_-]+$/
+				if(!test2.test(value)){
+				   uni.showToast({
+				   	title: '用户名仅允许中文、英文、数字、符号-_',
+				   	icon: 'none'
+				   })
+				   return false
 				}
 			  const db = uniCloud.database();
 			  let user_detail = { ...this.user_detail };
