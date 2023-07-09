@@ -183,6 +183,15 @@
 		    }
 		    
 		}
+        ,{
+            "path" : "pages/m8_lecture_search/m8_lecture_search",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "讲座搜索",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

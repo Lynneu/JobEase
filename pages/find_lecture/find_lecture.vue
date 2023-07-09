@@ -42,7 +42,7 @@
           </view>
         </uni-drawer>
       </view>
-      <view class="text" style="-webkit-flex: 1;flex: 1;">
+      <view class="text" style="-webkit-flex: 1;flex: 1;" @click="openSearchPage">
         <uni-search-bar @confirm="search" :focus="false" v-model="searchValue" @blur="blur" @focus="focus" @input="input" @cancel="cancel" @clear="clear" placeholder="请输入搜索内容" clearButton="auto" cancelButton="none"></uni-search-bar>
       </view>
       <view class="text" style="width: 170rpx; margin-left: 10px;">
@@ -170,6 +170,12 @@ export default {
 	  this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
   },
   methods: {
+	//打开搜索页
+	openSearchPage() {
+	    uni.navigateTo({
+	        url: "../m8_lecture_search/m8_lecture_search",
+	    });
+	},
     search(res) {
       uni.showToast({
         title: '搜索：' + res.value,
