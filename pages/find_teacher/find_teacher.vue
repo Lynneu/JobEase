@@ -70,11 +70,13 @@
 							        v-for="(tutor, index) in filteredData || recoData" 
 									direction="column"
 							        :key="index"
-							        @click="navigateToTutorDetail(tutor.phone)"
 							    >
 									<template v-slot:header>
-										<view>
+										<view class="title_display">
 											<text>{{`${tutor.username} - ${getJobText(tutor.post)}`}}</text>
+											<view class="button">
+												<button  class="button_text" size="mini" style="background-color: #007aff; color: #fff;" @click="navigateToTutorDetail(tutor.phone)"><text>查看</text> </button>
+											</view>
 										</view>
 									</template>
 									<template v-slot:body>
@@ -393,5 +395,19 @@
 		color: #999;
 		font-size: 0.7em;
 		font-weight: normal;
+	}
+	.button{
+		flex: 1;
+		text-align: right;
+		padding-right: 10px;
+
+	}
+	.title_display{
+		display: flex;
+	}
+	.button_text{
+		font-size: 5px;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 </style>

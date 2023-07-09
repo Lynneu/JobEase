@@ -59,12 +59,18 @@
     							        v-for="(tutor, index) in filteredData || recoData"
     									direction="column"
     							        :key="index"
-    							        @click="navigateToTutorDetail(tutor._id)"
+    							        
     							    >
     									<template v-slot:header>
-    										<view>
-    											<text>{{`${tutor.lecture_title}`}}</text>
-    										</view>
+											<view class="title_display">
+												<view >
+													<text>{{`${tutor.lecture_title}`}}</text>
+												</view>
+												<view class="button">
+													<button  class="button_text" size="mini" style="background-color: #007aff; color: #fff;" @click="navigateToTutorDetail(tutor._id)"><text>查看</text> </button>
+												</view>
+											</view>
+    										
     									</template>
     									<template v-slot:body>
     										<view style="display: flex;">
@@ -391,5 +397,19 @@ export default {
 		color: #999;
 		font-size: 0.7em;
 		font-weight: normal;
+	}
+	.button{
+		flex: 1;
+		text-align: right;
+		padding-right: 10px;
+	
+	}
+	.title_display{
+		display: flex;
+	}
+	.button_text{
+		font-size: 5px;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 </style>

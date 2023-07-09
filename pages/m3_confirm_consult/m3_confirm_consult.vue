@@ -3,15 +3,25 @@
 		<view class="information_display">
 			<view>
 				<uni-list>
-					<uni-list-item v-for="item in consultData1" :key="item._id" direction="column" @click="updatefn(item)">
+					<uni-list-item v-for="item in consultData1" :key="item._id" direction="column" >
 						<template v-slot:body>
 							<view>
-								<text class="title">咨询信息</text>
-								<text class="title2">待审核\n</text>
+								<view class="title_display">
+									<text class="title">咨询信息</text>
+									<view class="button">
+										<button class="button_text" size="mini" style="background-color: #007aff; color: #fff;" @click="updatefn(item)">
+											<text>待审核</text>
+										</button>
+									</view>
+									<text>\n</text>
+								</view>
+								
 								<text class="word">咨询价格：{{item.appt_cost}} 元\n</text>
 								<text class="word">咨询主题：{{appt_theme[item.appt_label].text}}\n</text>
 								<text class="word">咨询日期：{{item.appt_date}}\n</text>
 								<text class="word">预计时长：{{item.appt_duration}} 小时 \n</text>
+								
+								
 							</view>
 						</template>
 					</uni-list-item>
@@ -19,7 +29,7 @@
 			</view>
 			<view>
 				<uni-list>
-					<uni-list-item v-for="item in consultData2" :key="item._id" direction="column" @click="warning">
+					<uni-list-item v-for="item in consultData2" :key="item._id" direction="column">
 						<template v-slot:body>
 							<view>
 								<text class="title">咨询信息</text>
@@ -28,7 +38,6 @@
 								<text class="word">咨询主题：{{appt_theme[item.appt_label].text}}\n</text>
 								<text class="word">咨询日期：{{item.appt_date}}\n</text>
 								<text class="word">预计时长：{{item.appt_duration}} 小时 \n</text>
-								
 							</view>
 						</template>
 					</uni-list-item>
@@ -84,13 +93,8 @@
 					fail: () =>{},
 					complete: () => {}
 				});
-			},
-			warning(){
-				uni.showToast({
-					title: '咨询未完成',
-					icon: 'none'
-				})
 			}
+			
 		}
 		
 	}
@@ -116,5 +120,18 @@
 	}
 	.information_display{
 		padding: 5px;
+	}
+	.title_display{
+		display: flex;
+	}
+	.button{
+		flex: 1;
+		text-align: right;
+		padding-right: 10%;
+	}
+	.button_text{
+		font-size: 5px;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 </style>
