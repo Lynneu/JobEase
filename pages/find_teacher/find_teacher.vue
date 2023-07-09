@@ -299,7 +299,7 @@
         background-color: #fff;
         border-radius: 10px;
         margin: 5px;
-        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.1);
     }
 
     /* Setting the tutor's name and job to be bold, and larger */

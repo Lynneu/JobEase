@@ -15,6 +15,9 @@ const _sfc_main = {
       direction: "horizontal",
       lectrue: [],
       filteredData: null,
+      recoData: null,
+      userphone: "",
+      userTag: "",
       pattern: {
         color: "#7A7E83",
         backgroundColor: "#fff",
@@ -59,6 +62,9 @@ const _sfc_main = {
       return true;
     }
     return false;
+  },
+  onShow: async function() {
+    this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
   },
   methods: {
     search(res) {
@@ -141,7 +147,7 @@ const _sfc_main = {
       this.filter();
     },
     searchclick() {
-      console.log(this.searchValue());
+      console.log(this.searchValue);
     },
     changeJob(e) {
       console.log(e);
@@ -164,6 +170,32 @@ const _sfc_main = {
       common_vendor.index.navigateTo({
         url: `../m3_detail_lecture/m3_detail_lecture?lecture=${id}`
       });
+    },
+    async recommendAlgorithm(lectures) {
+      this.userphone = getApp().globalData.ph;
+      console.log(this.userphone);
+      const db = common_vendor.Ds.database();
+      db.collection("user_detail").where({
+        phone: {
+          $eq: this.userphone
+        }
+      }).get().then((res) => {
+        console.log("res:" + res.result.data[0].tip_student);
+        this.userTag = res.result.data[0].tip_student;
+        console.log(this.userTag);
+      }).catch((err) => {
+        console.log(err.message);
+      });
+      console.log(lectures);
+      lectures = lectures.slice().sort((a, b) => {
+        let scoreA = a.lecture_label == this.userTag ? 1 : 0;
+        let scoreB = b.lecture_label == this.userTag ? 1 : 0;
+        if (scoreA === scoreB) {
+          return new Date(b.lecture_time) - new Date(a.lecture_time);
+        }
+        return scoreB - scoreA;
+      });
+      return lectures;
     }
   }
 };
@@ -274,7 +306,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       }, error ? {
         b: common_vendor.t(error.message)
       } : {
-        c: common_vendor.f($data.filteredData || data, (tutor, index, i1) => {
+        c: common_vendor.f($data.filteredData || $data.recoData, (tutor, index, i1) => {
           return {
             a: common_vendor.t(`${tutor.lecture_title}`),
             b: common_vendor.t(`已预约${tutor.lecture_reserved}人`),

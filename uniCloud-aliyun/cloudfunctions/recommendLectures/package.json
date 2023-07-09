@@ -1,0 +1,7 @@
+{
+  "name": "recommendLectures",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

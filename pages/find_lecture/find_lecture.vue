@@ -56,7 +56,7 @@
     							<uni-list :border="false" style="background-color: #f8f8f8;">
     							    <uni-list-item 
     									:border="false"
-    							        v-for="(tutor, index) in filteredData || data"
+    							        v-for="(tutor, index) in filteredData || recoData"
     									direction="column"
     							        :key="index"
     							        @click="navigateToTutorDetail(tutor._id)"
@@ -110,6 +110,9 @@ export default {
       direction: 'horizontal',
 	  lectrue: [],
 	  filteredData: null,
+	  recoData: null,
+	  userphone: '',
+	  userTag: '',
       pattern: {
         color: '#7A7E83',
         backgroundColor: '#fff',
@@ -154,6 +157,9 @@ export default {
       return true
     }
     return false
+  },
+  onShow: async function() {
+	  this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
   },
   methods: {
     search(res) {
@@ -239,7 +245,7 @@ export default {
       this.filter(); // 在关闭筛选抽屉时调用filter函数进行过滤
     },
     searchclick() {
-      console.log(this.searchValue())
+      console.log(this.searchValue)
     },
 	changeJob(e) {
 		console.log(e)
@@ -263,6 +269,37 @@ export default {
 	        url: `../m3_detail_lecture/m3_detail_lecture?lecture=${id}`  
 	    });
 	},
+	async recommendAlgorithm(lectures) {
+		this.userphone = getApp().globalData.ph
+		console.log(this.userphone)
+		const db = uniCloud.database()
+		db.collection('user_detail')
+		.where({
+			phone: {
+			  $eq: this.userphone
+			}
+		}).get()
+		.then((res)=>{
+			console.log('res:'+res.result.data[0].tip_student)
+			this.userTag = res.result.data[0].tip_student
+			console.log(this.userTag)
+		}).catch((err)=>{
+			console.log(err.message)
+		})
+		console.log(lectures)
+		// 不进行过滤，让所有讲座都参与排序
+		lectures = lectures.slice().sort((a, b) => {
+		let scoreA = a.lecture_label == this.userTag ? 1 : 0;
+		let scoreB = b.lecture_label == this.userTag ? 1 : 0;
+		  // 如果评分相同，以时间顺序进行排序
+		  if (scoreA === scoreB) {
+		    return new Date(b.lecture_time) - new Date(a.lecture_time);
+		  }
+		  // 以匹配评分进行排序
+		  return scoreB - scoreA;
+		});
+		return lectures
+	}
   },
 }
 </script>
@@ -294,7 +331,7 @@ export default {
         background-color: #fff;
         border-radius: 10px;
         margin: 5px;
-        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.1);
     }
 
     /* Setting the tutor's name and job to be bold, and larger */
