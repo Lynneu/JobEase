@@ -35,7 +35,7 @@
 				    "phone": "",
 				    "username": "test",
 				    "isTeacher": 1,
-				    "status": 1,
+				    "status": "",
 				    "email": "",
 				    "comment": "",
 				    "co": "",
@@ -92,6 +92,20 @@
 				else 
 				{
 					const db = uniCloud.database();
+					db.collection('user_detail').where({
+												  phone: {
+												    $eq: this.user.phone
+												  }
+												}).limit(1).get().then(res => {
+													if (res.result && res.result.data && res.result.data.length > 0)
+													{
+												    this.testing = res.result.data[0]
+													getApp().globalData.st = this.testing.status
+													}
+												})
+												
+												
+					
 					db.collection('user').where({
 					  phone: {
 					    $eq: this.user.phone
@@ -101,15 +115,7 @@
 					    this.user_find = res.result.data[0]
 						if(this.user_find.password==this.user.password)
 						{
-							db.collection('user_detail').where({
-														  phone: {
-														    $eq: this.user.phone
-														  }
-														}).limit(1).get().then(res => {
-														    this.testing = res.result.data[0]
-														})
-														
-														getApp().globalData.st = this.testing.status
+							
 							
 							
 							getApp().globalData.ph = this.user.phone

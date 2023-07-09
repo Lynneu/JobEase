@@ -29,7 +29,7 @@
 	export default {
 		data() {
 			return {
-				test:{
+				testing:{
 				    "phone": "000",
 				    "username": "求职者11111111",
 				    "isTeacher": 0,
@@ -65,7 +65,7 @@
 		},
 		methods: {
 			onShow() {
-						this.test.phone=getApp().globalData.ph;			
+						this.testing.phone=getApp().globalData.ph;			
 					},
 			choice(index){
 				if(this.list[index].selected == true){
@@ -95,7 +95,7 @@
 			//提交
 			sure(){
 				//提交选中的值
-				this.test.phone=getApp().globalData.ph
+				this.testing.phone=getApp().globalData.ph
 				if(this.selectId.length==0){
 					uni.showToast({
 						title: '请选择身份',
@@ -109,18 +109,18 @@
 				
 				if(listIds.includes("2")){//导师已认证不跳转，没认证跳转
 					getApp().globalData.st = 1
-					//this.test.status=1
+					//this.testing.status=1
 					
 					
 					db.collection('user_detail').where({
 						phone: {
-							    $eq: this.test.phone
+							    $eq: this.testing.phone
 						}
 						}).limit(1).get().then(res => {
 							if (res.result && res.result.data && res.result.data.length > 0)
 							{
-								this.test = res.result.data[0]
-								if(this.test.isTeacher==0)
+								this.testing = res.result.data[0]
+								if(this.testing.isTeacher==0)
 								{
 									uni.navigateTo({
 										url: "../m1_identify_teacher/m1_identify_teacher",
@@ -154,19 +154,19 @@
 					getApp().globalData.st = 0
 					db.collection('user_detail').where({
 						phone: {
-							    $eq: this.test.phone
+							    $eq: this.testing.phone
 						}
 						}).limit(1).get().then(res => {
 							if (res.result && res.result.data && res.result.data.length > 0)
 							{
-								this.test = res.result.data[0]
+								this.testing = res.result.data[0]
 								getApp().globalData.st = 0
 							}
 							else
 							{
-								this.test.phone=getApp().globalData.ph;
+								this.testing.phone=getApp().globalData.ph;
 								
-								db.collection("user_detail").add(this.test).then(e=>{
+								db.collection("user_detail").add(this.testing).then(e=>{
 										console.log(e)
 									})
 								
@@ -177,9 +177,9 @@
 							
 					})
 					///////////////////////////////////////////////////////////////////////////
-					//this.test.phone=getApp().globalData.ph;	
+					//this.testing.phone=getApp().globalData.ph;	
 					/*const db = uniCloud.database();
-					db.collection("user_detail").add(this.test).then(e=>{
+					db.collection("user_detail").add(this.testing).then(e=>{
 							console.log(e)
 						})
 					uni.switchTab({
