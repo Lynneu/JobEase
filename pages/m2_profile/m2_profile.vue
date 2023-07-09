@@ -4,7 +4,7 @@
 			<image class="user-icon" mode="aspectFit" src="../../static/image/icon_my_HL.png"></image>
 		</view>
 		<view class="user">
-			<text class="user-name">付某某</text>
+			<text class="user-name">{{user_detail.username}}</text>
 		</view>
 	</view>
 	<uni-card>
@@ -37,12 +37,6 @@
 			<uni-icons type="forward" size="18" color="#999"></uni-icons>
 		</view>
 	</uni-card>
-	<uni-card @click="mentorinfo">
-		<view class="uni-flex uni-row">
-			<view class="normal">导师信息</view>
-			<uni-icons type="forward" size="18" color="#999"></uni-icons>
-		</view>
-	</uni-card>
 	<uni-card @click="goToRoleSelect">
 		<view class="uni-flex uni-row">
 			<view class="normal">身份切换</view>
@@ -56,15 +50,22 @@ import m4_mentor_informationVue from '../m4_mentor_information/m4_mentor_informa
 	export default {
 		data() {
 			return {
-				
+				user_detail:{
+					username: '',
+				},
 			};
 		},
+		onLoad() {
+			if(getApp().globalData.st == 0)
+			{
+				this.st = true
+			}else{
+				this.st = false
+			}
+			this.phone = getApp().globalData.ph
+			this.getMsg()
+		},
 		methods: {
-			mentorinfo() {
-				uni.navigateTo({
-					url: "../m4_mentor_information/m4_mentor_information"
-				})
-			},
 			myconsult() {
 				uni.navigateTo({
 					url: "../m2_my_consult/m2_my_consult"
@@ -76,9 +77,16 @@ import m4_mentor_informationVue from '../m4_mentor_information/m4_mentor_informa
 				})
 			},
 			seekerinfo() {
-				uni.navigateTo({
-					url: "../m4_seeker_information/m4_seeker_information"
-				})
+				if (this.st == true) {
+					uni.navigateTo({
+						url: "../m4_seeker_information/m4_seeker_information"
+					})
+				} else{
+					uni.navigateTo({
+						url: "../m4_mentor_information/m4_mentor_information"
+					})
+				}
+				
 			},
 			lecture() {
 				uni.navigateTo({
@@ -89,7 +97,25 @@ import m4_mentor_informationVue from '../m4_mentor_information/m4_mentor_informa
 				uni.navigateTo({
 					url: "../m1_role_select/m1_role_select"
 				})
-			}
+			},
+			getMsg() {
+			    const db = uniCloud.database() // 创建数据库连接
+				db.collection("user_detail").where({
+						phone: {
+						  $eq: this.phone
+						}
+					})
+					.get()
+					.then(res => {
+						console.log(res)
+						if (res.result.data.length > 0) {
+							this.user_detail.username = res.result.data[0].username; // 获取查询结果中的username，并赋值给this.username
+						}
+					})
+					.catch(err => {
+						console.log(err)
+					})
+			},
 		}
 	}
 </script>
