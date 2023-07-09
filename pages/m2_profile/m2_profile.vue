@@ -77,7 +77,7 @@ import m4_mentor_informationVue from '../m4_mentor_information/m4_mentor_informa
 				})
 			},
 			seekerinfo() {
-				if (this.st == true) {
+				if(getApp().globalData.st == 0) {
 					uni.navigateTo({
 						url: "../m4_seeker_information/m4_seeker_information"
 					})
