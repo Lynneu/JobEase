@@ -13,10 +13,10 @@
 						</uni-forms-item>
 						<uni-forms-item label="用户名称" label-width=60 name="name"> 
 							<uni-easyinput
-								maxlength="10"
+								maxlength="20"
 								trim="all" 
 								v-model="valiFormData.name" 
-								placeholder="最大输入长度为10">
+								placeholder="最大输入长度为20">
 							</uni-easyinput>
 						</uni-forms-item>
 						<uni-forms-item label="工号" name="number">
@@ -225,8 +225,12 @@
 								db.collection("user_detail").add(this.user_detail).then(e=>{
 										console.log(e)
 									})
+									/*
 								uni.switchTab({
 									url: "../find_teacher/find_teacher"
+								})*/
+								uni.switchTab({
+								url: "../m2_profile/m2_profile"
 								})
 							}).catch(err => {
 								console.log('err', err);
