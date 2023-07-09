@@ -138,29 +138,11 @@
             }
             
         }
-		,{
-            "path" : "pages/m2_my_consult/detail/m2_consult_detail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "咨询详情",
-                "enablePullDownRefresh": false
-            }
-            
-        }
         ,{
             "path" : "pages/m2_my_lecture/m2_my_lecture",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "我的讲座",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-		,{
-            "path" : "pages/m2_my_lecture/detail/m2_lecture_detail",
-			"style" :                                                                                    
-            {
-                "navigationBarTitleText": "讲座详情",
                 "enablePullDownRefresh": false
             }
             
@@ -172,7 +154,22 @@
                 "navigationBarTitleText": "时间选择",
                 "enablePullDownRefresh": false
             }
-            
+        }
+        ,{
+            "path" : "pages/m7_mentor_search/m7_mentor_search",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "导师搜索",
+                "enablePullDownRefresh": false
+            }
+        }
+        ,{
+            "path" : "pages/m8_lecture_search/m8_lecture_search",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "讲座搜索",
+                "enablePullDownRefresh": false
+            }
         }
     ],
 	"globalStyle": {
