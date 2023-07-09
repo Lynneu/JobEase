@@ -176,7 +176,7 @@ const _sfc_main = {
         let scoreA = a.tip_teacher.includes(this.userTag) ? 1 : 0;
         let scoreB = b.tip_teacher.includes(this.userTag) ? 1 : 0;
         if (scoreA === scoreB) {
-          return new Date(b.score) - new Date(a.score);
+          return b.score - a.score;
         }
         return scoreB - scoreA;
       });

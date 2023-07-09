@@ -293,7 +293,7 @@
 				let scoreB = b.tip_teacher.includes(this.userTag) ? 1 : 0;
 				  // 如果评分相同，以评分顺序进行排序
 				  if (scoreA === scoreB) {
-				    return new Date(b.score) - new Date(a.score);
+				    return b.score - a.score;
 				  }
 				  // 以匹配评分进行排序
 				  return scoreB - scoreA;
