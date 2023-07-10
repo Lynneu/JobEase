@@ -54,9 +54,9 @@ const _sfc_main = {
         this.lecture = res.result.data[0];
         console.log(this.lecture.lecture_limit + "测试1");
         this.islimit(this.lecture.lecture_limit);
-        this.lecture.phone;
+        const phone = this.lecture.phone;
         db.collection("user_detail").where({
-          phone: this.phone
+          phone
         }).get().then((res2) => {
           console.log(res2);
           if (res2.result.data.length > 0) {

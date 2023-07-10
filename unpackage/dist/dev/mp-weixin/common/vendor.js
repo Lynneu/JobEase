@@ -7284,7 +7284,7 @@ const pages = [
     path: "pages/index/index",
     style: {
       navigationBarTitleText: "",
-      enablePullDownRefresh: false
+      enablePullDownRefresh: true
     }
   },
   {

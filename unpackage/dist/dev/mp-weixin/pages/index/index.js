@@ -21,6 +21,27 @@ const _sfc_main = {
   onShow: function() {
     this.role = getApp().globalData.st;
     console.log(this.role);
+    if (this.role == 1) {
+      setTimeout(() => {
+        common_vendor.index.setNavigationBarTitle({
+          title: "咨询信息"
+        });
+      }, 500);
+      common_vendor.index.setTabBarItem({
+        index: 0,
+        text: "咨询信息"
+      });
+    } else {
+      setTimeout(() => {
+        common_vendor.index.setNavigationBarTitle({
+          title: "找导师"
+        });
+      }, 500);
+      common_vendor.index.setTabBarItem({
+        index: 0,
+        text: "找导师"
+      });
+    }
   }
 };
 if (!Array) {

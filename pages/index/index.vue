@@ -1,7 +1,9 @@
 <template>
   <div>
+	  <view>
     <pageconfirmConsult v-if="role == '1'" />
     <pagefindTeacher v-else-if="role == '0'" />
+	</view>
   </div>
 </template>
 
@@ -27,6 +29,28 @@ export default {
   onShow: function() {
   	  this.role = getApp().globalData.st
   	  console.log(this.role)
+	  if(this.role == 1) {
+		  setTimeout(() => {
+		      uni.setNavigationBarTitle({
+		          title: '咨询信息'
+		      });
+		  }, 500);  // 延迟2000毫秒，也就是2秒
+		  uni.setTabBarItem({
+		    index: 0,
+		    text: '咨询信息',
+		  })
+	  }
+	  else {
+		  setTimeout(() => {
+		      uni.setNavigationBarTitle({
+		          title: '找导师'
+		      });
+		  }, 500);  // 延迟2000毫秒，也就是2秒
+		  uni.setTabBarItem({
+		    index: 0,
+		    text: '找导师',
+		  })
+	  }
   },
 }
 </script>

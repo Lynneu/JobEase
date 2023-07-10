@@ -98,8 +98,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     d: common_vendor.p({
       direction: "column"
     }),
-    e: $data.consultData2 == null
-  }, $data.consultData2 == null ? {} : {});
+    e: $data.consultData2.length == 0
+  }, $data.consultData2.length == 0 ? {} : {});
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/lynneu/Documents/GitHub/JobEase/pages/m3_confirm_consult/m3_confirm_consult.vue"]]);
 exports.MiniProgramPage = MiniProgramPage;

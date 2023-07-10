@@ -180,6 +180,10 @@ export default {
   			this.$refs.udb.loadData()
   		}
   	},
+	onShow: function() {
+		  this.role = getApp().globalData.st
+		  console.log(this.role)
+	},
 	
   onPullDownRefresh() { //下拉刷新
         this.$refs.udb.loadData({

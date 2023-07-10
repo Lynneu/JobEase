@@ -78,6 +78,10 @@ const _sfc_main = {
       this.$refs.udb.loadData();
     }
   },
+  onShow: function() {
+    this.role = getApp().globalData.st;
+    console.log(this.role);
+  },
   onPullDownRefresh() {
     this.$refs.udb.loadData({
       clear: true
