@@ -19,7 +19,9 @@
     "pages/m2_my_lecture/m2_my_lecture",
     "pages/m2_my_lecture/detail/m2_lecture_detail",
     "pages/m3_confirm_consult/m3_choosetime/m3_choosetime",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/m8_lecture_search/m8_lecture_search",
+    "pages/m7_mentor_search/m7_mentor_search"
   ],
   "window": {
     "navigationBarTextStyle": "black",

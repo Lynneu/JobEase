@@ -22,6 +22,8 @@ if (!Math) {
   "./pages/m2_my_lecture/detail/m2_lecture_detail.js";
   "./pages/m3_confirm_consult/m3_choosetime/m3_choosetime.js";
   "./pages/index/index.js";
+  "./pages/m8_lecture_search/m8_lecture_search.js";
+  "./pages/m7_mentor_search/m7_mentor_search.js";
 }
 const _sfc_main = {
   globalData: {

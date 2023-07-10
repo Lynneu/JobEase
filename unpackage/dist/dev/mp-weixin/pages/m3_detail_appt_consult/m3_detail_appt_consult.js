@@ -52,7 +52,7 @@ const _sfc_main = {
   methods: {
     appointconsult(e) {
       console.log(e);
-      common_vendor.index.navigateTo({
+      common_vendor.index.redirectTo({
         url: "../m3_appt_consult/m3_appt_consult?phone=" + this.user_detail.phone
       });
     }

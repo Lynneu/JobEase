@@ -52,6 +52,12 @@ const _sfc_main = {
     this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
   },
   methods: {
+    //打开搜索页
+    openSearchPage() {
+      common_vendor.index.navigateTo({
+        url: "../m7_mentor_search/m7_mentor_search"
+      });
+    },
     search(res) {
       common_vendor.index.showToast({
         title: "搜索：" + res.value,
@@ -172,14 +178,6 @@ const _sfc_main = {
         console.log(err.message);
       });
       console.log(tutors);
-      tutors = tutors.slice().sort((a, b) => {
-        let scoreA = a.tip_teacher.includes(this.userTag) ? 1 : 0;
-        let scoreB = b.tip_teacher.includes(this.userTag) ? 1 : 0;
-        if (scoreA === scoreB) {
-          return b.score - a.score;
-        }
-        return scoreB - scoreA;
-      });
       return tutors;
     }
   },
@@ -277,21 +275,17 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       width: 300
     }),
     x: common_vendor.o($options.search),
-    y: common_vendor.o($options.blur),
-    z: common_vendor.o($options.focus),
-    A: common_vendor.o($options.input),
-    B: common_vendor.o($options.cancel),
-    C: common_vendor.o($options.clear),
-    D: common_vendor.o(($event) => $data.searchValue = $event),
-    E: common_vendor.p({
+    y: common_vendor.o(($event) => $data.searchValue = $event),
+    z: common_vendor.p({
       focus: false,
       placeholder: "请输入搜索内容",
       clearButton: "auto",
       cancelButton: "none",
       modelValue: $data.searchValue
     }),
-    F: common_vendor.o((...args) => $options.searchclick && $options.searchclick(...args)),
-    G: common_vendor.w(({
+    A: common_vendor.o((...args) => $options.openSearchPage && $options.openSearchPage(...args)),
+    B: common_vendor.o((...args) => $options.searchclick && $options.searchclick(...args)),
+    C: common_vendor.w(({
       data,
       loading,
       error,
@@ -305,10 +299,9 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         c: common_vendor.f($data.filteredData || $data.recoData, (tutor, index, i1) => {
           return {
             a: common_vendor.t(`${tutor.username} - ${$options.getJobText(tutor.post)}`),
-            b: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor.phone), index),
-            c: common_vendor.t(`${tutor.score}分`),
-            d: common_vendor.t(`, 价格 ¥${tutor.price}/小时`),
-            e: common_vendor.f(tutor.tip_teacher, (tip, idx, i2) => {
+            b: common_vendor.t(`${tutor.score}分`),
+            c: common_vendor.t(`, 价格 ¥${tutor.price}/小时`),
+            d: common_vendor.f(tutor.tip_teacher, (tip, idx, i2) => {
               return {
                 a: idx,
                 b: "0c1b2ad5-16-" + i0 + "-" + i1 + "-" + i2 + "," + ("0c1b2ad5-15-" + i0 + "-" + i1),
@@ -318,14 +311,16 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
                 })
               };
             }),
-            f: common_vendor.t(tutor.comment),
-            g: index,
+            e: common_vendor.t(tutor.comment),
+            f: index,
+            g: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor.phone), index),
             h: "0c1b2ad5-15-" + i0 + "-" + i1 + "," + ("0c1b2ad5-14-" + i0)
           };
         }),
         d: common_vendor.p({
           border: false,
-          direction: "column"
+          direction: "column",
+          clickable: true
         }),
         e: "0c1b2ad5-14-" + i0 + ",0c1b2ad5-13",
         f: common_vendor.p({
@@ -337,11 +332,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       });
     }, {
       name: "d",
-      path: "G",
+      path: "C",
       vueId: "0c1b2ad5-13"
     }),
-    H: common_vendor.sr("udb", "0c1b2ad5-13"),
-    I: common_vendor.p({
+    D: common_vendor.sr("udb", "0c1b2ad5-13"),
+    E: common_vendor.p({
       collection: "user_detail",
       where: "isTeacher==1"
     })

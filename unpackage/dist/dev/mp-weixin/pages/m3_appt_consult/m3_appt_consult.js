@@ -147,7 +147,7 @@ const _sfc_main = {
         duration: 2e3
       });
       common_vendor.index.switchTab({
-        url: "../find_teacher/find_teacher"
+        url: "../index/index"
       });
     }
   }

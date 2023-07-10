@@ -7286,6 +7286,20 @@ const pages = [
       navigationBarTitleText: "",
       enablePullDownRefresh: false
     }
+  },
+  {
+    path: "pages/m8_lecture_search/m8_lecture_search",
+    style: {
+      navigationBarTitleText: "讲座搜索",
+      enablePullDownRefresh: false
+    }
+  },
+  {
+    path: "pages/m7_mentor_search/m7_mentor_search",
+    style: {
+      navigationBarTitleText: "导师搜索",
+      enablePullDownRefresh: false
+    }
   }
 ];
 const globalStyle = {

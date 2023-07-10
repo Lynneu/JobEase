@@ -69,36 +69,15 @@ const _sfc_main = {
     this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
   },
   methods: {
+    //打开搜索页
+    openSearchPage() {
+      common_vendor.index.navigateTo({
+        url: "../m8_lecture_search/m8_lecture_search"
+      });
+    },
     search(res) {
       common_vendor.index.showToast({
         title: "搜索：" + res.value,
-        icon: "none"
-      });
-    },
-    input(res) {
-      console.log("----input:", res);
-    },
-    clear(res) {
-      common_vendor.index.showToast({
-        title: "clear事件，清除值为：" + res.value,
-        icon: "none"
-      });
-    },
-    blur(res) {
-      common_vendor.index.showToast({
-        title: "blur事件，输入值为：" + res.value,
-        icon: "none"
-      });
-    },
-    focus(e) {
-      common_vendor.index.showToast({
-        title: "focus事件，输出值为：" + e.value,
-        icon: "none"
-      });
-    },
-    cancel(res) {
-      common_vendor.index.showToast({
-        title: "点击取消，输入值为：" + res.value,
         icon: "none"
       });
     },
@@ -189,14 +168,6 @@ const _sfc_main = {
         console.log(err.message);
       });
       console.log(lectures);
-      lectures = lectures.slice().sort((a, b) => {
-        let scoreA = a.lecture_label == this.userTag ? 1 : 0;
-        let scoreB = b.lecture_label == this.userTag ? 1 : 0;
-        if (scoreA === scoreB) {
-          return new Date(b.lecture_time) - new Date(a.lecture_time);
-        }
-        return scoreB - scoreA;
-      });
       return lectures;
     }
   }
@@ -282,22 +253,17 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       mode: "left",
       width: 300
     }),
-    s: common_vendor.o($options.search),
-    t: common_vendor.o($options.blur),
-    v: common_vendor.o($options.focus),
-    w: common_vendor.o($options.input),
-    x: common_vendor.o($options.cancel),
-    y: common_vendor.o($options.clear),
-    z: common_vendor.o(($event) => $data.searchValue = $event),
-    A: common_vendor.p({
+    s: common_vendor.o(($event) => $data.searchValue = $event),
+    t: common_vendor.p({
       focus: false,
       placeholder: "请输入搜索内容",
       clearButton: "auto",
       cancelButton: "none",
       modelValue: $data.searchValue
     }),
-    B: common_vendor.o((...args) => $options.searchclick && $options.searchclick(...args)),
-    C: common_vendor.w(({
+    v: common_vendor.o((...args) => $options.openSearchPage && $options.openSearchPage(...args)),
+    w: common_vendor.o((...args) => $options.searchclick && $options.searchclick(...args)),
+    x: common_vendor.w(({
       data,
       loading,
       error,
@@ -311,22 +277,23 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         c: common_vendor.f($data.filteredData || $data.recoData, (tutor, index, i1) => {
           return {
             a: common_vendor.t(`${tutor.lecture_title}`),
-            b: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor._id), index),
-            c: common_vendor.t(`已预约${tutor.lecture_reserved}人`),
-            d: common_vendor.t(`, 价格 ¥${tutor.lecture_price}/小时`),
-            e: "7538e855-14-" + i0 + "-" + i1 + "," + ("7538e855-13-" + i0 + "-" + i1),
-            f: common_vendor.p({
+            b: common_vendor.t(`已预约${tutor.lecture_reserved}人`),
+            c: common_vendor.t(`, 价格 ¥${tutor.lecture_price}/小时`),
+            d: "7538e855-14-" + i0 + "-" + i1 + "," + ("7538e855-13-" + i0 + "-" + i1),
+            e: common_vendor.p({
               text: $options.getConsultText(tutor.lecture_label),
               type: "primary"
             }),
-            g: common_vendor.t(tutor.lecture_content),
-            h: index,
+            f: common_vendor.t(tutor.lecture_content),
+            g: index,
+            h: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor.phone), index),
             i: "7538e855-13-" + i0 + "-" + i1 + "," + ("7538e855-12-" + i0)
           };
         }),
         d: common_vendor.p({
           border: false,
-          direction: "column"
+          direction: "column",
+          clickable: true
         }),
         e: "7538e855-12-" + i0 + ",7538e855-11",
         f: common_vendor.p({
@@ -338,18 +305,18 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       });
     }, {
       name: "d",
-      path: "C",
+      path: "x",
       vueId: "7538e855-11"
     }),
-    D: common_vendor.sr("udb", "7538e855-11"),
-    E: common_vendor.p({
+    y: common_vendor.sr("udb", "7538e855-11"),
+    z: common_vendor.p({
       collection: "lecture"
     }),
-    F: $data.role == "1"
+    A: $data.role == "1"
   }, $data.role == "1" ? {
-    G: common_vendor.sr("fab", "7538e855-15"),
-    H: common_vendor.o($options.trigger),
-    I: common_vendor.p({
+    B: common_vendor.sr("fab", "7538e855-15"),
+    C: common_vendor.o($options.trigger),
+    D: common_vendor.p({
       pattern: $data.pattern,
       content: $data.content,
       horizontal: $data.horizontal,

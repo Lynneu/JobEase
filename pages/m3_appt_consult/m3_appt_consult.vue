@@ -212,8 +212,8 @@
 					duration: 2000
 				});
 				
-				uni.redirectTo({
-				    url: `../m3_detail_appt_consult/m3_detail_appt_consult?id=`+this.consult.teach_tele,  
+				uni.switchTab({
+				    url: "../index/index",  
 				});
 				
 			}

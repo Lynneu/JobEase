@@ -51,8 +51,8 @@
 			</uni-drawer>
 		</view>
 		<view class="text" style="-webkit-flex: 1;flex: 1;"  @click="openSearchPage">
-			<uni-search-bar @confirm="search" :focus="false" v-model="searchValue" @blur="blur" @focus="focus" @input="input"
-							@cancel="cancel" @clear="clear" placeholder="请输入搜索内容"
+			<uni-search-bar @confirm="search" :focus="false" v-model="searchValue"
+							 placeholder="请输入搜索内容"
 							clearButton="auto" cancelButton="none">
 			</uni-search-bar>
 		</view>
@@ -70,13 +70,12 @@
 							        v-for="(tutor, index) in filteredData || recoData" 
 									direction="column"
 							        :key="index"
+									@click="navigateToTutorDetail(tutor.phone)"
+									clickable
 							    >
 									<template v-slot:header>
 										<view class="title_display">
 											<text>{{`${tutor.username} - ${getJobText(tutor.post)}`}}</text>
-											<view class="button">
-												<button  class="button_text" size="mini" style="background-color: #007aff; color: #fff;" @click="navigateToTutorDetail(tutor.phone)"><text>查看</text> </button>
-											</view>
 										</view>
 									</template>
 									<template v-slot:body>
@@ -293,17 +292,17 @@
 					console.log(err.message)
 				})
 				console.log(tutors)
-				// 不进行过滤，让所有讲座都参与排序
-				tutors = tutors.slice().sort((a, b) => {
-				let scoreA = a.tip_teacher.includes(this.userTag) ? 1 : 0;
-				let scoreB = b.tip_teacher.includes(this.userTag) ? 1 : 0;
-				  // 如果评分相同，以评分顺序进行排序
-				  if (scoreA === scoreB) {
-				    return b.score - a.score;
-				  }
-				  // 以匹配评分进行排序
-				  return scoreB - scoreA;
-				});
+				// // 不进行过滤，让所有讲座都参与排序
+				// tutors = tutors.slice().sort((a, b) => {
+				// let scoreA = a.tip_teacher.includes(this.userTag) ? 1 : 0;
+				// let scoreB = b.tip_teacher.includes(this.userTag) ? 1 : 0;
+				//   // 如果评分相同，以评分顺序进行排序
+				//   if (scoreA === scoreB) {
+				//     return b.score - a.score;
+				//   }
+				//   // 以匹配评分进行排序
+				//   return scoreB - scoreA;
+				// });
 				return tutors
 			}
 		},

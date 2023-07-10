@@ -43,10 +43,10 @@
         </uni-drawer>
       </view>
       <view class="text" style="-webkit-flex: 1;flex: 1;" @click="openSearchPage">
-        <uni-search-bar @confirm="search" :focus="false" v-model="searchValue" @blur="blur" @focus="focus" @input="input" @cancel="cancel" @clear="clear" placeholder="请输入搜索内容" clearButton="auto" cancelButton="none"></uni-search-bar>
+        <uni-search-bar :focus="false" v-model="searchValue" placeholder="请输入搜索内容" clearButton="auto" cancelButton="none"></uni-search-bar>
       </view>
       <view class="text" style="width: 170rpx; margin-left: 10px;">
-        <button style="background-color:#007AFF; color: #fff;" size="mini" @click="searchclick">搜索</button>
+        <button style="background-color:#007AFF; color: #fff;" size="mini" @click="searchclick">重置</button>
       </view>
     </view>
     <view class="list-area">
@@ -59,15 +59,13 @@
     							        v-for="(tutor, index) in filteredData || recoData"
     									direction="column"
     							        :key="index"
-    							        
+    							        @click="navigateToTutorDetail(tutor.phone)"
+    							        clickable
     							    >
     									<template v-slot:header>
 											<view class="title_display">
 												<view >
 													<text>{{`${tutor.lecture_title}`}}</text>
-												</view>
-												<view class="button">
-													<button  class="button_text" size="mini" style="background-color: #007aff; color: #fff;" @click="navigateToTutorDetail(tutor._id)"><text>查看</text> </button>
 												</view>
 											</view>
     										
@@ -182,33 +180,6 @@ export default {
         icon: 'none'
       })
     },
-    input(res) {
-      console.log('----input:', res)
-    },
-    clear(res) {
-      uni.showToast({
-        title: 'clear事件，清除值为：' + res.value,
-        icon: 'none'
-      })
-    },
-    blur(res) {
-      uni.showToast({
-        title: 'blur事件，输入值为：' + res.value,
-        icon: 'none'
-      })
-    },
-    focus(e) {
-      uni.showToast({
-        title: 'focus事件，输出值为：' + e.value,
-        icon: 'none'
-      })
-    },
-    cancel(res) {
-      uni.showToast({
-        title: '点击取消，输入值为：' + res.value,
-        icon: 'none'
-      })
-    },
     trigger(e) {
       console.log(e)
       // this.content[e.index].active = !e.item.active
@@ -301,17 +272,17 @@ export default {
 			console.log(err.message)
 		})
 		console.log(lectures)
-		// 不进行过滤，让所有讲座都参与排序
-		lectures = lectures.slice().sort((a, b) => {
-		let scoreA = a.lecture_label == this.userTag ? 1 : 0;
-		let scoreB = b.lecture_label == this.userTag ? 1 : 0;
-		  // 如果评分相同，以时间顺序进行排序
-		  if (scoreA === scoreB) {
-		    return new Date(b.lecture_time) - new Date(a.lecture_time);
-		  }
-		  // 以匹配评分进行排序
-		  return scoreB - scoreA;
-		});
+		// // 不进行过滤，让所有讲座都参与排序
+		// lectures = lectures.slice().sort((a, b) => {
+		// let scoreA = a.lecture_label == this.userTag ? 1 : 0;
+		// let scoreB = b.lecture_label == this.userTag ? 1 : 0;
+		//   // 如果评分相同，以时间顺序进行排序
+		//   if (scoreA === scoreB) {
+		//     return new Date(b.lecture_time) - new Date(a.lecture_time);
+		//   }
+		//   // 以匹配评分进行排序
+		//   return scoreB - scoreA;
+		// });
 		return lectures
 	}
   },
