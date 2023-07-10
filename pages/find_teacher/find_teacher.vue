@@ -61,13 +61,16 @@
 		</view>
 	</view>
 		<view class="list-area">
-			<unicloud-db ref="udb" v-slot:default="{data, loading, error, options}" collection="user_detail" where="isTeacher==1">
+			<unicloud-db ref="udb" v-slot:default="{data, pagination, loading, error, options, hasMore}" 
+			collection="user_detail" where="isTeacher==1" @load="onqueryload"
+			:options="options" :page-size="pagesize">
 						<view v-if="error">{{error.message}}</view>
+						<view v-else-if="loading" class="loading">加载中...</view>
 						<view v-else>
 							<uni-list :border="false" style="background-color: #f8f8f8;">
 							    <uni-list-item 
 									:border="false"
-							        v-for="(tutor, index) in filteredData || recoData" 
+							        v-for="(tutor, index) in filteredData || data" 
 									direction="column"
 							        :key="index"
 									@click="navigateToTutorDetail(tutor.phone)"
@@ -101,6 +104,7 @@
 							        </template>
 							    </uni-list-item>
 							</uni-list>
+							<uni-load-more v-if="!hasMore" status="noMore"></uni-load-more>
 						</view>
 					</unicloud-db>		
 		</view>
@@ -112,6 +116,8 @@
 		name: 'pagefindTeacher',
 		data() {
 			return {
+				options: {}, // 插槽不能访问外面的数据，通过此参数传递, 不支持传递函数
+				pagesize: 10,
 				searchValue: '',
 				jobvalue: '',
 				consultvalue: '',
@@ -156,10 +162,49 @@
 				]
 			}
 		},
-		mounted: async function() {
-			  this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
+		async created() {
+			this.userphone = getApp().globalData.ph
+			console.log(this.userphone)
+			await this.fetchUserTag()	
 		},
+		onPullDownRefresh() { //下拉刷新
+		      this.$refs.udb.loadData({
+		        clear: true //可选参数，是否清空数据
+		      }, () => {
+		        uni.stopPullDownRefresh()
+		      })
+		    },
+		onReachBottom() { //滚动到底翻页
+		      this.$refs.udb.loadMore()
+		    },
+		// mounted: async function() {
+		// 	  this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
+		// },
 		methods: {
+			onqueryload(data, ended) {
+			        data = this.recommendAlgorithm(data);
+					console.log(data)
+			    },
+			async fetchUserTag() {
+			        return new Promise((resolve, reject) => {
+			            const db = uniCloud.database()
+			            db.collection('user_detail')
+			                .where({
+			                    phone: {
+			                        $eq: this.userphone
+			                    }
+			                }).get()
+			                .then((res) => {
+			                    console.log('res:' + res.result.data[0].tip_student)
+			                    this.userTag = res.result.data[0].tip_student
+			                    console.log(this.userTag)
+			                    resolve(this.userTag);
+			                }).catch((err) => {
+			                    console.log(err.message)
+			                    reject(err);
+			                })
+			        });
+			    },
 			//打开搜索页
 			openSearchPage() {
 			    uni.navigateTo({
@@ -274,35 +319,21 @@
 			        url: `../m3_detail_appt_consult/m3_detail_appt_consult?id=${id}`  
 			    });
 			},
-			async recommendAlgorithm(tutors) {
-				this.userphone = getApp().globalData.ph
-				console.log(this.userphone)
-				const db = uniCloud.database()
-				db.collection('user_detail')
-				.where({
-					phone: {
-					  $eq: this.userphone
-					}
-				}).get()
-				.then((res)=>{
-					console.log('res:'+res.result.data[0].tip_student)
-					this.userTag = res.result.data[0].tip_student
-					console.log(this.userTag)
-				}).catch((err)=>{
-					console.log(err.message)
-				})
-				console.log(tutors)
-				// // 不进行过滤，让所有讲座都参与排序
-				// tutors = tutors.slice().sort((a, b) => {
-				// let scoreA = a.tip_teacher.includes(this.userTag) ? 1 : 0;
-				// let scoreB = b.tip_teacher.includes(this.userTag) ? 1 : 0;
-				//   // 如果评分相同，以评分顺序进行排序
-				//   if (scoreA === scoreB) {
-				//     return b.score - a.score;
-				//   }
-				//   // 以匹配评分进行排序
-				//   return scoreB - scoreA;
-				// });
+			recommendAlgorithm(tutors) {
+				// console.log(tutors)
+				// 不进行过滤，让所有讲座都参与排序
+				tutors = tutors.sort((a, b) => {
+				let scoreA = a.tip_teacher.includes(this.userTag) ? 1 : 0;
+				let scoreB = b.tip_teacher.includes(this.userTag) ? 1 : 0;
+				  // 如果评分相同，以评分顺序进行排序
+				  if (scoreA === scoreB) {
+				    return b.score - a.score;
+				  }
+				  // 以匹配评分进行排序
+				  return scoreB - scoreA;
+				});
+				console.log('over')
+				// console.log(tutors)
 				return tutors
 			}
 		},
@@ -415,4 +446,8 @@
 		padding-left: 10px;
 		padding-right: 10px;
 	}
+	.loading {
+	    padding: 20px;
+	    text-align: center;
+	  }
 </style>

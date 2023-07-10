@@ -156,7 +156,7 @@ const _sfc_main = {
           console.log(e);
         });
         common_vendor.index.switchTab({
-          url: "../m2_profile/m2_profile"
+          url: "../index/index"
         });
       }).catch((err) => {
         console.log("err", err);

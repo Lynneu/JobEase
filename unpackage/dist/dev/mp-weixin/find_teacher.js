@@ -4,6 +4,9 @@ const _sfc_main = {
   name: "pagefindTeacher",
   data() {
     return {
+      options: {},
+      // 插槽不能访问外面的数据，通过此参数传递, 不支持传递函数
+      pagesize: 10,
       searchValue: "",
       jobvalue: "",
       consultvalue: "",
@@ -48,10 +51,48 @@ const _sfc_main = {
       ]
     };
   },
-  mounted: async function() {
-    this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
+  async created() {
+    this.userphone = getApp().globalData.ph;
+    console.log(this.userphone);
+    await this.fetchUserTag();
   },
+  onPullDownRefresh() {
+    this.$refs.udb.loadData({
+      clear: true
+      //可选参数，是否清空数据
+    }, () => {
+      common_vendor.index.stopPullDownRefresh();
+    });
+  },
+  onReachBottom() {
+    this.$refs.udb.loadMore();
+  },
+  // mounted: async function() {
+  // 	  this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
+  // },
   methods: {
+    onqueryload(data, ended) {
+      data = this.recommendAlgorithm(data);
+      console.log(data);
+    },
+    async fetchUserTag() {
+      return new Promise((resolve, reject) => {
+        const db = common_vendor.Ds.database();
+        db.collection("user_detail").where({
+          phone: {
+            $eq: this.userphone
+          }
+        }).get().then((res) => {
+          console.log("res:" + res.result.data[0].tip_student);
+          this.userTag = res.result.data[0].tip_student;
+          console.log(this.userTag);
+          resolve(this.userTag);
+        }).catch((err) => {
+          console.log(err.message);
+          reject(err);
+        });
+      });
+    },
     //打开搜索页
     openSearchPage() {
       common_vendor.index.navigateTo({
@@ -162,22 +203,16 @@ const _sfc_main = {
         url: `../m3_detail_appt_consult/m3_detail_appt_consult?id=${id}`
       });
     },
-    async recommendAlgorithm(tutors) {
-      this.userphone = getApp().globalData.ph;
-      console.log(this.userphone);
-      const db = common_vendor.Ds.database();
-      db.collection("user_detail").where({
-        phone: {
-          $eq: this.userphone
+    recommendAlgorithm(tutors) {
+      tutors = tutors.sort((a, b) => {
+        let scoreA = a.tip_teacher.includes(this.userTag) ? 1 : 0;
+        let scoreB = b.tip_teacher.includes(this.userTag) ? 1 : 0;
+        if (scoreA === scoreB) {
+          return b.score - a.score;
         }
-      }).get().then((res) => {
-        console.log("res:" + res.result.data[0].tip_student);
-        this.userTag = res.result.data[0].tip_student;
-        console.log(this.userTag);
-      }).catch((err) => {
-        console.log(err.message);
+        return scoreB - scoreA;
       });
-      console.log(tutors);
+      console.log("over");
       return tutors;
     }
   },
@@ -195,8 +230,9 @@ if (!Array) {
   const _easycom_uni_tag2 = common_vendor.resolveComponent("uni-tag");
   const _easycom_uni_list_item2 = common_vendor.resolveComponent("uni-list-item");
   const _easycom_uni_list2 = common_vendor.resolveComponent("uni-list");
+  const _easycom_uni_load_more2 = common_vendor.resolveComponent("uni-load-more");
   const _easycom_unicloud_db2 = common_vendor.resolveComponent("unicloud-db");
-  (_easycom_uni_icons2 + _easycom_uni_data_select2 + _easycom_uni_forms_item2 + _easycom_uni_forms2 + _easycom_uni_section2 + _easycom_uni_drawer2 + _easycom_uni_search_bar2 + _easycom_uni_tag2 + _easycom_uni_list_item2 + _easycom_uni_list2 + _easycom_unicloud_db2)();
+  (_easycom_uni_icons2 + _easycom_uni_data_select2 + _easycom_uni_forms_item2 + _easycom_uni_forms2 + _easycom_uni_section2 + _easycom_uni_drawer2 + _easycom_uni_search_bar2 + _easycom_uni_tag2 + _easycom_uni_list_item2 + _easycom_uni_list2 + _easycom_uni_load_more2 + _easycom_unicloud_db2)();
 }
 const _easycom_uni_icons = () => "./uni_modules/uni-icons/components/uni-icons/uni-icons.js";
 const _easycom_uni_data_select = () => "./uni_modules/uni-data-select/components/uni-data-select/uni-data-select.js";
@@ -208,9 +244,10 @@ const _easycom_uni_search_bar = () => "./uni_modules/uni-search-bar/components/u
 const _easycom_uni_tag = () => "./uni_modules/uni-tag/components/uni-tag/uni-tag.js";
 const _easycom_uni_list_item = () => "./uni_modules/uni-list/components/uni-list-item/uni-list-item.js";
 const _easycom_uni_list = () => "./uni_modules/uni-list/components/uni-list/uni-list.js";
+const _easycom_uni_load_more = () => "./uni_modules/uni-load-more/components/uni-load-more/uni-load-more.js";
 const _easycom_unicloud_db = () => "./node-modules/@dcloudio/uni-components/lib/unicloud-db/unicloud-db.js";
 if (!Math) {
-  (_easycom_uni_icons + _easycom_uni_data_select + _easycom_uni_forms_item + _easycom_uni_forms + _easycom_uni_section + _easycom_uni_drawer + _easycom_uni_search_bar + _easycom_uni_tag + _easycom_uni_list_item + _easycom_uni_list + _easycom_unicloud_db)();
+  (_easycom_uni_icons + _easycom_uni_data_select + _easycom_uni_forms_item + _easycom_uni_forms + _easycom_uni_section + _easycom_uni_drawer + _easycom_uni_search_bar + _easycom_uni_tag + _easycom_uni_list_item + _easycom_uni_list + _easycom_uni_load_more + _easycom_unicloud_db)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
@@ -287,16 +324,18 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     B: common_vendor.o((...args) => $options.searchclick && $options.searchclick(...args)),
     C: common_vendor.w(({
       data,
+      pagination,
       loading,
       error,
-      options
+      options,
+      hasMore
     }, s0, i0) => {
       return common_vendor.e({
         a: error
       }, error ? {
         b: common_vendor.t(error.message)
-      } : {
-        c: common_vendor.f($data.filteredData || $data.recoData, (tutor, index, i1) => {
+      } : loading ? {} : common_vendor.e({
+        d: common_vendor.f($data.filteredData || data, (tutor, index, i1) => {
           return {
             a: common_vendor.t(`${tutor.username} - ${$options.getJobText(tutor.post)}`),
             b: common_vendor.t(`${tutor.score}分`),
@@ -317,18 +356,25 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             h: "0c1b2ad5-15-" + i0 + "-" + i1 + "," + ("0c1b2ad5-14-" + i0)
           };
         }),
-        d: common_vendor.p({
+        e: common_vendor.p({
           border: false,
           direction: "column",
           clickable: true
         }),
-        e: "0c1b2ad5-14-" + i0 + ",0c1b2ad5-13",
-        f: common_vendor.p({
+        f: "0c1b2ad5-14-" + i0 + ",0c1b2ad5-13",
+        g: common_vendor.p({
           border: false
+        }),
+        h: !hasMore
+      }, !hasMore ? {
+        i: "0c1b2ad5-17-" + i0 + ",0c1b2ad5-13",
+        j: common_vendor.p({
+          status: "noMore"
         })
-      }, {
-        g: i0,
-        h: s0
+      } : {}), {
+        c: loading,
+        k: i0,
+        l: s0
       });
     }, {
       name: "d",
@@ -336,9 +382,12 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       vueId: "0c1b2ad5-13"
     }),
     D: common_vendor.sr("udb", "0c1b2ad5-13"),
-    E: common_vendor.p({
+    E: common_vendor.o($options.onqueryload),
+    F: common_vendor.p({
       collection: "user_detail",
-      where: "isTeacher==1"
+      where: "isTeacher==1",
+      options: $data.options,
+      ["page-size"]: $data.pagesize
     })
   };
 }

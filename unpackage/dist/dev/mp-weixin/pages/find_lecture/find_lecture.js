@@ -4,6 +4,9 @@ const _sfc_main = {
   components: {},
   data() {
     return {
+      options: {},
+      // 插槽不能访问外面的数据，通过此参数传递, 不支持传递函数
+      pagesize: 10,
       searchValue: "",
       consultvalue: "",
       payvalue: "",
@@ -64,11 +67,46 @@ const _sfc_main = {
     }
     return false;
   },
-  onShow: async function() {
+  async created() {
     this.role = getApp().globalData.st;
-    this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
+    this.userphone = getApp().globalData.ph;
+    console.log(this.userphone);
+    await this.fetchUserTag();
+  },
+  onPullDownRefresh() {
+    this.$refs.udb.loadData({
+      clear: true
+      //可选参数，是否清空数据
+    }, () => {
+      common_vendor.index.stopPullDownRefresh();
+    });
+  },
+  onReachBottom() {
+    this.$refs.udb.loadMore();
   },
   methods: {
+    onqueryload(data, ended) {
+      data = this.recommendAlgorithm(data);
+      console.log(data);
+    },
+    async fetchUserTag() {
+      return new Promise((resolve, reject) => {
+        const db = common_vendor.Ds.database();
+        db.collection("user_detail").where({
+          phone: {
+            $eq: this.userphone
+          }
+        }).get().then((res) => {
+          console.log("res:" + res.result.data[0].tip_student);
+          this.userTag = res.result.data[0].tip_student;
+          console.log(this.userTag);
+          resolve(this.userTag);
+        }).catch((err) => {
+          console.log(err.message);
+          reject(err);
+        });
+      });
+    },
     //打开搜索页
     openSearchPage() {
       common_vendor.index.navigateTo({
@@ -152,22 +190,15 @@ const _sfc_main = {
         url: `../m3_detail_lecture/m3_detail_lecture?lecture=${id}`
       });
     },
-    async recommendAlgorithm(lectures) {
-      this.userphone = getApp().globalData.ph;
-      console.log(this.userphone);
-      const db = common_vendor.Ds.database();
-      db.collection("user_detail").where({
-        phone: {
-          $eq: this.userphone
+    recommendAlgorithm(lectures) {
+      lectures = lectures.sort((a, b) => {
+        let scoreA = a.lecture_label == this.userTag ? 1 : 0;
+        let scoreB = b.lecture_label == this.userTag ? 1 : 0;
+        if (scoreA === scoreB) {
+          return new Date(b.lecture_time) - new Date(a.lecture_time);
         }
-      }).get().then((res) => {
-        console.log("res:" + res.result.data[0].tip_student);
-        this.userTag = res.result.data[0].tip_student;
-        console.log(this.userTag);
-      }).catch((err) => {
-        console.log(err.message);
+        return scoreB - scoreA;
       });
-      console.log(lectures);
       return lectures;
     }
   }
@@ -183,9 +214,10 @@ if (!Array) {
   const _easycom_uni_tag2 = common_vendor.resolveComponent("uni-tag");
   const _easycom_uni_list_item2 = common_vendor.resolveComponent("uni-list-item");
   const _easycom_uni_list2 = common_vendor.resolveComponent("uni-list");
+  const _easycom_uni_load_more2 = common_vendor.resolveComponent("uni-load-more");
   const _easycom_unicloud_db2 = common_vendor.resolveComponent("unicloud-db");
   const _easycom_uni_fab2 = common_vendor.resolveComponent("uni-fab");
-  (_easycom_uni_icons2 + _easycom_uni_data_select2 + _easycom_uni_forms_item2 + _easycom_uni_forms2 + _easycom_uni_section2 + _easycom_uni_drawer2 + _easycom_uni_search_bar2 + _easycom_uni_tag2 + _easycom_uni_list_item2 + _easycom_uni_list2 + _easycom_unicloud_db2 + _easycom_uni_fab2)();
+  (_easycom_uni_icons2 + _easycom_uni_data_select2 + _easycom_uni_forms_item2 + _easycom_uni_forms2 + _easycom_uni_section2 + _easycom_uni_drawer2 + _easycom_uni_search_bar2 + _easycom_uni_tag2 + _easycom_uni_list_item2 + _easycom_uni_list2 + _easycom_uni_load_more2 + _easycom_unicloud_db2 + _easycom_uni_fab2)();
 }
 const _easycom_uni_icons = () => "../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
 const _easycom_uni_data_select = () => "../../uni_modules/uni-data-select/components/uni-data-select/uni-data-select.js";
@@ -197,10 +229,11 @@ const _easycom_uni_search_bar = () => "../../uni_modules/uni-search-bar/componen
 const _easycom_uni_tag = () => "../../uni_modules/uni-tag/components/uni-tag/uni-tag.js";
 const _easycom_uni_list_item = () => "../../uni_modules/uni-list/components/uni-list-item/uni-list-item.js";
 const _easycom_uni_list = () => "../../uni_modules/uni-list/components/uni-list/uni-list.js";
+const _easycom_uni_load_more = () => "../../uni_modules/uni-load-more/components/uni-load-more/uni-load-more.js";
 const _easycom_unicloud_db = () => "../../node-modules/@dcloudio/uni-components/lib/unicloud-db/unicloud-db.js";
 const _easycom_uni_fab = () => "../../uni_modules/uni-fab/components/uni-fab/uni-fab.js";
 if (!Math) {
-  (_easycom_uni_icons + _easycom_uni_data_select + _easycom_uni_forms_item + _easycom_uni_forms + _easycom_uni_section + _easycom_uni_drawer + _easycom_uni_search_bar + _easycom_uni_tag + _easycom_uni_list_item + _easycom_uni_list + _easycom_unicloud_db + _easycom_uni_fab)();
+  (_easycom_uni_icons + _easycom_uni_data_select + _easycom_uni_forms_item + _easycom_uni_forms + _easycom_uni_section + _easycom_uni_drawer + _easycom_uni_search_bar + _easycom_uni_tag + _easycom_uni_list_item + _easycom_uni_list + _easycom_uni_load_more + _easycom_unicloud_db + _easycom_uni_fab)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return common_vendor.e({
@@ -265,16 +298,18 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     w: common_vendor.o((...args) => $options.searchclick && $options.searchclick(...args)),
     x: common_vendor.w(({
       data,
+      pagination,
       loading,
       error,
-      options
+      options,
+      hasMore
     }, s0, i0) => {
       return common_vendor.e({
         a: error
       }, error ? {
         b: common_vendor.t(error.message)
-      } : {
-        c: common_vendor.f($data.filteredData || $data.recoData, (tutor, index, i1) => {
+      } : loading ? {} : common_vendor.e({
+        d: common_vendor.f($data.filteredData || data, (tutor, index, i1) => {
           return {
             a: common_vendor.t(`${tutor.lecture_title}`),
             b: common_vendor.t(`已预约${tutor.lecture_reserved}人`),
@@ -290,18 +325,25 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             i: "7538e855-13-" + i0 + "-" + i1 + "," + ("7538e855-12-" + i0)
           };
         }),
-        d: common_vendor.p({
+        e: common_vendor.p({
           border: false,
           direction: "column",
           clickable: true
         }),
-        e: "7538e855-12-" + i0 + ",7538e855-11",
-        f: common_vendor.p({
+        f: "7538e855-12-" + i0 + ",7538e855-11",
+        g: common_vendor.p({
           border: false
+        }),
+        h: !hasMore
+      }, !hasMore ? {
+        i: "7538e855-15-" + i0 + ",7538e855-11",
+        j: common_vendor.p({
+          status: "noMore"
         })
-      }, {
-        g: i0,
-        h: s0
+      } : {}), {
+        c: loading,
+        k: i0,
+        l: s0
       });
     }, {
       name: "d",
@@ -309,14 +351,17 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       vueId: "7538e855-11"
     }),
     y: common_vendor.sr("udb", "7538e855-11"),
-    z: common_vendor.p({
-      collection: "lecture"
+    z: common_vendor.o($options.onqueryload),
+    A: common_vendor.p({
+      collection: "lecture",
+      options: $data.options,
+      ["page-size"]: $data.pagesize
     }),
-    A: $data.role == "1"
+    B: $data.role == "1"
   }, $data.role == "1" ? {
-    B: common_vendor.sr("fab", "7538e855-15"),
-    C: common_vendor.o($options.trigger),
-    D: common_vendor.p({
+    C: common_vendor.sr("fab", "7538e855-16"),
+    D: common_vendor.o($options.trigger),
+    E: common_vendor.p({
       pattern: $data.pattern,
       content: $data.content,
       horizontal: $data.horizontal,

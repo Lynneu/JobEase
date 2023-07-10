@@ -117,3 +117,7 @@
   padding-left: 10px;
   padding-right: 10px;
 }
+.loading {
+  padding: 20px;
+  text-align: center;
+}

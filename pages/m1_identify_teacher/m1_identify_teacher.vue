@@ -230,7 +230,7 @@
 									url: "../find_teacher/find_teacher"
 								})*/
 								uni.switchTab({
-								url: "../m2_profile/m2_profile"
+								url: "../index/index"
 								})
 							}).catch(err => {
 								console.log('err', err);

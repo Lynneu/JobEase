@@ -3,17 +3,12 @@
 		<view class="information_display">
 			<view>
 				<uni-list>
-					<uni-list-item v-for="item in consultData1" :key="item._id" direction="column" >
+					<uni-list-item v-for="item in consultData1" :key="item._id" direction="column" @click="updatefn(item)" clickable>
 						<template v-slot:body>
 							<view>
 								<view class="title_display">
 									<text class="title">咨询信息</text>
-									<view class="button">
-										<button class="button_text" size="mini" style="background-color: #007aff; color: #fff;" @click="updatefn(item)">
-											<text>待审核</text>
-										</button>
-									</view>
-									<text>\n</text>
+									<text class="title2">待审核\n</text>
 								</view>
 								
 								<text class="word">咨询价格：{{item.appt_cost}} 元\n</text>

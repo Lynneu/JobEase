@@ -89,7 +89,7 @@ const _sfc_main = {
               });
             } else {
               common_vendor.index.switchTab({
-                url: "../m2_profile/m2_profile"
+                url: "../index/index"
               });
             }
           } else {
@@ -118,7 +118,7 @@ const _sfc_main = {
             });
           }
           common_vendor.index.switchTab({
-            url: "../find_teacher/find_teacher"
+            url: "../index/index"
           });
         });
       }
