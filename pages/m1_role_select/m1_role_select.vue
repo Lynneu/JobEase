@@ -144,10 +144,10 @@
 						})
 					
 					
-					
+					/*
 					uni.navigateTo({
 						url: "../m1_identify_teacher/m1_identify_teacher"
-					})
+					})*/
 				}
 				else {
 					
