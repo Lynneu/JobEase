@@ -57,7 +57,7 @@
 			</uni-search-bar>
 		</view>
 		<view class="text" style="width: 170rpx; margin-left: 10px;">
-			<button class="mini-btn" style="background-color:#007AFF; color: #fff;" size="mini" @click="searchclick">搜索</button>
+			<button class="mini-btn" style="background-color:#007AFF; color: #fff;" size="mini" @click="searchclick">重置</button>
 		</view>
 	</view>
 		<view class="list-area">
@@ -69,7 +69,7 @@
 						<view v-else>
 							<uni-list :border="false" style="background-color: #f8f8f8;">
 							    <uni-list-item 
-									:border="false"
+									
 							        v-for="(tutor, index) in filteredData || data" 
 									direction="column"
 							        :key="index"
@@ -117,7 +117,7 @@
 		data() {
 			return {
 				options: {}, // 插槽不能访问外面的数据，通过此参数传递, 不支持传递函数
-				pagesize: 10,
+				pagesize: 20,
 				searchValue: '',
 				jobvalue: '',
 				consultvalue: '',
@@ -162,11 +162,20 @@
 				]
 			}
 		},
-		async created() {
-			this.userphone = getApp().globalData.ph
-			console.log(this.userphone)
-			await this.fetchUserTag()	
-		},
+		created() {
+		    this.userphone = getApp().globalData.ph;
+		    console.log(this.userphone);
+		    // 获取 userTag
+		    this.fetchUserTag().then(() => {
+		      // userTag 获取完毕，开始获取数据
+		      this.$refs.udb.loadData();
+		    });
+		  },
+		onReady() {
+				if (this.userTag) {
+					this.$refs.udb.loadData()
+				}
+			},
 		onPullDownRefresh() { //下拉刷新
 		      this.$refs.udb.loadData({
 		        clear: true //可选参数，是否清空数据
@@ -182,13 +191,12 @@
 		// },
 		methods: {
 			async onqueryload(data, ended) {
-				if (!this.userTag) {
-				           await this.fetchUserTag();
-				       }
-			    data = this.recommendAlgorithm(data);
-				
-				console.log(data)
-			    },
+			      // 确保有 userTag
+			      if (this.userTag) {
+			        data = this.recommendAlgorithm(data);
+			        console.log(data);
+			      }
+			},	  
 			async fetchUserTag() {
 			        return new Promise((resolve, reject) => {
 			            const db = uniCloud.database()
@@ -295,7 +303,8 @@
 			  this.filter(); // 在关闭筛选抽屉时调用filter函数进行过滤
 			},
 			searchclick() {
-				console.log(this.searchValue)
+				this.filteredData = null
+				this.$refs.udb.refresh()
 			},
 			changeJob(e) {
 				console.log("e:", e);

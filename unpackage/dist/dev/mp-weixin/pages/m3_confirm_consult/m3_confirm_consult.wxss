@@ -56,3 +56,7 @@
   padding-left: 10px;
   padding-right: 10px;
 }
+.nonedetail {
+  display: flex;
+  justify-content: center;
+}

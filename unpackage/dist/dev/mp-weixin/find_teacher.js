@@ -6,7 +6,7 @@ const _sfc_main = {
     return {
       options: {},
       // 插槽不能访问外面的数据，通过此参数传递, 不支持传递函数
-      pagesize: 10,
+      pagesize: 20,
       searchValue: "",
       jobvalue: "",
       consultvalue: "",
@@ -51,10 +51,17 @@ const _sfc_main = {
       ]
     };
   },
-  async created() {
+  created() {
     this.userphone = getApp().globalData.ph;
     console.log(this.userphone);
-    await this.fetchUserTag();
+    this.fetchUserTag().then(() => {
+      this.$refs.udb.loadData();
+    });
+  },
+  onReady() {
+    if (this.userTag) {
+      this.$refs.udb.loadData();
+    }
   },
   onPullDownRefresh() {
     this.$refs.udb.loadData({
@@ -72,11 +79,10 @@ const _sfc_main = {
   // },
   methods: {
     async onqueryload(data, ended) {
-      if (!this.userTag) {
-        await this.fetchUserTag();
+      if (this.userTag) {
+        data = this.recommendAlgorithm(data);
+        console.log(data);
       }
-      data = this.recommendAlgorithm(data);
-      console.log(data);
     },
     async fetchUserTag() {
       return new Promise((resolve, reject) => {
@@ -178,7 +184,8 @@ const _sfc_main = {
       this.filter();
     },
     searchclick() {
-      console.log(this.searchValue);
+      this.filteredData = null;
+      this.$refs.udb.refresh();
     },
     changeJob(e) {
       console.log("e:", e);
@@ -360,7 +367,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           };
         }),
         e: common_vendor.p({
-          border: false,
           direction: "column",
           clickable: true
         }),

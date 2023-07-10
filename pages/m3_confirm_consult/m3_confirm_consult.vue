@@ -37,6 +37,7 @@
 						</template>
 					</uni-list-item>
 				</uni-list>
+				<text v-if="consultData2==null" class="nonedetail">没有咨询预约信息</text>
 			</view>
 		</view>	
 	</view>
@@ -136,5 +137,9 @@
 		font-size: 5px;
 		padding-left: 10px;
 		padding-right: 10px;
+	}
+	.nonedetail {
+		display: flex;
+		justify-content: center;
 	}
 </style>

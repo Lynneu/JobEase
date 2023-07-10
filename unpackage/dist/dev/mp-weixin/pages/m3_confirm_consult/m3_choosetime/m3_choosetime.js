@@ -82,8 +82,8 @@ const _sfc_main = {
         icon: "none",
         duration: 2e3
       });
-      common_vendor.index.navigateTo({
-        url: "../m3_confirm_consult"
+      common_vendor.index.switchTab({
+        url: "../index/index"
       });
       console.log("跳转");
     }

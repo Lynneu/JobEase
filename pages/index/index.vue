@@ -24,6 +24,10 @@ export default {
   	  this.role = getApp().globalData.st
 	  console.log(this.role)
   },
+  onShow: function() {
+  	  this.role = getApp().globalData.st
+  	  console.log(this.role)
+  },
 }
 </script>
 

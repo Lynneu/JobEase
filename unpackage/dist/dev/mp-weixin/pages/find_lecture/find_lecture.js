@@ -73,6 +73,11 @@ const _sfc_main = {
     console.log(this.userphone);
     await this.fetchUserTag();
   },
+  onReady() {
+    if (this.userTag) {
+      this.$refs.udb.loadData();
+    }
+  },
   onPullDownRefresh() {
     this.$refs.udb.loadData({
       clear: true
@@ -88,8 +93,9 @@ const _sfc_main = {
     async onqueryload(data, ended) {
       if (!this.userTag) {
         await this.fetchUserTag();
+      } else {
+        data = this.recommendAlgorithm(data);
       }
-      data = this.recommendAlgorithm(data);
     },
     async fetchUserTag() {
       return new Promise((resolve, reject) => {
@@ -168,7 +174,8 @@ const _sfc_main = {
       this.filter();
     },
     searchclick() {
-      console.log(this.searchValue);
+      this.filteredData = null;
+      this.$refs.udb.refresh();
     },
     changeJob(e) {
       console.log(e);

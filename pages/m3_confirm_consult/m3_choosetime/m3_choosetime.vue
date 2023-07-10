@@ -118,8 +118,8 @@
 					duration: 2000
 				});
 
-				uni.navigateTo({
-					url:'../m3_confirm_consult'
+				uni.switchTab({
+					url:'../index/index'
 				});
 				
 				console.log('跳转')

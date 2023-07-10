@@ -17,6 +17,10 @@ const _sfc_main = {
   onLoad: function() {
     this.role = getApp().globalData.st;
     console.log(this.role);
+  },
+  onShow: function() {
+    this.role = getApp().globalData.st;
+    console.log(this.role);
   }
 };
 if (!Array) {

@@ -175,6 +175,12 @@ export default {
   	console.log(this.userphone)
   	await this.fetchUserTag()	
   },
+  onReady() {
+  		if (this.userTag) {
+  			this.$refs.udb.loadData()
+  		}
+  	},
+	
   onPullDownRefresh() { //下拉刷新
         this.$refs.udb.loadData({
           clear: true //可选参数，是否清空数据
@@ -189,8 +195,10 @@ export default {
 	   async onqueryload(data, ended) {
 		   if (!this.userTag) {
 		              await this.fetchUserTag();
-		          }
-	        data = this.recommendAlgorithm(data);
+		        }
+	        else {
+				data = this.recommendAlgorithm(data);
+			}
 	  		// console.log(data)
 	      },
 	  async fetchUserTag() {
@@ -275,7 +283,8 @@ export default {
       this.filter(); // 在关闭筛选抽屉时调用filter函数进行过滤
     },
     searchclick() {
-      console.log(this.searchValue)
+    	this.filteredData = null
+    	this.$refs.udb.refresh()
     },
 	changeJob(e) {
 		console.log(e)
