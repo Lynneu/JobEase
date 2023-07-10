@@ -82,7 +82,7 @@
 		methods:{
 			appointconsult(e){
 				console.log(e)
-				uni.navigateTo({
+				uni.redirectTo({
 					url:'../m3_appt_consult/m3_appt_consult?phone='+this.user_detail.phone
 				});
 			},
