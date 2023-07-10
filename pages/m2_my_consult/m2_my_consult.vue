@@ -188,22 +188,10 @@
 								.limit(1)
 								.get()
 								.then(res => {
-									console.log("xxx")
-									if(this.student)
-									{
-										this.showFake = false
-									}else{
-										this.showFake = true
-									}				
+												
 								})
 								.catch(err => {
-									console.log(err)
-									if(this.student)
-									{
-										showFake = false
-									}else{
-										showFake = true
-									}	
+									
 								})
 							}
 							
