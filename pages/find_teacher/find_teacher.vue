@@ -181,9 +181,13 @@
 		// 	  this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
 		// },
 		methods: {
-			onqueryload(data, ended) {
-			        data = this.recommendAlgorithm(data);
-					console.log(data)
+			async onqueryload(data, ended) {
+				if (!this.userTag) {
+				           await this.fetchUserTag();
+				       }
+			    data = this.recommendAlgorithm(data);
+				
+				console.log(data)
 			    },
 			async fetchUserTag() {
 			        return new Promise((resolve, reject) => {

@@ -61,7 +61,7 @@
     							        v-for="(tutor, index) in filteredData || data"
     									direction="column"
     							        :key="index"
-    							        @click="navigateToTutorDetail(tutor.phone)"
+    							        @click="navigateToTutorDetail(tutor._id)"
     							        clickable
     							    >
     									<template v-slot:header>
@@ -186,9 +186,12 @@ export default {
         this.$refs.udb.loadMore()
       },
   methods: {
-	  onqueryload(data, ended) {
-	          data = this.recommendAlgorithm(data);
-	  		console.log(data)
+	   async onqueryload(data, ended) {
+		   if (!this.userTag) {
+		              await this.fetchUserTag();
+		          }
+	        data = this.recommendAlgorithm(data);
+	  		// console.log(data)
 	      },
 	  async fetchUserTag() {
 	          return new Promise((resolve, reject) => {

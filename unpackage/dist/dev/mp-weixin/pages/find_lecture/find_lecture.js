@@ -85,9 +85,11 @@ const _sfc_main = {
     this.$refs.udb.loadMore();
   },
   methods: {
-    onqueryload(data, ended) {
+    async onqueryload(data, ended) {
+      if (!this.userTag) {
+        await this.fetchUserTag();
+      }
       data = this.recommendAlgorithm(data);
-      console.log(data);
     },
     async fetchUserTag() {
       return new Promise((resolve, reject) => {
@@ -321,7 +323,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             }),
             f: common_vendor.t(tutor.lecture_content),
             g: index,
-            h: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor.phone), index),
+            h: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor._id), index),
             i: "7538e855-13-" + i0 + "-" + i1 + "," + ("7538e855-12-" + i0)
           };
         }),

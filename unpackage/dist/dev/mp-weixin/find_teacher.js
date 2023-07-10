@@ -71,7 +71,10 @@ const _sfc_main = {
   // 	  this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
   // },
   methods: {
-    onqueryload(data, ended) {
+    async onqueryload(data, ended) {
+      if (!this.userTag) {
+        await this.fetchUserTag();
+      }
       data = this.recommendAlgorithm(data);
       console.log(data);
     },

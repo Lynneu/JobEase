@@ -38,6 +38,7 @@ const _sfc_main = {
   },
   onShow() {
     this.appt_lecture.phone = getApp().globalData.ph;
+    console.log("Phone:", this.lecture.phone);
   },
   onLoad: function(option) {
     console.log(option.lecture);
@@ -53,9 +54,9 @@ const _sfc_main = {
         this.lecture = res.result.data[0];
         console.log(this.lecture.lecture_limit + "测试1");
         this.islimit(this.lecture.lecture_limit);
-        const phone = this.lecture.phone;
+        this.lecture.phone;
         db.collection("user_detail").where({
-          phone
+          phone: this.phone
         }).get().then((res2) => {
           console.log(res2);
           if (res2.result.data.length > 0) {
