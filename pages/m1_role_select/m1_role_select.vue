@@ -130,7 +130,7 @@
 								else
 								{
 									uni.switchTab({
-									url: "../index/index"
+									url: "../find_teacher/find_teacher"
 									})
 								}
 								
@@ -172,7 +172,7 @@
 								
 							}
 							uni.switchTab({
-								url: "../index/index"
+								url: "../find_teacher/find_teacher"
 							})
 							
 					})

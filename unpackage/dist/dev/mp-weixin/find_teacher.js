@@ -1,12 +1,16 @@
 "use strict";
 const common_vendor = require("./common/vendor.js");
+const pageconfirmConsult = () => "./pages/m3_confirm_consult/m3_confirm_consult2.js";
 const _sfc_main = {
   name: "pagefindTeacher",
+  components: {
+    pageconfirmConsult
+  },
   data() {
     return {
       options: {},
       // 插槽不能访问外面的数据，通过此参数传递, 不支持传递函数
-      pagesize: 30,
+      pagesize: 20,
       searchValue: "",
       jobvalue: "",
       consultvalue: "",
@@ -18,6 +22,7 @@ const _sfc_main = {
       userphone: "",
       userTag: 6,
       newuserTag: 6,
+      role: "",
       job: [
         { value: 0, text: "前端开发" },
         { value: 1, text: "后端开发" },
@@ -55,6 +60,7 @@ const _sfc_main = {
     };
   },
   created() {
+    this.role = getApp().globalData.st;
     this.userTag = getApp().globalData.tip;
     console.log(this.userTag);
   },
@@ -64,6 +70,7 @@ const _sfc_main = {
   // 		}
   // 	},
   onShow: function() {
+    this.role = getApp().globalData.st;
     this.newuserTag = getApp().globalData.tip;
     if (this.newuserTag != 6 && this.newuserTag != this.userTag) {
       this.userTag = this.newuserTag;
@@ -237,6 +244,7 @@ const _sfc_main = {
   }
 };
 if (!Array) {
+  const _component_pageconfirmConsult = common_vendor.resolveComponent("pageconfirmConsult");
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
   const _easycom_uni_data_select2 = common_vendor.resolveComponent("uni-data-select");
   const _easycom_uni_forms_item2 = common_vendor.resolveComponent("uni-forms-item");
@@ -249,7 +257,7 @@ if (!Array) {
   const _easycom_uni_list2 = common_vendor.resolveComponent("uni-list");
   const _easycom_uni_load_more2 = common_vendor.resolveComponent("uni-load-more");
   const _easycom_unicloud_db2 = common_vendor.resolveComponent("unicloud-db");
-  (_easycom_uni_icons2 + _easycom_uni_data_select2 + _easycom_uni_forms_item2 + _easycom_uni_forms2 + _easycom_uni_section2 + _easycom_uni_drawer2 + _easycom_uni_search_bar2 + _easycom_uni_tag2 + _easycom_uni_list_item2 + _easycom_uni_list2 + _easycom_uni_load_more2 + _easycom_unicloud_db2)();
+  (_component_pageconfirmConsult + _easycom_uni_icons2 + _easycom_uni_data_select2 + _easycom_uni_forms_item2 + _easycom_uni_forms2 + _easycom_uni_section2 + _easycom_uni_drawer2 + _easycom_uni_search_bar2 + _easycom_uni_tag2 + _easycom_uni_list_item2 + _easycom_uni_list2 + _easycom_uni_load_more2 + _easycom_unicloud_db2)();
 }
 const _easycom_uni_icons = () => "./uni_modules/uni-icons/components/uni-icons/uni-icons.js";
 const _easycom_uni_data_select = () => "./uni_modules/uni-data-select/components/uni-data-select/uni-data-select.js";
@@ -268,78 +276,79 @@ if (!Math) {
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_vendor.o(($event) => $options.showDrawer("showLeft")),
-    b: common_vendor.p({
+    a: $data.role == "1",
+    b: common_vendor.o(($event) => $options.showDrawer("showLeft")),
+    c: common_vendor.p({
       type: "bars",
       size: "25",
       color: "#007AFF"
     }),
-    c: common_vendor.o($options.changeJob),
-    d: common_vendor.o(($event) => $data.jobvalue = $event),
-    e: common_vendor.p({
+    d: common_vendor.o($options.changeJob),
+    e: common_vendor.o(($event) => $data.jobvalue = $event),
+    f: common_vendor.p({
       localdata: $data.job,
       placeholder: "请选择职位",
       modelValue: $data.jobvalue
     }),
-    f: common_vendor.p({
+    g: common_vendor.p({
       label: "咨询职位",
       ["label-width"]: "60"
     }),
-    g: common_vendor.o($options.changeconsult),
-    h: common_vendor.o(($event) => $data.consultvalue = $event),
-    i: common_vendor.p({
+    h: common_vendor.o($options.changeconsult),
+    i: common_vendor.o(($event) => $data.consultvalue = $event),
+    j: common_vendor.p({
       localdata: $data.consult,
       placeholder: "请选择咨询方向",
       modelValue: $data.consultvalue
     }),
-    j: common_vendor.p({
+    k: common_vendor.p({
       label: "咨询方向",
       ["label-width"]: "60"
     }),
-    k: common_vendor.o($options.changepay),
-    l: common_vendor.o(($event) => $data.payvalue = $event),
-    m: common_vendor.p({
+    l: common_vendor.o($options.changepay),
+    m: common_vendor.o(($event) => $data.payvalue = $event),
+    n: common_vendor.p({
       localdata: $data.pay,
       placeholder: "请选择价格区间",
       modelValue: $data.payvalue
     }),
-    n: common_vendor.p({
+    o: common_vendor.p({
       label: "价格区间",
       ["label-width"]: "60"
     }),
-    o: common_vendor.o($options.changescore),
-    p: common_vendor.o(($event) => $data.scorevalue = $event),
-    q: common_vendor.p({
+    p: common_vendor.o($options.changescore),
+    q: common_vendor.o(($event) => $data.scorevalue = $event),
+    r: common_vendor.p({
       localdata: $data.score,
       placeholder: "请选择评分区间",
       modelValue: $data.scorevalue
     }),
-    r: common_vendor.p({
+    s: common_vendor.p({
       label: "评分区间",
       ["label-width"]: "60"
     }),
-    s: common_vendor.o(($event) => $options.closeDrawer("showLeft")),
-    t: common_vendor.p({
+    t: common_vendor.o(($event) => $options.closeDrawer("showLeft")),
+    v: common_vendor.p({
       title: "筛选",
       type: "line"
     }),
-    v: common_vendor.sr("showLeft", "0c1b2ad5-1"),
-    w: common_vendor.p({
+    w: common_vendor.sr("showLeft", "0c1b2ad5-2"),
+    x: common_vendor.p({
       mode: "left",
       width: 300
     }),
-    x: common_vendor.o($options.search),
-    y: common_vendor.o(($event) => $data.searchValue = $event),
-    z: common_vendor.p({
+    y: common_vendor.o($options.search),
+    z: common_vendor.o(($event) => $data.searchValue = $event),
+    A: common_vendor.p({
       focus: false,
       placeholder: "请输入搜索内容",
       clearButton: "auto",
       cancelButton: "none",
       modelValue: $data.searchValue
     }),
-    A: common_vendor.o((...args) => $options.openSearchPage && $options.openSearchPage(...args)),
-    B: common_vendor.o((...args) => $options.searchclick && $options.searchclick(...args)),
-    C: common_vendor.w(({
+    B: common_vendor.o((...args) => $options.openSearchPage && $options.openSearchPage(...args)),
+    C: common_vendor.o((...args) => $options.searchclick && $options.searchclick(...args)),
+    D: common_vendor.w(({
       data,
       pagination,
       loading,
@@ -360,7 +369,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             d: common_vendor.f(tutor.tip_teacher, (tip, idx, i2) => {
               return {
                 a: idx,
-                b: "0c1b2ad5-16-" + i0 + "-" + i1 + "-" + i2 + "," + ("0c1b2ad5-15-" + i0 + "-" + i1),
+                b: "0c1b2ad5-17-" + i0 + "-" + i1 + "-" + i2 + "," + ("0c1b2ad5-16-" + i0 + "-" + i1),
                 c: common_vendor.p({
                   text: $options.getConsultText(tip),
                   type: "primary"
@@ -370,20 +379,20 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
             e: common_vendor.t(tutor.comment),
             f: index,
             g: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor.phone), index),
-            h: "0c1b2ad5-15-" + i0 + "-" + i1 + "," + ("0c1b2ad5-14-" + i0)
+            h: "0c1b2ad5-16-" + i0 + "-" + i1 + "," + ("0c1b2ad5-15-" + i0)
           };
         }),
         e: common_vendor.p({
           direction: "column",
           clickable: true
         }),
-        f: "0c1b2ad5-14-" + i0 + ",0c1b2ad5-13",
+        f: "0c1b2ad5-15-" + i0 + ",0c1b2ad5-14",
         g: common_vendor.p({
           border: false
         }),
         h: !hasMore
       }, !hasMore ? {
-        i: "0c1b2ad5-17-" + i0 + ",0c1b2ad5-13",
+        i: "0c1b2ad5-18-" + i0 + ",0c1b2ad5-14",
         j: common_vendor.p({
           status: "noMore"
         })
@@ -394,17 +403,18 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       });
     }, {
       name: "d",
-      path: "C",
-      vueId: "0c1b2ad5-13"
+      path: "D",
+      vueId: "0c1b2ad5-14"
     }),
-    D: common_vendor.sr("udb", "0c1b2ad5-13"),
-    E: common_vendor.o($options.onqueryload),
-    F: common_vendor.p({
+    E: common_vendor.sr("udb", "0c1b2ad5-14"),
+    F: common_vendor.o($options.onqueryload),
+    G: common_vendor.p({
       collection: "user_detail",
       where: "isTeacher==1",
       options: $data.options,
       ["page-size"]: $data.pagesize
-    })
+    }),
+    H: $data.role == "0"
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/lynneu/Documents/GitHub/JobEase/pages/find_teacher/find_teacher.vue"]]);

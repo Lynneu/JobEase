@@ -189,7 +189,7 @@ const _sfc_main = {
           });
         }
         common_vendor.index.switchTab({
-          url: "../index/index"
+          url: "../find_teacher/find_teacher"
         });
       }).catch((err) => {
         console.log("err", err);

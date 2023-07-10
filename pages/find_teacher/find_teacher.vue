@@ -1,5 +1,6 @@
 <template>
-	<view>
+	 <pageconfirmConsult v-show="role == '1'" />
+	<view v-show="role == '0'">
 	<view class="uni-inline-item uni-row area-padding">
 		<view style="width: 100rpx;">
 			<uni-icons @click="showDrawer('showLeft')" type="bars" size="25" color="#007AFF"></uni-icons>
@@ -112,12 +113,16 @@
 </template>
 
 <script>
+	import pageconfirmConsult from '../m3_confirm_consult/m3_confirm_consult'
 	export default {
 		name: 'pagefindTeacher',
+		components: {
+		  pageconfirmConsult
+		},
 		data() {
 			return {
 				options: {}, // 插槽不能访问外面的数据，通过此参数传递, 不支持传递函数
-				pagesize: 30,
+				pagesize: 20,
 				searchValue: '',
 				jobvalue: '',
 				consultvalue: '',
@@ -129,6 +134,7 @@
 				userphone: '',
 				userTag: 6,
 				newuserTag: 6,
+				role: '',
 				job: [
 				    { value: 0, text: '前端开发' },
 				    { value: 1, text: '后端开发' },
@@ -166,6 +172,7 @@
 			}
 		},
 		created() {
+			this.role = getApp().globalData.st
 			this.userTag = getApp().globalData.tip
 			console.log(this.userTag)
 		},
@@ -175,6 +182,7 @@
 		// 		}
 		// 	},
 			onShow: function() {
+				 this.role = getApp().globalData.st
 				  this.newuserTag = getApp().globalData.tip
 				  if(this.newuserTag != 6 && this.newuserTag != this.userTag) {
 					  this.userTag = this.newuserTag

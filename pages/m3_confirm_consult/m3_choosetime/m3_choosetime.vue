@@ -119,7 +119,7 @@
 				});
 
 				uni.switchTab({
-					url:'../index/index'
+					url:'../find_teacher/find_teacher'
 				});
 				
 				console.log('跳转')

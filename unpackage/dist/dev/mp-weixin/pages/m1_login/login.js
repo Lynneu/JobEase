@@ -94,11 +94,11 @@ const _sfc_main = {
               });
               if (this.testing.status == 0) {
                 common_vendor.index.switchTab({
-                  url: "../index/index"
+                  url: "../find_teacher/find_teacher"
                 });
               } else {
                 common_vendor.index.switchTab({
-                  url: "../index/index"
+                  url: "../find_teacher/find_teacher"
                 });
               }
             } else {

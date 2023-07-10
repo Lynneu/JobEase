@@ -274,7 +274,7 @@
 									url: "../find_teacher/find_teacher"
 								})*/
 								uni.switchTab({
-								url: "../index/index"
+								url: "../find_teacher/find_teacher"
 								})
 							}).catch(err => {
 								console.log('err', err);

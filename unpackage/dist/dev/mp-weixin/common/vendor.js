@@ -7319,7 +7319,7 @@ const tabBar = {
   spacing: "3px",
   list: [
     {
-      pagePath: "pages/index/index",
+      pagePath: "pages/find_teacher/find_teacher",
       iconPath: "static/image/icon_teacher.png",
       selectedIconPath: "static/image/icon_teacher_HL.png",
       text: "找导师"
