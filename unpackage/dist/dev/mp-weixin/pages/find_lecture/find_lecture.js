@@ -87,7 +87,10 @@ const _sfc_main = {
     if (this.newuserTag != 6 && this.newuserTag != this.userTag) {
       this.userTag = this.newuserTag;
       console.log("tag change");
-      this.searchclick();
+      this.$refs.udb.loadData({
+        clear: true
+        //可选参数，是否清空数据
+      });
     }
   },
   onPullDownRefresh() {
@@ -329,20 +332,27 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         b: common_vendor.t(error.message)
       } : loading ? {} : common_vendor.e({
         d: common_vendor.f($data.filteredData || data, (tutor, index, i1) => {
-          return {
+          return common_vendor.e({
             a: common_vendor.t(`${tutor.lecture_title}`),
-            b: common_vendor.t(`已预约${tutor.lecture_reserved}人`),
-            c: common_vendor.t(`, 价格 ¥${tutor.lecture_price}/小时`),
-            d: "7538e855-14-" + i0 + "-" + i1 + "," + ("7538e855-13-" + i0 + "-" + i1),
-            e: common_vendor.p({
+            b: new Date(tutor.lecture_time) < /* @__PURE__ */ new Date()
+          }, new Date(tutor.lecture_time) < /* @__PURE__ */ new Date() ? {
+            c: "7538e855-14-" + i0 + "-" + i1 + "," + ("7538e855-13-" + i0 + "-" + i1),
+            d: common_vendor.p({
+              text: "已结束报名"
+            })
+          } : {}, {
+            e: common_vendor.t(`已预约${tutor.lecture_reserved}人`),
+            f: common_vendor.t(`, 价格 ¥${tutor.lecture_price}/小时`),
+            g: "7538e855-15-" + i0 + "-" + i1 + "," + ("7538e855-13-" + i0 + "-" + i1),
+            h: common_vendor.p({
               text: $options.getConsultText(tutor.lecture_label),
               type: "primary"
             }),
-            f: common_vendor.t(tutor.lecture_content),
-            g: index,
-            h: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor._id), index),
-            i: "7538e855-13-" + i0 + "-" + i1 + "," + ("7538e855-12-" + i0)
-          };
+            i: common_vendor.t(tutor.lecture_content),
+            j: index,
+            k: common_vendor.o(($event) => $options.navigateToTutorDetail(tutor._id), index),
+            l: "7538e855-13-" + i0 + "-" + i1 + "," + ("7538e855-12-" + i0)
+          });
         }),
         e: common_vendor.p({
           border: false,
@@ -355,7 +365,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         }),
         h: !hasMore
       }, !hasMore ? {
-        i: "7538e855-15-" + i0 + ",7538e855-11",
+        i: "7538e855-16-" + i0 + ",7538e855-11",
         j: common_vendor.p({
           status: "noMore"
         })
@@ -378,7 +388,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     B: $data.role == "1"
   }, $data.role == "1" ? {
-    C: common_vendor.sr("fab", "7538e855-16"),
+    C: common_vendor.sr("fab", "7538e855-17"),
     D: common_vendor.o($options.trigger),
     E: common_vendor.p({
       pattern: $data.pattern,

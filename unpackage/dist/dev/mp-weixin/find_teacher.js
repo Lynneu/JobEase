@@ -59,7 +59,7 @@ const _sfc_main = {
       ]
     };
   },
-  created() {
+  onLoad: function() {
     this.role = getApp().globalData.st;
     this.userTag = getApp().globalData.tip;
     console.log(this.userTag);
@@ -75,7 +75,10 @@ const _sfc_main = {
     if (this.newuserTag != 6 && this.newuserTag != this.userTag) {
       this.userTag = this.newuserTag;
       console.log("tag change");
-      this.searchclick();
+      this.$refs.udb.loadData({
+        clear: true
+        //可选参数，是否清空数据
+      });
     }
   },
   onPullDownRefresh() {
@@ -239,8 +242,6 @@ const _sfc_main = {
       console.log("over");
       return tutors;
     }
-  },
-  onBackPress() {
   }
 };
 if (!Array) {

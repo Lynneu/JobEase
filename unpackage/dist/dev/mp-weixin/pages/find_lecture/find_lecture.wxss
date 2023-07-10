@@ -59,7 +59,7 @@
 }
 
 /* Making the consult tags stand out a bit more */
-.uni-tag {
+.tiptag {
   background-color: #007AFF;
   color: #fff;
 }
@@ -111,6 +111,7 @@
 }
 .title_display {
   display: flex;
+  justify-content: space-between;
 }
 .button_text {
   font-size: 5px;

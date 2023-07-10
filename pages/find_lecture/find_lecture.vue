@@ -69,8 +69,8 @@
 												<view >
 													<text>{{`${tutor.lecture_title}`}}</text>
 												</view>
+												<uni-tag v-if="new Date(tutor.lecture_time) < new Date()" text="已结束报名"/>
 											</view>
-    										
     									</template>
     									<template v-slot:body>
     										<view style="display: flex;">
@@ -82,6 +82,7 @@
     							            <view style="display: flex;flex-wrap: wrap;">
     							                <uni-tag 
     							                  style="font-size: 0.8em; margin-right: 10px; margin-top: 5px;"
+												  class="tiptag"
     							                  :text="getConsultText(tutor.lecture_label)" 
     							                  type="primary" 
     							                >
@@ -89,7 +90,7 @@
     							            </view>
     										<view class="comment-area">
     											<text>{{tutor.lecture_content}}</text>
-    										</view>
+    										</view>				
     							        </template>
     							    </uni-list-item>
     							</uni-list>
@@ -189,7 +190,10 @@ export default {
 		  if(this.newuserTag != 6 && this.newuserTag != this.userTag) {
 			  this.userTag = this.newuserTag
 			  console.log('tag change')
-			  this.searchclick()
+			  //this.searchclick()
+			  this.$refs.udb.loadData({
+			    clear: true //可选参数，是否清空数据
+			  })
 		  }	  
 	},
 	
@@ -374,7 +378,7 @@ export default {
     }
 
     /* Making the consult tags stand out a bit more */
-    .uni-tag {
+    .tiptag {
         background-color: #007AFF;
         color: #fff;
     }
@@ -431,6 +435,7 @@ export default {
 	}
 	.title_display{
 		display: flex;
+		justify-content: space-between;
 	}
 	.button_text{
 		font-size: 5px;

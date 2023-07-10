@@ -171,7 +171,7 @@
 				]
 			}
 		},
-		created() {
+		onLoad: function() {
 			this.role = getApp().globalData.st
 			this.userTag = getApp().globalData.tip
 			console.log(this.userTag)
@@ -187,7 +187,10 @@
 				  if(this.newuserTag != 6 && this.newuserTag != this.userTag) {
 					  this.userTag = this.newuserTag
 					  console.log('tag change')
-					  this.searchclick()
+					  //this.searchclick()
+					  this.$refs.udb.loadData({
+					    clear: true //可选参数，是否清空数据
+					  })
 				  }	  
 			},
 		onPullDownRefresh() { //下拉刷新
@@ -364,11 +367,6 @@
 				return tutors
 			}
 		},
-		onBackPress() {
-			// #ifdef APP-PLUS
-			plus.key.hideSoftKeybord();
-			// #endif
-		}
 	}
 </script>
 
