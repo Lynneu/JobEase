@@ -88,8 +88,7 @@ export default {
 					this.islimit(this.lecture.lecture_limit)
                     const phone = this.lecture.phone; // 从lecture数据库获取phone
                     db.collection("user_detail").where({
-                            phone:  this.phone
-                            
+                            phone
                         }) // 在user_detail数据库中根据phone进行查询
                         .get()
                         .then(res => {
