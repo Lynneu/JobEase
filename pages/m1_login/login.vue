@@ -119,6 +119,17 @@
 							
 							
 							getApp().globalData.ph = this.user.phone
+							
+							db.collection('user_detail').where({
+							  phone: {
+							    $eq: this.user.phone
+							  }
+							}).limit(1).get().then(res => {
+								let tip_student = res.result.data[0].tip_student
+								getApp().globalData.tip = tip_student
+								console.log('tip:' + tip_student)
+							})
+							
 							if(this.testing.status==0)
 							{
 								uni.switchTab({

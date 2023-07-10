@@ -1,8 +1,8 @@
 <template>
   <div>
 	  <view>
-    <pageconfirmConsult v-if="role == '1'" />
-    <pagefindTeacher v-else-if="role == '0'" />
+    <pageconfirmConsult v-show="role == '1'" />
+    <pagefindTeacher v-show="role == '0'" />
 	</view>
   </div>
 </template>
@@ -34,7 +34,7 @@ export default {
 		      uni.setNavigationBarTitle({
 		          title: '咨询信息'
 		      });
-		  }, 500);  // 延迟2000毫秒，也就是2秒
+		  }, 5);  // 延迟2000毫秒，也就是2秒
 		  uni.setTabBarItem({
 		    index: 0,
 		    text: '咨询信息',
@@ -45,7 +45,7 @@ export default {
 		      uni.setNavigationBarTitle({
 		          title: '找导师'
 		      });
-		  }, 500);  // 延迟2000毫秒，也就是2秒
+		  }, 5);  // 延迟2000毫秒，也就是2秒
 		  uni.setTabBarItem({
 		    index: 0,
 		    text: '找导师',

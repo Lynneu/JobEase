@@ -1,1 +1,1 @@
-<view class="data-v-1cf27b2a"><view class="data-v-1cf27b2a"><pageconfirm-consult wx:if="{{a}}" class="data-v-1cf27b2a" u-i="1cf27b2a-0" bind:__l="__l"/><pagefind-teacher wx:elif="{{b}}" class="data-v-1cf27b2a" u-i="1cf27b2a-1" bind:__l="__l"/></view></view>
+<view class="data-v-1cf27b2a"><view class="data-v-1cf27b2a"><pageconfirm-consult class="data-v-1cf27b2a" data-c-h="{{!a}}" u-i="1cf27b2a-0" bind:__l="__l"/><pagefind-teacher class="data-v-1cf27b2a" data-c-h="{{!b}}" u-i="1cf27b2a-1" bind:__l="__l"/></view></view>

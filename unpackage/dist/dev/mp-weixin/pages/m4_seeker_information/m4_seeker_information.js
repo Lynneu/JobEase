@@ -98,6 +98,7 @@ const _sfc_main = {
       delete user_detail._id;
       db.collection("user_detail").doc(this.user_detail._id).update(user_detail).then((res) => {
         console.log(res);
+        getApp().globalData.tip = this.user_detail.tip_student;
       }).catch((err) => {
         console.error("Error updating data:", err);
       });

@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "",
-  "enablePullDownRefresh": true,
+  "enablePullDownRefresh": false,
   "usingComponents": {
     "pagefind-teacher": "../find_teacher/find_teacher",
     "pageconfirm-consult": "../m3_confirm_consult/m3_confirm_consult"

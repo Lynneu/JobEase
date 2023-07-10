@@ -6,7 +6,7 @@ const _sfc_main = {
     return {
       options: {},
       // 插槽不能访问外面的数据，通过此参数传递, 不支持传递函数
-      pagesize: 10,
+      pagesize: 20,
       searchValue: "",
       consultvalue: "",
       payvalue: "",
@@ -20,8 +20,10 @@ const _sfc_main = {
       filteredData: null,
       recoData: null,
       userphone: "",
-      userTag: "",
+      userTag: 6,
+      newuserTag: 6,
       role: "",
+      sortdata: [],
       pattern: {
         color: "#7A7E83",
         backgroundColor: "#fff",
@@ -67,20 +69,26 @@ const _sfc_main = {
     }
     return false;
   },
-  async created() {
+  onLoad: function() {
     this.role = getApp().globalData.st;
     this.userphone = getApp().globalData.ph;
-    console.log(this.userphone);
-    await this.fetchUserTag();
+    this.userTag = getApp().globalData.tip;
+    console.log(this.userTag);
   },
-  onReady() {
-    if (this.userTag) {
-      this.$refs.udb.loadData();
-    }
-  },
+  // onReady() {
+  // 		if (this.userTag) {
+  // 			this.$refs.udb.loadData()
+  // 		}
+  // 	},
   onShow: function() {
     this.role = getApp().globalData.st;
-    console.log(this.role);
+    console.log("role:" + this.role);
+    this.newuserTag = getApp().globalData.tip;
+    if (this.newuserTag != 6 && this.newuserTag != this.userTag) {
+      this.userTag = this.newuserTag;
+      console.log("tag change");
+      this.searchclick();
+    }
   },
   onPullDownRefresh() {
     this.$refs.udb.loadData({
@@ -94,10 +102,8 @@ const _sfc_main = {
     this.$refs.udb.loadMore();
   },
   methods: {
-    async onqueryload(data, ended) {
-      if (!this.userTag) {
-        await this.fetchUserTag();
-      } else {
+    onqueryload(data, ended) {
+      if (this.userTag != 6) {
         data = this.recommendAlgorithm(data);
       }
     },

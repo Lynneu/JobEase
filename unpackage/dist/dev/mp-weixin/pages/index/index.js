@@ -26,7 +26,7 @@ const _sfc_main = {
         common_vendor.index.setNavigationBarTitle({
           title: "咨询信息"
         });
-      }, 500);
+      }, 5);
       common_vendor.index.setTabBarItem({
         index: 0,
         text: "咨询信息"
@@ -36,7 +36,7 @@ const _sfc_main = {
         common_vendor.index.setNavigationBarTitle({
           title: "找导师"
         });
-      }, 500);
+      }, 5);
       common_vendor.index.setTabBarItem({
         index: 0,
         text: "找导师"
@@ -50,11 +50,10 @@ if (!Array) {
   (_component_pageconfirmConsult + _component_pagefindTeacher)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return common_vendor.e({
-    a: $data.role == "1"
-  }, $data.role == "1" ? {} : $data.role == "0" ? {} : {}, {
+  return {
+    a: $data.role == "1",
     b: $data.role == "0"
-  });
+  };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-1cf27b2a"], ["__file", "/Users/lynneu/Documents/GitHub/JobEase/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

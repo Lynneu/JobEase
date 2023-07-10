@@ -9,6 +9,7 @@ const _sfc_main = {
       // 等待时间
       timer: null,
       //定时器
+      flag: 0,
       valiFormData: {
         company: "",
         name: "",
@@ -108,6 +109,18 @@ const _sfc_main = {
     };
   },
   onLoad() {
+    this.user_detail.phone = getApp().globalData.ph;
+    const db1 = common_vendor.Ds.database();
+    db1.collection("user_detail").where({
+      phone: {
+        $eq: this.user_detail.phone
+      }
+    }).limit(1).get().then((res) => {
+      if (res.result && res.result.data && res.result.data.length > 0) {
+        this.user_detail = res.result.data[0];
+        this.flag = 1;
+      }
+    });
   },
   onReady() {
     this.$refs.valiForm.setRules(this.rules);
@@ -152,9 +165,29 @@ const _sfc_main = {
           return false;
         }
         const db = common_vendor.Ds.database();
-        db.collection("user_detail").add(this.user_detail).then((e) => {
-          console.log(e);
-        });
+        if (this.flag == 0) {
+          db.collection("user_detail").add(this.user_detail).then((e) => {
+            console.log(e);
+          });
+        } else {
+          db.collection("user_detail").where({
+            phone: this.user_detail.phone
+          }).update({
+            username: this.user_detail.username,
+            isTeacher: 1,
+            status: 1,
+            email: this.user_detail.email,
+            co: this.user_detail.co,
+            job_number: this.user_detail.job_number,
+            price: this.user_detail.price,
+            post: this.user_detail.post,
+            tip_teacher: this.user_detail.tip_teacher
+          }).then((res2) => {
+            console.log("成功");
+          }).catch((err) => {
+            console.error("报错", err);
+          });
+        }
         common_vendor.index.switchTab({
           url: "../index/index"
         });

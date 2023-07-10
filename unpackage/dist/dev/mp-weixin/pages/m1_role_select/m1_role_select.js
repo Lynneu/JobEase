@@ -98,9 +98,6 @@ const _sfc_main = {
             });
           }
         });
-        common_vendor.index.navigateTo({
-          url: "../m1_identify_teacher/m1_identify_teacher"
-        });
       } else {
         getApp().globalData.st = 0;
         db.collection("user_detail").where({

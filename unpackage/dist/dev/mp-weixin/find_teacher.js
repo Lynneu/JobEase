@@ -6,7 +6,7 @@ const _sfc_main = {
     return {
       options: {},
       // 插槽不能访问外面的数据，通过此参数传递, 不支持传递函数
-      pagesize: 20,
+      pagesize: 30,
       searchValue: "",
       jobvalue: "",
       consultvalue: "",
@@ -15,6 +15,9 @@ const _sfc_main = {
       tutors: [],
       recoData: null,
       filteredData: null,
+      userphone: "",
+      userTag: 6,
+      newuserTag: 6,
       job: [
         { value: 0, text: "前端开发" },
         { value: 1, text: "后端开发" },
@@ -52,15 +55,20 @@ const _sfc_main = {
     };
   },
   created() {
-    this.userphone = getApp().globalData.ph;
-    console.log(this.userphone);
-    this.fetchUserTag().then(() => {
-      this.$refs.udb.loadData();
-    });
+    this.userTag = getApp().globalData.tip;
+    console.log(this.userTag);
   },
-  onReady() {
-    if (this.userTag) {
-      this.$refs.udb.loadData();
+  // onReady() {
+  // 		if (this.userTag) {
+  // 			this.$refs.udb.loadData()
+  // 		}
+  // 	},
+  onShow: function() {
+    this.newuserTag = getApp().globalData.tip;
+    if (this.newuserTag != 6 && this.newuserTag != this.userTag) {
+      this.userTag = this.newuserTag;
+      console.log("tag change");
+      this.searchclick();
     }
   },
   onPullDownRefresh() {
@@ -78,10 +86,9 @@ const _sfc_main = {
   // 	  this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
   // },
   methods: {
-    async onqueryload(data, ended) {
-      if (this.userTag) {
+    onqueryload(data, ended) {
+      if (this.userTag != 6) {
         data = this.recommendAlgorithm(data);
-        console.log(data);
       }
     },
     async fetchUserTag() {
@@ -93,9 +100,9 @@ const _sfc_main = {
           }
         }).get().then((res) => {
           console.log("res:" + res.result.data[0].tip_student);
-          this.userTag = res.result.data[0].tip_student;
-          console.log(this.userTag);
-          resolve(this.userTag);
+          this.newuserTag = res.result.data[0].tip_student;
+          console.log(this.newuserTag);
+          resolve(this.newuserTag);
         }).catch((err) => {
           console.log(err.message);
           reject(err);

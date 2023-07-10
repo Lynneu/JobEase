@@ -37,7 +37,7 @@
 						</template>
 					</uni-list-item>
 				</uni-list>
-				<text v-if="consultData2.length==0" class="nonedetail">没有咨询预约信息</text>
+				<text class="nonedetail">没有咨询预约信息</text>
 			</view>
 		</view>	
 	</view>

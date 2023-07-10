@@ -83,6 +83,15 @@ const _sfc_main = {
             this.user_find = res.result.data[0];
             if (this.user_find.password == this.user.password) {
               getApp().globalData.ph = this.user.phone;
+              db.collection("user_detail").where({
+                phone: {
+                  $eq: this.user.phone
+                }
+              }).limit(1).get().then((res2) => {
+                let tip_student = res2.result.data[0].tip_student;
+                getApp().globalData.tip = tip_student;
+                console.log("tip:" + tip_student);
+              });
               if (this.testing.status == 0) {
                 common_vendor.index.switchTab({
                   url: "../index/index"

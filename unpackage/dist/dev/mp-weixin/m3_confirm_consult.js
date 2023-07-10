@@ -69,7 +69,7 @@ if (!Math) {
   (_easycom_uni_list_item + _easycom_uni_list)();
 }
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return common_vendor.e({
+  return {
     a: common_vendor.f($data.consultData1, (item, k0, i0) => {
       return {
         a: common_vendor.t(item.appt_cost),
@@ -97,9 +97,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     d: common_vendor.p({
       direction: "column"
-    }),
-    e: $data.consultData2.length == 0
-  }, $data.consultData2.length == 0 ? {} : {});
+    })
+  };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__file", "/Users/lynneu/Documents/GitHub/JobEase/pages/m3_confirm_consult/m3_confirm_consult.vue"]]);
 exports.MiniProgramPage = MiniProgramPage;

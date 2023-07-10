@@ -117,7 +117,7 @@
 		data() {
 			return {
 				options: {}, // 插槽不能访问外面的数据，通过此参数传递, 不支持传递函数
-				pagesize: 20,
+				pagesize: 30,
 				searchValue: '',
 				jobvalue: '',
 				consultvalue: '',
@@ -126,6 +126,9 @@
 				tutors: [],
 				recoData: null,
 				filteredData: null,
+				userphone: '',
+				userTag: 6,
+				newuserTag: 6,
 				job: [
 				    { value: 0, text: '前端开发' },
 				    { value: 1, text: '后端开发' },
@@ -163,18 +166,21 @@
 			}
 		},
 		created() {
-		    this.userphone = getApp().globalData.ph;
-		    console.log(this.userphone);
-		    // 获取 userTag
-		    this.fetchUserTag().then(() => {
-		      // userTag 获取完毕，开始获取数据
-		      this.$refs.udb.loadData();
-		    });
-		  },
-		onReady() {
-				if (this.userTag) {
-					this.$refs.udb.loadData()
-				}
+			this.userTag = getApp().globalData.tip
+			console.log(this.userTag)
+		},
+		// onReady() {
+		// 		if (this.userTag) {
+		// 			this.$refs.udb.loadData()
+		// 		}
+		// 	},
+			onShow: function() {
+				  this.newuserTag = getApp().globalData.tip
+				  if(this.newuserTag != 6 && this.newuserTag != this.userTag) {
+					  this.userTag = this.newuserTag
+					  console.log('tag change')
+					  this.searchclick()
+				  }	  
 			},
 		onPullDownRefresh() { //下拉刷新
 		      this.$refs.udb.loadData({
@@ -190,13 +196,13 @@
 		// 	  this.recoData = await this.recommendAlgorithm(this.$refs.udb.dataList);
 		// },
 		methods: {
-			async onqueryload(data, ended) {
-			      // 确保有 userTag
-			      if (this.userTag) {
-			        data = this.recommendAlgorithm(data);
-			        console.log(data);
-			      }
-			},	  
+			onqueryload(data, ended) {
+					   
+						if (this.userTag != 6) {
+							data = this.recommendAlgorithm(data);
+						}	
+				  		// console.log(data)
+			   }, 
 			async fetchUserTag() {
 			        return new Promise((resolve, reject) => {
 			            const db = uniCloud.database()
@@ -208,9 +214,9 @@
 			                }).get()
 			                .then((res) => {
 			                    console.log('res:' + res.result.data[0].tip_student)
-			                    this.userTag = res.result.data[0].tip_student
-			                    console.log(this.userTag)
-			                    resolve(this.userTag);
+			                    this.newuserTag = res.result.data[0].tip_student
+			                    console.log(this.newuserTag)
+			                    resolve(this.newuserTag);
 			                }).catch((err) => {
 			                    console.log(err.message)
 			                    reject(err);
