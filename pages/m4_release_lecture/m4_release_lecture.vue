@@ -206,7 +206,7 @@
 		padding: 20rpx 40rpx;
 
 		.rl-content {
-			font-size: 1rpx;
+			//font-size: 1rpx;
 			width: 100%;
 			text-align: left;
 			position: relative;	
