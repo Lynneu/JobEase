@@ -72,6 +72,7 @@
 				show_again: 0, //  显示发送验证码||请稍后按钮
 				count: "", // 等待时间
 				timer: null, //定时器
+				flag:0,
 				valiFormData: {
 					company: '',
 					name: '',
@@ -169,7 +170,24 @@
 						},
 			}
 		},
-		onLoad() {},
+		onLoad() {
+			this.user_detail.phone=getApp().globalData.ph
+			const db1 = uniCloud.database();
+			db1.collection('user_detail').where({
+										  phone: {
+										    $eq: this.user_detail.phone
+										  }
+										}).limit(1).get().then(res => {
+											if (res.result && res.result.data && res.result.data.length > 0)
+											{
+										    this.user_detail = res.result.data[0]
+											this.flag=1
+											//getApp().globalData.st = this.testing.status
+											}
+										})
+			
+			
+		},
 		onReady() {
 			// 设置自定义表单校验规则，必须在节点渲染完毕后执行
 			this.$refs.valiForm.setRules(this.rules)
@@ -220,11 +238,37 @@
 								}
 								
 								
-								
+					
 								const db = uniCloud.database();
+								if(this.flag==0)
+								{
 								db.collection("user_detail").add(this.user_detail).then(e=>{
 										console.log(e)
 									})
+								}
+								else
+								{
+									
+									db.collection("user_detail").where({
+										phone: this.user_detail.phone
+									}).update({
+										username: this.user_detail.username,
+										isTeacher: 1,
+										status: 1,
+										email: this.user_detail.email,
+										co:this.user_detail.co,
+										job_number: this.user_detail.job_number,
+										price: this.user_detail.price,
+										post:this.user_detail.post,
+										tip_teacher: this.user_detail.tip_teacher
+									}).then(res => {
+										console.log("成功");
+					
+									  }).catch(err => {
+										console.error("报错", err);
+									  })
+									
+								}
 									/*
 								uni.switchTab({
 									url: "../find_teacher/find_teacher"
