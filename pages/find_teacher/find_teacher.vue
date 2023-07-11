@@ -183,6 +183,30 @@
 		// 	},
 			onShow: function() {
 				 this.role = getApp().globalData.st
+				 
+				 if(this.role == 1) {
+				 		  setTimeout(() => {
+				 		      uni.setNavigationBarTitle({
+				 		          title: '咨询信息'
+				 		      });
+				 		  }, 5);  // 延迟2000毫秒，也就是2秒
+				 		  uni.setTabBarItem({
+				 		    index: 0,
+				 		    text: '咨询信息',
+				 		  })
+				 }
+				 else {
+				 		  setTimeout(() => {
+				 		      uni.setNavigationBarTitle({
+				 		          title: '找导师'
+				 		      });
+				 		  }, 5);  // 延迟2000毫秒，也就是2秒
+				 		  uni.setTabBarItem({
+				 		    index: 0,
+				 		    text: '找导师',
+				 		  })
+				 }
+				 
 				  this.newuserTag = getApp().globalData.tip
 				  if(this.newuserTag != 6 && this.newuserTag != this.userTag) {
 					  this.userTag = this.newuserTag
