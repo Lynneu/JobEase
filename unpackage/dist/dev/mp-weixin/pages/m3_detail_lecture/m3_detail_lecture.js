@@ -97,7 +97,7 @@ const _sfc_main = {
       }).limit(1).get().then((res) => {
         if (res.result && res.result.data && res.result.data.length > 0) {
           common_vendor.index.showToast({
-            title: "已预约",
+            title: "预约重复",
             icon: "none",
             duration: 2e3
           });

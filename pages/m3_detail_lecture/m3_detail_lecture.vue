@@ -137,7 +137,7 @@ export default {
 				if (res.result && res.result.data && res.result.data.length > 0)
 					{
 						uni.showToast({
-							title: '已预约',
+							title: '预约重复',
 							icon: 'none',
 							duration: 2000
 						});
