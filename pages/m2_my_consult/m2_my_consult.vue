@@ -5,55 +5,7 @@
                         <view :class="['inv-h',Inv==1?'inv-h-se':'']" @click="Inv=1">已完成</view>
 						<view :class="['inv-h',Inv==2?'inv-h-se':'']" @click="Inv=2">已评价</view>
                 </view>
-				<view v-if="showFake">
-					<view class="" v-show="Inv == 0">
-					        <uni-card style="align-content: center;">
-								<view class="uni-flex uni-row">
-									<view class="normal title">AAA前端</view>
-									<view class="status-green">已成功预约</view>
-								</view>
-								<view>咨询价格：100元</view>
-								<view>支付情况：已付款</view>
-								<view>预计时间：2小时</view>
-								<view>预约时间：2023年6月20日</view>
-							</uni-card>
-					        <uni-card style="align-content: center;">
-								<view class="uni-flex uni-row">
-									<view class="normal title">AAA前端</view>
-									<view class="status-red">已取消</view>
-								</view>
-								<view>咨询价格：100元</view>
-								<view>支付情况：已付款</view>
-								<view>预计时间：2小时</view>
-								<view>预约时间：2023年6月20日</view>
-							</uni-card>
-					</view>
-					<view class="" v-show="Inv == 1">
-					        <uni-card style="align-content: center;">
-					        	<view class="uni-flex uni-row">
-					        		<view class="normal title">AAA前端</view>
-					        		<view class="status-green">已完成，待评价</view>
-					        	</view>
-					        	<view>咨询价格：100元</view>
-					        	<view>支付情况：已付款</view>
-					        	<view>预计时间：2小时</view>
-					        	<view>预约时间：2023年6月20日</view>
-					        </uni-card>
-					</view>
-					<view class="" v-show="Inv == 2">
-					        <uni-card style="align-content: center;">
-					        	<view class="uni-flex uni-row">
-					        		<view class="normal title">产品经理</view>
-					        		<view class="status-green">已评价</view>
-					        	</view>
-					        	<view>咨询价格：100元</view>
-					        	<view>支付情况：已付款</view>
-					        	<view>预计时间：2小时</view>
-					        	<view>预约时间：2023年6月20日</view>
-					        </uni-card>
-					</view>
-				</view>
-				<unicloud-db ref="udb" v-slot:default="{data, loading, error, options}" collection="consult" :where="sWhere">
+				<unicloud-db ref="udb" v-slot:default="{data, loading, error, options}" collection="consult" :where="sWhere" v-if="isRefresh">
 					<view class="" v-show="Inv == 0">
 						<view v-if="error">{{error.message}}</view>
 						<view v-else>
@@ -97,7 +49,7 @@
                         								<view>支付情况：已付款</view>
                         								<view>预计时间：{{item.appt_duration}}分钟</view>
                         								<view>预约时间：{{item.appt_date}}</view>
-														<view class="uni-flex uni-row">
+														<view class="uni-flex uni-row" v-if="isStudent">
 															<view class="normal title"></view>
 															<button style="background-color:#007AFF; color: #fff; font-size: 30rpx; line-height: 50rpx; padding: 10rpx; height: 70rpx;" @click="goEvaluate(item._id,item.teach_tele)">去评价</button>
 														</view>
@@ -147,7 +99,6 @@
         export default {
                 data() {
                         return {
-							showFake:false,
 							appt_theme:[
 								{ value: 0, text: '简历优化' },
 								{ value: 1, text: '面试经验' },
@@ -165,6 +116,8 @@
 								{ value: 5, text: '其他' }
 							],
                                 Inv:0,
+								isRefresh: true,
+								isStudent: true
                         }
 						
                 },
@@ -173,14 +126,22 @@
 					if(getApp().globalData.st == 0)
 					{
 						this.student = true
+						this.isStudent = true
 						this.sWhere = "stud_tele=='" + this.st + "'"
 					}else{
 						this.student = false
+						this.isStudent = false
 						this.sWhere = "teach_tele=='" + this.st + "'"
 					}
 					this.getMsg()
 				},
                 methods: {
+					updateDate(t){
+						this.isRefresh = false;
+						this.$nextTick(()=>{
+							this.isRefresh = true;
+						})
+					},
 						getMsg(){
 							if(true){
 								const db = uniCloud.database();
@@ -211,6 +172,8 @@
 							.doc(this.id)
 							.update({
 								appt_state: 2
+							}).then(res=>{
+								this.updateDate(1)
 							});
 							uni.showToast({
 								title: '确认成功',
@@ -252,6 +215,7 @@
 											score: e["value"]
 										})
 										.then((res) => {
+											this.updateDate(1)
 										})
 										.catch((err) => {
 											console.error("Error updating data:", err);

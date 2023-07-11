@@ -5,130 +5,57 @@
                         <view :class="['inv-h',Inv==1?'inv-h-se':'']" @click="Inv=1">已完成</view>
 						<view :class="['inv-h',Inv==2?'inv-h-se':'']" @click="Inv=2">已评价</view>
                 </view>
-				<view v-if="showFake">
-					<view class="" v-show="Inv == 0">
-					        <uni-card style="align-content: center;">
-					        	<view class="uni-flex uni-row">
-					        		<view class="normal title">行业前景</view>
-					        		<view class="status-green">已成功预约</view>
-					        	</view>
-					        	<view>讲座价格：100元</view>
-					        	<view>支付情况：已付款</view>
-					        	<view>预计时间：2小时</view>
-					        	<view>预约时间：2023年6月20日</view>
-					        </uni-card>
+					<view class="" v-show="Inv == 0" v-if="isRefresh">
+						<view v-for="(item, index) in final_data.filter((item) => item.lecture_state === 0)" @click="detail(item)">
 							<uni-card style="align-content: center;">
 								<view class="uni-flex uni-row">
-									<view class="normal title">职业生涯一站规划</view>
-									<view class="status-red">已取消</view>
+									<view class="normal title">{{item.lecture_title}}</view>
+									<view class="status-red">{{appt_ste[item.lecture_state].text}}</view>
 								</view>
-								<view>讲座价格：100元</view>
-								<view>支付情况：超期未支付</view>
-								<view>预计时间：2小时</view>
-								<view>预约时间：2023年6月20日</view>
-							</uni-card>
-					</view>
-					<view class="" v-show="Inv == 1">
-					        <uni-card style="align-content: center;">
-					        	<view class="uni-flex uni-row">
-					        		<view class="normal title">职业生涯一站规划</view>
-					        		<view class="status-green">已完成，待评价</view>
-					        	</view>
-					        	<view>讲座价格：40元</view>
-					        	<view>支付情况：已付款</view>
-					        	<view>预计时间：2小时</view>
-					        	<view>预约时间：2023年6月20日</view>
-					        </uni-card>
-					</view>
-					<view class="" v-show="Inv == 2">
-					        <uni-card style="align-content: center;">
-					        	<view class="uni-flex uni-row">
-					        		<view class="normal title">讲座测试</view>
-					        		<view class="status-green">已完成，待评价</view>
-					        	</view>
-					        	<view>讲座价格：15元</view>
-					        	<view>支付情况：已付款</view>
-					        	<view>预计时间：2小时</view>
-					        	<view>预约时间：2023年6月20日</view>
-					        </uni-card>
-					</view>
-				</view>
-				<unicloud-db v-slot:default="{data, loading, error, options}"
-				collection="appt_lecture,lecture" 
-				foreign-key="appt_lecture.lecture_id" 
-				:where="sWhere">
-					<view class="" v-show="Inv == 0">
-							<view v-if="error">{{error.message}}</view>
-							<view v-else>
-								<uni-list style="">
-									<uni-list-item style="border: 0rpx;" v-for="item in data.filter((item) => item.lecture_state === 0)" :key="item._id" direction="column" @click="detail(item)">
-										<template v-slot:body>
-												<uni-card style="align-content: center;">
-													<view class="uni-flex uni-row">
-														<view class="normal title">{{item.lecture_id[0].lecture_title}}</view>
-														<view class="status-red">{{appt_ste[item.lecture_state].text}}</view>
-													</view>
-													<view>咨询价格：{{item.lecture_id[0].lecture_price}}元</view>
-													<view>支付情况：已付款</view>
-													<view>预计时间：{{item.lecture_id[0].lecture_duration}}分钟</view>
-													<view>预约时间：{{item.lecture_id[0].lecture_time}}</view>
-												<view class="uni-flex uni-row">
-													<view class="normal title"></view>
-													<button style="background-color:#007AFF; color: #fff; font-size: 30rpx; line-height: 50rpx; padding: 10rpx; height: 70rpx;" @click="goFinish(item._id)">确定已完成</button>
-												</view>
-												</uni-card>
-										</template>
-									</uni-list-item>
-								</uni-list>
+								<view>咨询价格：{{item.lecture_price}}元</view>
+								<view>支付情况：已付款</view>
+								<view>预计时间：{{item.lecture_duration}}分钟</view>
+								<view>预约时间：{{item.lecture_time}}</view>
+							<view class="uni-flex uni-row">
+								<view class="normal title"></view>
+								<button style="background-color:#007AFF; color: #fff; font-size: 30rpx; line-height: 50rpx; padding: 10rpx; height: 70rpx;" @click="goFinish(item._id)">确定已完成</button>
 							</view>
-					</view>
-					<view class="" v-show="Inv == 1">
-						<view v-if="error">{{error.message}}</view>
-						<view v-else>
-							<uni-list style="">
-								<uni-list-item style="border: 0rpx;" v-for="item in data.filter((item) => item.lecture_state === 1)" :key="item._id" direction="column" @click="detail(item)">
-									<template v-slot:body>
-											<uni-card style="align-content: center;">
-												<view class="uni-flex uni-row">
-													<view class="normal title">{{item.lecture_id[0].lecture_title}}</view>
-													<view class="status-green">{{appt_ste[item.lecture_state].text}}</view>
-												</view>
-												<view>咨询价格：{{item.lecture_id[0].lecture_price}}元</view>
-												<view>支付情况：已付款</view>
-												<view>预计时间：{{item.lecture_id[0].lecture_duration}}分钟</view>
-												<view>预约时间：{{item.lecture_id[0].lecture_time}}</view>
-												<view class="uni-flex uni-row">
-													<view class="normal title"></view>
-													<button style="background-color:#007AFF; color: #fff; font-size: 30rpx; line-height: 50rpx; padding: 10rpx; height: 70rpx;" @click="goEvaluate(item._id)">去评价</button>
-												</view>
-											</uni-card>
-									</template>
-								</uni-list-item>
-							</uni-list>
+							</uni-card>
 						</view>
 					</view>
-					<view class="" v-show="Inv == 2">
-						<view v-if="error">{{error.message}}</view>
-						<view v-else>
-							<uni-list style="">
-								<uni-list-item style="border: 0rpx;" v-for="item in data.filter((item) => item.lecture_state === 2)" :key="item._id" direction="column" @click="detail(item)">
-									<template v-slot:body>
-											<uni-card style="align-content: center;">
-												<view class="uni-flex uni-row">
-													<view class="normal title">{{item.lecture_id[0].lecture_title}}</view>
-													<view class="status-green">{{appt_ste[item.lecture_state].text}}</view>
-												</view>
-												<view>咨询价格：{{item.lecture_id[0].lecture_price}}元</view>
-												<view>支付情况：已付款</view>
-												<view>预计时间：{{item.lecture_id[0].lecture_duration}}分钟</view>
-												<view>预约时间：{{item.lecture_id[0].lecture_time}}</view>
-											</uni-card>
-									</template>
-								</uni-list-item>
-							</uni-list>
+					<view class="" v-show="Inv == 1" v-if="isRefresh">
+						<view v-for="(item, index) in final_data.filter((item) => item.lecture_state === 1)" @click="detail(item)">
+							<uni-card style="align-content: center;">
+								<view class="uni-flex uni-row">
+									<view class="normal title">{{item.lecture_title}}</view>
+									<view class="status-green">{{appt_ste[item.lecture_state].text}}</view>
+								</view>
+								<view>咨询价格：{{item.lecture_price}}元</view>
+								<view>支付情况：已付款</view>
+								<view>预计时间：{{item.lecture_duration}}分钟</view>
+								<view>预约时间：{{item.lecture_time}}</view>
+								<view class="uni-flex uni-row" v-if="isStudent">
+									<view class="normal title"></view>
+									<button  style="background-color:#007AFF; color: #fff; font-size: 30rpx; line-height: 50rpx; padding: 10rpx; height: 70rpx;" @click="goEvaluate(item._id)">去评价</button>
+								</view>
+							</uni-card>
 						</view>
 					</view>
-				</unicloud-db>
+					<view class="" v-show="Inv == 2" v-if="isRefresh">
+						<view v-for="(item, index) in final_data.filter((item) => item.lecture_state === 2)" @click="detail(item)">
+							<uni-card style="align-content: center;">
+								<view class="uni-flex uni-row">
+									<view class="normal title">{{item.lecture_title}}</view>
+									<view class="status-green">{{appt_ste[item.lecture_state].text}}</view>
+								</view>
+								<view>咨询价格：{{item.lecture_price}}元</view>
+								<view>支付情况：已付款</view>
+								<view>预计时间：{{item.lecture_duration}}分钟</view>
+								<view>预约时间：{{item.lecture_time}}</view>
+							</uni-card>
+						</view>
+					</view>
+				<!-- </unicloud-db> -->
 				<uni-popup ref="popup" :mask-click="true">
 					<uni-card style="align-items: center; text-align: center;">
 						<view>点击评价😊</view>
@@ -142,11 +69,11 @@
 </template>
  
 <script>
+	const db = uniCloud.database()
 import { nextTick } from "vue"
         export default {
                 data() {
                         return {
-							showFake:false,
 							lecture_list: [
 							    { value: 0, text: '前端开发' },
 							    { value: 1, text: '后端开发' },
@@ -169,7 +96,21 @@ import { nextTick } from "vue"
 								{ value: 1, text: '已完成' },
 								{ value: 2, text: '已评价' }
 							],
-                                Inv:0
+                                Inv:0,
+								
+						
+							colList: [
+							  db.collection('lecture').where({
+									phone: this.ph
+								}).getTemp(),
+							  db.collection('appt_lecture').getTemp()
+							],
+							
+							final_data:[
+								
+							],
+							isRefresh: true,
+							isStudent: true
 								
                         }
                 },
@@ -178,14 +119,23 @@ import { nextTick } from "vue"
 						if(getApp().globalData.st == 0)
 						{
 							this.st = true
+							this.isStudent = true;
 							this.sWhere = "phone=='" + this.ph + "'"
 						}else{
 							this.st = false
+							//this.isStudent = false;
+							console.log("1233333")
 							this.sWhere = "lecture.phone=='" + this.ph + "' && appt_lecture.lecture_id == lecture._id"
 						}
 						this.getMsg()
 				},
                 methods: {
+						updateDate(t){
+							this.isRefresh = false;
+							this.$nextTick(()=>{
+								this.isRefresh = true;
+							})
+						},
 						detail(item){
 							uni.navigateTo({
 								url:'../m2_my_lecture/detail/m2_lecture_detail?item='+JSON.stringify(item),
@@ -199,35 +149,106 @@ import { nextTick } from "vue"
                                  
                         },
 						getMsg(){
-							if(true){
+							if(true){					
 								const db = uniCloud.database();
 								db.collection('appt_lecture,lecture')
 								.foreignKey('appt_lecture.lecture_id')
 								.where({
 									phone: this.ph,
-									lecture_state: 2
-									// phone: {
-									// 	$eq: this.ph
-									// },
-									// lecture_state: {
-									// 	$eq: '3'
-									// }
 									}
 								)
-								.field('lecture_state,lecture_id')
 								.get()
 								.then( res => {
-									console.log(res)
-									if(this.st){
-										this.showFake = false;
-									}else{
-										this.showFake = true;
+									var mydata = res.result.data
+									console.log(mydata)
+									
+									var myselfdata = []
+									for(var i = 0; i< mydata.length; i++){
+										var ss = mydata[i]
+										
+										var testdata = {}
+										testdata._id = ss._id
+										testdata.st_phone = ss.phone
+										testdata.lecture_state = ss.lecture_state
+										
+										
+										var lectures = ss.lecture_id
+										for(var j = 0 ; j< lectures.length; j++){
+											var lectnow = lectures[j]
+											
+											testdata.lecture_id = lectnow._id
+											testdata.te_phone = lectnow.phone
+											testdata.lecture_title = lectnow.lecture_title
+											testdata.lecture_time = lectnow.lecture_time
+											testdata.lecture_reserved = lectnow.lecture_reserved
+											testdata.lecture_price = lectnow.lecture_price
+											testdata.lecture_number = lectnow.lecture_number
+											testdata.lecture_limit = lectnow.lecture_limit
+											testdata.lecture_label = lectnow.lecture_label
+											testdata.lecture_duration = lectnow.lecture_duration
+											testdata.lecture_content = lectnow.lecture_content
+											
+											myselfdata.push(testdata)
+										}
+										console.log(myselfdata)
+										
 									}
-									
-									
+									this.final_data = myselfdata
+									console.log(this.final_data)
+																	
 								}).catch( err => {
 									console.log("xxxx" + err)
 								})
+							}else{
+								const db = uniCloud.database();
+								db.collection('lecture,appt_lecture')
+								.foreignKey('appt_lecture.lecture_id')
+								.where({
+									phone: this.ph,
+									}
+								)
+								.get()
+								.then(res=>{
+									var mydata = res.result.data
+									console.log(mydata)
+									
+									var myselfdata = []
+									for(var i = 0; i< mydata.length; i++){
+										var lectnow = mydata[i]
+										var testdata = {}
+										testdata.lecture_id = lectnow._id._value
+										testdata.te_phone = lectnow.phone
+										testdata.lecture_title = lectnow.lecture_title
+										testdata.lecture_time = lectnow.lecture_time
+										testdata.lecture_reserved = lectnow.lecture_reserved
+										testdata.lecture_price = lectnow.lecture_price
+										testdata.lecture_number = lectnow.lecture_number
+										testdata.lecture_limit = lectnow.lecture_limit
+										testdata.lecture_label = lectnow.lecture_label
+										testdata.lecture_duration = lectnow.lecture_duration
+										testdata.lecture_content = lectnow.lecture_content
+										
+										var lectures = lectnow._id.appt_lecture
+										for(var j = 0 ; j< lectures.length; j++){
+											var ss = lectures[j]
+											testdata._id = ss._id
+											testdata.st_phone = ss.phone
+											testdata.lecture_state = ss.lecture_state
+											
+											myselfdata.push(testdata)
+										}
+									
+										console.log("123333")
+										console.log(myselfdata)
+									}
+									this.final_data = myselfdata
+									console.log(this.final_data)
+								}).catch( err => {
+									console.log("xxxx" + err)
+								})
+								
+								console.log("123")
+								console.log(this.colList)
 							}
 						},
 						goFinish(id){
@@ -240,6 +261,8 @@ import { nextTick } from "vue"
 							}).then((res) => {
 											console.log("xxx")
 											console.log(res)
+											this.getMsg()
+											this.updateDate(1)
 										})
 										.catch((err) => {
 											console.error("Error updating data:", err);
@@ -249,7 +272,11 @@ import { nextTick } from "vue"
 							uni.showToast({
 								title: '确认成功',
 								icon: 'none',
+								success() {
+									this.update()
+								}
 							})
+							
 							event.stopPropagation()
 						},
 						goEvaluate(id){
@@ -267,6 +294,8 @@ import { nextTick } from "vue"
 							}).then((res) => {
 											console.log("xxx")
 											console.log(res)
+											this.getMsg()
+											this.updateDate(1)
 										})
 										.catch((err) => {
 											console.error("Error updating data:", err);

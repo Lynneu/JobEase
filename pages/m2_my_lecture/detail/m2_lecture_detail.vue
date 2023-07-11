@@ -2,22 +2,22 @@
     <view>
         <view class="main_body">
             <view class="lec_title">
-                <uni-title :title="item.lecture_id[0].lecture_title" color="#027fff" type="h1"></uni-title>
+                <uni-title :title="item.lecture_title" color="#027fff" type="h1"></uni-title>
 
             </view>
             <view>
                 <uni-section :title="'演 讲 人 ：'+ user_detail.username" type="line" padding="0px"></uni-section>
-                <uni-section :title="'讲座时间：'+ item.lecture_id[0].lecture_time" type="line"></uni-section>
-                <uni-section :title="'讲座主题：'+ direction[item.lecture_id[0].lecture_label].text" type="line"></uni-section>
-                <uni-section :title="'讲座费用：'+item.lecture_id[0].lecture_price+' 元'" type="line"></uni-section>
-                <uni-section :title="'讲座名额：'+item.lecture_id[0].lecture_reserved+' / '+item.lecture_id[0].lecture_number+' 人'+limit[item.lecture_id[0].lecture_limit].text" type="line"></uni-section>
-                <uni-section :title="'学生手机号：'+item.phone" type="line"></uni-section>
+                <uni-section :title="'讲座时间：'+ item.lecture_time" type="line"></uni-section>
+                <uni-section :title="'讲座主题：'+ direction[item.lecture_label].text" type="line"></uni-section>
+                <uni-section :title="'讲座费用：'+item.lecture_price+' 元'" type="line"></uni-section>
+                <uni-section :title="'讲座名额：'+item.lecture_reserved+' / '+item.lecture_number+' 人'+limit[item.lecture_limit].text" type="line"></uni-section>
+                <uni-section :title="'学生手机号：'+item.st_phone" type="line"></uni-section>
 				<uni-section :title="'状态：'+appt_ste[item.lecture_state].text" type="line"></uni-section>
 				<view class="line"></view>
                 <uni-section title="讲座内容" type="circle"></uni-section>
             </view>
             <view class="lec_content">
-                <text>{{item.lecture_id[0].lecture_content}}</text>
+                <text>{{item.lecture_content}}</text>
             </view>
         </view>
 
@@ -77,7 +77,7 @@ export default {
     methods: {
 		getMsg(){
 			const db = uniCloud.database()
-			const phone = this.item.lecture_id[0].phone;
+			const phone = this.item.te_phone;
 		
 			db.collection("user_detail").where({
 			        phone
