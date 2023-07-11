@@ -17,6 +17,9 @@ const _sfc_main = {
     this.phone = getApp().globalData.ph;
     this.getMsg();
   },
+  onShow() {
+    this.getMsg();
+  },
   methods: {
     myconsult() {
       common_vendor.index.navigateTo({

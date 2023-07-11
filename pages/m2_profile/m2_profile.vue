@@ -65,6 +65,9 @@ import m4_mentor_informationVue from '../m4_mentor_information/m4_mentor_informa
 			this.phone = getApp().globalData.ph
 			this.getMsg()
 		},
+		onShow() {
+			this.getMsg()
+		},
 		methods: {
 			myconsult() {
 				uni.navigateTo({
