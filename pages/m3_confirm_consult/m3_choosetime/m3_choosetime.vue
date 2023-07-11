@@ -73,7 +73,7 @@
 			agree(){
 				this.item.appt_state=this.agree_consult;
 				
-				if(this.pick > this.len){
+				if(this.pick >= this.len){
 					uni.showToast({
 						title: '该时间段无效',
 						icon: 'none',
@@ -95,9 +95,10 @@
 					duration: 2000
 				});
 				
-				uni.navigateTo({
-					url:'../m3_confirm_consult'
+				uni.switchTab({
+					url:'../../find_teacher/find_teacher'
 				});
+				
 				console.log('跳转')
 					
 			},
@@ -119,7 +120,7 @@
 				});
 
 				uni.switchTab({
-					url:'../find_teacher/find_teacher'
+					url:'../../find_teacher/find_teacher'
 				});
 				
 				console.log('跳转')
